@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brand.ushopping.activity.AddressDetailActivity">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shrinkColumns="0"
+            android:stretchColumns="0"
+            android:baselineAligned="false"
+            android:background="@color/tablelayout_background"
+            android:layout_marginTop="8dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tablerow_background">
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="收货人:"
+                    android:textColor="#ff333333"
+                    android:singleLine="false"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:layout_gravity="center_vertical" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手机:"
+                    android:textColor="#ff333333"
+                    android:singleLine="false"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:layout_gravity="center_vertical" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="1dp"
+                android:id="@+id/about_us">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="固话:"
+                    android:textColor="#ff333333"
+                    android:singleLine="false"
+                    android:layout_margin="1dp"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:layout_gravity="center_vertical" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地区:"
+                    android:textColor="#ff333333"
+                    android:singleLine="false"
+                    android:layout_margin="1dp"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:layout_gravity="center_vertical" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地址:"
+                    android:textColor="#ff333333"
+                    android:singleLine="false"
+                    android:layout_margin="1dp"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:layout_gravity="center_vertical" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="邮编:"
+                    android:textColor="#ff333333"
+                    android:singleLine="false"
+                    android:layout_margin="1dp"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:layout_gravity="center_vertical" />
+
+            </TableRow>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="温馨提示:"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="8dp"
+                    android:phoneNumber="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="手机和固定电话选择其中一项填写即可"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="8dp" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="保存地址"
+                    android:id="@+id/save"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+
+        </TableLayout>
+
+    </TableLayout>
+
+</RelativeLayout>

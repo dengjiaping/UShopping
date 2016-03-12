@@ -1,0 +1,136 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.brand.ushopping.fragment.BrandFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:id="@+id/action_bar"
+            android:background="@color/actionbar_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/title"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/actionbar_text"
+                style="@style/TitleTextViewStyle" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/search"
+                android:src="@drawable/ic_search_white"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="4dp" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="454dp"
+            android:layout_below="@+id/action_bar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bg_white">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_grey">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/bg_white">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:src="@drawable/block_green" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="推荐品牌"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/text_grey"
+                        android:layout_weight="1"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看更多>"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="8dp"
+                        android:textColor="@color/text_green"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <ListView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/recommend"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/bg_white" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/bg_white">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:src="@drawable/block_green" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="全部品牌"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/text_grey"
+                        android:layout_weight="1"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看更多>"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="8dp"
+                        android:textColor="@color/text_green"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <GridView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/brand_all"
+                    android:numColumns="3"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/bg_white" />
+
+            </TableLayout>
+
+
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</FrameLayout>

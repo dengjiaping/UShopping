@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.brand.ushopping.fragment.ThemeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:id="@+id/action_bar"
+            android:background="@color/actionbar_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/title"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/actionbar_text"
+                style="@style/TitleTextViewStyle" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/search"
+                android:src="@drawable/ic_search_white"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="4dp" />
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/theme_list"
+            android:layout_below="@+id/action_bar"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</FrameLayout>

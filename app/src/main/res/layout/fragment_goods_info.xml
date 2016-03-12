@@ -1,0 +1,399 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brand.ushopping.fragment.GoodsInfoFragment">
+
+    <LinearLayout
+        android:id="@+id/商品"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/root_view">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_below="@+id/action_bar"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/goods_name"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginTop="8dp"
+                    android:text="商品名称"
+                    style="@style/TextViewStyle" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="¥"
+                        android:textColor="@color/text_red"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0"
+                        android:id="@+id/price"
+                        android:layout_marginLeft="4dp"
+                        android:textColor="@color/text_red"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="价格"
+                        android:layout_column="0"
+                        android:layout_columnSpan="1"
+                        android:layout_rowSpan="1"
+                        android:layout_row="0"
+                        android:textColor="@color/text_grey"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_column="1"
+                        android:layout_row="0"
+                        android:layout_columnSpan="1"
+                        android:layout_rowSpan="1"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/text_grey"
+                        android:id="@+id/original_price"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快递"
+                        android:id="@+id/textView16"
+                        android:layout_marginTop="8dp"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:layout_columnSpan="1"
+                        android:layout_rowSpan="1"
+                        android:textColor="@color/text_grey"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_column="1"
+                        android:layout_columnSpan="1"
+                        android:layout_row="1"
+                        android:layout_rowSpan="1"
+                        android:textColor="@color/text_grey"
+                        android:id="@+id/app_express"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="月销51笔"
+                        android:layout_column="2"
+                        android:layout_row="1"
+                        android:layout_columnSpan="1"
+                        android:layout_rowSpan="1"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="100dp"
+                        android:textColor="@color/text_grey"
+                        style="@style/TextViewStyle" />
+                </GridLayout>
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="0"
+                    android:stretchColumns="0"
+                    android:baselineAligned="false"
+                    android:background="@color/tablelayout_background"
+                    android:layout_marginTop="8dp">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tablerow_background"
+                        android:id="@+id/address">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/u_coin"
+                            android:layout_column="0"
+                            android:layout_span="1"
+                            android:layout_gravity="center" />
+
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="我的U币"
+                            android:textColor="@color/text_grey"
+                            android:singleLine="true"
+                            android:paddingLeft="18dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:layout_column="1"
+                            android:layout_span="1"
+                            android:layout_gravity="center_vertical"
+                            style="@style/TableRowTextViewStyle" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/more"
+                            android:layout_gravity="center_vertical"
+                            android:layout_column="2"
+                            android:layout_span="1"
+                            android:layout_marginBottom="4dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tablerow_background"
+                        android:layout_marginTop="1dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:id="@+id/imageView"
+                            android:src="@drawable/card"
+                            android:layout_column="0"
+                            android:layout_span="1"
+                            android:layout_gravity="center" />
+
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="我的卡券"
+                            android:textColor="@color/text_grey"
+                            android:singleLine="false"
+                            android:paddingLeft="18dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="1dp"
+                            android:layout_column="1"
+                            android:layout_span="1"
+                            android:layout_gravity="center_vertical"
+                            style="@style/TableRowTextViewStyle" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            android:layout_span="1"
+                            android:src="@drawable/more"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="4dp"
+                            android:layout_gravity="center_vertical" />
+
+                    </TableRow>
+
+                </TableLayout>
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="0"
+                    android:stretchColumns="0"
+                    android:baselineAligned="false"
+                    android:background="@color/tablelayout_background"
+                    android:layout_marginTop="8dp">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tablerow_background">
+
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="产品参数"
+                            android:textColor="#ff333333"
+                            android:singleLine="true"
+                            android:paddingLeft="18dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:layout_column="0"
+                            android:layout_span="1"
+                            android:layout_gravity="center_vertical"
+                            style="@style/TableRowTextViewStyle" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/more"
+                            android:layout_gravity="center_vertical"
+                            android:layout_column="2"
+                            android:layout_span="1"
+                            android:layout_marginBottom="4dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tablerow_background"
+                        android:layout_marginTop="1dp">
+
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="请选择 尺码"
+                            android:textColor="#ff333333"
+                            android:singleLine="false"
+                            android:paddingLeft="18dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="1dp"
+                            android:layout_column="0"
+                            android:layout_span="1"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/attributes"
+                            style="@style/TableRowTextViewStyle" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            android:layout_span="1"
+                            android:src="@drawable/more"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="4dp"
+                            android:layout_gravity="center_vertical" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:id="@+id/brand_logo"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/brand_name"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginLeft="8dp"
+                                style="@style/TableRowTextViewStyle" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="0dp"
+                                android:text="New Text"
+                                android:id="@+id/brand_detail"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_weight="1"
+                                style="@style/TextViewStyle" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:id="@+id/store_favourite"
+                            android:src="@drawable/ic_favourite_grey"
+                            android:textAlignment="gravity"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                    </TableRow>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="48dp"
+                            android:id="@+id/brand_enter"
+                            android:background="@drawable/enter_store"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="80dp"
+                            android:layout_marginRight="80dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                    </LinearLayout>
+
+                </TableLayout>
+
+            </TableLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

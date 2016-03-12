@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+
+    defaultConfig {
+        applicationId "com.brand.ushopping"
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    signingConfigs {
+        release {
+//            storeFile file("F:\\workspace\\UShopping\\release.jks")
+//            storePassword "sdugou87058858"
+//            keyAlias "UShopping"
+//            keyPassword "sdugou87058858"
+        }
+        debug {
+
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+repositories{
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    //    compile files('libs/httpclient-android-4.3.5.1.jar')
+    compile files('libs/httpmime-4.3.5.jar')
+    compile files('libs/httpclient-android-4.3.3.jar')
+    //    compile files('libs/fastjson-1.2.7.jar')
+    compile files('libs/universal-image-loader-1.9.4.jar')
+    compile files('libs/fastjson-1.1.43.android.jar')
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
+    compile files('libs/AMap_Location_v1.4.1_20150917.jar')
+    //    compile files('libs/nineoldroid.jar')
+    compile files('libs/weiboSDKCore_3.1.2.jar')
+    compile files('libs/open_sdk_r5509_lite.jar')
+    compile files('libs/libammsdk.jar')
+    compile files('libs/UPPayAssistEx.jar')
+    compile files('libs/UPPayPluginExStd.jar')
+    compile files('libs/alipaySDK-20150818.jar')
+    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:support-v4:+'
+    //    compile 'com.android.support:support-v4:19.+'
+    compile files('libs/Cashier_SDK-v4.2.0.jar')
+    compile files('libs/AMap_Location_v2.1.0_20151202.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile files('libs/MobCommons-2016.0223.1655.jar')
+    compile files('libs/MobTools-2016.0223.1655.jar')
+    compile 'com.smssdk:smssdk:2.0.2@aar'
+    compile files('libs/umeng_social_sdk.jar')
+    compile files('libs/SocialSDK_WeiXin_1.jar')
+    compile files('libs/SocialSDK_WeiXin_2.jar')
+}
+

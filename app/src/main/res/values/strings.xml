@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">U购</string>
+    <string name="title_activity_main">U购</string>
+
+    <string name="tel">400-966-7876</string>
+    <string name="website">www.ugochina.com</string>
+    <string name="description_text">U购,为您提供足不出户的购物体验,新品实时商家,专柜同步,正品保证.七天无理由退换货,让您躺在家里逛品牌,坐在办公室逛专卖店.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">登录</string>
+    <string name="title_activity_register">注册</string>
+    <string name="title_activity_profile">我的资料</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="title_activity_about_us">关于我们</string>
+    <string name="title_activity_ref">反馈信息</string>
+    <string name="title_activity_addresses">管理收货地址</string>
+    <string name="title_activity_address_detail">管理收货地址</string>
+    <string name="title_activity_map_locate">地图定位</string>
+    <string name="title_activity_add_address">管理收货地址</string>
+    <string name="title_activity_brand_detail">品牌详情</string>
+
+    <string name="com_sina_weibo_sdk_login_with_weibo_account">用微博登录</string>
+    <string name="com_sina_weibo_sdk_login">登录</string>
+    <string name="com_sina_weibo_sdk_logout">注销</string>
+    <string name="title_activity_guidance">GuidanceActivity</string>
+    <string name="title_activity_goods">GoodsActivity</string>
+    <string name="title_activity_order_confirm">确认订单</string>
+    <string name="title_activity_goods_favourite">收藏的商品</string>
+    <string name="title_activity_brand_favourite">收藏的品牌</string>
+    <string name="title_activity_around">附近门店</string>
+    <string name="title_activity_order">订单</string>
+    <string name="title_activity_reservation">到店预定</string>
+    <string name="title_activity_tryout">上门试衣</string>
+    <string name="title_activity_taber">TaberActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_sign">签到有礼</string>
+    <string name="title_activity_user_reward">U币商城</string>
+    <string name="title_activity_brand">品牌</string>
+    <string name="title_activity_select_date">选择上门时间</string>
+    <string name="title_activity_splash">U购</string>
+    <string name="title_activity_order_pay">订单支付</string>
+    <string name="title_activity_category">分类</string>
+    <string name="title_activity_search">搜索</string>
+    <string name="title_activity_after_sale_service">申请售后</string>
+    <string name="title_activity_web_view">WebView</string>
+    <string name="title_activity_view_history">我的足迹</string>
+    <string name="title_activity_help">使用帮助</string>
+    <string name="title_activity_profile_edit">用户信息修改</string>
+    <string name="title_activity_goods_evaluate">商品评价</string>
+    <string name="title_activity_voucher">我的卡券</string>
+
+</resources>

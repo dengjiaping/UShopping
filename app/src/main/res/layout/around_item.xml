@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:id="@+id/img" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                style="@style/TextViewStyle" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="地址："
+                        android:enabled="true"
+                        android:textColor="@color/text_grey"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/address"
+                        android:textColor="@color/text_grey"
+                        android:layout_marginTop="4dp"
+                        android:singleLine="false"
+                        android:layout_weight="1"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电话："
+                        android:id="@+id/textView15"
+                        android:textColor="@color/text_grey"
+                        android:layout_marginLeft="4dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/telephone"
+                        android:textColor="@color/text_grey"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="营业时间："
+                        android:id="@+id/textView19"
+                        android:textColor="@color/text_grey"
+                        android:layout_marginLeft="4dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/open_time"
+                        android:textColor="@color/text_grey"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+            </TableLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/reservation"
+                    android:background="@drawable/button_gray_border"
+                    android:textSize="12dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="4dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/split_line_full_width" />
+
+</LinearLayout>

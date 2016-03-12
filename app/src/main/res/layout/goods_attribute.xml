@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:background="#ffffff">
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/img"
+            android:src="@drawable/logo"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp" />
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¥"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/price"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    style="@style/TextViewStyle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="库存"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/storage"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="件"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
+                    style="@style/TextViewStyle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择 颜色分类"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/color"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="尺码"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/size"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    style="@style/TextViewStyle" />
+            </LinearLayout>
+
+        </TableLayout>
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/close"
+            android:src="@drawable/close"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品名称"
+            android:id="@+id/goods_name"
+            android:layout_marginLeft="8dp"
+            style="@style/TextViewStyle" />
+
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="尺码"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        style="@style/TextViewStyle" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/size_layout"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"></RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="颜色"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        style="@style/TextViewStyle" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/color_layout"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"></RadioGroup>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个数"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            style="@style/TextViewStyle" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/decrease"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/minus" />
+
+        <EditText
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/count"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:enabled="false"
+            android:editable="false"
+            android:text="1"
+            android:singleLine="true" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/increase"
+            android:src="@drawable/plus"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp" />
+
+    </TableRow>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="确定"
+        android:id="@+id/confirm"
+        android:textColor="@color/text_white"
+        android:background="@color/buttonl_bg_brick"
+        android:layout_marginTop="38dp"
+        style="@style/BtnTextSizeStyle" />
+
+</TableLayout>

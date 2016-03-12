@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.brand.ushopping.activity.AfterSaleServiceActivity"
+    android:focusable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/action_bar"
+        android:background="@color/actionbar_bg">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back_white"
+            android:layout_centerVertical="true"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/actionbar_text"
+            style="@style/TitleTextViewStyle" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/tablelayout_background">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/goods_info"
+                android:layout_below="@+id/action_bar"
+                android:layout_alignParentStart="true"
+                android:background="@color/tablerow_background">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/img"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/goods_name"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="2"
+                        style="@style/TextViewStyle" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/attribute"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            style="@style/TextViewStyle" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¥"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center_vertical"
+                            style="@style/TextViewStyle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:id="@+id/price"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="8dp"
+                            style="@style/TextViewStyle" />
+
+                    </LinearLayout>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/submit_layout"
+                android:layout_alignTop="@+id/textView22"
+                android:layout_alignParentStart="true"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    style="@style/TextViewStyle" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    style="@style/EditTextStyle"
+                    android:gravity="clip_vertical" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="提交申请"
+                    android:id="@+id/submit"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    style="@style/BtnStyle"
+                    android:layout_margin="8dp" />
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/apply_layout"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="状态未知"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/status"
+                    style="@style/TextViewStyle" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="退款金额"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/re_summary"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="退款时间"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/re_time"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订单编号"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/order_no"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="售后类型"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="退款退货"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="退款原因"
+                        android:id="@+id/textView23"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/re_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:layout_marginBottom="8dp"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="退货规则详情\n U购所有商品支持“七天退货”，如需换货可先退货，再由买家重新下单进行购买；退货要求如下：\n 1. 因质量问题产生的退货，所有邮费由卖家承担，七天退货质量问题的界定为货品破损或残缺。\n 2. 退货要求具备商品收到的完整外包装、配件、吊牌等；购买物品人为破坏不予退。\n 3. 商品有口红印、香水味等不予退。\n 4. 非商品质量问题的退货，由买家承担运费。\n 5. 为避免由于商品在滞留造成的经济损失，所有退货商品，买家需电话通知品牌发货方、并及时返回至发货地址。\n 6. 退款于卖家收到商品后的1-7个工作日内退款，退款最终到账时间以银行办理时间为准。"
+                    android:layout_column="10"
+                    android:textSize="12dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:background="@color/text_white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="购物车"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="12dp"
+        android:id="@+id/cart"
+        style="@style/TextViewStyle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上门购物车"
+        android:id="@+id/tryit_cart"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="12dp"
+        style="@style/TextViewStyle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预定购物车"
+        android:id="@+id/reservation_cart"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="12dp"
+        style="@style/TextViewStyle" />
+</LinearLayout>

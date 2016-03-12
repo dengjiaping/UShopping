@@ -1,0 +1,2 @@
+include ':app'
+include ':bdwallet_pay_sdk'

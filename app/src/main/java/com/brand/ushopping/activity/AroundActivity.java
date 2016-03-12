@@ -1,0 +1,183 @@
+package com.brand.ushopping.activity;
+
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.brand.ushopping.AppContext;
+import com.brand.ushopping.R;
+import com.brand.ushopping.action.StoreAction;
+import com.brand.ushopping.adapter.AroundItemAdapter;
+import com.brand.ushopping.model.AppStoresList;
+import com.brand.ushopping.model.AppStoresListItem;
+import com.brand.ushopping.model.AppbrandId;
+import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.StaticValues;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class AroundActivity extends Activity {
+    private AppContext appContext;
+    private User user;
+    private ArrayList<AppStoresListItem> appStoresListItems;
+    private ListView listView;
+
+    private TextView titleTextView;
+    private TextView areaTextView;
+    private TextView clostBtn;
+    private FrameLayout warningLayout;
+    private TextView warningTextView;
+
+    private int currentBoughtType;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_around);
+        appContext = (AppContext) getApplicationContext();
+        user = appContext.getUser();
+
+        Bundle bundle = getIntent().getExtras();
+
+        currentBoughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+
+        titleTextView = (TextView) findViewById(R.id.title);
+        titleTextView.setText(this.getTitle().toString());
+        areaTextView = (TextView) findViewById(R.id.area);
+        areaTextView.setText(appContext.getCity());
+        clostBtn = (TextView) findViewById(R.id.close);
+        clostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AroundActivity.this.finish();
+
+            }
+        });
+
+        warningLayout = (FrameLayout) findViewById(R.id.warning_layout);
+        warningTextView = (TextView) findViewById(R.id.warning_text);
+
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        reload();
+
+    }
+
+    private void reload()
+    {
+        //没有数据时的提示
+        warningLayout.setVisibility(View.GONE);
+
+        String city = appContext.getCity();
+        if(city != null)
+        {
+            AppStoresList appStoresList = new AppStoresList();
+            if(user != null)
+            {
+                appStoresList.setUserId(user.getUserId());
+                appStoresList.setSessionid(user.getSessionid());
+            }
+            appStoresList.setCity(city);
+
+            new GettAppStoresListTask().execute(appStoresList);
+
+        }
+        else
+        {
+            warningLayout.setVisibility(View.VISIBLE);
+            warningTextView.setText("未获取到位置信息");
+
+        }
+
+    }
+
+    //周边门店
+    public class GettAppStoresListTask extends AsyncTask<AppStoresList, Void, AppStoresList>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected AppStoresList doInBackground(AppStoresList... appStoresLists) {
+            return new StoreAction().gettAppStoresList(appStoresLists[0]);
+        }
+
+        @Override
+        protected void onPostExecute(AppStoresList result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    appStoresListItems = result.getAppStoresListItems();
+
+                    //UI更新
+                    List listData = new ArrayList<Map<String,Object>>();
+                    for(AppStoresListItem appStoresListItem: appStoresListItems)
+                    {
+                        Map line = new HashMap();
+                        AppbrandId appbrandId = appStoresListItem.getAppbrandId();
+                        line.put("id", appbrandId.getId());
+                        line.put("shopName", appStoresListItem.getShopName());
+                        line.put("logopicUrl", appStoresListItem.getLogopicUrl());
+                        line.put("showpic", appbrandId.getShowpic());
+                        line.put("shopAddr", appStoresListItem.getShopAddr());
+                        line.put("shopTele", appStoresListItem.getShopTele());
+                        line.put("latitude", appStoresListItem.getLatitude());
+                        line.put("longitude", appStoresListItem.getLongitude());
+                        line.put("flag", appStoresListItem.getFlag());
+                        line.put("door", appStoresListItem.getDoor());
+                        if(CommonUtils.isValueEmpty(appStoresListItem.getBusinessHours()))
+                        {
+                            line.put("businessHours", "");
+                        }
+                        else
+                        {
+                            line.put("businessHours", appStoresListItem.getBusinessHours());
+                        }
+
+                        line.put("boughtType", currentBoughtType);
+
+                        listData.add(line);
+                    }
+
+                    AroundItemAdapter adapter = new AroundItemAdapter(listData, AroundActivity.this);
+                    listView.setAdapter(adapter);
+                }
+                else
+                {
+
+
+                }
+
+            }
+        }
+    }
+
+}

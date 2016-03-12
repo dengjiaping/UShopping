@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/img" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:id="@+id/name"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            style="@style/TextViewStyle" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="¥"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/text_orange"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="0"
+                android:id="@+id/price"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/text_orange"
+                style="@style/TextViewStyle" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/share"
+                android:layout_margin="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

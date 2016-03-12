@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/icon"
+            android:src="@drawable/shop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/order_no"
+            android:layout_marginLeft="8dp"
+            android:layout_alignTop="@+id/icon"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:textAlignment="gravity"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            style="@style/TextViewStyle" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/forward"
+            android:layout_marginTop="8dp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="20px"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/status"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_orange"
+            android:singleLine="true"
+            style="@style/TextViewStyle" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/goods_list"
+        android:layout_marginTop="8dp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="共"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/quantity"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="件商品,合计 ¥"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/money"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="4dp"
+                style="@style/TextViewStyle" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20px"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认收货"
+                android:id="@+id/confirm"
+                style="@style/BtnStyle"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+        </RelativeLayout>
+    </TableLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/split_line_full_width" />
+
+</LinearLayout>

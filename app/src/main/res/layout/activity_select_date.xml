@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brand.ushopping.activity.SelectDateActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/action_bar"
+        android:background="@color/actionbar_bg">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back_white"
+            android:layout_centerVertical="true"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/actionbar_text"
+            style="@style/TitleTextViewStyle" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/action_bar">
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="55dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/date_pick">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time_pick"
+            android:columnCount="4"
+            android:layout_gravity="center"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp"
+            android:layout_marginTop="18dp"></GridLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/date_pick"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/time_pick_dep">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="8:00"
+                    android:id="@+id/time0800"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="8:30"
+                    android:id="@+id/time0830"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="1"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="9:00"
+                    android:id="@+id/time0900"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="2"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="9:30"
+                    android:id="@+id/time0930"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="3"
+                    android:layout_span="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="10:00"
+                    android:id="@+id/time1000"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="10:30"
+                    android:id="@+id/time1030"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="1"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="11:00"
+                    android:id="@+id/time1100"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="2"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="11:30"
+                    android:id="@+id/time1130"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="3"
+                    android:layout_span="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="12:00"
+                    android:id="@+id/time1200"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="12:30"
+                    android:id="@+id/time1230"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="1"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="13:00"
+                    android:id="@+id/time1300"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="2"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="13:30"
+                    android:id="@+id/time1330"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="3"
+                    android:layout_span="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="14:00"
+                    android:id="@+id/time1400"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="14:30"
+                    android:id="@+id/time1430"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="1"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="15:00"
+                    android:id="@+id/time1500"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="2"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="15:30"
+                    android:id="@+id/time1530"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="3"
+                    android:layout_span="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="16:00"
+                    android:id="@+id/time1600"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="0"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="16:30"
+                    android:id="@+id/time1630"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="1"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="17:00"
+                    android:id="@+id/time1700"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="2"
+                    android:layout_span="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="17:30"
+                    android:id="@+id/time1730"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:layout_column="3"
+                    android:layout_span="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:text="18:00"
+                    android:id="@+id/time1800"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:layout_column="0"
+                    android:layout_span="1"
+                    android:paddingTop="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/selected_date"
+                    android:layout_weight="1"
+                    android:layout_column="9" />
+            </TableRow>
+
+
+        </TableLayout>
+    </TableLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="确定选择"
+        android:id="@+id/confirm"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/buttonl_bg_green"
+        android:textColor="@color/text_white" />
+
+</RelativeLayout>

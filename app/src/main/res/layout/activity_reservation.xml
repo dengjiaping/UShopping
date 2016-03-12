@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.brand.ushopping.activity.ReservationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/action_bar"
+        android:background="@color/actionbar_bg">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back_white"
+            android:layout_centerVertical="true"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/actionbar_text"
+            style="@style/TitleTextViewStyle" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/action_bar"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:text="未付款"
+            android:id="@+id/unpaid"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:gravity="center_horizontal"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:text="已付款"
+            android:id="@+id/paid"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:gravity="center_horizontal"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="已发货"
+            android:id="@+id/delivered"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:gravity="center_horizontal"
+            style="@style/TextViewStyle" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="13"
+        android:id="@+id/category_bar_idc"
+        android:layout_below="@+id/linearLayout3">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/unpaid_idc"
+            android:layout_weight="1"
+            android:src="@drawable/tab_bar_yellow" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/paid_idc"
+            android:layout_weight="1"
+            android:src="@drawable/tab_bar_yellow" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/delivered_idc"
+            android:layout_weight="1"
+            android:src="@drawable/tab_bar_yellow"
+            android:focusableInTouchMode="false" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="false"
+        android:layout_below="@+id/category_bar_idc">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content"></TableLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/warning_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/warning_text"
+            style="@style/TextViewStyle" />
+    </FrameLayout>
+
+</RelativeLayout>

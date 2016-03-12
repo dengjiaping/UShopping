@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="264dp"
+    android:background="@color/bg_white"
+    android:padding="4dp">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="190dp"
+        android:id="@+id/img"
+        android:minWidth="100dp"
+        android:minHeight="100dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="38dp"
+        android:id="@+id/name"
+        android:minWidth="100dp"
+        android:layout_marginLeft="4dp"
+        style="@style/TextViewStyle" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/text_orange"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/promotion_price"
+            android:layout_weight="1"
+            android:textColor="@color/text_orange"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            style="@style/TextViewStyle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/original_price"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            style="@style/TextViewStyle" />
+    </LinearLayout>
+</LinearLayout>

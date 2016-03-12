@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="$"
+                android:layout_gravity="center"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/money"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/text_red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/money01"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:singleLine="true"
+                android:textColor="@color/text_red" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                style="@style/TextViewStyle"
+                android:textSize="18dp"
+                android:textColor="@color/text_orange" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="有效期至"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/validity"
+                android:layout_weight="1"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                style="@style/TextViewStyle" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="满减金额"
+                style="@style/TextViewStyle"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/money02"
+                style="@style/TextViewStyle"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="有效天数"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/come"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                style="@style/TextViewStyle" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brand.ushopping.activity.SignActivity"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sign_bg">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="260dp"
+                android:layout_height="100dp"
+                android:id="@+id/title_img"
+                android:focusableInTouchMode="false"
+                android:src="@drawable/sign_title"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="您已累计签到"
+                    android:layout_alignTop="@+id/fate_bg"
+                    android:layout_toLeftOf="@+id/warning"
+                    android:layout_toStartOf="@+id/warning"
+                    android:gravity="center"
+                    style="@style/TextViewStyle" />
+
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/fate_bg"
+                    android:background="@drawable/sign_days_bg"
+                    android:layout_below="@+id/title_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="0"
+                        android:id="@+id/fate"
+                        android:gravity="right"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        style="@style/TextViewStyle" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="天"
+                    android:layout_alignTop="@+id/textView24"
+                    android:layout_toRightOf="@+id/warning"
+                    android:layout_toEndOf="@+id/warning"
+                    android:gravity="center"
+                    style="@style/TextViewStyle" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_height="48dp"
+                android:text="签到"
+                android:id="@+id/sign"
+                android:background="@drawable/sign_btn_bg"
+                android:layout_below="@+id/fate_bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:focusableInTouchMode="false" />
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_height="48dp"
+                android:text="分享"
+                android:id="@+id/share"
+                android:background="@drawable/sign_btn_bg"
+                android:layout_below="@+id/sign"
+                android:layout_alignLeft="@+id/sign"
+                android:layout_alignStart="@+id/sign" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/warning"
+                android:layout_below="@+id/share"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="28dp"
+                android:textColor="@color/text_white"
+                android:gravity="center" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
