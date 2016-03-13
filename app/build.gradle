@@ -15,10 +15,10 @@ android {
 
     signingConfigs {
         release {
-//            storeFile file("F:\\workspace\\UShopping\\release.jks")
-//            storePassword "sdugou87058858"
-//            keyAlias "UShopping"
-//            keyPassword "sdugou87058858"
+            storeFile file("/Users/viator42/AndroidStudioProjects/UShopping/release.jks")
+            storePassword "87058858"
+            keyAlias "UShopping"
+            keyPassword "87058858"
         }
         debug {
 
