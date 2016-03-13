@@ -76,6 +76,7 @@ dependencies {
     compile files('libs/alipaySDK-20150818.jar')
     compile 'com.android.support:appcompat-v7:19.1.0'
     compile 'com.android.support:support-v4:+'
+
     //    compile 'com.android.support:support-v4:19.+'
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/AMap_Location_v2.1.0_20151202.jar')
@@ -86,5 +87,6 @@ dependencies {
     compile files('libs/umeng_social_sdk.jar')
     compile files('libs/SocialSDK_WeiXin_1.jar')
     compile files('libs/SocialSDK_WeiXin_2.jar')
+
 }
 
