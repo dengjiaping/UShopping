@@ -7,6 +7,8 @@ public class UserVoucherItem {
     private AppvoucherId appvoucherId;
     private long days;
     private int flag;
+    private long id;
+    private AppuserId appuserId;
 
     public AppvoucherId getAppvoucherId() {
         return appvoucherId;
@@ -30,5 +32,21 @@ public class UserVoucherItem {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public AppuserId getAppuserId() {
+        return appuserId;
+    }
+
+    public void setAppuserId(AppuserId appuserId) {
+        this.appuserId = appuserId;
     }
 }

@@ -294,7 +294,15 @@ public class VoucherActivity extends Activity {
                         line.put("id", appvoucherId.getId());
                         line.put("money02", appvoucherId.getMoney02());
                         line.put("money01", appvoucherId.getMoney01());
-                        line.put("name", appvoucherId.getName());
+                        AppbrandId appbrandId = appvoucherId.getAppbrandId();
+                        if(appbrandId != null)
+                        {
+                            line.put("name", appbrandId.getBrandName());
+                        }
+                        else
+                        {
+                            line.put("name", "全品牌");
+                        }
 
                         line.put("come", 12);
 

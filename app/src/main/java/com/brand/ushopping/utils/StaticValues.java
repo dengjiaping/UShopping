@@ -168,4 +168,8 @@ public class StaticValues
     public final static int VOUCHER_ENTER_MINE = 2;
     public final static int VOUCHER_ENTER_PICK = 3;
 
+    //优惠券地址
+    public final static String voucherAddress = "/ugouApp/yhq.html";
+
+
 }
