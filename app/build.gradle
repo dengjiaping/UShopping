@@ -15,7 +15,8 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("/Users/viator42/AndroidStudioProjects/UShopping/release.jks")
+//            storeFile file("/Users/viator42/AndroidStudioProjects/UShopping/release.jks")
+            storeFile file("../release.jks")
             storePassword "87058858"
             keyAlias "UShopping"
             keyPassword "87058858"
@@ -68,15 +69,12 @@ dependencies {
     compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
     compile files('libs/AMap_Location_v1.4.1_20150917.jar')
     //    compile files('libs/nineoldroid.jar')
-    compile files('libs/weiboSDKCore_3.1.2.jar')
-    compile files('libs/open_sdk_r5509_lite.jar')
     compile files('libs/libammsdk.jar')
     compile files('libs/UPPayAssistEx.jar')
     compile files('libs/UPPayPluginExStd.jar')
     compile files('libs/alipaySDK-20150818.jar')
     compile 'com.android.support:appcompat-v7:19.1.0'
     compile 'com.android.support:support-v4:+'
-
     //    compile 'com.android.support:support-v4:19.+'
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/AMap_Location_v2.1.0_20151202.jar')
@@ -87,6 +85,10 @@ dependencies {
     compile files('libs/umeng_social_sdk.jar')
     compile files('libs/SocialSDK_WeiXin_1.jar')
     compile files('libs/SocialSDK_WeiXin_2.jar')
-
+    compile files('libs/SocialSDK_Sina.jar')
+    compile files('libs/weiboSDKCore_3.1.4.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
+    compile files('libs/open_sdk_r5509.jar')
+    compile files('libs/SocialSDK_QQZone_3.jar')
 }
 

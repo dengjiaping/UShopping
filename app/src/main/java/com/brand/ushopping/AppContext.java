@@ -100,6 +100,8 @@ public class AppContext  extends Application
 
         //分享
         PlatformConfig.setWeixin("wx632d6c8a00776b9d", "0e141405d57f49123643fd771dacc039");
+        PlatformConfig.setSinaWeibo("866304116", "f233c114205bd034797fd4904553d71e");
+        PlatformConfig.setQQZone("1105140517", "xTKlL6zUVLeXgUgN");
 
     }
 
