@@ -32,6 +32,18 @@
             android:textColor="@color/actionbar_text"
             style="@style/TitleTextViewStyle" />
 
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="fill_parent"
+            android:text="分享"
+            android:id="@+id/share"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+
     </RelativeLayout>
 
     <ScrollView

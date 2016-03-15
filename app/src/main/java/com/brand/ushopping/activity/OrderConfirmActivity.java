@@ -95,6 +95,8 @@ public class OrderConfirmActivity extends Activity {
     private Long addressId;
     private String deaddress;
 
+    private TextView shareBtn;
+
     public OrderConfirmActivity() {
     }
 
@@ -169,6 +171,16 @@ public class OrderConfirmActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
+
+        shareBtn = (TextView) findViewById(R.id.share);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 //        int totalHeight = 0;
 //        for (int i = 0; i < adapter.getCount(); i++) {

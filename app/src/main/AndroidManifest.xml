@@ -365,7 +365,7 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="56e0f3ede0f55a0e0a00167d"></meta-data>
+            android:value="56e0f3ede0f55a0e0a00167d" />
 
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -373,21 +373,20 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name=".WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false">
-        </service>
+            android:exported="false"></service>
 
         <activity
             android:name=".activity.SplashActivity"
@@ -435,7 +434,10 @@
             android:label="@string/title_activity_voucher" />
         <activity
             android:name=".activity.DevActivity"
-            android:label="@string/title_activity_dev"></activity>
+            android:label="@string/title_activity_dev" />
+        <activity
+            android:name=".activity.SnsShareActivity"
+            android:label="@string/title_activity_sns_share"></activity>
     </application>
 
 </manifest>
