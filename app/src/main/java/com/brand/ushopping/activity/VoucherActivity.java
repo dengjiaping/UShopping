@@ -97,27 +97,34 @@ public class VoucherActivity extends Activity {
                                     VoucherItem voucherItem = voucherItems.get(a);
                                     if(voucherItem.getId() == id)
                                     {
-                                        SaveUserVoucher saveUserVoucher = new SaveUserVoucher();
-                                        saveUserVoucher.setUserId(user.getUserId());
-                                        saveUserVoucher.setSessionid(user.getSessionid());
+                                        if(voucherItem.getFlag() == 1)
+                                        {
+                                            Toast.makeText(VoucherActivity.this, "您已领取该优惠券,不能重复领取", Toast.LENGTH_SHORT).show();
 
-                                        AppuserId appuserId = new AppuserId();
-                                        appuserId.setUserId(user.getUserId());
-                                        saveUserVoucher.setAppuserId(appuserId);
+                                        }
+                                        else
+                                        {
+                                            SaveUserVoucher saveUserVoucher = new SaveUserVoucher();
+                                            saveUserVoucher.setUserId(user.getUserId());
+                                            saveUserVoucher.setSessionid(user.getSessionid());
 
-                                        AppvoucherId appvoucherId = new AppvoucherId();
-                                        appvoucherId.setId(id);
-                                        saveUserVoucher.setAppvoucherId(appvoucherId);
+                                            AppuserId appuserId = new AppuserId();
+                                            appuserId.setUserId(user.getUserId());
+                                            saveUserVoucher.setAppuserId(appuserId);
 
-                                        saveUserVoucher.setEndDays(voucherItem.getCome());
+                                            AppvoucherId appvoucherId = new AppvoucherId();
+                                            appvoucherId.setId(id);
+                                            saveUserVoucher.setAppvoucherId(appvoucherId);
 
-                                        new SaveUserVoucherActionTask().execute(saveUserVoucher);
+                                            saveUserVoucher.setEndDays(voucherItem.getCome());
+
+                                            new SaveUserVoucherActionTask().execute(saveUserVoucher);
+
+                                        }
 
                                     }
 
                                 }
-
-
 
                             }
                         });
@@ -216,7 +223,7 @@ public class VoucherActivity extends Activity {
                     voucherItems = result.getVoucherItems();
 
                     List listData = new ArrayList<Map<String,Object>>();
-                    for(VoucherItem voucherItem: voucherItems)
+                    for (VoucherItem voucherItem : voucherItems)
                     {
                         Map line = new HashMap();
 
@@ -238,6 +245,7 @@ public class VoucherActivity extends Activity {
                         line.put("days", CommonUtils.timestampToDate(voucherItem.getDays() / 1000));
                         line.put("validity", CommonUtils.timestampToDate(voucherItem.getValidity() / 1000));
                         line.put("enterType", enterType);
+                        line.put("flag", voucherItem.getFlag());
 
                         listData.add(line);
 

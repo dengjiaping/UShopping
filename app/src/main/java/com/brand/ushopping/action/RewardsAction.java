@@ -67,7 +67,7 @@ public class RewardsAction
         try
         {
             resultString = HttpClientUtil.post("GetAppUshopAll.action", params);
-            Log.v("ushop", resultString);
+            Log.v("reward", resultString);
 
             if(resultString != null)
             {

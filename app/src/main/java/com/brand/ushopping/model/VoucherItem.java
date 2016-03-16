@@ -12,7 +12,7 @@ public class VoucherItem implements Parcelable
     private String name;
     private double money02;
     private double money01;
-    private int flag;
+    private int flag;   //1为已领取 0为未领取
     private long days;
     private long validity;
     private int come;

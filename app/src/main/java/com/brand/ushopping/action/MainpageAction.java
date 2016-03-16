@@ -43,6 +43,7 @@ public class MainpageAction
             resultString = mCache.getAsString("HomeAction");
             if(resultString == null)
             {
+//                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
                 resultString = HttpClientUtil.post("HomeAction.action", params);
                 Log.v("home action", resultString);
             }

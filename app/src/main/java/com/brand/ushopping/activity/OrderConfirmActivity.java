@@ -555,7 +555,14 @@ public class OrderConfirmActivity extends Activity {
                                 userVoucherId.add(appvoucherId.getId());
 
                             }
-                            orderSaveList.setUserVoucherId(userVoucherId);
+                            if(userVoucherId.isEmpty())
+                            {
+                                orderSaveList.setUserVoucherId(null);
+                            }
+                            else
+                            {
+                                orderSaveList.setUserVoucherId(userVoucherId);
+                            }
 
                             new OrderSaveTask().execute(orderSaveList);
 
@@ -584,6 +591,21 @@ public class OrderConfirmActivity extends Activity {
                             break;
 
                     }
+
+                    //弹出分享优惠券
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                    builder.setMessage("分享链接领取优惠券");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
+                        }
+                    });
+                    builder.create().show();
 
                 }
                 if(result.equals(StaticValues.PAYMENT_RESULT_FAIL))
