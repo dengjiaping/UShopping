@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -7,7 +8,9 @@ import com.brand.ushopping.model.AppBrandCollect;
 import com.brand.ushopping.model.AppBrandCollectItem;
 import com.brand.ushopping.model.BrandRecommend;
 import com.brand.ushopping.model.SaveAppBrandCollect;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -16,13 +19,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import simplecache.ACache;
+
 /**
  * Created by Administrator on 2015/11/16.
  */
 public class BrandAction
 {
-    public BrandRecommend getRecommendAppBrandAction(BrandRecommend brand)
+    private ACache mCache;
+
+    public BrandRecommend getRecommendAppBrandAction(Context context, BrandRecommend brand)
     {
+        mCache = ACache.get(context);
+
         BrandRecommend result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(brand);
@@ -53,8 +62,10 @@ public class BrandAction
     }
 
     // --  收藏品牌  --
-    public SaveAppBrandCollect saveAppBrandCollectAction(SaveAppBrandCollect saveAppBrandCollect)
+    public SaveAppBrandCollect saveAppBrandCollectAction(Context context, SaveAppBrandCollect saveAppBrandCollect)
     {
+        mCache = ACache.get(context);
+
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppBrandCollect);
         List params = new ArrayList();
@@ -62,8 +73,14 @@ public class BrandAction
 
         try
         {
-            resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
-            Log.v("brand favourite", resultString);
+            resultString = mCache.getAsString("SaveAppBrandCollectAction.action");
+            if(CommonUtils.isValueEmpty(resultString))
+            {
+                resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
+                Log.v("brand favourite", resultString);
+
+            }
+
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -73,6 +90,10 @@ public class BrandAction
                     String data = dataObject.toString();
                     saveAppBrandCollect = JSON.parseObject(data, SaveAppBrandCollect.class);
                     saveAppBrandCollect.setSuccess(true);
+
+                    //存入缓存
+                    mCache.put("SaveAppBrandCollectAction.action", resultString, StaticValues.CACHE_LIFE);
+
                 }
             }
         } catch (Exception e) {
@@ -94,7 +115,12 @@ public class BrandAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
+            resultString = mCache.getAsString("GetListAppBrandCollectUserIdAction.action");
+            if(CommonUtils.isValueEmpty(resultString))
+            {
+                resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
+
+            }
 
             if(resultString != null)
             {
@@ -115,6 +141,10 @@ public class BrandAction
                     appBrandCollect.setAppBrandCollectItems(appBrandCollectItems);
 
                     appBrandCollect.setSuccess(true);
+
+                    //存入缓存
+                    mCache.put("GetListAppBrandCollectUserIdAction.action", resultString, StaticValues.CACHE_LIFE);
+
                 }
                 else
                 {

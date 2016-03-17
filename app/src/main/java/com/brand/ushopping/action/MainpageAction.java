@@ -8,6 +8,7 @@ import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.StaticValues;
 
@@ -40,7 +41,7 @@ public class MainpageAction
 
         try
         {
-            resultString = mCache.getAsString("HomeAction");
+            resultString = mCache.getAsString("HomeAction.action");
             if(resultString == null)
             {
 //                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
@@ -62,7 +63,7 @@ public class MainpageAction
                     result.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("HomeAction", resultString, StaticValues.CACHE_LIFE);
+                    mCache.put("HomeAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else
@@ -94,7 +95,13 @@ public class MainpageAction
 
         try
         {
-            resultString = HttpClientUtil.post("HomeReAction.action", params);
+            resultString = mCache.getAsString("HomeReAction.action" + homeRe.getMin());
+            if(CommonUtils.isValueEmpty(resultString))
+            {
+                resultString = HttpClientUtil.post("HomeReAction.action", params);
+                Log.v("homeRe", resultString);
+
+            }
 
             if(resultString != null)
             {
@@ -115,6 +122,10 @@ public class MainpageAction
 
 //                    ArrayList<AppgoodsId> appgoodsIds = (ArrayList<AppgoodsId>) JSON.parseArray(data, AppgoodsId.class);
                     homeRe.setSuccess(true);
+
+                    //存入缓存
+                    mCache.put("HomeReAction.action" + homeRe.getMin(), resultString, StaticValues.CACHE_LIFE);
+
                 }
                 else
                 {

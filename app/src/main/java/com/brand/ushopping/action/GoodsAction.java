@@ -86,7 +86,7 @@ public class GoodsAction
         try
         {
             resultString = HttpClientUtil.post("ReturnClientChargeAction.action", params);
-            //{"data":{"amount":83800,"amountRefunded":0,"amountSettle":0,"app":"app_KuTSSO9GivPCv1uf","body":"pay req viator42 att","channel":"upacp","clientIp":"192.168.0.110","created":1450072346,"credential":{"object":"credential","upacp":{"mode":"00","tn":"201512141352268128987"}},"currency":"cny","extra":{},"id":"ch_C84OmHu9yjDG48yX5CSSaDWD","livemode":false,"metadata":{},"object":"charge","orderNo":"201512141352150001","paid":false,"refunded":false,"refunds":{"data":[],"hasMore":false,"object":"list","uRL":"/v1/charges/ch_C84OmHu9yjDG48yX5CSSaDWD/refunds"},"subject":"pay req viator42","timeExpire":1450075946},"sessionid":"08FA8DB584CFFEFAEC21CD460D6E6267","success":true,"userId":6}
+
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);

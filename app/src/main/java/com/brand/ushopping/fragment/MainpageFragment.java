@@ -744,5 +744,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 //        ImageLoader.getInstance().clearMemoryCache();
 //        ImageLoader.getInstance().clearDiskCache();
 
+        ImageLoader.getInstance().clearMemoryCache();
+
     }
 }

@@ -195,7 +195,7 @@ public class ThemeFragment extends Fragment {
 
         @Override
         protected AppTheme doInBackground(AppTheme... appThemes) {
-            return new ThemeAction().getAppThemeAllAction(appThemes[0]);
+            return new ThemeAction().getAppThemeAllAction(getActivity(), appThemes[0]);
         }
 
         @Override

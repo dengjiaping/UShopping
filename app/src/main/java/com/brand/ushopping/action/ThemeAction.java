@@ -1,11 +1,14 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.AppTheme;
 import com.brand.ushopping.model.AppThemeItem;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -14,13 +17,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import simplecache.ACache;
+
 /**
  * Created by Administrator on 2016/1/20.
  */
 public class ThemeAction
 {
-    public AppTheme getAppThemeAllAction(AppTheme appTheme)
+    private ACache mCache;
+
+    public AppTheme getAppThemeAllAction(Context context, AppTheme appTheme)
     {
+        mCache = ACache.get(context);
+
         String resultString = null;
         String jsonParam = JSON.toJSONString(appTheme);
         List params = new ArrayList();
@@ -28,8 +37,14 @@ public class ThemeAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);
-            Log.v("theme", resultString);
+            resultString = mCache.getAsString("GetAppThemeAllAction.action");
+            if(CommonUtils.isValueEmpty(resultString))
+            {
+                resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);
+                Log.v("theme", resultString);
+
+            }
+
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -49,6 +64,10 @@ public class ThemeAction
                     appTheme.setAppThemeItems(appThemeItems);
 
                     appTheme.setSuccess(true);
+
+                    //存入缓存
+                    mCache.put("GetAppThemeAllAction.action", resultString, StaticValues.CACHE_LIFE);
+
                 }
                 else
                 {
