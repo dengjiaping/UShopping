@@ -1,8 +1,9 @@
 package com.brand.ushopping.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,10 +15,11 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
-public class DevActivity extends ActionBarActivity {
+public class DevActivity extends Activity {
     private Button weiboShare;
     private Button wxShare;
     private Button qqShare;
+    private RecyclerView recyclerViewTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,10 @@ public class DevActivity extends ActionBarActivity {
                 shareAction.share();
             }
         });
+
+        recyclerViewTest = (RecyclerView) findViewById(R.id.recycler_view_test);
+
+
 
     }
 
