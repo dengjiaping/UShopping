@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +101,8 @@ public class SearchActivity extends Activity {
                 keyword = searchEditText.getText().toString();
                 if (!keyword.isEmpty())
                 {
+                    goodsCount = 0;
+                    productGridView.removeAllViewsInLayout();
                     search();
 
                 }
@@ -118,6 +119,7 @@ public class SearchActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switch (currentSearchMode)
+
                 {
                     case StaticValues.SEARCH_MODE_PROPERTY:
                         SearchActivity.this.finish();
@@ -132,7 +134,6 @@ public class SearchActivity extends Activity {
 
                         break;
                 }
-
 
             }
         });
@@ -181,6 +182,7 @@ public class SearchActivity extends Activity {
         });
 
         recentSearchLayout = (GridLayout) findViewById(R.id.recent);
+        currentSearchMode = StaticValues.SEARCH_MODE_PROPERTY;
 
     }
 
@@ -248,8 +250,7 @@ public class SearchActivity extends Activity {
         {
             searchAppGoods.setGoodsName(keyword);
         }
-        if(searchTypeSelected.equals(StaticValues.SEARCH_TYPE_CODE))
-        {
+        if(searchTypeSelected.equals(StaticValues.SEARCH_TYPE_CODE)) {
             searchAppGoods.setBarCode(keyword);
         }
 
@@ -262,7 +263,7 @@ public class SearchActivity extends Activity {
             searchAppGoods.setSessionid(user.getSessionid());
         }
 
-        Log.v("ushopping", "search page min: "+searchAppGoods.getMin() + "max: "+searchAppGoods.getMax());
+        Log.v("ushopping", "search page min: " + searchAppGoods.getMin() + "max: "+searchAppGoods.getMax());
 
         new SearchAppGoodsActionTask().execute(searchAppGoods);
 
@@ -290,8 +291,6 @@ public class SearchActivity extends Activity {
         protected void onPostExecute(SearchAppGoods result) {
             if(result != null)
             {
-                productGridView.removeAllViewsInLayout();
-
                 if(result.isSuccess())
                 {
                     goodses = result.getGoodses();
@@ -339,6 +338,11 @@ public class SearchActivity extends Activity {
 
                         new RefAction().setRecentSearch(SearchActivity.this, keyword);
                         loadRecent();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(SearchActivity.this, "未搜索到商品", Toast.LENGTH_SHORT).show();
 
                     }
 //                    else

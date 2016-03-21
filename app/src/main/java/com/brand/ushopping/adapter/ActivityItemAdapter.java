@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.VoucherActivity;
+import com.brand.ushopping.activity.WebViewActivity;
 import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -87,12 +88,30 @@ public class ActivityItemAdapter extends BaseAdapter {
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, VoucherActivity.class);
+                int flag =(Integer) list.get(position).get("flag");
+                Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_LIST);
-                intent.putExtras(bundle);
 
-                context.startActivity(intent);
+                switch (flag)
+                {
+                    case StaticValues.ACTIVITY_FLAG_WEBPAGE:
+                        intent.setClass(context, WebViewActivity.class);
+                        bundle.putString("url", list.get(position).get("url").toString());
+                        intent.putExtras(bundle);
+
+                        context.startActivity(intent);
+
+                        break;
+                    case StaticValues.ACTIVITY_FLAG_VOUCHER:
+                        intent.setClass(context, VoucherActivity.class);
+                        bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_LIST);
+                        intent.putExtras(bundle);
+
+                        context.startActivity(intent);
+
+                        break;
+
+                }
                 
             }
         });

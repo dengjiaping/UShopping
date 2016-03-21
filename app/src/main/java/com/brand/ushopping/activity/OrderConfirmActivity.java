@@ -947,7 +947,7 @@ public class OrderConfirmActivity extends Activity {
             line.put("id", appvoucherId.getId());
             line.put("money01", appvoucherId.getMoney01());
             line.put("money02", appvoucherId.getMoney02());
-            line.put("name", appvoucherId.getName());
+            line.put("name", appvoucherId.getAppbrandId().getBrandName());
 
             listData.add(line);
 

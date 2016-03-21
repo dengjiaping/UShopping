@@ -46,7 +46,7 @@ public class MainpageAction
             {
 //                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
                 resultString = HttpClientUtil.post("HomeAction.action", params);
-                Log.v("home action", resultString);
+                Log.v("home", resultString);
             }
 
             if(resultString != null)

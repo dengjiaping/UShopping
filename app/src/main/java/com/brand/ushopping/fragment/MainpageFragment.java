@@ -514,6 +514,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                     line.put("id", activity.getId());
                     line.put("img", activity.getImg());
                     line.put("url", activity.getImgUrl());
+                    line.put("flag", activity.getFlag());
 
                     listData.add(line);
 

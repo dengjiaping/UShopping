@@ -171,5 +171,9 @@ public class StaticValues
     //优惠券地址
     public final static String voucherAddress = "/ugouApp/yhq.html";
 
+    //活动类型
+    public final static int ACTIVITY_FLAG_WEBPAGE = 0;  //网页
+    public final static int ACTIVITY_FLAG_VOUCHER = 3;  //优惠券
+
 
 }
