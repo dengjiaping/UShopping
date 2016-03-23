@@ -724,6 +724,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -866,6 +871,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -915,6 +925,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }

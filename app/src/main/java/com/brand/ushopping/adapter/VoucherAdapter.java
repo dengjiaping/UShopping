@@ -62,6 +62,7 @@ public class VoucherAdapter extends BaseAdapter {
             holder.money02=(TextView)convertView.findViewById(R.id.money02);
             holder.money01=(TextView)convertView.findViewById(R.id.money01);
             holder.name=(TextView)convertView.findViewById(R.id.name);
+            holder.days=(TextView)convertView.findViewById(R.id.days);
             holder.validity=(TextView)convertView.findViewById(R.id.validity);
             holder.come=(TextView)convertView.findViewById(R.id.come);
 
@@ -74,6 +75,7 @@ public class VoucherAdapter extends BaseAdapter {
         holder.money02.setText(list.get(position).get("money02").toString());
         holder.money01.setText(list.get(position).get("money01").toString());
         holder.name.setText(list.get(position).get("name").toString());
+        holder.days.setText(list.get(position).get("days").toString());
         holder.validity.setText(list.get(position).get("validity").toString());
         holder.come.setText(list.get(position).get("come").toString());
 
@@ -92,6 +94,7 @@ public class VoucherAdapter extends BaseAdapter {
         TextView money02;   //金额
         TextView money01;   //满减金额
         TextView name;
+        TextView days;
         TextView validity;
         TextView come;      //有效天数
 
