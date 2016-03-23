@@ -79,7 +79,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/days"
+                android:id="@+id/validity"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="4dp"
                 style="@style/TextViewStyle" />
@@ -95,11 +95,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/validity"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="4dp"
-                style="@style/TextViewStyle" />
+                style="@style/TextViewStyle"
+                android:id="@+id/days" />
         </TableRow>
 
         <TableRow
@@ -127,7 +127,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
