@@ -255,7 +255,7 @@
                 android:layout_height="wrap_content"
                 android:text="dev"
                 android:id="@+id/dev"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_column="13" />
         </TableRow>
 

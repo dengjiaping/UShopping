@@ -23,6 +23,9 @@ import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import simplecache.ACache;
 
 public class SettingsActivity extends Activity {
     private AppContext appContext;
@@ -35,6 +38,7 @@ public class SettingsActivity extends Activity {
     private ImageView backBtn;
     private TextView titleTextView;
     private ViewGroup logoutBtn;
+    private ACache aCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,11 @@ public class SettingsActivity extends Activity {
         cleanCacheBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ImageLoader.getInstance().clearMemoryCache();
+                ImageLoader.getInstance().clearDiskCache();
+                aCache = ACache.get(SettingsActivity.this);
+                aCache.clear();
+
                 Toast.makeText(SettingsActivity.this, "图片缓存已清理", Toast.LENGTH_SHORT).show();
 
             }

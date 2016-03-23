@@ -162,7 +162,7 @@ public class StaticValues
     public final static int ARRENGE_PRICE_ASC = 3;
     public final static int ARRENGE_PRICE_DESC = 4;
 
-    public final static int CACHE_LIFE = 3600;
+    public final static int CACHE_LIFE = 60;
 
     public final static int VOUCHER_ENTER_LIST = 1;
     public final static int VOUCHER_ENTER_MINE = 2;

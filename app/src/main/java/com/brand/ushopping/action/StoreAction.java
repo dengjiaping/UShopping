@@ -77,7 +77,7 @@ public class StoreAction
 
         try
         {
-            resultString = mCache.getAsString("GetAppStoresIdAll.action"+brandGoodsList.getMin());
+            resultString = mCache.getAsString("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin());
             if(CommonUtils.isValueEmpty(resultString))
             {
                 resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
@@ -97,7 +97,7 @@ public class StoreAction
                     brandGoodsList.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("GetAppStoresIdAll.action"+brandGoodsList.getMin(), resultString, StaticValues.CACHE_LIFE);
+                    mCache.put("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin(), resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else

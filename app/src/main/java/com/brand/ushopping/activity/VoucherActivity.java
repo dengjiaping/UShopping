@@ -85,7 +85,7 @@ public class VoucherActivity extends Activity {
                 {
                     case StaticValues.VOUCHER_ENTER_LIST:
                         AlertDialog.Builder builder = new AlertDialog.Builder(VoucherActivity.this);
-                        builder.setMessage("是否兑换这张优惠券?");
+                        builder.setMessage("是否领取这张优惠券?");
                         builder.setTitle("提示");
                         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
@@ -104,21 +104,30 @@ public class VoucherActivity extends Activity {
                                         }
                                         else
                                         {
-                                            SaveUserVoucher saveUserVoucher = new SaveUserVoucher();
-                                            saveUserVoucher.setUserId(user.getUserId());
-                                            saveUserVoucher.setSessionid(user.getSessionid());
+                                            if(user != null)
+                                            {
+                                                SaveUserVoucher saveUserVoucher = new SaveUserVoucher();
+                                                saveUserVoucher.setUserId(user.getUserId());
+                                                saveUserVoucher.setSessionid(user.getSessionid());
 
-                                            AppuserId appuserId = new AppuserId();
-                                            appuserId.setUserId(user.getUserId());
-                                            saveUserVoucher.setAppuserId(appuserId);
+                                                AppuserId appuserId = new AppuserId();
+                                                appuserId.setUserId(user.getUserId());
+                                                saveUserVoucher.setAppuserId(appuserId);
 
-                                            AppvoucherId appvoucherId = new AppvoucherId();
-                                            appvoucherId.setId(id);
-                                            saveUserVoucher.setAppvoucherId(appvoucherId);
+                                                AppvoucherId appvoucherId = new AppvoucherId();
+                                                appvoucherId.setId(id);
+                                                saveUserVoucher.setAppvoucherId(appvoucherId);
 
-                                            saveUserVoucher.setEndDays(voucherItem.getCome());
+                                                saveUserVoucher.setEndDays(voucherItem.getCome());
 
-                                            new SaveUserVoucherActionTask().execute(saveUserVoucher);
+                                                new SaveUserVoucherActionTask().execute(saveUserVoucher);
+
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(VoucherActivity.this, "请先注册或登录后领取优惠券", Toast.LENGTH_SHORT).show();
+
+                                            }
 
                                         }
 
