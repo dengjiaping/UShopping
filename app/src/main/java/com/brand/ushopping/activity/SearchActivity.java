@@ -342,7 +342,7 @@ public class SearchActivity extends Activity {
                     }
                     else
                     {
-                        Toast.makeText(SearchActivity.this, "未搜索到商品", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchActivity.this, "没有更多", Toast.LENGTH_SHORT).show();
 
                     }
 //                    else

@@ -78,7 +78,7 @@ dependencies {
     compile files('libs/alipaySDK-20150818.jar')
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
-//    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/AMap_Location_v2.1.0_20151202.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
