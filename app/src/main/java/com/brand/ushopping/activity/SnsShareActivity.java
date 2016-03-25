@@ -128,7 +128,7 @@ public class SnsShareActivity extends Activity {
     public UMShareListener testmulListener = new UMShareListener() {
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(SnsShareActivity.this, platform + " 分享成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SnsShareActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
         }
 
         @Override
