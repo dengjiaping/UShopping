@@ -1,5 +1,8 @@
 package com.brand.ushopping.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
+import com.brand.ushopping.activity.GoodsActivity;
+import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -19,12 +24,13 @@ import java.util.Map;
  */
 public class CategoryGoodsAdapter extends RecyclerView.Adapter<CategoryGoodsAdapter.ViewHolder>
 {
-    List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
+    private List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
+    private Context context;
 
-    public CategoryGoodsAdapter(List<Map<String,Object>> list)
+    public CategoryGoodsAdapter(Context context, List<Map<String,Object>> list)
     {
         this.list = list;
-
+        this.context = context;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class CategoryGoodsAdapter extends RecyclerView.Adapter<CategoryGoodsAdap
     }
 
     @Override
-    public void onBindViewHolder(CategoryGoodsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CategoryGoodsAdapter.ViewHolder holder, final int position) {
         if(list.get(position).get("img") != null)
         {
             ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.img);
@@ -44,7 +50,17 @@ public class CategoryGoodsAdapter extends RecyclerView.Adapter<CategoryGoodsAdap
 
         holder.name.setText(list.get(position).get("name").toString());
         holder.price.setText(list.get(position).get("price").toString());
-
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, GoodsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("goodsId", (Long) list.get(position).get("id"));
+                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -198,7 +198,7 @@ public class BrandActivity extends Activity {
                     }
                 });
                 break;
-        }
+     }
 
         if(enterType == StaticValues.BRAND_ENTER_TYPE_AROUND)
         {

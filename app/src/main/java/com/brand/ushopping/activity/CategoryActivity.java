@@ -21,6 +21,7 @@ import com.brand.ushopping.adapter.CategoryGoodsAdapter;
 import com.brand.ushopping.model.AppGoodsTypeId;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.EndlessGridRecyclerOnScrollListener;
 import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
@@ -85,21 +86,21 @@ public class CategoryActivity extends Activity {
 
         goodsGridView = (RecyclerView) findViewById(R.id.goods_grid);
 
-        goodsGridView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int lastVisibleItem = ((GridLayoutManager) gridLayoutManager).findLastVisibleItemPosition();
-                int totalItemCount = gridLayoutManager.getItemCount();
-                //lastVisibleItem >= totalItemCount - 4 表示剩下4个item自动加载，各位自由选择
-                // dy>0 表示向下滑动
-                if (lastVisibleItem >= totalItemCount - 4 && dy > 0) {
-                    Log.d("ushopping", "load more!");
-                    reload();
-
-                }
-            }
-        });
+//        goodsGridView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                int lastVisibleItem = ((GridLayoutManager) gridLayoutManager).findLastVisibleItemPosition();
+//                int totalItemCount = gridLayoutManager.getItemCount();
+//                //lastVisibleItem >= totalItemCount - 4 表示剩下4个item自动加载，各位自由选择
+//                // dy>0 表示向下滑动
+//                if (lastVisibleItem >= totalItemCount - 4 && dy > 0) {
+//                    Log.d("ushopping", "load more!");
+//                    reload();
+//
+//                }
+//            }
+//        });
 
         /*
         goodsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -191,6 +192,14 @@ public class CategoryActivity extends Activity {
         gridLayoutManager = new GridLayoutManager(this, 2);
         goodsGridView.setLayoutManager(gridLayoutManager);
 
+        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                Log.v("recycler test", "load more");
+                reload();
+
+            }
+        });
         selectTab();
 
     }
@@ -262,7 +271,7 @@ public class CategoryActivity extends Activity {
 
                         if(goodsAdapter == null)
                         {
-                            goodsAdapter = new CategoryGoodsAdapter(goodsListData);
+                            goodsAdapter = new CategoryGoodsAdapter(CategoryActivity.this, goodsListData);
                             goodsGridView.setAdapter(goodsAdapter);
 
                         }
