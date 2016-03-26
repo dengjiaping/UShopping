@@ -149,7 +149,7 @@ public class TryoutActivity extends Activity {
                         for(int a=0; a<orderList.size(); a++)
                         {
                             OrderItem orderItem = orderList.get(a);
-                            TryitOrderItemView orderItemView = new TryitOrderItemView(TryoutActivity.this, null, orderItem);
+                            TryitOrderItemView orderItemView = new TryitOrderItemView(TryoutActivity.this, null, orderItem, user);
                             contentViewGroup.addView(orderItemView);
 
                         }
@@ -199,4 +199,5 @@ public class TryoutActivity extends Activity {
 
         }
     }
+
 }

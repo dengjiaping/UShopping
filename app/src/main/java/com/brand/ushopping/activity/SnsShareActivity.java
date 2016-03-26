@@ -52,7 +52,7 @@ public class SnsShareActivity extends Activity {
             @Override
             public void onClick(View v) {
 //                UMImage image = new UMImage(SnsShareActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
 
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.WEIXIN);
@@ -71,7 +71,7 @@ public class SnsShareActivity extends Activity {
         wxCircleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
 
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE);
@@ -89,7 +89,7 @@ public class SnsShareActivity extends Activity {
         qqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
 
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.QZONE);
@@ -109,7 +109,7 @@ public class SnsShareActivity extends Activity {
         weiboBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.SINA);
                 shareAction.setCallback(testmulListener);

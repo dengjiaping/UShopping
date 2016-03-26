@@ -227,7 +227,8 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:id="@+id/unpaid">
 
                     <ImageView
                         android:layout_width="38dp"
@@ -249,7 +250,8 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:id="@+id/paid">
 
                     <ImageView
                         android:layout_width="38dp"
@@ -272,7 +274,8 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:id="@+id/comment">
 
                     <ImageView
                         android:layout_width="38dp"

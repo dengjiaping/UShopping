@@ -102,7 +102,10 @@ public class SearchActivity extends Activity {
                 if (!keyword.isEmpty())
                 {
                     goodsCount = 0;
+                    goodsAdapter = null;
+                    listData = null;
                     productGridView.removeAllViewsInLayout();
+
                     search();
 
                 }
@@ -295,14 +298,14 @@ public class SearchActivity extends Activity {
                 {
                     goodses = result.getGoodses();
 
-                    //UI更新
-                    if(listData == null)
-                    {
-                        listData = new ArrayList<Map<String,Object>>();
-                    }
-
                     if(!goodses.isEmpty())
                     {
+                        //UI更新
+                        if(listData == null)
+                        {
+                            listData = new ArrayList<Map<String,Object>>();
+                        }
+
                         for(Goods goods: goodses)
                         {
                             Map line = new HashMap();

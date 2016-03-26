@@ -1,7 +1,10 @@
 package com.brand.ushopping.widget;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,14 +14,20 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.activity.OrderConfirmActivity;
+import com.brand.ushopping.activity.SnsShareActivity;
+import com.brand.ushopping.activity.TryoutActivity;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.OrderGoodsItem;
 import com.brand.ushopping.model.OrderItem;
+import com.brand.ushopping.model.OrderSuccess;
+import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
@@ -42,13 +51,15 @@ public class TryitOrderItemView extends LinearLayout
     private OrderItem orderItem;
     private TextView moneyTextView;
     private TextView quantityTextView;
+    private TryoutActivity activity;
 
 
-    public TryitOrderItemView(final Context context, AttributeSet attrs, final OrderItem orderItem) {
+    public TryitOrderItemView(final Context context, AttributeSet attrs, final OrderItem orderItem, final User user) {
         super(context, attrs);
 
         this.context = context;
         this.orderItem = orderItem;
+        this.activity = (TryoutActivity) context;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.tryit_order_item, this, true);
@@ -151,14 +162,87 @@ public class TryitOrderItemView extends LinearLayout
             payOfflineBtn.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //线下支付
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("确认线下支付");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+
+                            OrderSuccess orderSuccess = new OrderSuccess();
+                            orderSuccess.setUserId(user.getUserId());
+                            orderSuccess.setSessionid(user.getSessionid());
+                            orderSuccess.setOrderNo(orderItem.getOrderNo());
+                            orderSuccess.setFlag(1);
+
+                            new SmOrderSuccessActionTask().execute(orderSuccess);
+
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                    builder.create().show();
 
                 }
             });
 
             payOnlineBtn.setVisibility(View.VISIBLE);
-//            payOfflineBtn.setVisibility(View.VISIBLE);
+            payOfflineBtn.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    //上门订单线下支付
+    public class SmOrderSuccessActionTask extends AsyncTask<OrderSuccess, Void, OrderSuccess>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
+            return new OrderAction().smOrderSuccessAction(orderSuccesses[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(OrderSuccess result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    activity.reload();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("上门订单支付成功");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(context, SnsShareActivity.class);
+                            context.startActivity(intent);
+
+                        }
+                    });
+                    builder.create().show();
+
+                }
+                else
+                {
+                    Toast.makeText(context, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else
+            {
+                Toast.makeText(context, "上门订单支付失败", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }

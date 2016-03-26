@@ -72,6 +72,8 @@ public class CategoryActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
         categoryId = bundle.getLong("categoryId");
+        Log.v("categoryId", Long.toString(categoryId));
+
         categoryName = bundle.getString("categoryName");
 
         backBtn = (ImageView) findViewById(R.id.back);
@@ -219,7 +221,15 @@ public class CategoryActivity extends Activity {
             appGoodsTypeId.setUserId(user.getUserId());
             appGoodsTypeId.setSessionid(user.getSessionid());
         }
-        appGoodsTypeId.setAppcategoryId(categoryId);
+        if(categoryId != 17)
+        {
+            appGoodsTypeId.setAppcategoryId(categoryId);
+        }
+        else
+        {
+            appGoodsTypeId.setAppcategoryId(null);
+        }
+
         appGoodsTypeId.setMin(currentGoodsCount);
         appGoodsTypeId.setMax(StaticValues.GOODS_PAGE_COUNT);
 

@@ -116,8 +116,10 @@ public class OrderActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
+        currentType = getIntent().getExtras().getInt("enterType", StaticValues.ORDER_FLAG_UNPAY);
+
         selectTab();
-        currentType = StaticValues.ORDER_FLAG_UNPAY;
+
         reload();
 
     }

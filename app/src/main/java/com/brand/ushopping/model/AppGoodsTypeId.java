@@ -9,7 +9,7 @@ public class AppGoodsTypeId
 {
     private long userId;
     private String sessionid;
-    private long appcategoryId;
+    private Long appcategoryId;
     private int min;
     private int max;
     private boolean success;
@@ -32,11 +32,11 @@ public class AppGoodsTypeId
         this.sessionid = sessionid;
     }
 
-    public long getAppcategoryId() {
+    public Long getAppcategoryId() {
         return appcategoryId;
     }
 
-    public void setAppcategoryId(long appcategoryId) {
+    public void setAppcategoryId(Long appcategoryId) {
         this.appcategoryId = appcategoryId;
     }
 
