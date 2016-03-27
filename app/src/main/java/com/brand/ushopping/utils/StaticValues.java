@@ -162,14 +162,18 @@ public class StaticValues
     public final static int ARRENGE_PRICE_ASC = 3;
     public final static int ARRENGE_PRICE_DESC = 4;
 
-    public final static int CACHE_LIFE = 3600;
+    public final static int CACHE_LIFE = 60;
 
     public final static int VOUCHER_ENTER_LIST = 1;
     public final static int VOUCHER_ENTER_MINE = 2;
     public final static int VOUCHER_ENTER_PICK = 3;
 
     //优惠券地址
-    public final static String voucherAddress = "/ugouApp/yhq.html";
+    public final static String voucherAddress = "/yhq.html";
+
+    //活动类型
+    public final static int ACTIVITY_FLAG_WEBPAGE = 0;  //网页
+    public final static int ACTIVITY_FLAG_VOUCHER = 3;  //优惠券
 
 
 }

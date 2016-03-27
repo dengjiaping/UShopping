@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -7,7 +8,9 @@ import com.brand.ushopping.model.AppStoresList;
 import com.brand.ushopping.model.AppStoresListItem;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.BrandGoodsList;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -16,11 +19,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import simplecache.ACache;
+
 /**
  * Created by Administrator on 2015/12/23.
  */
 public class StoreAction
 {
+    private ACache mCache;
+
     public AppStoresList gettAppStoresList(AppStoresList appStoresList)
     {
         String resultString = null;
@@ -59,8 +66,10 @@ public class StoreAction
     }
 
     // 根据实体店铺查询店铺商品
-    public BrandGoodsList getAppStoresIdAll(BrandGoodsList brandGoodsList)
+    public BrandGoodsList getAppStoresIdAll(Context context, BrandGoodsList brandGoodsList)
     {
+        mCache = ACache.get(context);
+
         String resultString = null;
         String jsonParam = JSON.toJSONString(brandGoodsList);
         List params = new ArrayList();
@@ -68,8 +77,14 @@ public class StoreAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
-            Log.v("brand goods", resultString);
+            resultString = mCache.getAsString("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin());
+            if(CommonUtils.isValueEmpty(resultString))
+            {
+                resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
+                Log.v("brand goods", resultString);
+
+            }
+
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -80,6 +95,10 @@ public class StoreAction
                     brandGoodsList.setAppgoodsIds((ArrayList<AppgoodsId>) JSON.parseArray(data, AppgoodsId.class));
 
                     brandGoodsList.setSuccess(true);
+
+                    //存入缓存
+                    mCache.put("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin(), resultString, StaticValues.CACHE_LIFE);
+
                 }
                 else
                 {

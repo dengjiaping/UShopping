@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.brand.ushopping.activity.DevActivity">
 
     <Button
@@ -31,4 +31,13 @@
         android:layout_alignBottom="@+id/wx_share"
         android:layout_toRightOf="@+id/wx_share"
         android:layout_toEndOf="@+id/wx_share" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_test"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#bbccaa"
+        />
+
 </RelativeLayout>

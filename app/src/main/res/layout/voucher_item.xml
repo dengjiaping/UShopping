@@ -18,12 +18,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="$"
+                android:text="¥"
                 android:layout_gravity="center"
                 android:id="@+id/textView3"
                 android:layout_below="@+id/money"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/text_red" />
+                android:textColor="@color/text_red"
+                android:singleLine="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="0dp"
@@ -70,20 +71,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="有效期至"
+                android:text="有效期"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="4dp"
                 style="@style/TextViewStyle" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/validity"
-                android:layout_weight="1"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="至"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="4dp"
-                style="@style/TextViewStyle" />
+                style="@style/TextViewStyle"
+                android:id="@+id/days" />
         </TableRow>
 
         <TableRow
@@ -111,7 +127,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"

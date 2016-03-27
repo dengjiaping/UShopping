@@ -49,7 +49,8 @@
     <string name="title_activity_help">使用帮助</string>
     <string name="title_activity_profile_edit">用户信息修改</string>
     <string name="title_activity_goods_evaluate">商品评价</string>
-    <string name="title_activity_voucher">我的卡券</string>
+    <string name="title_activity_voucher">优惠券</string>
     <string name="title_activity_dev">DevActivity</string>
+    <string name="title_activity_sns_share">分享</string>
 
 </resources>

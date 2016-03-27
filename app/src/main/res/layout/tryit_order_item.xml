@@ -111,7 +111,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="28dp"
                 android:text="线上支付"
                 android:id="@+id/pay_online"
@@ -122,7 +122,7 @@
                 style="@style/BtnTextSizeStyle" />
 
             <Button
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="28dp"
                 android:text="线下支付"
                 android:id="@+id/pay_offline"

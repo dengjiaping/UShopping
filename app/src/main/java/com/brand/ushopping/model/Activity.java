@@ -8,6 +8,7 @@ public class Activity
     private long id;
     private String img;
     private String imgUrl;
+    private int flag;
 
     public long getId() {
         return id;
@@ -31,5 +32,13 @@ public class Activity
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }

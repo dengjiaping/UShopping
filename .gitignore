@@ -36,3 +36,5 @@ captures/
 /.idea/libraries
 .DS_Store
 /.svn
+
+/app/src/main/java/com/brand/ushopping/utils/EnvValues.java

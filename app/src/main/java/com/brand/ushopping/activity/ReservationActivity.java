@@ -162,7 +162,7 @@ public class ReservationActivity extends Activity {
                         for(int a=0; a<orderList.size(); a++)
                         {
                             OrderItem orderItem = orderList.get(a);
-                            ReservationOrderItemView orderItemView = new ReservationOrderItemView(ReservationActivity.this, null, orderItem);
+                            ReservationOrderItemView orderItemView = new ReservationOrderItemView(ReservationActivity.this, null, orderItem, user);
                             contentViewGroup.addView(orderItemView);
 
                         }

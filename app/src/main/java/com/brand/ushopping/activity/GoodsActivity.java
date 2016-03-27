@@ -936,7 +936,7 @@ public class GoodsActivity extends Activity {
 
         @Override
         protected SaveAppBrandCollect doInBackground(SaveAppBrandCollect... saveAppBrandCollects) {
-            return new BrandAction().saveAppBrandCollectAction(saveAppBrandCollects[0]);
+            return new BrandAction().saveAppBrandCollectAction(GoodsActivity.this, saveAppBrandCollects[0]);
 
         }
 

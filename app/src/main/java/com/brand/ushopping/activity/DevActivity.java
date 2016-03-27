@@ -1,8 +1,8 @@
 package com.brand.ushopping.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,10 +14,14 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
-public class DevActivity extends ActionBarActivity {
+public class DevActivity extends Activity {
     private Button weiboShare;
     private Button wxShare;
     private Button qqShare;
+//    private RecyclerView recyclerViewTest;
+//    private LinearLayoutManager linearLayoutManager;
+//    private RecyclerViewAdapter recyclerViewAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,11 @@ public class DevActivity extends ActionBarActivity {
             }
         });
 
+//        recyclerViewTest = (RecyclerView) findViewById(R.id.recycler_view_test);
+//        linearLayoutManager = new LinearLayoutManager(this);
+//        recyclerViewTest.setLayoutManager();
+
+
     }
 
     private UMShareListener testmulListener = new UMShareListener() {
@@ -107,5 +116,35 @@ public class DevActivity extends ActionBarActivity {
         /** attention to this below ,must add this**/
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
+
+//    public class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
+//    {
+//
+//
+//        @Override
+//        public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//            return null;
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
+//
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return 0;
+//        }
+//
+//        //自定义的ViewHolder，持有每个Item的的所有界面元素
+//        public class ViewHolder extends RecyclerView.ViewHolder {
+//            public TextView mTextView;
+//            public ViewHolder(View view){
+//                super(view);
+//                mTextView = (TextView) view.findViewById(R.id.text);
+//            }
+//        }
+//
+//    }
 
 }

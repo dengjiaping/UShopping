@@ -80,6 +80,10 @@ public class MineFragment extends Fragment {
     private TextView brandFavouriteCountTextView;
     private TextView viewHistoryCountTextView;
 
+    private ViewGroup unpaidBtn;
+    private ViewGroup paidBtn;
+    private ViewGroup deliveredBtn;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -178,6 +182,10 @@ public class MineFragment extends Fragment {
                 else
                 {
                     Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("enterType", StaticValues.ORDER_FLAG_UNPAY);
+                    intent.putExtras(bundle);
+
                     startActivity(intent);
                 }
 
@@ -311,6 +319,68 @@ public class MineFragment extends Fragment {
 //                builder.create().show();
 
 
+
+            }
+        });
+
+        unpaidBtn = (ViewGroup) view.findViewById(R.id.unpaid);
+        unpaidBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user == null)
+                {
+                    Toast.makeText(getActivity(), "请登录或注册", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("enterType", StaticValues.ORDER_FLAG_UNPAY);
+                    intent.putExtras(bundle);
+
+                    startActivity(intent);
+                }
+            }
+        });
+
+        paidBtn = (ViewGroup) view.findViewById(R.id.paid);
+        paidBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user == null)
+                {
+                    Toast.makeText(getActivity(), "请登录或注册", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("enterType", StaticValues.ORDER_FLAG_DELIVERED);
+                    intent.putExtras(bundle);
+
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+        deliveredBtn = (ViewGroup) view.findViewById(R.id.comment);
+        deliveredBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user == null)
+                {
+                    Toast.makeText(getActivity(), "请登录或注册", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("enterType", StaticValues.ORDER_FLAG_CONFIRMED);
+                    intent.putExtras(bundle);
+
+                    startActivity(intent);
+                }
 
             }
         });

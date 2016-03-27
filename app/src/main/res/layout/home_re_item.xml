@@ -1,68 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="264dp"
+    android:layout_height="wrap_content"
     android:minHeight="210dp"
     android:minWidth="160dp"
-    android:background="@color/bg_white">
+    android:background="@color/bg_grey">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="190dp"
-        android:id="@+id/img"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="38dp"
-        android:id="@+id/name"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp"
-        android:maxHeight="48dp"
-        style="@style/TextViewStyle" />
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/bg_white"
         android:layout_margin="4dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥"
-            android:layout_marginLeft="8dp"
-            android:textColor="@color/text_orange"
-            style="@style/TextViewStyle" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/price"
-            android:layout_weight="1"
-            android:textColor="@color/text_orange"
-            style="@style/TextViewStyle" />
-
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/favourite_count"
-            android:visibility="invisible" />
+            android:layout_width="fill_parent"
+            android:layout_height="190dp"
+            android:id="@+id/img" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="0"
-            android:id="@+id/favourite_count"
-            android:layout_marginRight="8dp"
-            android:textColor="@color/text_grey"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/name"
             android:layout_marginLeft="4dp"
-            android:visibility="invisible"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
             style="@style/TextViewStyle" />
-    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/text_orange"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/price"
+                android:layout_weight="1"
+                android:textColor="@color/text_orange"
+                style="@style/TextViewStyle" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favourite_count"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="0"
+                android:id="@+id/favourite_count"
+                android:layout_marginRight="8dp"
+                android:textColor="@color/text_grey"
+                android:layout_marginLeft="4dp"
+                android:visibility="invisible"
+                style="@style/TextViewStyle" />
+        </LinearLayout>
+    </TableLayout>
+
 </LinearLayout>

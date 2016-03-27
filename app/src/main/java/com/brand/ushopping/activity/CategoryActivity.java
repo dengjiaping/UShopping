@@ -1,17 +1,16 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +18,11 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.GoodsAction;
-import com.brand.ushopping.adapter.GoodsAdapter;
+import com.brand.ushopping.adapter.CategoryGoodsAdapter;
 import com.brand.ushopping.model.AppGoodsTypeId;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.EndlessGridRecyclerOnScrollListener;
 import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
@@ -38,10 +38,12 @@ public class CategoryActivity extends Activity {
     private TextView titleTextView;
     private long categoryId;
     private String categoryName;
-    private GridView goodsGridView;
+    private RecyclerView goodsGridView;
     private int currentGoodsCount = 0;
     private ArrayList<Goods> goodsList;
-    private GoodsAdapter goodsAdapter;
+    private CategoryGoodsAdapter goodsAdapter;
+    private GridLayoutManager gridLayoutManager;
+
     private FrameLayout warningLayout;
     private TextView warningTextView;
     private ArrayList<Map<String,Object>> goodsListData;
@@ -72,6 +74,8 @@ public class CategoryActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
         categoryId = bundle.getLong("categoryId");
+        Log.v("categoryId", Long.toString(categoryId));
+
         categoryName = bundle.getString("categoryName");
 
         backBtn = (ImageView) findViewById(R.id.back);
@@ -84,7 +88,25 @@ public class CategoryActivity extends Activity {
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(categoryName);
 
-        goodsGridView = (GridView) findViewById(R.id.goods_grid);
+        goodsGridView = (RecyclerView) findViewById(R.id.goods_grid);
+
+//        goodsGridView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                int lastVisibleItem = ((GridLayoutManager) gridLayoutManager).findLastVisibleItemPosition();
+//                int totalItemCount = gridLayoutManager.getItemCount();
+//                //lastVisibleItem >= totalItemCount - 4 表示剩下4个item自动加载，各位自由选择
+//                // dy>0 表示向下滑动
+//                if (lastVisibleItem >= totalItemCount - 4 && dy > 0) {
+//                    Log.d("ushopping", "load more!");
+//                    reload();
+//
+//                }
+//            }
+//        });
+
+        /*
         goodsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -126,6 +148,7 @@ public class CategoryActivity extends Activity {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
+        */
 
         //没有数据时的提示
         warningLayout = (FrameLayout) findViewById(R.id.warning_layout);
@@ -180,6 +203,17 @@ public class CategoryActivity extends Activity {
         brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
         brandGoodsTypePrev = brandGoodsType;
 
+        gridLayoutManager = new GridLayoutManager(this, 2);
+        goodsGridView.setLayoutManager(gridLayoutManager);
+
+        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                Log.v("recycler test", "load more");
+                reload();
+
+            }
+        });
         selectTab();
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
@@ -215,7 +249,15 @@ public class CategoryActivity extends Activity {
             appGoodsTypeId.setUserId(user.getUserId());
             appGoodsTypeId.setSessionid(user.getSessionid());
         }
-        appGoodsTypeId.setAppcategoryId(categoryId);
+        if(categoryId != 17)
+        {
+            appGoodsTypeId.setAppcategoryId(categoryId);
+        }
+        else
+        {
+            appGoodsTypeId.setAppcategoryId(null);
+        }
+
         appGoodsTypeId.setMin(currentGoodsCount);
         appGoodsTypeId.setMax(StaticValues.GOODS_PAGE_COUNT);
 
@@ -269,7 +311,7 @@ public class CategoryActivity extends Activity {
 
                         if(goodsAdapter == null)
                         {
-                            goodsAdapter = new GoodsAdapter(goodsListData, CategoryActivity.this);
+                            goodsAdapter = new CategoryGoodsAdapter(CategoryActivity.this, goodsListData);
                             goodsGridView.setAdapter(goodsAdapter);
 
                         }

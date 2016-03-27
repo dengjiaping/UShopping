@@ -201,7 +201,7 @@ public class BrandActivity extends Activity {
                     }
                 });
                 break;
-        }
+     }
 
         if(enterType == StaticValues.BRAND_ENTER_TYPE_AROUND)
         {
@@ -333,7 +333,7 @@ public class BrandActivity extends Activity {
 
         @Override
         protected BrandGoodsList doInBackground(BrandGoodsList... brandGoodsLists) {
-            return new StoreAction().getAppStoresIdAll(brandGoodsLists[0]);
+            return new StoreAction().getAppStoresIdAll(BrandActivity.this, brandGoodsLists[0]);
         }
 
         @Override
@@ -450,7 +450,7 @@ public class BrandActivity extends Activity {
 
         @Override
         protected SaveAppBrandCollect doInBackground(SaveAppBrandCollect... saveAppBrandCollects) {
-            return new BrandAction().saveAppBrandCollectAction(saveAppBrandCollects[0]);
+            return new BrandAction().saveAppBrandCollectAction(BrandActivity.this, saveAppBrandCollects[0]);
 
         }
 
@@ -613,5 +613,11 @@ public class BrandActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
 
+        ImageLoader.getInstance().clearMemoryCache();
+
+    }
 }

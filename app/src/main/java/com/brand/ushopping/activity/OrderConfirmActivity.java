@@ -95,6 +95,8 @@ public class OrderConfirmActivity extends Activity {
     private Long addressId;
     private String deaddress;
 
+    private TextView shareBtn;
+
     public OrderConfirmActivity() {
     }
 
@@ -169,6 +171,16 @@ public class OrderConfirmActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
+
+        shareBtn = (TextView) findViewById(R.id.share);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 //        int totalHeight = 0;
 //        for (int i = 0; i < adapter.getCount(); i++) {
@@ -543,7 +555,14 @@ public class OrderConfirmActivity extends Activity {
                                 userVoucherId.add(appvoucherId.getId());
 
                             }
-                            orderSaveList.setUserVoucherId(userVoucherId);
+                            if(userVoucherId.isEmpty())
+                            {
+                                orderSaveList.setUserVoucherId(null);
+                            }
+                            else
+                            {
+                                orderSaveList.setUserVoucherId(userVoucherId);
+                            }
 
                             new OrderSaveTask().execute(orderSaveList);
 
@@ -572,6 +591,21 @@ public class OrderConfirmActivity extends Activity {
                             break;
 
                     }
+
+                    //弹出分享优惠券
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                    builder.setMessage("分享链接领取优惠券");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
+                        }
+                    });
+                    builder.create().show();
 
                 }
                 if(result.equals(StaticValues.PAYMENT_RESULT_FAIL))
@@ -690,6 +724,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -832,6 +871,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -881,6 +925,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            //进入分享页面
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -913,7 +962,7 @@ public class OrderConfirmActivity extends Activity {
             line.put("id", appvoucherId.getId());
             line.put("money01", appvoucherId.getMoney01());
             line.put("money02", appvoucherId.getMoney02());
-            line.put("name", appvoucherId.getName());
+            line.put("name", appvoucherId.getAppbrandId().getBrandName());
 
             listData.add(line);
 

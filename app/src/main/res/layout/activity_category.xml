@@ -9,7 +9,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout6"
@@ -78,7 +77,7 @@
         android:id="@+id/swipe"
         android:layout_below="@+id/action_bar">
 
-        <GridView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/goods_grid"
