@@ -21,6 +21,10 @@ import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.OrderItemView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 
 public class OrderActivity extends Activity {
     private AppContext appContext;
@@ -166,8 +170,10 @@ public class OrderActivity extends Activity {
                         //列表为空
                         warningLayout.setVisibility(View.VISIBLE);
                         warningTextView.setText("暂时没有订单");
+                        return;
 
                     }
+                    Collections.sort(orderList, new OrderComparator());
 
                     for(int a=0; a<orderList.size(); a++)
                     {
@@ -220,6 +226,18 @@ public class OrderActivity extends Activity {
                 confirmedIdc.setVisibility(View.VISIBLE);
                 break;
 
+        }
+    }
+
+    //订单排序
+    class OrderComparator implements Comparator<OrderItem>
+    {
+        @Override
+        public int compare(OrderItem orderItem, OrderItem t1) {
+            Long id1 = orderItem.getId();
+            Long id2 = t1.getId();
+
+            return id1.compareTo(id2);
         }
     }
 
