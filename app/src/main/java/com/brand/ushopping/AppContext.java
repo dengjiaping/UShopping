@@ -80,7 +80,7 @@ public class AppContext  extends Application
                 .tasksProcessingOrder(QueueProcessingType.FIFO) // default
                 .denyCacheImageMultipleSizesInMemory()
                 .memoryCache(new FIFOLimitedMemoryCache(8 * 1024 * 1024))
-                .memoryCacheSize(50 * 1024 * 1024)
+                .memoryCacheSize(16 * 1024 * 1024)
                 .memoryCacheSizePercentage(40) // default
                 .diskCache(new UnlimitedDiskCache(cacheDir)) // default
                 .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -56,6 +57,7 @@ public class CategoryActivity extends Activity {
     private int brandGoodsType;
     private int brandGoodsTypePrev;
     private int currentArrenge = StaticValues.ARRENGE_NONE;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,17 @@ public class CategoryActivity extends Activity {
                     case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                         // 判断滚动到底部
                         if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
-                            reload();
+                            AppGoodsTypeId appGoodsTypeId = new AppGoodsTypeId();
+                            if(user != null)
+                            {
+                                appGoodsTypeId.setUserId(user.getUserId());
+                                appGoodsTypeId.setSessionid(user.getSessionid());
+                            }
+                            appGoodsTypeId.setAppcategoryId(categoryId);
+                            appGoodsTypeId.setMin(currentGoodsCount);
+                            appGoodsTypeId.setMax(StaticValues.GOODS_PAGE_COUNT);
+
+                            new GetAppGoodsTypeIdTask().execute(appGoodsTypeId);
 
                         }
                         break;
@@ -170,6 +182,17 @@ public class CategoryActivity extends Activity {
 
         selectTab();
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+
+                reload();
+
+            }
+        });
+
     }
 
     @Override
@@ -181,6 +204,11 @@ public class CategoryActivity extends Activity {
 
     public void reload()
     {
+        currentGoodsCount = 0;
+        goodsAdapter = null;
+        goodsListData = null;
+        goodsGridView.removeAllViewsInLayout();
+
         AppGoodsTypeId appGoodsTypeId = new AppGoodsTypeId();
         if(user != null)
         {
@@ -211,6 +239,8 @@ public class CategoryActivity extends Activity {
 
         @Override
         protected void onPostExecute(AppGoodsTypeId result) {
+            swipeRefreshLayout.setRefreshing(false);
+
             if(result != null)
             {
                 if(result.isSuccess())

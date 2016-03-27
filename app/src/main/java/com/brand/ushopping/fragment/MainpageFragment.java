@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +99,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
     private TimeoutbleProgressDialog mainpageLoadDialog;
     private TimeoutbleProgressDialog homereLoadDialog;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -198,13 +201,10 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         signBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(user == null)
-                {
+                if (user == null) {
                     Toast.makeText(getActivity(), "请登录或注册", Toast.LENGTH_SHORT).show();
 
-                }
-                else
-                {
+                } else {
                     Intent intent = new Intent(getActivity(), SignActivity.class);
                     startActivity(intent);
 
@@ -282,6 +282,26 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             @Override
             public void onTimeOut(TimeoutbleProgressDialog dialog) {
                 homereLoadDialog.dismiss();
+
+            }
+        });
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+
+                User user1 = new User();
+                if(user != null)
+                {
+                    user1.setUserId(user.getUserId());
+                    user1.setSessionid(user.getSessionid());
+                }
+
+                new MainpageLoadTask().execute(user1);
+
+                swipeRefreshLayout.setRefreshing(false);
 
             }
         });

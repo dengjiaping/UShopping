@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -69,6 +70,8 @@ public class BrandActivity extends Activity {
     private int enterType = StaticValues.BRAND_ENTER_TYPE_NORMAL;
     private ScrollViewX mainScrollView;
     private int currentArrenge = StaticValues.ARRENGE_NONE;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,6 +273,16 @@ public class BrandActivity extends Activity {
 
         selectTab();
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
+
+            }
+        });
+
     }
 
     @Override
@@ -286,6 +299,10 @@ public class BrandActivity extends Activity {
 
         nameTextView.setText(brand.getBrandName());
         descriptionTextView.setText(brand.getIntro());
+
+        goodsCount = 0;
+        adapter = null;
+        listData = null;
 
         loadGoods();
     }
@@ -321,6 +338,8 @@ public class BrandActivity extends Activity {
 
         @Override
         protected void onPostExecute(BrandGoodsList result) {
+            swipeRefreshLayout.setRefreshing(false);
+
             if(result != null)
             {
                 if(result.isSuccess())

@@ -48,281 +48,290 @@
 
         </RelativeLayout>
 
-        <com.brand.ushopping.widget.ScrollViewX
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/main_scroll_view"
-            android:scrollbars="none"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/action_bar">
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_below="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe"
+            >
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg_grey">
+            <com.brand.ushopping.widget.ScrollViewX
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/main_scroll_view"
+                android:scrollbars="none"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/action_bar">
 
-                <HorizontalScrollView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fillViewport="false"
-                    android:background="@color/bg_white"
-                    android:scrollbars="none"
-                    android:clickable="false">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_grey">
+
+                    <HorizontalScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="false"
+                        android:background="@color/bg_white"
+                        android:scrollbars="none"
+                        android:clickable="false">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/category">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_below="@+id/action_bar"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_weight="1" />
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/category">
-
-                    </LinearLayout>
-                </HorizontalScrollView>
-
-                <com.daimajia.slider.library.SliderLayout
-                    android:id="@+id/slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:layout_below="@+id/action_bar"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/bg_white">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/sign">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_checkin"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="签到"
-                            android:layout_gravity="center"
-                            android:textColor="@color/text_grey"
-                            android:layout_marginTop="4dp"
-                            style="@style/TextViewStyle"
-                            android:layout_marginRight="4dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/tryit">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_tryit"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="上门试衣"
-                            android:layout_gravity="center"
-                            android:textColor="@color/text_grey"
-                            android:layout_marginBottom="4dp"
-                            android:layout_marginTop="4dp"
-                            style="@style/TextViewStyle" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/reservation">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_order"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="到店预订"
-                            android:layout_gravity="center"
-                            android:textColor="@color/text_grey"
-                            android:layout_marginBottom="4dp"
-                            android:layout_marginTop="4dp"
-                            style="@style/TextViewStyle" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/user_reward">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_ucoin"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="U币"
-                            android:layout_gravity="center"
-                            android:singleLine="false"
-                            android:textColor="@color/text_grey"
-                            android:layout_marginBottom="4dp"
-                            android:layout_marginTop="4dp"
-                            style="@style/TextViewStyle" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/bg_white"
-                    android:layout_marginTop="4dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:src="@drawable/block_green" />
-
-                    <TextView
-                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="潮流前线"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/text_grey"
-                        android:layout_weight="1"
-                        style="@style/TextViewStyle" />
+                        android:background="@color/bg_white">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="查看更多>"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="8dp"
-                        android:textColor="@color/text_green"
-                        style="@style/TextViewStyle" />
-                </TableRow>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/sign">
 
-                <HorizontalScrollView
-                    android:layout_width="fill_parent"
-                    android:layout_height="100dp"
-                    android:background="@color/bg_white"
-                    android:scrollbars="none"
-                    android:layout_marginTop="4dp">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_checkin"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="8dp" />
 
-                    <LinearLayout
-                        android:orientation="horizontal"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="签到"
+                                android:layout_gravity="center"
+                                android:textColor="@color/text_grey"
+                                android:layout_marginTop="4dp"
+                                style="@style/TextViewStyle"
+                                android:layout_marginRight="4dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/tryit">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_tryit"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="上门试衣"
+                                android:layout_gravity="center"
+                                android:textColor="@color/text_grey"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginTop="4dp"
+                                style="@style/TextViewStyle" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/reservation">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_order"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="到店预订"
+                                android:layout_gravity="center"
+                                android:textColor="@color/text_grey"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginTop="4dp"
+                                style="@style/TextViewStyle" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/user_reward">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_ucoin"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="U币"
+                                android:layout_gravity="center"
+                                android:singleLine="false"
+                                android:textColor="@color/text_grey"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginTop="4dp"
+                                style="@style/TextViewStyle" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/recommend">
-
-                    </LinearLayout>
-                </HorizontalScrollView>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/bg_white">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:src="@drawable/block_green" />
-
-                    <TextView
-                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="最新活动"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/text_grey"
-                        android:layout_weight="1"
-                        style="@style/TextViewStyle" />
+                        android:background="@color/bg_white"
+                        android:layout_marginTop="4dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:src="@drawable/block_green" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="潮流前线"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/text_grey"
+                            android:layout_weight="1"
+                            style="@style/TextViewStyle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看更多>"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="8dp"
+                            android:textColor="@color/text_green"
+                            style="@style/TextViewStyle" />
+                    </TableRow>
+
+                    <HorizontalScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="100dp"
+                        android:background="@color/bg_white"
+                        android:scrollbars="none"
+                        android:layout_marginTop="4dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/recommend">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TableRow
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="查看更多>"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="8dp"
-                        android:textColor="@color/text_green"
-                        style="@style/TextViewStyle" />
-                </TableRow>
+                        android:layout_marginTop="4dp"
+                        android:background="@color/bg_white">
 
-                <com.brand.ushopping.widget.MyListView
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/activity"
-                    android:background="@color/bg_white">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:src="@drawable/block_green" />
 
-                </com.brand.ushopping.widget.MyListView>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="最新活动"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/text_grey"
+                            android:layout_weight="1"
+                            style="@style/TextViewStyle" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/bg_white">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看更多>"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="8dp"
+                            android:textColor="@color/text_green"
+                            style="@style/TextViewStyle" />
+                    </TableRow>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:src="@drawable/block_green" />
-
-                    <TextView
-                        android:layout_width="0dp"
+                    <com.brand.ushopping.widget.MyListView
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="推荐商品"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/text_grey"
-                        android:layout_weight="1"
-                        style="@style/TextViewStyle" />
+                        android:id="@+id/activity"
+                        android:background="@color/bg_white">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    </com.brand.ushopping.widget.MyListView>
+
+                    <TableRow
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="查看更多>"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="8dp"
-                        android:textColor="@color/text_green"
-                        style="@style/TextViewStyle" />
-                </TableRow>
+                        android:layout_marginTop="4dp"
+                        android:background="@color/bg_white">
 
-                <com.brand.ushopping.widget.MyGridView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/home_re"
-                    android:numColumns="2"
-                    android:layout_marginTop="4dp" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:src="@drawable/block_green" />
 
-            </TableLayout>
-        </com.brand.ushopping.widget.ScrollViewX>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="推荐商品"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/text_grey"
+                            android:layout_weight="1"
+                            style="@style/TextViewStyle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看更多>"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="8dp"
+                            android:textColor="@color/text_green"
+                            style="@style/TextViewStyle" />
+                    </TableRow>
+
+                    <com.brand.ushopping.widget.MyGridView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/home_re"
+                        android:numColumns="2"
+                        android:layout_marginTop="4dp" />
+
+                </TableLayout>
+            </com.brand.ushopping.widget.ScrollViewX>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 </FrameLayout>
