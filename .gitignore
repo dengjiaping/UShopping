@@ -38,3 +38,5 @@ captures/
 /.svn
 
 /app/src/main/java/com/brand/ushopping/utils/EnvValues.java
+
+app/app.iml
