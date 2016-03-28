@@ -210,7 +210,7 @@ public class CategoryActivity extends Activity {
             @Override
             public void onLoadMore(int currentPage) {
                 Log.v("recycler test", "load more");
-                reload();
+                load();
 
             }
         });
@@ -243,6 +243,11 @@ public class CategoryActivity extends Activity {
         goodsListData = null;
         goodsGridView.removeAllViewsInLayout();
 
+        load();
+    }
+
+    public void load()
+    {
         AppGoodsTypeId appGoodsTypeId = new AppGoodsTypeId();
         if(user != null)
         {
@@ -262,6 +267,7 @@ public class CategoryActivity extends Activity {
         appGoodsTypeId.setMax(StaticValues.GOODS_PAGE_COUNT);
 
         new GetAppGoodsTypeIdTask().execute(appGoodsTypeId);
+
 
     }
 

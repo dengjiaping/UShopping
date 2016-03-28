@@ -229,6 +229,7 @@ public class BrandActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
                 selectTab();
+                reloadGoods();
                 brandGoodsTypePrev = brandGoodsType;
 
             }
@@ -239,6 +240,7 @@ public class BrandActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_PRICE;
                 selectTab();
+                reloadGoods();
                 brandGoodsTypePrev = brandGoodsType;
 
             }
@@ -249,6 +251,7 @@ public class BrandActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_SALE;
                 selectTab();
+                reloadGoods();
                 brandGoodsTypePrev = brandGoodsType;
 
             }
@@ -259,6 +262,7 @@ public class BrandActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_UNDEF;
                 selectTab();
+                reloadGoods();
                 brandGoodsTypePrev = brandGoodsType;
 
             }
@@ -300,10 +304,14 @@ public class BrandActivity extends Activity {
         nameTextView.setText(brand.getBrandName());
         descriptionTextView.setText(brand.getIntro());
 
+        reloadGoods();
+    }
+
+    public void reloadGoods()
+    {
         goodsCount = 0;
         adapter = null;
         listData = null;
-
         loadGoods();
     }
 
