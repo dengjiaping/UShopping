@@ -386,7 +386,7 @@
 
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".activity.SplashActivity"
@@ -437,7 +437,11 @@
             android:label="@string/title_activity_dev" />
         <activity
             android:name=".activity.SnsShareActivity"
-            android:label="@string/title_activity_sns_share"></activity>
+            android:label="@string/title_activity_sns_share" />
+        <activity
+            android:name=".activity.MoreGoodsActivity"
+            android:label="@string/title_activity_more_goods"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

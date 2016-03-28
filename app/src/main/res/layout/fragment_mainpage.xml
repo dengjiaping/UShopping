@@ -318,7 +318,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="8dp"
                             android:textColor="@color/text_green"
-                            style="@style/TextViewStyle" />
+                            style="@style/TextViewStyle"
+                            android:id="@+id/more_goods" />
                     </TableRow>
 
                     <com.brand.ushopping.widget.MyGridView

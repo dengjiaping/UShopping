@@ -99,12 +99,12 @@ public class MainpageAction
             if(CommonUtils.isValueEmpty(resultString))
             {
                 resultString = HttpClientUtil.post("HomeReAction.action", params);
-                Log.v("homeRe", resultString);
-
             }
 
             if(resultString != null)
             {
+                Log.v("homeRe", resultString);
+
                 JSONObject jsonObject = new JSONObject(resultString);
                 if(jsonObject.getBoolean("success"))
                 {

@@ -28,6 +28,7 @@ import com.brand.ushopping.R;
 import com.brand.ushopping.action.MainpageAction;
 import com.brand.ushopping.activity.AroundActivity;
 import com.brand.ushopping.activity.GoodsActivity;
+import com.brand.ushopping.activity.MoreGoodsActivity;
 import com.brand.ushopping.activity.SearchActivity;
 import com.brand.ushopping.activity.SignActivity;
 import com.brand.ushopping.activity.UserRewardActivity;
@@ -52,7 +53,6 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,6 +101,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     private TimeoutbleProgressDialog homereLoadDialog;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    private TextView moreGoodsBtn;
 
     /**
      * Use this factory method to create a new instance of
@@ -161,6 +163,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             }
         });
 
+        // 主页关闭商品加载更多
+        /*
         boolean pauseOnScroll = false; // or true
         boolean pauseOnFling = true; // or false
         PauseOnScrollListener listener = new PauseOnScrollListener(ImageLoader.getInstance(), pauseOnScroll, pauseOnFling);
@@ -196,6 +200,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
             }
         });
+        */
 
         signBtn = (ViewGroup) view.findViewById(R.id.sign);
         signBtn.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +307,16 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 new MainpageLoadTask().execute(user1);
 
                 swipeRefreshLayout.setRefreshing(false);
+
+            }
+        });
+
+        moreGoodsBtn = (TextView) view.findViewById(R.id.more_goods);
+        moreGoodsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MoreGoodsActivity.class);
+                startActivity(intent);
 
             }
         });
