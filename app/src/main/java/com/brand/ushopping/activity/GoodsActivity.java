@@ -262,7 +262,12 @@ public class GoodsActivity extends Activity {
         voucherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(GoodsActivity.this, VoucherActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_MINE);
+                intent.putExtras(bundle);
 
+                startActivity(intent);
 
             }
         });

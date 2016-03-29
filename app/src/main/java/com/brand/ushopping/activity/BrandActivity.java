@@ -73,6 +73,8 @@ public class BrandActivity extends Activity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private TextView moreGoodsBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +86,7 @@ public class BrandActivity extends Activity {
         user = appContext.getUser();
 
         mainScrollView = (ScrollViewX) findViewById(R.id.main_scroll_view);
+        /*
         mainScrollView.setOnScrollListener(new ScrollViewX.OnScrollListener() {
             @Override
             public void onScrollChanged(int x, int y, int oldX, int oldY) {
@@ -103,7 +106,7 @@ public class BrandActivity extends Activity {
 
             }
         });
-
+        */
         backBtn = (ImageView) findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +117,7 @@ public class BrandActivity extends Activity {
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
 
-        Bundle bundle = getIntent().getExtras();
+        final Bundle bundle = getIntent().getExtras();
         brand = bundle.getParcelable("brand");
         if(brand == null)
         {
@@ -286,6 +289,22 @@ public class BrandActivity extends Activity {
 
             }
         });
+
+        moreGoodsBtn = (TextView) findViewById(R.id.more_goods);
+        moreGoodsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BrandActivity.this, BrandMoreGoodsActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putLong("brandId", brand.getId());
+                bundle1.putString("brandName", brand.getBrandName());
+                intent.putExtras(bundle1);
+
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 
@@ -625,7 +644,7 @@ public class BrandActivity extends Activity {
     protected void onStop() {
         super.onStop();
 
-        ImageLoader.getInstance().clearMemoryCache();
+//        ImageLoader.getInstance().clearMemoryCache();
 
     }
 }

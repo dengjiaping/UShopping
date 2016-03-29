@@ -103,6 +103,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private TextView moreGoodsBtn;
+    private TextView moreGoods2Btn;
 
     /**
      * Use this factory method to create a new instance of
@@ -315,13 +316,27 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         moreGoodsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MoreGoodsActivity.class);
-                startActivity(intent);
+                moreGoods();
+
+            }
+        });
+        moreGoods2Btn = (TextView) view.findViewById(R.id.more_goods_2);
+        moreGoods2Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moreGoods();
 
             }
         });
 
         return view;
+    }
+
+    private void moreGoods()
+    {
+        Intent intent = new Intent(getActivity(), MoreGoodsActivity.class);
+        startActivity(intent);
+
     }
 
     @Override

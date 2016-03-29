@@ -216,6 +216,14 @@
                     android:numColumns="2"
                     android:layout_marginTop="4dp" />
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="38dp"
+                    android:text="查看更多"
+                    style="@style/TextViewStyle"
+                    android:gravity="center"
+                    android:id="@+id/more_goods" />
+
             </LinearLayout>
         </com.brand.ushopping.widget.ScrollViewX>
 

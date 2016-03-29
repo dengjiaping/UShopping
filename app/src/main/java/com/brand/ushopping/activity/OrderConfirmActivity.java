@@ -641,6 +641,7 @@ public class OrderConfirmActivity extends Activity {
             }
         }
 
+        // 添加优惠券
         if (requestCode == StaticValues.CODE_VOUCHER_PICK)
         {
             if (resultCode == Activity.RESULT_OK) {
@@ -649,14 +650,46 @@ public class OrderConfirmActivity extends Activity {
 
                 //判断是否允许添加
                 AppbrandId appbrandId = appvoucherId.getAppbrandId();
-                //全品牌
+
+                //已有判断
                 for(AppvoucherId appvoucherId1: appvoucherIds)
                 {
+
                     if(appvoucherId.getId() == appvoucherId1.getId())
                     {
                         Toast.makeText(OrderConfirmActivity.this, "您已添加此优惠券,不能重复添加", Toast.LENGTH_SHORT).show();
                         return;
 
+                    }
+
+                }
+
+                //金额限制
+                if(summary < appvoucherId.getMoney02())
+                {
+                    Toast.makeText(OrderConfirmActivity.this, "未达到优惠券满减金额", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
+                //品牌限制
+                if(appbrandId.getId() != 0)
+                {
+                    boolean brandAvaliable = false;
+                    for(Goods goods: goodsList)
+                    {
+                        if(goods.getId() == appbrandId.getId())
+                        {
+                            brandAvaliable = true;
+
+                        }
+
+                    }
+
+                    if(brandAvaliable == false)
+                    {
+                        Toast.makeText(OrderConfirmActivity.this, "只能使用该品牌的优惠券", Toast.LENGTH_SHORT).show();
+                        return;
                     }
 
                 }

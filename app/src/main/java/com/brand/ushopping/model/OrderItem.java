@@ -13,6 +13,7 @@ public class OrderItem
     private String orderNo;
     private double money;
     private int quantity;
+    private long reTime;
 
     public ArrayList<OrderGoodsItem> getOrderGoodsItems() {
         return orderGoodsItems;
@@ -60,5 +61,13 @@ public class OrderItem
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public long getReTime() {
+        return reTime;
+    }
+
+    public void setReTime(long reTime) {
+        this.reTime = reTime;
     }
 }

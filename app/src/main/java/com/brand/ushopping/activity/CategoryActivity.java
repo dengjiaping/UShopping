@@ -206,14 +206,6 @@ public class CategoryActivity extends Activity {
         gridLayoutManager = new GridLayoutManager(this, 2);
         goodsGridView.setLayoutManager(gridLayoutManager);
 
-        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                Log.v("recycler test", "load more");
-                load();
-
-            }
-        });
         selectTab();
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
@@ -232,6 +224,16 @@ public class CategoryActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                Log.v("recycler test", "load more");
+                load();
+
+            }
+        });
+
         reload();
 
     }

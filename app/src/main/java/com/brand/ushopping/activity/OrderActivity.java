@@ -21,10 +21,8 @@ import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.OrderItemView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
 
 public class OrderActivity extends Activity {
     private AppContext appContext;
@@ -236,10 +234,18 @@ public class OrderActivity extends Activity {
     {
         @Override
         public int compare(OrderItem orderItem, OrderItem t1) {
-            Long id1 = orderItem.getId();
-            Long id2 = t1.getId();
+            long reTime1 = orderItem.getReTime();
+            long reTime2 = orderItem.getReTime();
 
-            return id1.compareTo(id2);
+            if(reTime1 > reTime2)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+
         }
     }
 

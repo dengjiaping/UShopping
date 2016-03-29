@@ -69,15 +69,6 @@ public class MoreGoodsActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(MoreGoodsActivity.this, 2);
         goodsGridView.setLayoutManager(gridLayoutManager);
 
-        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                Log.v("recycler test", "load more");
-                load();
-
-            }
-        });
-
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -94,6 +85,15 @@ public class MoreGoodsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                Log.v("recycler test", "load more");
+                load();
+
+            }
+        });
 
         reload();
 
