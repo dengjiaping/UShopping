@@ -59,8 +59,8 @@ public class BrandMoreGoodsActivity extends Activity {
     private ImageView categoryUndefIdc;
 
     private int brandGoodsType;
-    private int brandGoodsTypePrev;
-    private int currentArrenge = StaticValues.ARRENGE_NONE;
+//    private int brandGoodsTypePrev;
+    private int currentArrenge = StaticValues.ARRENGE_TIME_ASC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +108,22 @@ public class BrandMoreGoodsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
+
                 selectTab();
-                load();
-                brandGoodsTypePrev = brandGoodsType;
+                reload();
+
+                if(currentArrenge == StaticValues.ARRENGE_TIME_ASC)
+                {
+                    currentArrenge = StaticValues.ARRENGE_TIME_DESC;
+
+                }
+                else
+                {
+                    currentArrenge = StaticValues.ARRENGE_TIME_ASC;
+
+                }
+
+//                brandGoodsTypePrev = brandGoodsType;
 
             }
         });
@@ -120,8 +133,20 @@ public class BrandMoreGoodsActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_PRICE;
                 selectTab();
-                load();
-                brandGoodsTypePrev = brandGoodsType;
+                reload();
+
+                if(currentArrenge == StaticValues.ARRENGE_PRICE_ASC)
+                {
+                    currentArrenge = StaticValues.ARRENGE_PRICE_DESC;
+
+                }
+                else
+                {
+                    currentArrenge = StaticValues.ARRENGE_PRICE_ASC;
+
+                }
+
+//                brandGoodsTypePrev = brandGoodsType;
 
             }
         });
@@ -132,7 +157,7 @@ public class BrandMoreGoodsActivity extends Activity {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_SALE;
                 selectTab();
                 load();
-                brandGoodsTypePrev = brandGoodsType;
+//                brandGoodsTypePrev = brandGoodsType;
 
             }
         });
@@ -143,7 +168,7 @@ public class BrandMoreGoodsActivity extends Activity {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_UNDEF;
                 selectTab();
                 load();
-                brandGoodsTypePrev = brandGoodsType;
+//                brandGoodsTypePrev = brandGoodsType;
 
             }
         });
@@ -153,7 +178,7 @@ public class BrandMoreGoodsActivity extends Activity {
         categoryUndefIdc = (ImageView) findViewById(R.id.category_undef_idc);
 
         brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
-        brandGoodsTypePrev = brandGoodsType;
+//        brandGoodsTypePrev = brandGoodsType;
 
         selectTab();
     }
@@ -161,15 +186,6 @@ public class BrandMoreGoodsActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                Log.v("recycler test", "load more");
-                load();
-
-            }
-        });
 
         reload();
 
@@ -181,6 +197,15 @@ public class BrandMoreGoodsActivity extends Activity {
         moreGoodsAdapter = null;
         listData = null;
         goodsGridView.removeAllViewsInLayout();
+
+        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                Log.v("recycler test", "load more");
+                load();
+
+            }
+        });
 
         load();
 
@@ -314,8 +339,23 @@ public class BrandMoreGoodsActivity extends Activity {
         {
             case StaticValues.BRAND_GOODS_TYPE_NEW:
                 categoryNewIdc.setVisibility(View.VISIBLE);
+                /*
                 if(listData != null && !listData.isEmpty())
                 {
+                    if(currentArrenge == StaticValues.ARRENGE_TIME_DESC)
+                    {
+                        Collections.sort(listData, new BrandGoodsTimeDescComparator());
+                        currentArrenge = StaticValues.ARRENGE_TIME_ASC;
+
+                    }
+                    if(currentArrenge == StaticValues.ARRENGE_TIME_ASC)
+                    {
+                        Collections.sort(listData, new BrandGoodsTimeAscComparator());
+                        currentArrenge = StaticValues.ARRENGE_TIME_DESC;
+
+                    }
+
+                    ↑↓←→
                     if(brandGoodsType == brandGoodsTypePrev)
                     {
                         Collections.sort(listData, new BrandGoodsTimeDescComparator());
@@ -329,16 +369,33 @@ public class BrandMoreGoodsActivity extends Activity {
                         currentArrenge = StaticValues.ARRENGE_TIME_ASC;
 
                     }
-
                     moreGoodsAdapter.notifyDataSetChanged();
 
+
                 }
+                */
+
 
                 break;
             case StaticValues.BRAND_GOODS_TYPE_PRICE:
                 categoryPriceIdc.setVisibility(View.VISIBLE);
+                /*
                 if(listData != null && !listData.isEmpty())
                 {
+                    if(currentArrenge == StaticValues.ARRENGE_PRICE_DESC)
+                    {
+                        Collections.sort(listData, new BrandGoodsPriceDescComparator());
+                        currentArrenge = StaticValues.ARRENGE_PRICE_ASC;
+
+                    }
+                    if(currentArrenge == StaticValues.ARRENGE_PRICE_ASC)
+                    {
+                        Collections.sort(listData, new BrandGoodsPriceAscComparator());
+                        currentArrenge = StaticValues.ARRENGE_PRICE_DESC;
+
+                    }
+
+                    /*
                     if(brandGoodsType == brandGoodsTypePrev)
                     {
                         Collections.sort(listData, new BrandGoodsPriceDescComparator());
@@ -354,8 +411,9 @@ public class BrandMoreGoodsActivity extends Activity {
                     }
 
                     moreGoodsAdapter.notifyDataSetChanged();
-                }
 
+                }
+                */
                 break;
             case StaticValues.BRAND_GOODS_TYPE_SALE:
                 categorySaleIdc.setVisibility(View.VISIBLE);
