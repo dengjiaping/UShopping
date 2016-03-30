@@ -156,7 +156,7 @@ public class BrandMoreGoodsActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_SALE;
                 selectTab();
-                load();
+//                load();
 //                brandGoodsTypePrev = brandGoodsType;
 
             }
@@ -167,7 +167,7 @@ public class BrandMoreGoodsActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_UNDEF;
                 selectTab();
-                load();
+//                load();
 //                brandGoodsTypePrev = brandGoodsType;
 
             }
@@ -458,7 +458,19 @@ public class BrandMoreGoodsActivity extends Activity {
             Long time1 = (Long)lhs.get("reTime");
             Long time2 = (Long)rhs.get("reTime");
 
-            return time1.compareTo(time2);
+            if(time1 > time2)
+            {
+                return 1;
+            }
+            else if(time1 < time2)
+            {
+                return -1;
+            }
+            else
+            {
+                return time1.compareTo(time2);
+            }
+
         }
     }
 
@@ -469,7 +481,18 @@ public class BrandMoreGoodsActivity extends Activity {
             Long time1 = (Long)lhs.get("reTime");
             Long time2 = (Long)rhs.get("reTime");
 
-            return time2.compareTo(time1);
+            if(time1 < time2)
+            {
+                return 1;
+            }
+            else if(time1 > time2)
+            {
+                return -1;
+            }
+            else
+            {
+                return time1.compareTo(time2);
+            }
         }
     }
 

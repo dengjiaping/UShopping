@@ -110,6 +110,7 @@ public class StaticValues
     public static final int ORDER_COMFIRM_GEN_ORDER = 1;    //生成订单
     public static final int ORDER_COMFIRM_PAY = 2;          //订单支付
 
+    public static final int SEARCH_MODE_NONE = 0;
     public static final int SEARCH_MODE_PROPERTY = 1;
     public static final int SEARCH_MODE_RESULT = 2;
 
@@ -174,6 +175,5 @@ public class StaticValues
     //活动类型
     public final static int ACTIVITY_FLAG_WEBPAGE = 0;  //网页
     public final static int ACTIVITY_FLAG_VOUCHER = 3;  //优惠券
-
 
 }

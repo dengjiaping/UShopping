@@ -40,6 +40,7 @@ import java.util.Map;
 
 public class SearchActivity extends Activity {
     private User user;
+
     private AppContext appContext;
 
     private EditText searchEditText;
@@ -54,7 +55,7 @@ public class SearchActivity extends Activity {
     private GoodsAdapter goodsAdapter = null;
     private ArrayList<Map<String,Object>> listData;
     private int goodsCount = 0;
-    private int currentSearchMode;
+    private int currentSearchMode = StaticValues.SEARCH_MODE_PROPERTY;
     private Button cleatHistoryBtn;
     private static final String[] searchTypes = {StaticValues.SEARCH_TYPE_NAME, StaticValues.SEARCH_TYPE_CODE};
     private Spinner searchTypeSpinner;
@@ -121,22 +122,7 @@ public class SearchActivity extends Activity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (currentSearchMode)
-
-                {
-                    case StaticValues.SEARCH_MODE_PROPERTY:
-                        SearchActivity.this.finish();
-
-                        break;
-
-                    case StaticValues.SEARCH_MODE_RESULT:
-                        currentSearchMode = StaticValues.SEARCH_MODE_PROPERTY;
-                        searchPropertyView.setVisibility(ViewGroup.VISIBLE);
-                        productGridView.setVisibility(View.GONE);
-                        warningLayout.setVisibility(View.GONE);
-
-                        break;
-                }
+                backAction();
 
             }
         });
@@ -185,25 +171,20 @@ public class SearchActivity extends Activity {
         });
 
         recentSearchLayout = (GridLayout) findViewById(R.id.recent);
-        currentSearchMode = StaticValues.SEARCH_MODE_PROPERTY;
 
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onStart() {
+        super.onStart();
 
-        searchPropertyView.setVisibility(ViewGroup.VISIBLE);
-        productGridView.setVisibility(View.GONE);
-
+        chooseMode();
+        setValues();
         loadRecent();
-
-        currentSearchMode = StaticValues.SEARCH_MODE_PROPERTY;
 
     }
 
-    private void loadRecent()
-    {
+    private void loadRecent() {
         recentSearchLayout.removeAllViewsInLayout();
 
         recent = new RefAction().getRecentSearch(SearchActivity.this);
@@ -271,8 +252,8 @@ public class SearchActivity extends Activity {
         new SearchAppGoodsActionTask().execute(searchAppGoods);
 
         currentSearchMode = StaticValues.SEARCH_MODE_RESULT;
-        searchPropertyView.setVisibility(ViewGroup.GONE);
-        productGridView.setVisibility(View.VISIBLE);
+        chooseMode();
+
     }
 
     //搜索任务
@@ -298,61 +279,7 @@ public class SearchActivity extends Activity {
                 {
                     goodses = result.getGoodses();
 
-                    if(!goodses.isEmpty())
-                    {
-                        //UI更新
-                        if(listData == null)
-                        {
-                            listData = new ArrayList<Map<String,Object>>();
-                        }
-
-                        for(Goods goods: goodses)
-                        {
-                            Map line = new HashMap();
-
-                            line.put("id", goods.getId());
-                            line.put("name", goods.getGoodsName());
-                            if(goods.getLogopicUrl() != null)
-                            {
-                                line.put("img", goods.getLogopicUrl());
-                            }
-                            else
-                            {
-                                line.put("img", "");
-                            }
-                            line.put("price", goods.getPromotionPrice());
-                            line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
-
-                            listData.add(line);
-                        }
-                        goodsCount += goodses.size();
-
-                        if(goodsAdapter == null)
-                        {
-                            goodsAdapter = new GoodsAdapter(listData, SearchActivity.this);
-                            productGridView.setAdapter(goodsAdapter);
-
-                        }
-                        else
-                        {
-                            goodsAdapter.notifyDataSetChanged();
-
-                        }
-
-                        new RefAction().setRecentSearch(SearchActivity.this, keyword);
-                        loadRecent();
-
-                    }
-                    else
-                    {
-                        Toast.makeText(SearchActivity.this, "没有更多", Toast.LENGTH_SHORT).show();
-
-                    }
-//                    else
-//                    {
-//                        warningLayout.setVisibility(View.VISIBLE);
-//                        warningTextView.setText("没有搜索到商品");
-//                    }
+                    setValues();
 
                 }
                 else
@@ -366,6 +293,108 @@ public class SearchActivity extends Activity {
 
             }
         }
+    }
+
+    public void setValues() {
+        if (goodses != null)
+        {
+            if(!goodses.isEmpty())
+            {
+                //UI更新
+                if(listData == null)
+                {
+                    listData = new ArrayList<Map<String,Object>>();
+                }
+
+                for(Goods goods: goodses)
+                {
+                    Map line = new HashMap();
+
+                    line.put("id", goods.getId());
+                    line.put("name", goods.getGoodsName());
+                    if(goods.getLogopicUrl() != null)
+                    {
+                        line.put("img", goods.getLogopicUrl());
+                    }
+                    else
+                    {
+                        line.put("img", "");
+                    }
+                    line.put("price", goods.getPromotionPrice());
+                    line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+
+                    listData.add(line);
+                }
+                goodsCount += goodses.size();
+
+                if(goodsAdapter == null)
+                {
+                    goodsAdapter = new GoodsAdapter(listData, SearchActivity.this);
+                    productGridView.setAdapter(goodsAdapter);
+
+                }
+                else
+                {
+                    goodsAdapter.notifyDataSetChanged();
+
+                }
+
+                new RefAction().setRecentSearch(SearchActivity.this, keyword);
+                loadRecent();
+
+            }
+            else
+            {
+                Toast.makeText(SearchActivity.this, "没有更多", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+
+    }
+
+    private void chooseMode()
+    {
+        switch (currentSearchMode)
+        {
+            case StaticValues.SEARCH_MODE_PROPERTY:
+                searchPropertyView.setVisibility(ViewGroup.VISIBLE);
+                productGridView.setVisibility(View.GONE);
+                warningLayout.setVisibility(View.GONE);
+
+                break;
+
+            case StaticValues.SEARCH_MODE_RESULT:
+                searchPropertyView.setVisibility(ViewGroup.GONE);
+                productGridView.setVisibility(View.VISIBLE);
+                warningLayout.setVisibility(View.GONE);
+
+                break;
+        }
+
+    }
+
+    private void backAction()
+    {
+        switch (currentSearchMode)
+        {
+            case StaticValues.SEARCH_MODE_PROPERTY:
+                SearchActivity.this.finish();
+
+                break;
+
+            case StaticValues.SEARCH_MODE_RESULT:
+                currentSearchMode = StaticValues.SEARCH_MODE_PROPERTY;
+                chooseMode();
+
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        backAction();
+
     }
 
 }
