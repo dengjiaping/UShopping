@@ -298,6 +298,8 @@ public class BrandActivity extends Activity {
                 Bundle bundle1 = new Bundle();
                 bundle1.putLong("brandId", brand.getId());
                 bundle1.putString("brandName", brand.getBrandName());
+                bundle1.putInt("boughtType", boughtType);
+                boughtType = bundle.getInt("", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle1);
 
                 startActivity(intent);

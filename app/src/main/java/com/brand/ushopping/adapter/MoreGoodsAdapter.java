@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
-import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
                 Intent intent = new Intent(context, GoodsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", (Long) list.get(position).get("id"));
-                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                bundle.putInt("boughtType", (int) list.get(position).get("boughtType"));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

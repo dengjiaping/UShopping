@@ -61,6 +61,7 @@ public class BrandMoreGoodsActivity extends Activity {
     private int brandGoodsType;
 //    private int brandGoodsTypePrev;
     private int currentArrenge = StaticValues.ARRENGE_TIME_DESC;
+    private int boughtType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,7 @@ public class BrandMoreGoodsActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         brandId = bundle.getLong("brandId");
         brandName = bundle.getString("brandName");
+        boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
 
         titleTextView.setText(brandName);
 
@@ -277,7 +279,7 @@ public class BrandMoreGoodsActivity extends Activity {
 
                             line.put("reTime",appgoodsId.getReTime());
 
-                            line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                            line.put("boughtType", boughtType);
 
                             listData.add(line);
                         }
