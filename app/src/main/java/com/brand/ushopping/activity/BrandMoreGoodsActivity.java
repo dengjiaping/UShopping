@@ -158,8 +158,6 @@ public class BrandMoreGoodsActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_SALE;
                 selectTab();
-//                load();
-//                brandGoodsTypePrev = brandGoodsType;
 
             }
         });
@@ -169,8 +167,6 @@ public class BrandMoreGoodsActivity extends Activity {
             public void onClick(View v) {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_UNDEF;
                 selectTab();
-//                load();
-//                brandGoodsTypePrev = brandGoodsType;
 
             }
         });
