@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class BrandMoreGoodsActivity extends Activity {
@@ -58,7 +59,7 @@ public class BrandMoreGoodsActivity extends Activity {
     private ImageView categorySaleIdc;
     private ImageView categoryUndefIdc;
 
-    private int brandGoodsType;
+    private int brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
 //    private int brandGoodsTypePrev;
     private int currentArrenge = StaticValues.ARRENGE_TIME_DESC;
     private int boughtType;
@@ -191,10 +192,20 @@ public class BrandMoreGoodsActivity extends Activity {
 
     public void reload()
     {
+        if(listData != null)
+        {
+            listData.clear();
+        }
+
+        if(moreGoodsAdapter != null)
+        {
+            moreGoodsAdapter.notifyItemRangeRemoved(0, currentGoodsCount);
+
+        }
+
         currentGoodsCount = 0;
-        moreGoodsAdapter = null;
-        listData = null;
-        goodsGridView.removeAllViewsInLayout();
+
+//        goodsGridView.removeAllViewsInLayout();
 
         goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
             @Override
@@ -277,7 +288,25 @@ public class BrandMoreGoodsActivity extends Activity {
 
                             line.put("boughtType", boughtType);
 
-                            listData.add(line);
+                            //去重
+                            boolean insertAvaliable = true;
+                            for(Map<String,Object> item : listData)
+                            {
+                                long id1 = (long) item.get("id");
+                                long id2 = (long) line.get("id");
+                                if(id1 == id2)
+                                {
+                                    insertAvaliable = false;
+                                    break;
+                                }
+
+                            }
+
+                            if(insertAvaliable)
+                            {
+                                listData.add(line);
+                            }
+
                         }
                         currentGoodsCount += listData.size();
 
@@ -291,11 +320,9 @@ public class BrandMoreGoodsActivity extends Activity {
                         }
                         else
                         {
-                            moreGoodsAdapter.notifyDataSetChanged();
+                            moreGoodsAdapter.notifyItemRangeChanged(0, currentGoodsCount);
 
                         }
-
-                        currentGoodsCount += listData.size();
 
                     }
                     else
@@ -337,81 +364,11 @@ public class BrandMoreGoodsActivity extends Activity {
         {
             case StaticValues.BRAND_GOODS_TYPE_NEW:
                 categoryNewIdc.setVisibility(View.VISIBLE);
-                /*
-                if(listData != null && !listData.isEmpty())
-                {
-                    if(currentArrenge == StaticValues.ARRENGE_TIME_DESC)
-                    {
-                        Collections.sort(listData, new BrandGoodsTimeDescComparator());
-                        currentArrenge = StaticValues.ARRENGE_TIME_ASC;
-
-                    }
-                    if(currentArrenge == StaticValues.ARRENGE_TIME_ASC)
-                    {
-                        Collections.sort(listData, new BrandGoodsTimeAscComparator());
-                        currentArrenge = StaticValues.ARRENGE_TIME_DESC;
-
-                    }
-
-                    ↑↓←→
-                    if(brandGoodsType == brandGoodsTypePrev)
-                    {
-                        Collections.sort(listData, new BrandGoodsTimeDescComparator());
-                        brandGoodsTypePrev = 0;
-                        currentArrenge = StaticValues.ARRENGE_TIME_DESC;
-
-                    }
-                    else
-                    {
-                        Collections.sort(listData, new BrandGoodsTimeAscComparator());
-                        currentArrenge = StaticValues.ARRENGE_TIME_ASC;
-
-                    }
-                    moreGoodsAdapter.notifyDataSetChanged();
-
-
-                }
-                */
-
 
                 break;
             case StaticValues.BRAND_GOODS_TYPE_PRICE:
                 categoryPriceIdc.setVisibility(View.VISIBLE);
-                /*
-                if(listData != null && !listData.isEmpty())
-                {
-                    if(currentArrenge == StaticValues.ARRENGE_PRICE_DESC)
-                    {
-                        Collections.sort(listData, new BrandGoodsPriceDescComparator());
-                        currentArrenge = StaticValues.ARRENGE_PRICE_ASC;
 
-                    }
-                    if(currentArrenge == StaticValues.ARRENGE_PRICE_ASC)
-                    {
-                        Collections.sort(listData, new BrandGoodsPriceAscComparator());
-                        currentArrenge = StaticValues.ARRENGE_PRICE_DESC;
-
-                    }
-
-                    /*
-                    if(brandGoodsType == brandGoodsTypePrev)
-                    {
-                        Collections.sort(listData, new BrandGoodsPriceDescComparator());
-                        brandGoodsTypePrev = 0;
-                        currentArrenge = StaticValues.ARRENGE_PRICE_DESC;
-
-                    }
-                    else
-                    {
-                        Collections.sort(listData, new BrandGoodsPriceAscComparator());
-                        currentArrenge = StaticValues.ARRENGE_PRICE_ASC;
-
-                    }
-
-                    moreGoodsAdapter.notifyDataSetChanged();
-
-                }
-                */
                 break;
             case StaticValues.BRAND_GOODS_TYPE_SALE:
                 categorySaleIdc.setVisibility(View.VISIBLE);
@@ -524,5 +481,20 @@ public class BrandMoreGoodsActivity extends Activity {
             return price2.compareTo(price1);
         }
     }
+
+    //去重操作
+//    private void distinctList()
+//    {
+//        ArrayList<Map<String,Object>> newListData = new ArrayList<Map<String,Object>>();
+//        HashSet set = new HashSet();
+//        for(Map<String,Object> item : listData)
+//        {
+//            set.put
+//            item.get("id");
+//
+//        }
+//
+//    }
+
 
 }

@@ -68,7 +68,7 @@ public class StoreAction
     // 根据实体店铺查询店铺商品
     public BrandGoodsList getAppStoresIdAll(Context context, BrandGoodsList brandGoodsList)
     {
-        mCache = ACache.get(context);
+//        mCache = ACache.get(context);
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(brandGoodsList);
@@ -77,6 +77,7 @@ public class StoreAction
 
         try
         {
+            /*
             resultString = mCache.getAsString("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin());
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -84,6 +85,10 @@ public class StoreAction
                 Log.v("brand goods", resultString);
 
             }
+            */
+
+            resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
+            Log.v("brand goods", resultString);
 
             if(resultString != null)
             {
@@ -97,7 +102,7 @@ public class StoreAction
                     brandGoodsList.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin(), resultString, StaticValues.CACHE_LIFE);
+                    // mCache.put("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin(), resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else
