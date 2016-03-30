@@ -44,13 +44,15 @@ public class RegisterActivity extends Activity {
     private String pass;
     private String smsCode;
 
-    private long smsIntervalTime = 3600000;
+    private int smsIntervalTime = 60000;
     private long currentTimeMil;
     private TimeoutbleProgressDialog registerDialog;
     private boolean smsBtnEnable = true;
 
     //是否启用短信验证码
     private boolean smsEnable = true;
+
+    private Handler getSmsCodeHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class RegisterActivity extends Activity {
                     else
                     {
                         smsBtnEnable = false;
+                        getSmsBtn.setBackgroundColor(getResources().getColor(R.color.bg_grey));
                         currentTimeMil = System.currentTimeMillis();
                         new SmsIntervalTask().start();
                         SMSSDK.getVerificationCode("86", mobile);
@@ -189,6 +192,19 @@ public class RegisterActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
+
+        getSmsCodeHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case StaticValues.GET_SMS_CODE_HANDLER:
+                        smsBtnEnable = true;
+                        getSmsBtn.setBackgroundColor(getResources().getColor(R.color.buttonl_bg_yellow));
+
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
 
     }
 
@@ -287,18 +303,22 @@ public class RegisterActivity extends Activity {
     {
         @Override
         public void run() {
-            long timeInterval = System.currentTimeMillis() - currentTimeMil;
+            int timeInterval = (int) (System.currentTimeMillis() - currentTimeMil);
             if(timeInterval < smsIntervalTime)
             {
-
                 try {
                     sleep(smsIntervalTime - timeInterval);
-                    getSmsBtn.setText(Long.toString(timeInterval / 60));
+                    Log.v("uregister", Long.toString(timeInterval / 60));
+
+                    Message message = new Message();
+                    message.what = StaticValues.GET_SMS_CODE_HANDLER;
+                    message.arg1 = timeInterval;
+
+                    getSmsCodeHandler.sendMessage(message);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
 
             }
             else
@@ -308,8 +328,6 @@ public class RegisterActivity extends Activity {
                 smsBtnEnable = true;
 
             }
-
-
 
         }
 

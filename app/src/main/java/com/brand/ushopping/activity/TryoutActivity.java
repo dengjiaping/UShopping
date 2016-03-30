@@ -209,10 +209,10 @@ public class TryoutActivity extends Activity {
     {
         @Override
         public int compare(OrderItem orderItem, OrderItem t1) {
-            Long id1 = orderItem.getId();
-            Long id2 = t1.getId();
+            Long id1 = orderItem.getReTime();
+            Long id2 = t1.getReTime();
 
-            return id1.compareTo(id2);
+            return id2.compareTo(id1);
         }
     }
 

@@ -60,7 +60,7 @@ public class BrandMoreGoodsActivity extends Activity {
 
     private int brandGoodsType;
 //    private int brandGoodsTypePrev;
-    private int currentArrenge = StaticValues.ARRENGE_TIME_ASC;
+    private int currentArrenge = StaticValues.ARRENGE_TIME_DESC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -430,18 +430,26 @@ public class BrandMoreGoodsActivity extends Activity {
         switch (currentArrenge)
         {
             case StaticValues.ARRENGE_TIME_ASC:
+                categoryNew.setText("新品 ↑");
+                categoryPrice.setText("价格");
                 Collections.sort(listData, new BrandGoodsTimeAscComparator());
 
                 break;
             case StaticValues.ARRENGE_TIME_DESC:
+                categoryNew.setText("新品 ↓");
+                categoryPrice.setText("价格");
                 Collections.sort(listData, new BrandGoodsTimeDescComparator());
 
                 break;
             case StaticValues.ARRENGE_PRICE_ASC:
+                categoryNew.setText("新品");
+                categoryPrice.setText("价格 ↑");
                 Collections.sort(listData, new BrandGoodsPriceAscComparator());
 
                 break;
             case StaticValues.ARRENGE_PRICE_DESC:
+                categoryNew.setText("新品");
+                categoryPrice.setText("价格 ↓");
                 Collections.sort(listData, new BrandGoodsPriceDescComparator());
 
                 break;

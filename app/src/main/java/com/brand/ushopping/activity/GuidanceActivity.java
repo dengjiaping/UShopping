@@ -87,8 +87,8 @@ public class GuidanceActivity extends Activity implements android.view.GestureDe
         if (e2.getX() - e1.getX() > 120) {            // 从左向右滑动（左进右出）
             if(currentPage > 0)
             {
-                Animation rInAnim = AnimationUtils.loadAnimation(GuidanceActivity.this, R.anim.push_left_in);  // 向右滑动左侧进入的渐变效果（alpha  0.1 -> 1.0）
-                Animation rOutAnim = AnimationUtils.loadAnimation(GuidanceActivity.this, R.anim.push_left_out); // 向右滑动右侧滑出的渐变效果（alpha 1.0  -> 0.1）
+                Animation rInAnim = AnimationUtils.loadAnimation(GuidanceActivity.this, R.anim.push_right_in);  // 向右滑动左侧进入的渐变效果（alpha  0.1 -> 1.0）
+                Animation rOutAnim = AnimationUtils.loadAnimation(GuidanceActivity.this, R.anim.push_right_out); // 向右滑动右侧滑出的渐变效果（alpha 1.0  -> 0.1）
 
                 flipper.setInAnimation(rInAnim);
                 flipper.setOutAnimation(rOutAnim);

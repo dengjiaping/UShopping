@@ -176,4 +176,7 @@ public class StaticValues
     public final static int ACTIVITY_FLAG_WEBPAGE = 0;  //网页
     public final static int ACTIVITY_FLAG_VOUCHER = 3;  //优惠券
 
+    //注册handler
+    public final static int GET_SMS_CODE_HANDLER = 1000;
+
 }
