@@ -37,6 +37,7 @@ import com.brand.ushopping.model.OrderSuccess;
 import com.brand.ushopping.model.SmOrderSave;
 import com.brand.ushopping.model.SmOrderSaveList;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.model.UserVoucherItem;
 import com.brand.ushopping.model.YyOrderSave;
 import com.brand.ushopping.model.YyOrderSaveList;
 import com.brand.ushopping.utils.CommonUtils;
@@ -80,7 +81,7 @@ public class OrderConfirmActivity extends Activity {
 
     private TextView voucherBtn;
     private MyListView voucherListView;
-    private ArrayList<AppvoucherId> appvoucherIds;
+    private ArrayList<UserVoucherItem> userVoucherItems;
     private GoodsVoucherAdapter goodsVoucherAdapter;
 
     private int totalCount = 0;
@@ -453,7 +454,7 @@ public class OrderConfirmActivity extends Activity {
         });
 
         voucherListView = (MyListView) findViewById(R.id.voucher_list);
-        appvoucherIds = new ArrayList<AppvoucherId>();
+        userVoucherItems = new ArrayList<UserVoucherItem>();
 
     }
 
@@ -550,19 +551,13 @@ public class OrderConfirmActivity extends Activity {
 
                             //优惠券
                             ArrayList<Long> userVoucherId = new ArrayList<Long>();
-                            for(AppvoucherId appvoucherId: appvoucherIds)
+                            for(UserVoucherItem userVoucherItem: userVoucherItems)
                             {
-                                userVoucherId.add(appvoucherId.getId());
+                                userVoucherId.add(userVoucherItem.getId());
 
                             }
-                            if(userVoucherId.isEmpty())
-                            {
-                                orderSaveList.setUserVoucherId(null);
-                            }
-                            else
-                            {
-                                orderSaveList.setUserVoucherId(userVoucherId);
-                            }
+
+                            orderSaveList.setUserVoucherId(userVoucherId);
 
                             new OrderSaveTask().execute(orderSaveList);
 
@@ -646,16 +641,17 @@ public class OrderConfirmActivity extends Activity {
         {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                AppvoucherId appvoucherId = bundle.getParcelable("voucher");
+                UserVoucherItem userVoucherItem = bundle.getParcelable("voucher");
+                AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
 
                 //判断是否允许添加
                 AppbrandId appbrandId = appvoucherId.getAppbrandId();
 
                 //已有判断
-                for(AppvoucherId appvoucherId1: appvoucherIds)
+                for(UserVoucherItem userVoucherItem1: userVoucherItems)
                 {
 
-                    if(appvoucherId.getId() == appvoucherId1.getId())
+                    if(userVoucherItem.getId() == userVoucherItem1.getId())
                     {
                         Toast.makeText(OrderConfirmActivity.this, "您已添加此优惠券,不能重复添加", Toast.LENGTH_SHORT).show();
                         return;
@@ -694,32 +690,7 @@ public class OrderConfirmActivity extends Activity {
 
                 }
 
-//                if(appbrandId != null)
-//                {
-//                    //品牌
-//                    for(Goods goods: goodsList)
-//                    {
-//                        AppbrandId goodsAppbrandId = goods.getAppbrandId();
-//                        if(goodsAppbrandId != null)
-//                        {
-//                            if(goodsAppbrandId.getId() == appbrandId.getId())
-//                            {
-//                                Toast.makeText(OrderConfirmActivity.this, "您已添加此品牌的优惠券,不能重复添加", Toast.LENGTH_SHORT).show();
-//                                return;
-//                            }
-//
-//                        }
-//
-//                    }
-//
-//                }
-//                else
-//                {
-//
-//
-//                }
-
-                appvoucherIds.add(appvoucherId);
+                userVoucherItems.add(userVoucherItem);
 
                 voucherReload();
                 calculateSummary();
@@ -988,11 +959,12 @@ public class OrderConfirmActivity extends Activity {
         voucherListView.removeAllViewsInLayout();
 
         List listData = new ArrayList<Map<String,Object>>();
-        for(AppvoucherId appvoucherId: appvoucherIds)
+        for(UserVoucherItem userVoucherItem: userVoucherItems)
         {
+            AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
             Map line = new HashMap();
 
-            line.put("id", appvoucherId.getId());
+            line.put("id", userVoucherItem.getId());
             line.put("money01", appvoucherId.getMoney01());
             line.put("money02", appvoucherId.getMoney02());
             line.put("name", appvoucherId.getAppbrandId().getBrandName());
@@ -1035,12 +1007,12 @@ public class OrderConfirmActivity extends Activity {
 
     public void removeVoucher(long id)
     {
-        for(int a=0; a<appvoucherIds.size(); a++)
+        for(int a=0; a<userVoucherItems.size(); a++)
         {
-            AppvoucherId appvoucherId = appvoucherIds.get(a);
-            if(appvoucherId.getId() == id)
+            UserVoucherItem userVoucherItem = userVoucherItems.get(a);
+            if(userVoucherItem.getId() == id)
             {
-                appvoucherIds.remove(a);
+                userVoucherItems.remove(a);
                 voucherReload();
                 calculateSummary();
 
@@ -1067,11 +1039,13 @@ public class OrderConfirmActivity extends Activity {
         }
 
         //优惠券
-        if(appvoucherIds != null)
+        if(userVoucherItems != null)
         {
-            for(AppvoucherId appvoucherId: appvoucherIds)
+            for(UserVoucherItem userVoucherItem: userVoucherItems)
             {
+                AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
                 summary -= appvoucherId.getMoney01();
+
             }
 
         }

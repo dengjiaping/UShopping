@@ -84,6 +84,8 @@ public class MineFragment extends Fragment {
     private ViewGroup paidBtn;
     private ViewGroup deliveredBtn;
 
+    private ArrayList<AppgoodsId> goodsViewHistory;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -448,19 +450,14 @@ public class MineFragment extends Fragment {
             appBrandCollect.setSessionid(user.getSessionid());
             new GetListAppBrandCollectUserIdTask().execute(appBrandCollect);
 
-            ArrayList<AppgoodsId> goodsViewHistory = appContext.getGoodsViewHistory();
-            if(goodsViewHistory != null)
-            {
-                viewHistoryCountTextView.setText(Integer.toString(goodsViewHistory.size()));
+        }
 
-            }
+        goodsViewHistory = new GoodsAction().getGoodsViewHistory(appContext.getUdbHelper());
+        if(goodsViewHistory != null && !goodsViewHistory.isEmpty())
+        {
+            viewHistoryCountTextView.setText(Integer.toString(goodsViewHistory.size()));
 
         }
-//        else
-//        {
-//            Toast.makeText(getActivity(), "登录注册之后启用收藏功能", Toast.LENGTH_SHORT).show();
-//
-//        }
 
     }
 
@@ -504,7 +501,7 @@ public class MineFragment extends Fragment {
     }
 
     //获取收藏
-    //店铺收藏列表
+    //商品收藏列表
     public class GetListAppGoodsCollectUserIdTask extends AsyncTask<AppGoodsCollect, Void, AppGoodsCollect>
     {
         @Override
@@ -543,7 +540,7 @@ public class MineFragment extends Fragment {
 
         @Override
         protected AppBrandCollect doInBackground(AppBrandCollect... appBrandCollects) {
-            return new BrandAction().getListAppBrandCollectUserIdAction(appBrandCollects[0]);
+            return new BrandAction().getListAppBrandCollectUserIdAction(getActivity(), appBrandCollects[0]);
 
         }
 

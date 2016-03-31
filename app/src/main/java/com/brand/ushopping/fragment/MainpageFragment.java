@@ -335,6 +335,10 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     private void moreGoods()
     {
         Intent intent = new Intent(getActivity(), MoreGoodsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+        intent.putExtras(bundle);
+
         startActivity(intent);
 
     }

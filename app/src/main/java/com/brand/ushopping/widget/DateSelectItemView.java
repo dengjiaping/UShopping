@@ -35,11 +35,11 @@ public class DateSelectItemView extends LinearLayout {
         textView = (TextView) view.findViewById(R.id.text);
         dateView = (TextView) view.findViewById(R.id.date);
 
-        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
         calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
         calendar.add(Calendar.DAY_OF_MONTH, dayAfter);
 
-        textView.setText((calendar.get(Calendar.MONTH)) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日");
+        textView.setText((calendar.get(Calendar.MONTH) + 1) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日");
         dateView.setText("");
 
         this.setOnClickListener(new OnClickListener() {

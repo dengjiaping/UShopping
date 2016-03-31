@@ -151,12 +151,12 @@ public class VoucherActivity extends Activity {
                         {
                             UserVoucherItem userVoucherItem = userVoucherItems.get(a);
                             AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
-                            if(appvoucherId.getId() == id)
+                            if(userVoucherItem.getId() == id)
                             {
                                 Intent intent = new Intent(VoucherActivity.this, GoodsActivity.class);
 
                                 Bundle bundle = new Bundle();
-                                bundle.putParcelable("voucher", appvoucherId);
+                                bundle.putParcelable("voucher", userVoucherItem);
 
                                 intent.putExtras(bundle);
 
@@ -308,7 +308,7 @@ public class VoucherActivity extends Activity {
                         AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
                         Map line = new HashMap();
 
-                        line.put("id", appvoucherId.getId());
+                        line.put("id", userVoucherItem.getId());
                         line.put("money02", appvoucherId.getMoney02());
                         line.put("money01", appvoucherId.getMoney01());
                         AppbrandId appbrandId = appvoucherId.getAppbrandId();

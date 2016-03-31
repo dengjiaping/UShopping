@@ -106,8 +106,10 @@ public class BrandAction
     }
 
     // --  查询收藏列表  --
-    public AppBrandCollect getListAppBrandCollectUserIdAction(AppBrandCollect appBrandCollect)
+    public AppBrandCollect getListAppBrandCollectUserIdAction(Context context, AppBrandCollect appBrandCollect)
     {
+        mCache = ACache.get(context);
+
         String resultString = null;
         String jsonParam = JSON.toJSONString(appBrandCollect);
         List params = new ArrayList();
@@ -121,6 +123,7 @@ public class BrandAction
                 resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
 
             }
+            Log.v("brand collect", resultString);
 
             if(resultString != null)
             {

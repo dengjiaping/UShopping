@@ -136,7 +136,7 @@ public class BrandFavouriteActivity extends Activity {
 
         @Override
         protected AppBrandCollect doInBackground(AppBrandCollect... appBrandCollects) {
-            return new BrandAction().getListAppBrandCollectUserIdAction(appBrandCollects[0]);
+            return new BrandAction().getListAppBrandCollectUserIdAction(BrandFavouriteActivity.this, appBrandCollects[0]);
 
         }
 

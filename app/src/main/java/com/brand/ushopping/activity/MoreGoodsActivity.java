@@ -42,7 +42,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
     private MoreGoodsAdapter moreGoodsAdapter;
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,8 @@ public class MoreGoodsActivity extends AppCompatActivity {
 
             }
         });
+
+        boughtType = getIntent().getExtras().getInt("boughtType");
 
     }
 
@@ -168,6 +170,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
                                 line.put("img", appgoodsId.getLogopicUrl());
                                 line.put("name", appgoodsId.getGoodsName());
                                 line.put("price", appgoodsId.getPromotionPrice());
+                                line.put("boughtType", boughtType);
                                 line.put("favouriteCount", 123);
 
                                 goodsListData.add(line);
