@@ -188,7 +188,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
 
                             }
 
-                            currentGoodsCount += goodsListData.size();
+                            currentGoodsCount += appgoodsIds.size();
 
 //                            warningLayout.setVisibility(View.GONE);
 

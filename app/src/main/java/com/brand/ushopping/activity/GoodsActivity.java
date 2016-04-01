@@ -262,12 +262,17 @@ public class GoodsActivity extends Activity {
         voucherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GoodsActivity.this, VoucherActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_MINE);
-                intent.putExtras(bundle);
+                if (user == null) {
+                    Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(GoodsActivity.this, VoucherActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_MINE);
+                    intent.putExtras(bundle);
 
-                startActivity(intent);
+                    startActivity(intent);
+
+                }
 
             }
         });
@@ -713,35 +718,27 @@ public class GoodsActivity extends Activity {
     //进入店铺
     private void enterStore()
     {
-        if(user == null)
+        AppbrandId appbrandId = goods.getAppbrandId();
+
+        if(appbrandId != null)
         {
-            Toast.makeText(GoodsActivity.this, "请先登录或注册", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(GoodsActivity.this, BrandActivity.class);
+            Brand brand = new Brand();
+            brand.setId(appbrandId.getId());
+            brand.setLogopic(appbrandId.getLogopic());
+            brand.setBrandName(appbrandId.getBrandName());
+            brand.setShowpic(appbrandId.getShowpic());
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("brand", brand);
+            bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+            bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
         else
         {
-            AppbrandId appbrandId = goods.getAppbrandId();
-
-            if(appbrandId != null)
-            {
-                Intent intent = new Intent(GoodsActivity.this, BrandActivity.class);
-                Brand brand = new Brand();
-                brand.setId(appbrandId.getId());
-                brand.setLogopic(appbrandId.getLogopic());
-                brand.setBrandName(appbrandId.getBrandName());
-                brand.setShowpic(appbrandId.getShowpic());
-
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("brand", brand);
-                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
-                bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-            else
-            {
-                Toast.makeText(GoodsActivity.this, "未获取到商品的店铺信息", Toast.LENGTH_SHORT).show();
-            }
-
+            Toast.makeText(GoodsActivity.this, "未获取到商品的店铺信息", Toast.LENGTH_SHORT).show();
         }
 
     }

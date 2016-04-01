@@ -2,6 +2,8 @@ package com.brand.ushopping.activity;
 //上门试衣
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.brand.ushopping.model.OrderAll;
 import com.brand.ushopping.model.OrderItem;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 import com.brand.ushopping.widget.TryitOrderItemView;
 
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ public class TryoutActivity extends Activity {
     ArrayList<OrderItem> orderList;
     private int currentOrderType;
     private ViewGroup contentViewGroup;
+    private TimeoutbleProgressDialog orderTimeoutDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +103,25 @@ public class TryoutActivity extends Activity {
         paidIdc = (ImageView) findViewById(R.id.paid_idc);
         deliveredIdc = (ImageView) findViewById(R.id.delivered_idc);
 
+        orderTimeoutDialog = TimeoutbleProgressDialog.createProgressDialog(TryoutActivity.this, StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
+            @Override
+            public void onTimeOut(TimeoutbleProgressDialog dialog) {
+                orderTimeoutDialog.dismiss();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(TryoutActivity.this);
+                builder.setMessage("获取订单信息失败");
+                builder.setTitle("提示");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                builder.create().show();
+            }
+        });
+
     }
 
     @Override
@@ -131,6 +154,8 @@ public class TryoutActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            orderTimeoutDialog.show();
+
         }
 
         @Override
@@ -140,6 +165,8 @@ public class TryoutActivity extends Activity {
 
         @Override
         protected void onPostExecute(OrderAll result) {
+            orderTimeoutDialog.dismiss();
+
             if(result != null)
             {
                 if(result.isSuccess())

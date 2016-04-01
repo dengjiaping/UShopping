@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 public class BrandMoreGoodsActivity extends Activity {
@@ -199,7 +198,8 @@ public class BrandMoreGoodsActivity extends Activity {
 
         if(moreGoodsAdapter != null)
         {
-            moreGoodsAdapter.notifyItemRangeRemoved(0, currentGoodsCount);
+//            moreGoodsAdapter.notifyItemRangeRemoved(0, currentGoodsCount);
+            moreGoodsAdapter.notifyDataSetChanged();
 
         }
 
@@ -308,7 +308,7 @@ public class BrandMoreGoodsActivity extends Activity {
                             }
 
                         }
-                        currentGoodsCount += listData.size();
+                        currentGoodsCount += appgoodsIds.size();
 
                         arrange();
 
@@ -320,7 +320,7 @@ public class BrandMoreGoodsActivity extends Activity {
                         }
                         else
                         {
-                            moreGoodsAdapter.notifyItemRangeChanged(0, currentGoodsCount);
+                            moreGoodsAdapter.notifyDataSetChanged();
 
                         }
 

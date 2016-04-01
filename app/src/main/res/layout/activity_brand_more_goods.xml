@@ -140,6 +140,16 @@
         android:id="@+id/swipe"
         android:layout_below="@+id/linearLayout6">
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/goods_grid"
+            android:numColumns="2"
+            android:layout_alignTop="@+id/swipe"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true" />
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
@@ -154,15 +164,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/warning_text" />
     </FrameLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/goods_grid"
-        android:numColumns="2"
-        android:layout_alignTop="@+id/swipe"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

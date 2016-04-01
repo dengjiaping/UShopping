@@ -1,6 +1,8 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.brand.ushopping.model.OrderItem;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.ReservationOrderItemView;
+import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +45,8 @@ public class ReservationActivity extends Activity {
     ArrayList<OrderItem> orderList;
     private int currentOrderType;
     private ViewGroup contentViewGroup;
+
+    private TimeoutbleProgressDialog orderTimeoutDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +112,25 @@ public class ReservationActivity extends Activity {
         paidIdc = (ImageView) findViewById(R.id.paid_idc);
         deliveredIdc = (ImageView) findViewById(R.id.delivered_idc);
 
+        orderTimeoutDialog = TimeoutbleProgressDialog.createProgressDialog(ReservationActivity.this, StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
+            @Override
+            public void onTimeOut(TimeoutbleProgressDialog dialog) {
+                orderTimeoutDialog.dismiss();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
+                builder.setMessage("获取订单信息失败");
+                builder.setTitle("提示");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                builder.create().show();
+            }
+        });
+
     }
 
     @Override
@@ -140,6 +164,8 @@ public class ReservationActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            orderTimeoutDialog.show();
+
         }
 
         @Override
@@ -149,6 +175,8 @@ public class ReservationActivity extends Activity {
 
         @Override
         protected void onPostExecute(OrderAll result) {
+            orderTimeoutDialog.dismiss();
+
             if(result != null)
             {
                 if(result.isSuccess())
