@@ -172,14 +172,7 @@ public class SearchActivity extends Activity {
 
         recentSearchLayout = (GridLayout) findViewById(R.id.recent);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         chooseMode();
-        setValues();
         loadRecent();
 
     }

@@ -179,13 +179,13 @@ public class BrandMoreGoodsActivity extends Activity {
 //        brandGoodsTypePrev = brandGoodsType;
 
         selectTab();
+
+        reload();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        reload();
 
     }
 

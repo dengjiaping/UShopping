@@ -367,7 +367,7 @@
             android:name=".activity.BrandActivity"
             android:label="@string/title_activity_brand"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.SelectDateActivity"
             android:label="@string/title_activity_select_date"
