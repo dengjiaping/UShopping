@@ -125,6 +125,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appContext = (AppContext) getActivity().getApplicationContext();
+        user = appContext.getUser();
 
     }
 
@@ -209,6 +211,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             public void onClick(View v) {
                 if (user == null) {
                     Toast.makeText(getActivity(), "请登录或注册", Toast.LENGTH_SHORT).show();
+
 
                 } else {
                     Intent intent = new Intent(getActivity(), SignActivity.class);
@@ -329,6 +332,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             }
         });
 
+        setValue();
+
         return view;
     }
 
@@ -346,8 +351,6 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     @Override
     public void onStart() {
         super.onStart();
-
-        appContext = (AppContext) getActivity().getApplicationContext();
         user = appContext.getUser();
 
         //新建
@@ -367,8 +370,6 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
         // 启动定位
         locationClient.startLocation();
-
-        setValue();
 
     }
 

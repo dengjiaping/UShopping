@@ -1,6 +1,5 @@
 package com.brand.ushopping.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -28,7 +27,7 @@ import com.brand.ushopping.fragment.ThemeFragment;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
 
-public class MainActivity extends Activity
+public class MainActivity extends UActivity
         implements BrandFragment.OnFragmentInteractionListener,
         CartFragment.OnFragmentInteractionListener,
         MainpageFragment.OnFragmentInteractionListener,
@@ -74,7 +73,6 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
 
         appContext = (AppContext) getApplicationContext();
-        user = appContext.getUser();
 
         contentLayout = (RelativeLayout) findViewById(R.id.content);
 
@@ -217,6 +215,7 @@ public class MainActivity extends Activity
     @Override
     protected void onStart() {
         super.onStart();
+        user = appContext.getUser();
 
     }
 

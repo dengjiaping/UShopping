@@ -1,6 +1,5 @@
 package com.brand.ushopping.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,7 +52,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GoodsActivity extends Activity {
+public class GoodsActivity extends UActivity {
     private TabHost tabHost;
     private AppContext appContext;
     private User user;
@@ -125,7 +124,6 @@ public class GoodsActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_goods);
         appContext = (AppContext) getApplicationContext();
-        user = appContext.getUser();
 
         warningLayout = (FrameLayout) findViewById(R.id.warning_layout);
         warningTextView = (TextView) findViewById(R.id.warning_text);
@@ -197,7 +195,8 @@ public class GoodsActivity extends Activity {
             public void onClick(View v) {
                 if(user == null)
                 {
-                    Toast.makeText(GoodsActivity.this, "请先登录或注册", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(GoodsActivity.this, "请先登录或注册", Toast.LENGTH_SHORT).show();
+                    loginOrRegister();
                 }
                 else
                 {
@@ -223,7 +222,7 @@ public class GoodsActivity extends Activity {
             public void onClick(View v) {
                 if(user == null)
                 {
-                    Toast.makeText(GoodsActivity.this, "请先登录或注册", Toast.LENGTH_SHORT).show();
+                    loginOrRegister();
                 }
                 else
                 {
@@ -249,7 +248,9 @@ public class GoodsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (user == null) {
-                    Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                    loginOrRegister();
+
                 } else {
                     Intent intent = new Intent(GoodsActivity.this, UserRewardActivity.class);
                     startActivity(intent);
@@ -263,7 +264,9 @@ public class GoodsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (user == null) {
-                    Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                    loginOrRegister();
+
                 } else {
                     Intent intent = new Intent(GoodsActivity.this, VoucherActivity.class);
                     Bundle bundle = new Bundle();
@@ -402,6 +405,8 @@ public class GoodsActivity extends Activity {
 
     }
 
+
+
     //立即购买
     public void buyit()
     {
@@ -500,6 +505,7 @@ public class GoodsActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        user = appContext.getUser();
 
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setGoodsId(goodsId);
@@ -593,7 +599,9 @@ public class GoodsActivity extends Activity {
                                         Toast.makeText(GoodsActivity.this, "您已收藏该品牌", Toast.LENGTH_SHORT).show();
 
                                     } else {
-                                        Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                                        loginOrRegister();
+
                                     }
                                 }
                             });
@@ -620,7 +628,9 @@ public class GoodsActivity extends Activity {
                                     }
                                     else
                                     {
-                                        Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                                        loginOrRegister();
+
                                     }
                                 }
                             });
@@ -664,7 +674,8 @@ public class GoodsActivity extends Activity {
                                     }
                                     else
                                     {
-                                        Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                                        loginOrRegister();
+
                                     }
                                 }
                             });
@@ -692,7 +703,8 @@ public class GoodsActivity extends Activity {
                                     }
                                     else
                                     {
-                                        Toast.makeText(GoodsActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+                                        loginOrRegister();
+
                                     }
                                 }
                             });
@@ -748,7 +760,10 @@ public class GoodsActivity extends Activity {
         boolean result = true;
         if(user == null)
         {
-            Toast.makeText(GoodsActivity.this, "请先注册或登录", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(GoodsActivity.this, "请先注册或登录", Toast.LENGTH_SHORT).show();
+            loginOrRegister();
+
+
             return false;
         }
         if(sizeSelected == null)
