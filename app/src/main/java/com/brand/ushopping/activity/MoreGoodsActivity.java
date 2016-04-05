@@ -82,12 +82,6 @@ public class MoreGoodsActivity extends AppCompatActivity {
 
         boughtType = getIntent().getExtras().getInt("boughtType");
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
@@ -98,6 +92,12 @@ public class MoreGoodsActivity extends AppCompatActivity {
         });
 
         reload();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
     }
 
