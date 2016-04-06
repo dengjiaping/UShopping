@@ -12,6 +12,7 @@ public class OrderSuccess
     private String msg;
     private String orderNo;
     private int flag;
+    private int paymentMode;
 
     public long getUserId() {
         return userId;
@@ -59,5 +60,13 @@ public class OrderSuccess
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public int getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(int paymentMode) {
+        this.paymentMode = paymentMode;
     }
 }
