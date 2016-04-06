@@ -689,6 +689,10 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            Intent intent = new Intent(OrderConfirmActivity.this, ReservationActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -736,8 +740,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
-                            OrderConfirmActivity.this.finish();
 
+                            Intent intent = new Intent(OrderConfirmActivity.this, TryoutActivity.class);
+                            startActivity(intent);
+
+                            OrderConfirmActivity.this.finish();
                         }
                     });
                     builder.create().show();
