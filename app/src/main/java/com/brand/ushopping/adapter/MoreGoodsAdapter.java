@@ -2,6 +2,7 @@ package com.brand.ushopping.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +42,33 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(MoreGoodsAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final MoreGoodsAdapter.ViewHolder holder, final int position) {
         if(list.get(position).get("img") != null)
         {
-            ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.img);
+            final ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.setDefaultLoadingListener(new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String s, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+                    imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
+
+                }
+
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+
+                }
+            });
+            imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
         }
 
         holder.name.setText(list.get(position).get("name").toString());
@@ -58,7 +84,6 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
                 context.startActivity(intent);
             }
         });
-
 
     }
 
