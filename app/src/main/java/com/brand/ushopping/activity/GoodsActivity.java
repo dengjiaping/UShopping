@@ -316,6 +316,7 @@ public class GoodsActivity extends UActivity {
         infoPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
                 hideAllPages();
                 infoView.setVisibility(View.VISIBLE);
             }
@@ -324,6 +325,7 @@ public class GoodsActivity extends UActivity {
         detailPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                goodsViewPage = StaticValues.GOODS_VIEW_PAGE_DETAIL;
                 hideAllPages();
                 detailView.setVisibility(View.VISIBLE);
             }
@@ -332,6 +334,7 @@ public class GoodsActivity extends UActivity {
         commentPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                goodsViewPage = StaticValues.GOODS_VIEW_PAGE_COMMENT;
                 hideAllPages();
                 commentView.setVisibility(View.VISIBLE);
             }
@@ -487,15 +490,12 @@ public class GoodsActivity extends UActivity {
         switch (goodsViewPage)
         {
             case StaticValues.GOODS_VIEW_PAGE_INFO:
-                goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
                 infoIdc.setVisibility(View.VISIBLE);
                 break;
             case StaticValues.GOODS_VIEW_PAGE_DETAIL:
-                goodsViewPage = StaticValues.GOODS_VIEW_PAGE_DETAIL;
                 detailIdc.setVisibility(View.VISIBLE);
                 break;
             case StaticValues.GOODS_VIEW_PAGE_COMMENT:
-                goodsViewPage = StaticValues.GOODS_VIEW_PAGE_COMMENT;
                 commentIdc.setVisibility(View.VISIBLE);
                 break;
 

@@ -256,7 +256,7 @@ public class OrderConfirmActivity extends Activity {
                                     yyOrderSave.setAttribute(goods.getAttribute());
                                     yyOrderSave.setQuantity(goods.getCount());
 
-                                    yyOrderSave.setMoney(goods.getGoodsPrice() * goods.getCount());
+                                    yyOrderSave.setMoney(goods.getPromotionPrice() * goods.getCount());
 
                                     yyOrderSave.setTimeShop(new Date(reservationDate));
 
@@ -336,89 +336,7 @@ public class OrderConfirmActivity extends Activity {
 
                                 break;
 
-                                /*
-                                YyOrderSaveList yyOrderSaveList = new YyOrderSaveList();
-
-                                yyOrderSaveList.setUserId(user.getUserId());
-                                yyOrderSaveList.setSessionid(user.getSessionid());
-
-                                ArrayList<YyOrderSave> yyOrderSaveArrayList = new ArrayList<YyOrderSave>();
-                                for (Goods goods: goodsList)
-                                {
-                                    YyOrderSave yyOrderSave = new YyOrderSave();
-
-                                    yyOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
-
-                                    AppuserId appuserId = new AppuserId();
-                                    appuserId.setUserId(user.getUserId());
-                                    yyOrderSave.setAppuserId(appuserId);
-
-                                    AppaddressId appaddressId = new AppaddressId();
-                                    appaddressId.setId(appContext.getDefaultAddressId());
-                                    yyOrderSave.setAppaddressId(appaddressId);
-
-                                    //商品信息
-                                    AppgoodsId appgoodsId = new AppgoodsId();
-                                    appgoodsId.setId(goods.getId());
-                                    yyOrderSave.setAppgoodsId(appgoodsId);
-
-                                    yyOrderSave.setAttribute(goods.getAttribute());
-                                    yyOrderSave.setQuantity(goods.getCount());
-
-                                    yyOrderSave.setMoney(goods.getGoodsPrice() * goods.getCount());
-
-                                    yyOrderSave.setTimeShop(new Date(reservationDate));
-
-                                    yyOrderSaveArrayList.add(yyOrderSave);
-                                }
-
-                                yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
-
-                                new YyOrderSaveTask().execute(yyOrderSaveList);
-                                */
-
-                                /*
-                                SmOrderSaveList smOrderSaveList = new SmOrderSaveList();
-
-                                smOrderSaveList.setUserId(user.getUserId());
-                                smOrderSaveList.setSessionid(user.getSessionid());
-
-                                ArrayList<SmOrderSave> smOrderSaveArrayList = new ArrayList<SmOrderSave>();
-                                for (Goods goods: goodsList)
-                                {
-                                    SmOrderSave smOrderSave = new SmOrderSave();
-
-                                    smOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
-
-                                    AppuserId appuserId = new AppuserId();
-                                    appuserId.setUserId(user.getUserId());
-                                    smOrderSave.setAppuserId(appuserId);
-
-                                    AppaddressId appaddressId = new AppaddressId();
-                                    appaddressId.setId(appContext.getDefaultAddressId());
-                                    smOrderSave.setAppaddressId(appaddressId);
-
-                                    //商品信息
-                                    AppgoodsId appgoodsId = new AppgoodsId();
-                                    appgoodsId.setId(goods.getId());
-                                    smOrderSave.setAppgoodsId(appgoodsId);
-
-                                    smOrderSave.setAttribute(goods.getAttribute());
-                                    smOrderSave.setQuantity(goods.getCount());
-
-                                    smOrderSave.setMoney(goods.getGoodsPrice() * goods.getCount());
-
-                                    smOrderSave.setTimeShop(new Date(reservationDate));
-
-                                    smOrderSaveArrayList.add(smOrderSave);
-                                }
-
-                                smOrderSaveList.setSmorder(smOrderSaveArrayList);
-
-                                new SmOrderSaveTask().execute(smOrderSaveList);
-                                */
                         }
-
 
                         break;
                 }
@@ -503,22 +421,8 @@ public class OrderConfirmActivity extends Activity {
 
                                 orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
                                 String channel = chargeObj.getChannel();
-                                if(channel.equals(StaticValues.PAY_METHOD_ALIPAY))
-                                {
-                                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_ALIPAY);
-                                }
-                                if(channel.equals(StaticValues.PAY_METHOD_UPACP))
-                                {
-                                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_UNACP);
-                                }
-                                if(channel.equals(StaticValues.PAY_METHOD_WX))
-                                {
-                                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_WX);
-                                }
-                                if(channel.equals(StaticValues.PAY_METHOD_CASH))
-                                {
-                                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
-                                }
+
+                                orderSave.setPaymentMode(putPaymentMode(channel));
 
                                 orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
 
@@ -571,6 +475,9 @@ public class OrderConfirmActivity extends Activity {
                             orderSuccess.setOrderNo(orderNo);
                             orderSuccess.setFlag(1);
 
+                            String channel = chargeObj.getChannel();
+                            orderSuccess.setPaymentMode(putPaymentMode(channel));
+
                             new YyOrderSuccessActionTask().execute(orderSuccess);
                             break;
                         case StaticValues.BOUTHT_TYPE_TRYIT:
@@ -580,6 +487,9 @@ public class OrderConfirmActivity extends Activity {
                             orderSuccess.setSessionid(user.getSessionid());
                             orderSuccess.setOrderNo(orderNo);
                             orderSuccess.setFlag(1);
+
+                            String channel1 = chargeObj.getChannel();
+                            orderSuccess.setPaymentMode(putPaymentMode(channel1));
 
                             new SmOrderSuccessActionTask().execute(orderSuccess);
 
@@ -779,6 +689,10 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
+
+                            Intent intent = new Intent(OrderConfirmActivity.this, ReservationActivity.class);
+                            startActivity(intent);
+
                             OrderConfirmActivity.this.finish();
 
                         }
@@ -826,8 +740,11 @@ public class OrderConfirmActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
-                            OrderConfirmActivity.this.finish();
 
+                            Intent intent = new Intent(OrderConfirmActivity.this, TryoutActivity.class);
+                            startActivity(intent);
+
+                            OrderConfirmActivity.this.finish();
                         }
                     });
                     builder.create().show();
@@ -1052,6 +969,29 @@ public class OrderConfirmActivity extends Activity {
 
         totalCountTextView.setText(Integer.toString(totalCount));
         summaryTextView.setText(CommonUtils.df.format(summary));
+    }
+
+    private int putPaymentMode(String channel )
+    {
+        int result = 0;
+        if(channel.equals(StaticValues.PAY_METHOD_ALIPAY))
+        {
+            result = StaticValues.ORDER_PAY_ALIPAY;
+        }
+        if(channel.equals(StaticValues.PAY_METHOD_UPACP))
+        {
+            result = StaticValues.ORDER_PAY_UNACP;
+        }
+        if(channel.equals(StaticValues.PAY_METHOD_WX))
+        {
+            result = StaticValues.ORDER_PAY_WX;
+        }
+        if(channel.equals(StaticValues.PAY_METHOD_CASH))
+        {
+            result = StaticValues.ORDER_PAY_CASH;
+        }
+
+        return result;
     }
 
 }

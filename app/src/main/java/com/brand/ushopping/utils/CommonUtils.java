@@ -81,11 +81,22 @@ public class CommonUtils {
         return !(longitude == 0 || latitude == 0);
     }
 
-    public static String distanceFormat(double value) {
+    public static String distanceFormat(double distance) {
         /*
          * %.2f % 表示 小数点前任意位数 2 表示两位小数 格式后的结果为 f 表示浮点型
          */
-        return new Formatter().format("%.2f", value).toString();
+        String value;
+        if(distance > 1000)
+        {
+            value = new Formatter().format("%.2f", distance / 1000).toString() + "公里";
+
+        }
+        else
+        {
+            value = new Formatter().format("%.1f", distance).toString() + "米";
+        }
+
+        return value;
     }
 
     // 时间戳转换为日期字符串

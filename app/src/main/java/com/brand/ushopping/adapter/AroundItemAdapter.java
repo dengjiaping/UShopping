@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.BrandActivity;
 import com.brand.ushopping.model.Brand;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -74,6 +75,7 @@ public class AroundItemAdapter extends BaseAdapter {
             holder.telephone=(TextView)convertView.findViewById(R.id.telephone);
             holder.openTime=(TextView)convertView.findViewById(R.id.open_time);
             holder.reservation=(Button)convertView.findViewById(R.id.reservation);
+            holder.distance = (TextView) convertView.findViewById(R.id.distance);
 
             //为view设置标签
             convertView.setTag(holder);
@@ -143,6 +145,8 @@ public class AroundItemAdapter extends BaseAdapter {
             }
         });
 
+        holder.distance.setText(CommonUtils.distanceFormat((Double) list.get(position).get("distance")));
+
         return convertView;
     }
 
@@ -153,6 +157,7 @@ public class AroundItemAdapter extends BaseAdapter {
         TextView telephone;
         TextView openTime;
         Button reservation;
+        TextView distance;
 
     }
 }

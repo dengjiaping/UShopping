@@ -1,6 +1,7 @@
 package com.brand.ushopping.adapter;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.brand.ushopping.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +57,7 @@ public class GoodsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
 
         if (convertView == null){
@@ -73,7 +76,35 @@ public class GoodsAdapter extends BaseAdapter {
 
         if(list.get(position).get("img") != null)
         {
+
+            final ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.setDefaultLoadingListener(new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String s, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+                    imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
+//                    Toast.makeText(context, "image loading failed", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+
+                }
+            });
+            imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
+            /*
             ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.img);
+            */
+
         }
 
         holder.name.setText(list.get(position).get("name").toString());

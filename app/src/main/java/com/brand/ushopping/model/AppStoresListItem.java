@@ -1,9 +1,12 @@
 package com.brand.ushopping.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class AppStoresListItem {
+public class AppStoresListItem implements Parcelable{
     private long id;
     private String shopName;
     private String shopAddr;
@@ -15,6 +18,39 @@ public class AppStoresListItem {
     private int door;    // 支持上门 0 支持 1 不支持
     private AppbrandId appbrandId;
     private String businessHours;
+    private double distance;
+
+    protected AppStoresListItem(Parcel in) {
+        id = in.readLong();
+        shopName = in.readString();
+        shopAddr = in.readString();
+        logopicUrl = in.readString();
+        shopTele = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        flag = in.readInt();
+        door = in.readInt();
+        appbrandId = in.readParcelable(AppbrandId.class.getClassLoader());
+        businessHours = in.readString();
+        distance = in.readDouble();
+    }
+
+    public AppStoresListItem()
+    {
+
+    }
+
+    public static final Creator<AppStoresListItem> CREATOR = new Creator<AppStoresListItem>() {
+        @Override
+        public AppStoresListItem createFromParcel(Parcel in) {
+            return new AppStoresListItem(in);
+        }
+
+        @Override
+        public AppStoresListItem[] newArray(int size) {
+            return new AppStoresListItem[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -102,5 +138,34 @@ public class AppStoresListItem {
 
     public void setBusinessHours(String businessHours) {
         this.businessHours = businessHours;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(shopName);
+        dest.writeString(shopAddr);
+        dest.writeString(logopicUrl);
+        dest.writeString(shopTele);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeInt(flag);
+        dest.writeInt(door);
+        dest.writeParcelable(appbrandId, flags);
+        dest.writeString(businessHours);
+        dest.writeDouble(distance);
     }
 }

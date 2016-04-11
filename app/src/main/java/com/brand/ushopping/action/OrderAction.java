@@ -547,7 +547,7 @@ public class OrderAction
         String jsonParam = JSON.toJSONString(confirmOrder);
         List params = new ArrayList();
         params.add(new BasicNameValuePair("param", jsonParam));
-
+        Log.v("ConfirmOrderAction", jsonParam);
         try
         {
             resultString = HttpClientUtil.post("ConfirmOrderAction.action", params);

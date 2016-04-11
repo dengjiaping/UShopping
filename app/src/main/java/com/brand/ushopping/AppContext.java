@@ -52,6 +52,8 @@ public class AppContext  extends Application
     private long downloadId;
     private boolean neetworkEnable;
     private UDBHelper udbHelper;
+    private double longitude;
+    private double latitude;
 
     @Override
     public void onCreate() {
@@ -79,7 +81,7 @@ public class AppContext  extends Application
                 .threadPriority(Thread.NORM_PRIORITY - 2) // default
                 .tasksProcessingOrder(QueueProcessingType.FIFO) // default
                 .denyCacheImageMultipleSizesInMemory()
-                .memoryCache(new FIFOLimitedMemoryCache(8 * 1024 * 1024))
+                .memoryCache(new FIFOLimitedMemoryCache(16 * 1024 * 1024))
                 .memoryCacheSize(16 * 1024 * 1024)
                 .memoryCacheSizePercentage(40) // default
                 .diskCache(new UnlimitedDiskCache(cacheDir)) // default
@@ -272,5 +274,21 @@ public class AppContext  extends Application
 
     public void setUdbHelper(UDBHelper udbHelper) {
         this.udbHelper = udbHelper;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
