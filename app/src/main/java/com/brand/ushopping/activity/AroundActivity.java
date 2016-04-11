@@ -1,6 +1,7 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +41,9 @@ public class AroundActivity extends Activity {
     private TextView clostBtn;
     private FrameLayout warningLayout;
     private TextView warningTextView;
-
+    private ImageView mapBtn;
     private int currentBoughtType;
+    private TimeoutbleProgressDialog aroundDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +74,35 @@ public class AroundActivity extends Activity {
 
         warningLayout = (FrameLayout) findViewById(R.id.warning_layout);
         warningTextView = (TextView) findViewById(R.id.warning_text);
+        mapBtn = (ImageView) findViewById(R.id.map);
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AroundActivity.this, MapLocateActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putParcelableArrayList("appStoresListItems", appStoresListItems);
+                intent.putExtras(bundle1);
+
+                startActivity(intent);
+
+            }
+        });
 
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        aroundDialog = TimeoutbleProgressDialog.createProgressDialog(AroundActivity.this, StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
+            @Override
+            public void onTimeOut(TimeoutbleProgressDialog dialog) {
+                aroundDialog.dismiss();
+
+                warningLayout.setVisibility(View.VISIBLE);
+                warningTextView.setText("获取周边门店失败");
 
             }
         });
@@ -122,6 +150,8 @@ public class AroundActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            aroundDialog.show();
+
         }
 
         @Override
@@ -131,11 +161,25 @@ public class AroundActivity extends Activity {
 
         @Override
         protected void onPostExecute(AppStoresList result) {
+            aroundDialog.dismiss();
             if(result != null)
             {
                 if(result.isSuccess())
                 {
                     appStoresListItems = result.getAppStoresListItems();
+
+                    if(appStoresListItems.size() > 0)
+                    {
+                        mapBtn.setVisibility(View.VISIBLE);
+
+                    }
+
+                    //计算距离并排序
+                    for(AppStoresListItem appStoresListItem: appStoresListItems)
+                    {
+                        appStoresListItem.setDistance(CommonUtils.getDistance(appContext.getLongitude(), appContext.getLatitude(), appStoresListItem.getLongitude(), appContext.getLatitude()));
+
+                    }
 
                     //UI更新
                     List listData = new ArrayList<Map<String,Object>>();
@@ -153,6 +197,8 @@ public class AroundActivity extends Activity {
                         line.put("longitude", appStoresListItem.getLongitude());
                         line.put("flag", appStoresListItem.getFlag());
                         line.put("door", appStoresListItem.getDoor());
+                        line.put("distance", appStoresListItem.getDistance());
+
                         if(CommonUtils.isValueEmpty(appStoresListItem.getBusinessHours()))
                         {
                             line.put("businessHours", "");

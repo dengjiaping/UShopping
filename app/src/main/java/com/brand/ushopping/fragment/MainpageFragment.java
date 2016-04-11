@@ -424,6 +424,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 String city = aMapLocation.getCity();
                 cityTextView.setText(city);
                 appContext.setCity(city);
+                appContext.setLongitude(aMapLocation.getLongitude());
+                appContext.setLatitude(aMapLocation.getLatitude());
 
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。

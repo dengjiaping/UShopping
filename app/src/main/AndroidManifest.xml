@@ -54,48 +54,48 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AboutUsActivity"
             android:label="@string/title_activity_about_us"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RefActivity"
             android:label="@string/title_activity_ref"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AddressesActivity"
             android:label="@string/title_activity_addresses"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AddressDetailActivity"
             android:label="@string/title_activity_address_detail"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MapLocateActivity"
             android:label="@string/title_activity_map_locate"
@@ -103,13 +103,13 @@
         <activity
             android:name=".activity.AddAddressActivity"
             android:label="@string/title_activity_add_address"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BrandDetailActivity"
             android:label="@string/title_activity_brand_detail"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
@@ -308,66 +308,66 @@
         <activity
             android:name=".activity.GuidanceActivity"
             android:label="@string/title_activity_guidance"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.GoodsActivity"
             android:label="@string/title_activity_goods"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.OrderConfirmActivity"
             android:label="@string/title_activity_order_confirm"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.GoodsFavouriteActivity"
             android:label="@string/title_activity_goods_favourite"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BrandFavouriteActivity"
             android:label="@string/title_activity_brand_favourite"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AroundActivity"
             android:label="@string/title_activity_around"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.OrderActivity"
             android:label="@string/title_activity_order"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ReservationActivity"
             android:label="@string/title_activity_reservation"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TryoutActivity"
             android:label="@string/title_activity_tryout"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TaberActivity"
             android:label="@string/title_activity_taber" />
         <activity
             android:name=".activity.SignActivity"
             android:label="@string/title_activity_sign"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.UserRewardActivity"
             android:label="@string/title_activity_user_reward"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BrandActivity"
             android:label="@string/title_activity_brand"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SelectDateActivity"
             android:label="@string/title_activity_select_date"
@@ -427,62 +427,66 @@
         <activity
             android:name=".activity.CategoryActivity"
             android:label="@string/title_activity_category"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SearchActivity"
             android:label="@string/title_activity_search"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AfterSaleServiceActivity"
             android:label="@string/title_activity_after_sale_service"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.WebViewActivity"
             android:label="@string/title_activity_web_view"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ViewHistoryActivity"
             android:label="@string/title_activity_view_history"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HelpActivity"
             android:label="@string/title_activity_help"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.GoodsEvaluateActivity"
             android:label="@string/title_activity_goods_evaluate"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.VoucherActivity"
             android:label="@string/title_activity_voucher"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DevActivity"
             android:label="@string/title_activity_dev" />
         <activity
             android:name=".activity.SnsShareActivity"
-            android:screenOrientation="portrait"
+            android:label="@string/title_activity_sns_share"
             android:launchMode="singleTop"
-            android:label="@string/title_activity_sns_share" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MoreGoodsActivity"
             android:label="@string/title_activity_more_goods"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
-        <activity android:name=".activity.BrandMoreGoodsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.BrandMoreGoodsActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ReturnRulesActivity"
+            android:label="@string/title_activity_return_rules"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

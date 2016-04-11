@@ -28,6 +28,7 @@ import com.brand.ushopping.activity.ProfileActivity;
 import com.brand.ushopping.activity.RefActivity;
 import com.brand.ushopping.activity.RegisterActivity;
 import com.brand.ushopping.activity.ReservationActivity;
+import com.brand.ushopping.activity.ReturnRulesActivity;
 import com.brand.ushopping.activity.SettingsActivity;
 import com.brand.ushopping.activity.TryoutActivity;
 import com.brand.ushopping.activity.UserRewardActivity;
@@ -72,6 +73,7 @@ public class MineFragment extends Fragment {
     private ViewGroup brandFavouriteBtn;
     private ViewGroup viewHistoryBtn;
     private ViewGroup voucherBtn;
+    private ViewGroup returnsBtn;
     private int goodsFavouriteCount = 0;
     private int brandFavouriteCount = 0;
     private int viewHistoryCount = 0;
@@ -383,6 +385,16 @@ public class MineFragment extends Fragment {
 
                     startActivity(intent);
                 }
+
+            }
+        });
+
+        returnsBtn = (ViewGroup) view.findViewById(R.id.returns);
+        returnsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReturnRulesActivity.class);
+                startActivity(intent);
 
             }
         });

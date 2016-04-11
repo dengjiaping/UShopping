@@ -93,7 +93,8 @@
                 android:background="@drawable/sign_btn_bg"
                 android:layout_below="@+id/sign"
                 android:layout_alignLeft="@+id/sign"
-                android:layout_alignStart="@+id/sign" />
+                android:layout_alignStart="@+id/sign"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="fill_parent"

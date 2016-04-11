@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -47,6 +48,7 @@ public class TryoutActivity extends Activity {
     private int currentOrderType;
     private ViewGroup contentViewGroup;
     private TimeoutbleProgressDialog orderTimeoutDialog;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +124,15 @@ public class TryoutActivity extends Activity {
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
+            }
+        });
+
     }
 
     @Override
@@ -166,7 +177,8 @@ public class TryoutActivity extends Activity {
         @Override
         protected void onPostExecute(OrderAll result) {
             orderTimeoutDialog.dismiss();
-
+            swipeRefreshLayout.setRefreshing(false);
+            
             if(result != null)
             {
                 if(result.isSuccess())

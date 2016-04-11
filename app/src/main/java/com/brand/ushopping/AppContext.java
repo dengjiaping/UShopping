@@ -52,6 +52,8 @@ public class AppContext  extends Application
     private long downloadId;
     private boolean neetworkEnable;
     private UDBHelper udbHelper;
+    private double longitude;
+    private double latitude;
 
     @Override
     public void onCreate() {
@@ -272,5 +274,21 @@ public class AppContext  extends Application
 
     public void setUdbHelper(UDBHelper udbHelper) {
         this.udbHelper = udbHelper;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
