@@ -600,6 +600,15 @@ public class OrderConfirmActivity extends Activity {
 
                 }
 
+                //过期时间限制
+                long currentTime = System.currentTimeMillis();
+                if(currentTime < appvoucherId.getValidity() || currentTime > appvoucherId.getDays())
+                {
+                    Toast.makeText(OrderConfirmActivity.this, "优惠券已过期,无法添加", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
                 userVoucherItems.add(userVoucherItem);
 
                 voucherReload();

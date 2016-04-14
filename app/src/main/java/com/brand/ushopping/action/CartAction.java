@@ -1,5 +1,7 @@
 package com.brand.ushopping.action;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.AddAppShopcart;
 import com.brand.ushopping.model.AppShopcart;
@@ -65,6 +67,7 @@ public class CartAction {
             resultString = HttpClientUtil.post("GetAppShopcartIdListAction.action", params);
             if(resultString != null)
             {
+                Log.v("cart", resultString);
                 JSONObject jsonObject = new JSONObject(resultString);
                 if(jsonObject.getBoolean("success"))
                 {

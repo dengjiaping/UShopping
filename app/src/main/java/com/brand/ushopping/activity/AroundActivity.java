@@ -192,12 +192,20 @@ public class AroundActivity extends Activity {
                         line.put("logopicUrl", appStoresListItem.getLogopicUrl());
                         line.put("showpic", appbrandId.getShowpic());
                         line.put("shopAddr", appStoresListItem.getShopAddr());
-                        line.put("shopTele", appStoresListItem.getShopTele());
                         line.put("latitude", appStoresListItem.getLatitude());
                         line.put("longitude", appStoresListItem.getLongitude());
                         line.put("flag", appStoresListItem.getFlag());
                         line.put("door", appStoresListItem.getDoor());
                         line.put("distance", appStoresListItem.getDistance());
+
+                        if(CommonUtils.isValueEmpty(appStoresListItem.getShopTele()))
+                        {
+                            line.put("shopTele", "");
+                        }
+                        else
+                        {
+                            line.put("shopTele", appStoresListItem.getShopTele());
+                        }
 
                         if(CommonUtils.isValueEmpty(appStoresListItem.getBusinessHours()))
                         {

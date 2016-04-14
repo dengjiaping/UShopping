@@ -10,11 +10,11 @@ public class AppvoucherId implements Parcelable
 {
     private long id;
     private String name;
-    private long days;
+    private long days;      //有效期结束
     private int flag;
     private double money01; //金额
     private double money02; //满减金额
-    private long validity;
+    private long validity;  //有效期开始
     private AppbrandId appbrandId;
 
     protected AppvoucherId(Parcel in) {

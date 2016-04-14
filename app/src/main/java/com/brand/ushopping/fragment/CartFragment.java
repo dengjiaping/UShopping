@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class CartFragment extends Fragment {
     private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
     private FrameLayout warningLayout;
     private TextView warningTextView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -191,6 +193,15 @@ public class CartFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
+            }
+        });
+
         return view;
     }
 
@@ -311,6 +322,7 @@ public class CartFragment extends Fragment {
         @Override
         protected void onPostExecute(AppShopcartIdList result) {
             getinfoDialog.dismiss();
+            swipeRefreshLayout.setRefreshing(false);
 
             //清除所有
             cartItemSelected.clear();

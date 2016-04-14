@@ -145,7 +145,7 @@ public class AroundItemAdapter extends BaseAdapter {
             }
         });
 
-        holder.distance.setText(CommonUtils.distanceFormat((Double) list.get(position).get("distance")));
+        holder.distance.setText("距离: "+CommonUtils.distanceFormat((Double) list.get(position).get("distance")));
 
         return convertView;
     }

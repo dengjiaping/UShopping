@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class VoucherActivity extends Activity {
     private ArrayList<VoucherItem> voucherItems;
     private ArrayList<UserVoucherItem> userVoucherItems;
     private VoucherAdapter voucherAdapter;
+    private Button pickAllBtn;
 
     private int enterType = StaticValues.VOUCHER_ENTER_LIST;
 
@@ -66,6 +68,7 @@ public class VoucherActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
+        pickAllBtn = (Button) findViewById(R.id.pick_all);
 
         Bundle bundle = getIntent().getExtras();
         enterType = bundle.getInt("enterType");
@@ -165,6 +168,17 @@ public class VoucherActivity extends Activity {
 
                             }
                         }
+
+                        break;
+
+                    case StaticValues.VOUCHER_ENTER_BUNDLE:
+                        pickAllBtn.setVisibility(View.VISIBLE);
+                        pickAllBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
 
                         break;
                 }

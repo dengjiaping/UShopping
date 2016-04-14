@@ -245,7 +245,7 @@ public class RegisterActivity extends Activity {
             } else {
                 ((Throwable) data).printStackTrace();
                 int resId = getStringRes(RegisterActivity.this, "smssdk_network_error");
-                Toast.makeText(RegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "验证码发送错误", Toast.LENGTH_SHORT).show();
                 if (resId > 0) {
                     Toast.makeText(RegisterActivity.this, resId, Toast.LENGTH_SHORT).show();
                 }
