@@ -3,151 +3,167 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="¥"
-                android:layout_gravity="center"
-                android:id="@+id/textView3"
-                android:layout_below="@+id/money"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/text_red"
-                android:singleLine="false" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/money01"
-                android:text="0"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_gravity="center"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:singleLine="true"
-                android:textColor="@color/text_red" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@color/voucher_item_green">
 
-        <TableRow
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="¥"
+                    android:layout_gravity="center"
+                    android:id="@+id/textView3"
+                    android:layout_below="@+id/money"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_red"
+                    android:singleLine="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/money01"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:singleLine="true"
+                    android:textColor="@color/text_red" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/name"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:singleLine="true"
-                style="@style/TextViewStyle"
-                android:textSize="18dp"
-                android:textColor="@color/text_orange" />
-        </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    style="@style/TextViewStyle"
+                    android:textSize="18dp"
+                    android:textColor="@color/text_orange" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="有效期"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                style="@style/TextViewStyle" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/validity"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                style="@style/TextViewStyle" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="有效期"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="至"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                style="@style/TextViewStyle" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/validity"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
-                style="@style/TextViewStyle"
-                android:id="@+id/days" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="至"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    style="@style/TextViewStyle"
+                    android:id="@+id/days" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="满减金额"
-                style="@style/TextViewStyle"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:id="@+id/money02"
-                style="@style/TextViewStyle"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="满"
+                    style="@style/TextViewStyle"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp" />
 
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/money02"
+                    style="@style/TextViewStyle"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元可用"
+                    android:id="@+id/textView5"
+                    style="@style/TextViewStyle"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="有效天数"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                style="@style/TextViewStyle" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:id="@+id/come"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                style="@style/TextViewStyle" />
-        </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
-    </TableLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="有效天数"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/come"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextViewStyle" />
+            </LinearLayout>
+
+        </TableLayout>
+    </LinearLayout>
 
 </LinearLayout>

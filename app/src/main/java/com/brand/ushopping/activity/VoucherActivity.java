@@ -6,13 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,9 @@ public class VoucherActivity extends Activity {
     private ArrayList<VoucherItem> voucherItems;
     private ArrayList<UserVoucherItem> userVoucherItems;
     private VoucherAdapter voucherAdapter;
-    private Button pickAllBtn;
+    private ImageView pickAllBtn;
+    private RelativeLayout voucherRuleContainer;
+    private TextView voucherRuleTextView;
 
     private int enterType = StaticValues.VOUCHER_ENTER_LIST;
 
@@ -68,10 +71,48 @@ public class VoucherActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
-        pickAllBtn = (Button) findViewById(R.id.pick_all);
+        pickAllBtn = (ImageView) findViewById(R.id.pick_all);
+
+        voucherRuleContainer = (RelativeLayout) findViewById(R.id.voucher_rule);
+        voucherRuleContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(voucherRuleTextView.getVisibility() == View.VISIBLE)
+                {
+                    voucherRuleTextView.setVisibility(View.GONE);
+                }
+                else
+                {
+                    voucherRuleTextView.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
+        voucherRuleTextView = (TextView) findViewById(R.id.voucher_rule_text);
+        voucherRuleTextView.setText("1.\t优惠券请查看文字表述，只能在限定条件内使用。\n" +
+                "2.\t优惠券过期后将无法使用。\n" +
+                "3.\t使用优惠券发生退货关系，优惠券将不再返还。\n" +
+                "4.\t活动最终解释权归U购所有。\n");
 
         Bundle bundle = getIntent().getExtras();
         enterType = bundle.getInt("enterType");
+
+        switch (enterType)
+        {
+            case StaticValues.VOUCHER_ENTER_LIST:
+                voucherRuleContainer.setVisibility(View.VISIBLE);
+                pickAllBtn.setVisibility(View.VISIBLE);
+                voucherListView.setBackgroundColor(ContextCompat.getColor(VoucherActivity.this, R.color.voucher_bg));
+                break;
+
+            case StaticValues.VOUCHER_ENTER_PICK:
+            case StaticValues.VOUCHER_ENTER_MINE:
+                voucherRuleContainer.setVisibility(View.GONE);
+                pickAllBtn.setVisibility(View.GONE);
+
+                break;
+        }
 
     }
 
@@ -141,7 +182,6 @@ public class VoucherActivity extends Activity {
                             }
                         });
                         builder.setNegativeButton("取消", null);
-
                         builder.create().show();
 
                         break;
@@ -261,7 +301,7 @@ public class VoucherActivity extends Activity {
                         }
                         else
                         {
-                            line.put("brand", "全品牌");
+                            line.put("brand", "夏装优惠券");
                         }
                         line.put("come", voucherItem.getCome());
 

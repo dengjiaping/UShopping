@@ -34,4 +34,10 @@
 
     <color name="bg_white">#FFFFFF</color>
     <color name="bg_grey">#EEEEEE</color>
+
+    <color name="voucher_bg">#58C1F0</color>
+    <color name="voucher_info_bg">#2C9DE5</color>
+    <color name="voucher_item_green">#A4FB8D</color>
+    <color name="voucher_item_brick">#FD907F</color>
+
 </resources>
