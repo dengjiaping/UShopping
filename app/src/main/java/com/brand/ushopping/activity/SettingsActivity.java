@@ -35,6 +35,7 @@ public class SettingsActivity extends Activity {
     private ViewGroup addressUsBtn;
     private ViewGroup cleanCacheBtn;
     private ViewGroup checkUpdateBtn;
+    private ViewGroup upayBtn;
     private ImageView backBtn;
     private TextView titleTextView;
     private ViewGroup logoutBtn;
@@ -139,6 +140,14 @@ public class SettingsActivity extends Activity {
                 });
                 builder.setNegativeButton("取消", null);
                 builder.create().show();
+
+            }
+        });
+
+        upayBtn = (ViewGroup) findViewById(R.id.upay);
+        upayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

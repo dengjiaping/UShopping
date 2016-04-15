@@ -89,6 +89,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                 Intent intent = new Intent(context, GoodsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", (Long) list.get(position).get("goodsId"));
+                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle);
 
                 context.startActivity(intent);

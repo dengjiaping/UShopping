@@ -149,6 +149,7 @@ public class OrderConfirmActivity extends Activity {
 
             line.put("id", goods.getId());
             line.put("img", goods.getLogopicUrl());
+            line.put("goodsId", goods.getId());
             line.put("goodsName", goods.getGoodsName());
             line.put("attribute", goods.getAttribute());
             line.put("price", price);

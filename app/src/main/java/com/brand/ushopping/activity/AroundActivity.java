@@ -26,6 +26,8 @@ import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,7 +176,7 @@ public class AroundActivity extends Activity {
 
                     }
 
-                    //计算距离并排序
+                    //计算距离
                     for(AppStoresListItem appStoresListItem: appStoresListItems)
                     {
                         appStoresListItem.setDistance(CommonUtils.getDistance(appContext.getLongitude(), appContext.getLatitude(), appStoresListItem.getLongitude(), appContext.getLatitude()));
@@ -221,6 +223,9 @@ public class AroundActivity extends Activity {
                         listData.add(line);
                     }
 
+                    //排序
+                    Collections.sort(listData, new DistanceComparator());
+
                     AroundItemAdapter adapter = new AroundItemAdapter(listData, AroundActivity.this);
                     listView.setAdapter(adapter);
                 }
@@ -231,6 +236,18 @@ public class AroundActivity extends Activity {
                 }
 
             }
+        }
+    }
+
+    //根据距离排序
+    class DistanceComparator implements Comparator<Map<String, Object>>
+    {
+        @Override
+        public int compare(Map<String, Object> lhs, Map<String, Object> rhs) {
+            Double distance1 = (Double)lhs.get("distance");
+            Double distance2 = (Double)rhs.get("distance");
+
+            return distance1.compareTo(distance2);
         }
     }
 
