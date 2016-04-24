@@ -12,7 +12,8 @@ public class OrderSave
     private AppuserId appuserId;
     private AppaddressId appaddressId;
     private String remark;
-
+    private String userVoucherId;
+    private long appVoucherId;
     private AppgoodsId appgoodsId;
     private String attribute;
     private int quantity;
@@ -96,4 +97,21 @@ public class OrderSave
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public String getUserVoucherId() {
+        return userVoucherId;
+    }
+
+    public void setUserVoucherId(String userVoucherId) {
+        this.userVoucherId = userVoucherId;
+    }
+
+    public long getAppVoucherId() {
+        return appVoucherId;
+    }
+
+    public void setAppVoucherId(long appVoucherId) {
+        this.appVoucherId = appVoucherId;
+    }
+
 }

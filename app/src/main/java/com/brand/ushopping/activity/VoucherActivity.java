@@ -25,6 +25,7 @@ import com.brand.ushopping.model.AppVoucherSelect;
 import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.AppuserId;
 import com.brand.ushopping.model.AppvoucherId;
+import com.brand.ushopping.model.BatchSaveUserVoucher;
 import com.brand.ushopping.model.GetUserVoucher;
 import com.brand.ushopping.model.SaveUserVoucher;
 import com.brand.ushopping.model.User;
@@ -50,7 +51,7 @@ public class VoucherActivity extends Activity {
     private ImageView pickAllBtn;
     private RelativeLayout voucherRuleContainer;
     private TextView voucherRuleTextView;
-
+    private int pickType = StaticValues.VOUCHER_PICK_SINGLE;
     private int enterType = StaticValues.VOUCHER_ENTER_LIST;
 
     @Override
@@ -71,7 +72,50 @@ public class VoucherActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
+        ////一键领取大礼包
         pickAllBtn = (ImageView) findViewById(R.id.pick_all);
+        pickAllBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user != null)
+                {
+                    BatchSaveUserVoucher batchSaveUserVoucher = new BatchSaveUserVoucher();
+
+                    batchSaveUserVoucher.setUserId(user.getUserId());
+                    batchSaveUserVoucher.setSessionid(user.getSessionid());
+
+                    ArrayList<UserVoucherItem> userVoucherItems = new ArrayList<UserVoucherItem>();
+                    if(voucherItems != null)
+                    {
+                        for(VoucherItem voucherItem: voucherItems)
+                        {
+                            UserVoucherItem userVoucherItem = new UserVoucherItem();
+                            AppuserId appuserId = new AppuserId();
+                            appuserId.setUserId(user.getUserId());
+                            userVoucherItem.setAppuserId(appuserId);
+                            AppvoucherId appvoucherId = new AppvoucherId();
+                            appvoucherId.setId(voucherItem.getId());
+                            userVoucherItem.setAppvoucherId(appvoucherId);
+
+                            userVoucherItem.setDays(voucherItem.getDays());
+
+                            userVoucherItems.add(userVoucherItem);
+                        }
+
+                    }
+
+                    batchSaveUserVoucher.setUserVoucher(userVoucherItems);
+
+                    new BatchSaveUserVoucherActionTask().execute(batchSaveUserVoucher);
+                }
+                else
+                {
+                    Toast.makeText(VoucherActivity.this, "请登录或注册", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
 
         voucherRuleContainer = (RelativeLayout) findViewById(R.id.voucher_rule);
         voucherRuleContainer.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +146,7 @@ public class VoucherActivity extends Activity {
         {
             case StaticValues.VOUCHER_ENTER_LIST:
                 voucherRuleContainer.setVisibility(View.VISIBLE);
-                pickAllBtn.setVisibility(View.VISIBLE);
+//                pickAllBtn.setVisibility(View.VISIBLE);
                 voucherListView.setBackgroundColor(ContextCompat.getColor(VoucherActivity.this, R.color.voucher_bg));
                 break;
 
@@ -128,6 +172,7 @@ public class VoucherActivity extends Activity {
                 switch (enterType)
                 {
                     case StaticValues.VOUCHER_ENTER_LIST:
+                        // 领取单张优惠券
                         AlertDialog.Builder builder = new AlertDialog.Builder(VoucherActivity.this);
                         builder.setMessage("是否领取这张优惠券?");
                         builder.setTitle("提示");
@@ -141,7 +186,7 @@ public class VoucherActivity extends Activity {
                                     VoucherItem voucherItem = voucherItems.get(a);
                                     if(voucherItem.getId() == id)
                                     {
-                                        if(voucherItem.getFlag() == 1)
+                                        if(voucherItem.getFlag() == StaticValues.VOUCHER_ITEM_STATUS_GOT)
                                         {
                                             Toast.makeText(VoucherActivity.this, "您已领取该优惠券,不能重复领取", Toast.LENGTH_SHORT).show();
 
@@ -183,7 +228,6 @@ public class VoucherActivity extends Activity {
                         });
                         builder.setNegativeButton("取消", null);
                         builder.create().show();
-
                         break;
 
                     case StaticValues.VOUCHER_ENTER_MINE:
@@ -212,7 +256,7 @@ public class VoucherActivity extends Activity {
                         break;
 
                     case StaticValues.VOUCHER_ENTER_BUNDLE:
-                        pickAllBtn.setVisibility(View.VISIBLE);
+//                        pickAllBtn.setVisibility(View.VISIBLE);
                         pickAllBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -244,6 +288,8 @@ public class VoucherActivity extends Activity {
                     appVoucherSelect.setSessionid(user.getSessionid());
 
                 }
+                appVoucherSelect.setFlag(pickType);
+                appVoucherSelect.setModel(StaticValues.MODEL_ANDROID);
                 new AppVoucherSelectGeneralActionTask().execute(appVoucherSelect);
 
                 break;
@@ -256,6 +302,7 @@ public class VoucherActivity extends Activity {
                     getUserVoucher.setUserId(user.getUserId());
                     getUserVoucher.setSessionid(user.getSessionid());
                 }
+//                getUserVoucher.setFlag(pickType);
                 new GetUserVoucherIdActionTask().execute(getUserVoucher);
 
                 break;
@@ -309,6 +356,7 @@ public class VoucherActivity extends Activity {
                         line.put("validity", CommonUtils.timestampToDate(voucherItem.getValidity() / 1000));
                         line.put("enterType", enterType);
                         line.put("flag", voucherItem.getFlag());
+                        line.put("pickType", pickType);
 
                         listData.add(line);
 
@@ -380,6 +428,7 @@ public class VoucherActivity extends Activity {
                         line.put("days", CommonUtils.timestampToDate(appvoucherId.getDays() / 1000));
                         line.put("validity", CommonUtils.timestampToDate(appvoucherId.getValidity() / 1000));
                         line.put("enterType", enterType);
+                        line.put("flag", userVoucherItem.getFlag());
 
                         listData.add(line);
 
@@ -440,5 +489,52 @@ public class VoucherActivity extends Activity {
 
         }
     }
+
+    //一键领取大礼包
+    public class BatchSaveUserVoucherActionTask extends AsyncTask<BatchSaveUserVoucher, Void, BatchSaveUserVoucher>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected BatchSaveUserVoucher doInBackground(BatchSaveUserVoucher... batchSaveUserVouchers) {
+            return new VoucherAction().batchSaveUserVoucherAction(batchSaveUserVouchers[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(BatchSaveUserVoucher result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    reload();
+
+                    Toast.makeText(VoucherActivity.this, "优惠券领取成功", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    Toast.makeText(VoucherActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(VoucherActivity.this, "优惠券领取失败", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+    }
+
+    // 取消领取优惠券
+    public void voucherSaveDisable()
+    {
+        pickAllBtn.setVisibility(View.GONE);
+
+    }
+
 
 }

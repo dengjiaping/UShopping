@@ -237,6 +237,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="100dp"
                     android:textColor="@color/text_grey"
+                    android:visibility="gone"
                     style="@style/TextViewStyle" />
             </GridLayout>
             <TableLayout

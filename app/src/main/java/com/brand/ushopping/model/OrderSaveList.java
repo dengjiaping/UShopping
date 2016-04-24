@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class OrderSaveList
 {
     private ArrayList<OrderSave> order;
-    private ArrayList<Long> userVoucherId;
     private long userId;
     private String sessionid;
     private boolean success;
@@ -54,11 +53,4 @@ public class OrderSaveList
         this.msg = msg;
     }
 
-    public ArrayList<Long> getUserVoucherId() {
-        return userVoucherId;
-    }
-
-    public void setUserVoucherId(ArrayList<Long> userVoucherId) {
-        this.userVoucherId = userVoucherId;
-    }
 }

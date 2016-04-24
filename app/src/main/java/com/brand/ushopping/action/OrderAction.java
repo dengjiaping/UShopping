@@ -37,7 +37,7 @@ public class OrderAction
         try
         {
             resultString = HttpClientUtil.post("OrderSaveAction.action", params);
-
+            Log.v("OrderSaveAction", resultString);
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);

@@ -552,7 +552,7 @@ public class GoodsActivity extends UActivity {
                     goodsInfo = result;
                     goods = result.getGoods();
                     goodsNameTextView.setText(goods.getGoodsName());
-                    priceTextView.setText(Double.toString(goods.getPromotionPrice()));
+                    priceTextView.setText(CommonUtils.df.format(goods.getPromotionPrice()));
                     priceOriginalTextView.setText(Double.toString(goods.getOriginalPrice()));
                     AppexpressId appexpressId = goods.getAppexpressId();
 //                    appExpressPriceTextView.setText(Double.toString(appexpressId.getPrice()));

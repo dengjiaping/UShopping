@@ -1,6 +1,5 @@
 package com.brand.ushopping.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,6 +17,8 @@ public class YyOrderSave
     private AppgoodsId appgoodsId;
     private String attribute;
     private int quantity;
+    private String userVoucherId;
+    private long appVoucherId;
 
     public double getMoney() {
         return money;
@@ -97,5 +98,21 @@ public class YyOrderSave
 
     public void setTimeShop(Date timeShop) {
         this.timeShop = timeShop;
+    }
+
+    public String getUserVoucherId() {
+        return userVoucherId;
+    }
+
+    public void setUserVoucherId(String userVoucherId) {
+        this.userVoucherId = userVoucherId;
+    }
+
+    public long getAppVoucherId() {
+        return appVoucherId;
+    }
+
+    public void setAppVoucherId(long appVoucherId) {
+        this.appVoucherId = appVoucherId;
     }
 }

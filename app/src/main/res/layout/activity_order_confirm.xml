@@ -42,8 +42,8 @@
             android:layout_alignParentBottom="true"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:visibility="gone"
-            android:gravity="center" />
+            android:gravity="center"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -51,7 +51,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/action_bar"
-        android:layout_alignParentStart="true"
         android:layout_above="@+id/bottom_bar"
         android:background="@color/tablelayout_background">
 
@@ -62,7 +61,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/tablerow_background"
                 android:layout_marginTop="4dp">
 
@@ -165,7 +164,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/tablerow_background">
 
                 <ImageView
@@ -197,7 +196,34 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="28dp"
+                    android:text="满减券"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_grey"
+                    style="@style/TextViewStyle"
+                    android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <com.brand.ushopping.widget.MyListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/manjian_voucher_list"
+                android:background="@color/tablerow_background" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:visibility="visible"
                 android:background="@color/tablerow_background"
                 android:layout_marginTop="4dp">
@@ -217,7 +243,7 @@
             </LinearLayout>
 
             <com.brand.ushopping.widget.MyListView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/voucher_list"
                 android:background="@color/tablerow_background" />
@@ -291,7 +317,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/tablerow_background">
 
                 <TextView
@@ -369,7 +395,6 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/bottom_bar"
         android:gravity="right">
 

@@ -12,6 +12,7 @@ public class GetUserVoucher
     private ArrayList<UserVoucherItem> userVoucherItems;
     private boolean success;
     private String msg;
+    private int flag;
 
     public long getUserId() {
         return userId;
@@ -51,5 +52,13 @@ public class GetUserVoucher
 
     public void setUserVoucherItems(ArrayList<UserVoucherItem> userVoucherItems) {
         this.userVoucherItems = userVoucherItems;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }

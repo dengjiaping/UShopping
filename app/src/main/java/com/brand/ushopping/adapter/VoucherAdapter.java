@@ -1,6 +1,5 @@
 package com.brand.ushopping.adapter;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
+import com.brand.ushopping.activity.VoucherActivity;
+import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +22,13 @@ public class VoucherAdapter extends BaseAdapter {
     List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
 
     //上下文
-    private Activity context;
+    private VoucherActivity context;
 
     //用来导入布局
     private LayoutInflater inflater =null;
 
     //构造器
-    public VoucherAdapter(List<Map<String,Object>> list,Activity context){
+    public VoucherAdapter(List<Map<String,Object>> list,VoucherActivity context){
         this.context=context;
         this.list=list;
         inflater=LayoutInflater.from(context);
@@ -62,6 +63,7 @@ public class VoucherAdapter extends BaseAdapter {
             holder.money02=(TextView)convertView.findViewById(R.id.money02);
             holder.money01=(TextView)convertView.findViewById(R.id.money01);
             holder.name=(TextView)convertView.findViewById(R.id.name);
+            holder.status=(TextView)convertView.findViewById(R.id.status);
             holder.days=(TextView)convertView.findViewById(R.id.days);
             holder.validity=(TextView)convertView.findViewById(R.id.validity);
             holder.come=(TextView)convertView.findViewById(R.id.come);
@@ -79,6 +81,13 @@ public class VoucherAdapter extends BaseAdapter {
         holder.validity.setText(list.get(position).get("validity").toString());
         holder.come.setText(list.get(position).get("come").toString());
 
+        if(list.get(position).get("flag") == StaticValues.VOUCHER_ITEM_STATUS_GOT)
+        {
+            holder.status.setText("已领取");
+            context.voucherSaveDisable();
+
+        }
+
         width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
         height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
 
@@ -94,6 +103,7 @@ public class VoucherAdapter extends BaseAdapter {
         TextView money02;   //金额
         TextView money01;   //满减金额
         TextView name;
+        TextView status;
         TextView days;
         TextView validity;
         TextView come;      //有效天数

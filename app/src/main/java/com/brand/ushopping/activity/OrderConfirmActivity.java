@@ -21,7 +21,9 @@ import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
+import com.brand.ushopping.action.VoucherAction;
 import com.brand.ushopping.adapter.GoodsVoucherAdapter;
+import com.brand.ushopping.adapter.ManjianVoucherAdapter;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
 import com.brand.ushopping.model.AppaddressId;
 import com.brand.ushopping.model.AppbrandId;
@@ -31,6 +33,8 @@ import com.brand.ushopping.model.AppvoucherId;
 import com.brand.ushopping.model.Charge;
 import com.brand.ushopping.model.ClientCharge;
 import com.brand.ushopping.model.Goods;
+import com.brand.ushopping.model.ManJainVoucher;
+import com.brand.ushopping.model.ManJianVoucherItem;
 import com.brand.ushopping.model.OrderSave;
 import com.brand.ushopping.model.OrderSaveList;
 import com.brand.ushopping.model.OrderSuccess;
@@ -84,6 +88,12 @@ public class OrderConfirmActivity extends Activity {
     private ArrayList<UserVoucherItem> userVoucherItems;
     private GoodsVoucherAdapter goodsVoucherAdapter;
 
+    private ArrayList<ManJianVoucherItem> manJianVoucherItems = new ArrayList<ManJianVoucherItem>();
+    private ArrayList<ManJianVoucherItem> manJianVoucherItemResults;
+
+    private ManjianVoucherAdapter manjianVoucherAdapter;
+    private MyListView manjianVoucherListView;
+
     private int totalCount = 0;
     private double summary = 0;
 
@@ -97,6 +107,10 @@ public class OrderConfirmActivity extends Activity {
     private String deaddress;
 
     private TextView shareBtn;
+
+    private long currentTime = System.currentTimeMillis();
+    private List voucherListData = new ArrayList<Map<String,Object>>();
+    private List manjianListDatalistData = new ArrayList<Map<String,Object>>();
 
     public OrderConfirmActivity() {
     }
@@ -180,6 +194,7 @@ public class OrderConfirmActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
                 startActivity(intent);
+                OrderConfirmActivity.this.finish();
 
             }
         });
@@ -213,9 +228,10 @@ public class OrderConfirmActivity extends Activity {
                 switch (operation) {
                     case StaticValues.ORDER_COMFIRM_GEN_ORDER:
                         //订单提交
+                        StringBuffer userVoucherId;
                         switch (boughtType) {
                             case StaticValues.BOUTHT_TYPE_NORMAL:
-                                //普通
+                                //普通订单
                                 ClientCharge clientCharge = new ClientCharge();
                                 clientCharge.setUserId(user.getUserId());
                                 clientCharge.setSessionid(user.getSessionid());
@@ -229,7 +245,7 @@ public class OrderConfirmActivity extends Activity {
                                 break;
 
                             case StaticValues.BOUTHT_TYPE_RESERVATION:
-                                //预约
+                                //预约订单
                                 YyOrderSaveList yyOrderSaveList = new YyOrderSaveList();
 
                                 yyOrderSaveList.setUserId(user.getUserId());
@@ -263,6 +279,18 @@ public class OrderConfirmActivity extends Activity {
 
                                     yyOrderSaveArrayList.add(yyOrderSave);
                                 }
+
+                                //添加优惠券
+                                userVoucherId = new StringBuffer();
+                                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                                {
+                                    userVoucherId.append(userVoucherItem.getId());
+                                    userVoucherId.append(',');
+
+                                }
+                                yyOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
+                                //添加满减券
+//                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
 
@@ -304,6 +332,18 @@ public class OrderConfirmActivity extends Activity {
 
                                     smOrderSaveArrayList.add(smOrderSave);
                                 }
+
+                                //添加优惠券
+                                userVoucherId = new StringBuffer();
+                                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                                {
+                                    userVoucherId.append(userVoucherItem.getId());
+                                    userVoucherId.append(',');
+
+                                }
+                                smOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
+                                //添加满减券
+//                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 smOrderSaveList.setSmorder(smOrderSaveArrayList);
 
@@ -375,6 +415,16 @@ public class OrderConfirmActivity extends Activity {
         voucherListView = (MyListView) findViewById(R.id.voucher_list);
         userVoucherItems = new ArrayList<UserVoucherItem>();
 
+        manjianVoucherListView = (MyListView) findViewById(R.id.manjian_voucher_list);
+
+        //满减
+        /*
+        ManJainVoucher manJainVoucher = new ManJainVoucher();
+        manJainVoucher.setUserId(user.getUserId());
+        manJainVoucher.setSessionid(user.getSessionid());
+
+        new ManJainAllActionTask().execute(manJainVoucher);
+        */
     }
 
     //唤起支付对象
@@ -449,20 +499,22 @@ public class OrderConfirmActivity extends Activity {
 
                             }
 
+                            //添加优惠券
+                            StringBuffer userVoucherId = new StringBuffer();
+                            for(UserVoucherItem userVoucherItem: userVoucherItems)
+                            {
+                                userVoucherId.append(userVoucherItem.getId());
+                                userVoucherId.append(',');
+
+                            }
+                            orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
+                            //添加满减券
+//                            orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+
                             OrderSaveList orderSaveList = new OrderSaveList();
                             orderSaveList.setUserId(user.getUserId());
                             orderSaveList.setSessionid(user.getSessionid());
                             orderSaveList.setOrder(orderSaveArrayList);
-
-                            //优惠券
-                            ArrayList<Long> userVoucherId = new ArrayList<Long>();
-                            for(UserVoucherItem userVoucherItem: userVoucherItems)
-                            {
-                                userVoucherId.add(userVoucherItem.getId());
-
-                            }
-
-                            orderSaveList.setUserVoucherId(userVoucherId);
 
                             new OrderSaveTask().execute(orderSaveList);
 
@@ -497,21 +549,6 @@ public class OrderConfirmActivity extends Activity {
                             break;
 
                     }
-
-                    //弹出分享优惠券
-                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("分享链接领取优惠券");
-                    builder.setTitle("提示");
-                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                            startActivity(intent);
-
-                        }
-                    });
-                    builder.create().show();
 
                 }
                 if(result.equals(StaticValues.PAYMENT_RESULT_FAIL))
@@ -602,7 +639,6 @@ public class OrderConfirmActivity extends Activity {
                 }
 
                 //过期时间限制
-                long currentTime = System.currentTimeMillis();
                 if(currentTime < appvoucherId.getValidity() || currentTime > appvoucherId.getDays())
                 {
                     Toast.makeText(OrderConfirmActivity.this, "优惠券已过期,无法添加", Toast.LENGTH_SHORT).show();
@@ -610,6 +646,8 @@ public class OrderConfirmActivity extends Activity {
 
                 }
 
+                //改为只能使用一张优惠券
+                userVoucherItems.clear();
                 userVoucherItems.add(userVoucherItem);
 
                 voucherReload();
@@ -649,11 +687,21 @@ public class OrderConfirmActivity extends Activity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
 
-                            //进入分享页面
-                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                            startActivity(intent);
+                            //弹出分享优惠券
+                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                            builder.setMessage("分享链接领取优惠券");
+                            builder.setTitle("提示");
+                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                                    startActivity(intent);
+                                    OrderConfirmActivity.this.finish();
 
-                            OrderConfirmActivity.this.finish();
+                                }
+                            });
+                            builder.create().show();
 
                         }
                     });
@@ -803,11 +851,21 @@ public class OrderConfirmActivity extends Activity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
 
-                            //进入分享页面
-                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                            startActivity(intent);
+                            //弹出分享优惠券
+                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                            builder.setMessage("分享链接领取优惠券");
+                            builder.setTitle("提示");
+                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                                    startActivity(intent);
+                                    OrderConfirmActivity.this.finish();
 
-                            OrderConfirmActivity.this.finish();
+                                }
+                            });
+                            builder.create().show();
 
                         }
                     });
@@ -857,11 +915,21 @@ public class OrderConfirmActivity extends Activity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
 
-                            //进入分享页面
-                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                            startActivity(intent);
+                            //弹出分享优惠券
+                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                            builder.setMessage("分享链接领取优惠券");
+                            builder.setTitle("提示");
+                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                                    startActivity(intent);
+                                    OrderConfirmActivity.this.finish();
 
-                            OrderConfirmActivity.this.finish();
+                                }
+                            });
+                            builder.create().show();
 
                         }
                     });
@@ -881,11 +949,67 @@ public class OrderConfirmActivity extends Activity {
         }
     }
 
+    //满减券列表
+    public class ManJainAllActionTask extends AsyncTask<ManJainVoucher, Void, ManJainVoucher>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected ManJainVoucher doInBackground(ManJainVoucher... manJainVouchers) {
+            return new VoucherAction().manJainAllAction(manJainVouchers[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(ManJainVoucher result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    manJianVoucherItemResults = result.getManJianVoucherItems();
+
+                    voucherReload();
+                    calculateSummary();
+
+                }
+                else
+                {
+                    Toast.makeText(OrderConfirmActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else
+            {
+                Toast.makeText(OrderConfirmActivity.this, "满减券列表获取失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // 满减券是否有效
+    private boolean ifManjianVoucherAvalible(ManJianVoucherItem manJianVoucherItem)
+    {
+        if(summary < manJianVoucherItem.getMoney02())
+        {
+            return false;
+        }
+
+        //过期时间限制
+        if(currentTime < manJianVoucherItem.getValidity() || currentTime > manJianVoucherItem.getDays())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private void voucherReload()
     {
         voucherListView.removeAllViewsInLayout();
+        voucherListData.clear();
 
-        List listData = new ArrayList<Map<String,Object>>();
         for(UserVoucherItem userVoucherItem: userVoucherItems)
         {
             AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
@@ -896,12 +1020,57 @@ public class OrderConfirmActivity extends Activity {
             line.put("money02", appvoucherId.getMoney02());
             line.put("name", appvoucherId.getAppbrandId().getBrandName());
 
-            listData.add(line);
+            voucherListData.add(line);
 
         }
-        goodsVoucherAdapter = new GoodsVoucherAdapter(listData, OrderConfirmActivity.this);
-        voucherListView.setAdapter(goodsVoucherAdapter);
+        if(goodsVoucherAdapter == null)
+        {
+            goodsVoucherAdapter = new GoodsVoucherAdapter(voucherListData, OrderConfirmActivity.this);
+            voucherListView.setAdapter(goodsVoucherAdapter);
 
+        }
+        else
+        {
+            goodsVoucherAdapter.notifyDataSetChanged();
+        }
+
+        // 满减券停用
+        /*
+        manjianVoucherListView.removeAllViewsInLayout();
+        manjianListDatalistData.clear();
+        manJianVoucherItems.clear();
+        for(int a=0; a<manJianVoucherItemResults.size(); a++)
+        {
+            ManJianVoucherItem manJianVoucherItem = manJianVoucherItemResults.get(a);
+            //判断是否符合满减条件
+            if(ifManjianVoucherAvalible(manJianVoucherItem))
+            {
+                Map line = new HashMap();
+
+                line.put("id", manJianVoucherItem.getId());
+                line.put("money", manJianVoucherItem.getMoney01());
+                line.put("name", manJianVoucherItem.getName());
+                line.put("regulation", manJianVoucherItem.getRegulation());
+
+                manjianListDatalistData.add(line);
+                this.manJianVoucherItems.add(manJianVoucherItem);
+                break;
+
+            }
+
+        }
+
+        if(manjianVoucherAdapter == null)
+        {
+            manjianVoucherAdapter = new ManjianVoucherAdapter(manjianListDatalistData, OrderConfirmActivity.this);
+            manjianVoucherListView.setAdapter(manjianVoucherAdapter);
+
+        }
+        else
+        {
+            manjianVoucherAdapter.notifyDataSetChanged();
+        }
+        */
     }
 
     public int getBoughtType() {
@@ -972,6 +1141,17 @@ public class OrderConfirmActivity extends Activity {
             {
                 AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
                 summary -= appvoucherId.getMoney01();
+
+            }
+
+        }
+
+        //满减
+        if(this.manJianVoucherItems != null)
+        {
+            for(ManJianVoucherItem manJianVoucherItem: this.manJianVoucherItems)
+            {
+                summary -= manJianVoucherItem.getMoney01();
 
             }
 

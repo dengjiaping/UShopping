@@ -180,4 +180,14 @@ public class StaticValues
     //注册handler
     public final static int GET_SMS_CODE_HANDLER = 1000;
 
+    //优惠券
+    public final static int VOUCHER_ITEM_STATUS_AVALIABLE = 0;
+    public final static int VOUCHER_ITEM_STATUS_GOT = 1;
+
+    public final static int VOUCHER_PICK_SINGLE = 0;
+    public final static int VOUCHER_PICK_BATCH = 3;
+
+    //API环境
+    public final static boolean MODEL_ANDROID = false;
+
 }

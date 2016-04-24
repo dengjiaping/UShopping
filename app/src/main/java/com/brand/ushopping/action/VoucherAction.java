@@ -4,7 +4,10 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.AppVoucherSelect;
+import com.brand.ushopping.model.BatchSaveUserVoucher;
 import com.brand.ushopping.model.GetUserVoucher;
+import com.brand.ushopping.model.ManJainVoucher;
+import com.brand.ushopping.model.ManJianVoucherItem;
 import com.brand.ushopping.model.SaveUserVoucher;
 import com.brand.ushopping.model.UserVoucherItem;
 import com.brand.ushopping.model.VoucherItem;
@@ -118,7 +121,7 @@ public class VoucherAction
         try
         {
             resultString = HttpClientUtil.post("GetUserVoucherIdAction.action", params);
-            Log.v("voucher", resultString);
+            Log.v("user voucher", resultString);
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -154,5 +157,94 @@ public class VoucherAction
         return getUserVoucher;
 
     }
+
+    //查询满减券
+    public ManJainVoucher manJainAllAction(ManJainVoucher manJainVoucher)
+    {
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(manJainVoucher);
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("param", jsonParam));
+
+        try
+        {
+            resultString = HttpClientUtil.post("ManJainAllAction.action", params);
+            Log.v("manjian", resultString);
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    JSONArray vouderJSONArray = jsonObject.getJSONArray("data");
+                    ArrayList<ManJianVoucherItem> manJianVoucherItems = new ArrayList<ManJianVoucherItem>();
+
+                    for(int a=0; a<vouderJSONArray.length(); a++)
+                    {
+                        JSONObject dataObject = vouderJSONArray.getJSONObject(a);
+                        String data = dataObject.toString();
+                        manJianVoucherItems.add(JSON.parseObject(data, ManJianVoucherItem.class));
+
+                    }
+                    manJainVoucher.setManJianVoucherItems(manJianVoucherItems);
+
+                    manJainVoucher.setSuccess(true);
+
+                }
+                else
+                {
+                    manJainVoucher.setSuccess(false);
+                    manJainVoucher.setMsg(jsonObject.getString("msg"));
+
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return manJainVoucher;
+    }
+
+    // 一键领取大礼包
+    public BatchSaveUserVoucher batchSaveUserVoucherAction(BatchSaveUserVoucher batchSaveUserVoucher)
+    {
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(batchSaveUserVoucher);
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("param", jsonParam));
+
+        try
+        {
+            resultString = HttpClientUtil.post("BatchSaveUserVoucherAction.action", params);
+
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                    String data = dataObject.toString();
+                    batchSaveUserVoucher = JSON.parseObject(data, BatchSaveUserVoucher.class);
+                    batchSaveUserVoucher.setSuccess(true);
+
+                }
+                else
+                {
+                    batchSaveUserVoucher.setSuccess(false);
+                    batchSaveUserVoucher.setMsg(jsonObject.getString("msg"));
+
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return batchSaveUserVoucher;
+
+    }
+
 
 }
