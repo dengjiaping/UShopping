@@ -276,7 +276,7 @@ public class OrderActivity extends Activity {
             long reTime1 = orderItem.getReTime();
             long reTime2 = orderItem.getReTime();
 
-            if(reTime1 > reTime2)
+            if(reTime1 < reTime2)
             {
                 return 1;
             }

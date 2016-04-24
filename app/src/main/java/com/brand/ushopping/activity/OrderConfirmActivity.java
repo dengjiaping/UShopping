@@ -60,6 +60,7 @@ import static com.brand.ushopping.R.id.root_view;
 
 public class OrderConfirmActivity extends Activity {
     private AppContext appContext;
+
     private User user;
     private Goods goods;
     private AppbrandId appbrandId;
@@ -680,31 +681,37 @@ public class OrderConfirmActivity extends Activity {
                     orderSubmitPopup.dismiss();
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("订单生成成功");
+                    builder.setMessage("订单生成成功,分享链接领取优惠券");
                     builder.setTitle("提示");
-                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
 
                             //弹出分享优惠券
-                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                            builder.setMessage("分享链接领取优惠券");
-                            builder.setTitle("提示");
-                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                    Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                                    startActivity(intent);
-                                    OrderConfirmActivity.this.finish();
-
-                                }
-                            });
-                            builder.create().show();
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+                            OrderConfirmActivity.this.finish();
 
                         }
                     });
+
+                    builder.setNegativeButton("查看订单", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent intent = new Intent(OrderConfirmActivity.this, OrderActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
+                            OrderConfirmActivity.this.finish();
+
+                        }
+                    });
+
+                    builder.setCancelable(false);
                     builder.create().show();
 
                 }
@@ -844,31 +851,30 @@ public class OrderConfirmActivity extends Activity {
                     orderSubmitPopup.dismiss();
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("预约订单支付成功");
+                    builder.setMessage("预约订单支付成功,分享链接领取优惠券");
                     builder.setTitle("提示");
-                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
 
                             //弹出分享优惠券
-                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                            builder.setMessage("分享链接领取优惠券");
-                            builder.setTitle("提示");
-                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                    Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                                    startActivity(intent);
-                                    OrderConfirmActivity.this.finish();
-
-                                }
-                            });
-                            builder.create().show();
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+                            OrderConfirmActivity.this.finish();
 
                         }
                     });
+
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            OrderConfirmActivity.this.finish();
+
+                        }
+                    });
+
+                    builder.setCancelable(false);
                     builder.create().show();
 
                 }
@@ -908,31 +914,30 @@ public class OrderConfirmActivity extends Activity {
                     orderSubmitPopup.dismiss();
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("上门订单支付成功");
+                    builder.setMessage("上门订单支付成功,分享链接领取优惠券");
                     builder.setTitle("提示");
-                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
 
                             //弹出分享优惠券
-                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                            builder.setMessage("分享链接领取优惠券");
-                            builder.setTitle("提示");
-                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                    Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                                    startActivity(intent);
-                                    OrderConfirmActivity.this.finish();
-
-                                }
-                            });
-                            builder.create().show();
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+                            OrderConfirmActivity.this.finish();
 
                         }
                     });
+
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            OrderConfirmActivity.this.finish();
+
+                        }
+                    });
+
+                    builder.setCancelable(false);
                     builder.create().show();
 
                 }
