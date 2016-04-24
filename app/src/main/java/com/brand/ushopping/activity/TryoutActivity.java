@@ -251,7 +251,7 @@ public class TryoutActivity extends Activity {
             Long id1 = orderItem.getReTime();
             Long id2 = t1.getReTime();
 
-            return id2.compareTo(id1);
+            return id1.compareTo(id2);
         }
     }
 

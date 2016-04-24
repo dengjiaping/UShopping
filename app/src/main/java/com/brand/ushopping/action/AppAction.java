@@ -1,6 +1,7 @@
 package com.brand.ushopping.action;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.AppContext;
@@ -29,10 +30,11 @@ public class AppAction {
         String jsonParam = JSON.toJSONString(version);
         List params = new ArrayList();
         params.add(new BasicNameValuePair("param", jsonParam));
-
+        Log.v("version jsonParam", jsonParam);
         try
         {
             resultString = HttpClientUtil.post("GetMaxVersionAction.action", params);
+            Log.v("version", resultString);
 
             if(resultString != null)
             {

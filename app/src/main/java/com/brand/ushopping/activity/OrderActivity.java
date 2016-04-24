@@ -273,18 +273,10 @@ public class OrderActivity extends Activity {
     {
         @Override
         public int compare(OrderItem orderItem, OrderItem t1) {
-            long reTime1 = orderItem.getReTime();
-            long reTime2 = orderItem.getReTime();
+            Long reTime1 = orderItem.getReTime();
+            Long reTime2 = orderItem.getReTime();
 
-            if(reTime1 < reTime2)
-            {
-                return 1;
-            }
-            else
-            {
-                return -1;
-            }
-
+            return reTime1.compareTo(reTime2);
         }
     }
 
