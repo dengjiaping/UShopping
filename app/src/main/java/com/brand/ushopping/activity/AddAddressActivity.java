@@ -143,6 +143,10 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
 
             // 启动定位
             locationClient.startLocation();
+
+            //默认地址按钮隐藏
+            setDefaultAddressBtn.setVisibility(View.GONE);
+
         }
 
         //设置默认地址

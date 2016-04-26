@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="38dp"
-            android:text="待付款"
+            android:text="全部"
             android:id="@+id/unpaid"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -77,7 +77,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="38dp"
-            android:text="已收货"
+            android:text="评价"
             android:id="@+id/confirmed"
             android:layout_weight="1"
             android:textAlignment="center"

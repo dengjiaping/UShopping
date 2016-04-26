@@ -115,8 +115,6 @@ public class OrderSubmitPopup extends PopupWindow
                 } else
                 {
                     clientCharge.setChannelVal(payMethod);
-                    clientCharge.setSubjectVal("pay req viator42");
-                    clientCharge.setBodyVal("pay req viator42 att");
 
                     //根据不同的支付方式
                     if (payMethod.equals(StaticValues.PAY_METHOD_CASH)) {

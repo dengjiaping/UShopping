@@ -112,7 +112,6 @@ public class UserAction
         try
         {
             resultString = HttpClientUtil.post("SinaRegistered.action", params);
-            //{"access_token":"2.00xgZWoB0CRvcw0fff1f85ecpxfsWC","followMe":false,"gender":"m","headImg":"http://tp4.sinaimg.cn/1662713331/50/5721488565/1","uid":"1662713331","url":"","userName":"Viator42X","verified":false}
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -113,6 +114,8 @@ public class OrderConfirmActivity extends Activity {
     private List voucherListData = new ArrayList<Map<String,Object>>();
     private List manjianListDatalistData = new ArrayList<Map<String,Object>>();
 
+    private EditText commentEditText;
+
     public OrderConfirmActivity() {
     }
 
@@ -153,6 +156,8 @@ public class OrderConfirmActivity extends Activity {
         deaddress = appContext.getDefaultAddress();
 
         deaddressTextView.setText(deaddress);
+
+        commentEditText = (EditText) findViewById(R.id.comment);
 
         List listData = new ArrayList<Map<String,Object>>();
         for(Goods goods: goodsList)
@@ -239,6 +244,13 @@ public class OrderConfirmActivity extends Activity {
                                 clientCharge.setSummary(summary);
                                 int sumConverted = (int) (summary * 100);
                                 clientCharge.setAmountVal(sumConverted);
+                                String comment = commentEditText.getText().toString();
+                                if(!CommonUtils.isValueEmpty(comment))
+                                {
+                                    clientCharge.setSubjectVal(comment);
+                                    clientCharge.setBodyVal(comment);
+
+                                }
 
                                 orderSubmitPopup = new OrderSubmitPopup(OrderConfirmActivity.this, clientCharge);
                                 orderSubmitPopup.showAtLocation(rootView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -372,6 +384,13 @@ public class OrderConfirmActivity extends Activity {
                                 clientCharge.setSummary(summary);
                                 int sumConverted = (int) (summary * 100);
                                 clientCharge.setAmountVal(sumConverted);
+                                String comment = commentEditText.getText().toString();
+                                if(!CommonUtils.isValueEmpty(comment))
+                                {
+                                    clientCharge.setSubjectVal(comment);
+                                    clientCharge.setBodyVal(comment);
+
+                                }
 
                                 orderSubmitPopup = new OrderSubmitPopup(OrderConfirmActivity.this, clientCharge);
                                 orderSubmitPopup.showAtLocation(rootView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
