@@ -413,6 +413,19 @@ public class GoodsActivity extends UActivity {
     //立即购买
     public void buyit()
     {
+        //检查属性是否选择
+        if(CommonUtils.isValueEmpty(colorSelected))
+        {
+            Toast.makeText(GoodsActivity.this, "请选择颜色", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(CommonUtils.isValueEmpty(sizeSelected))
+        {
+            Toast.makeText(GoodsActivity.this, "请选择尺码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = new Intent();
 
         Goods goods = goodsInfo.getGoods();
@@ -449,6 +462,19 @@ public class GoodsActivity extends UActivity {
     //加入购物车
     public void addToCart()
     {
+        //检查属性是否选择
+        if(CommonUtils.isValueEmpty(colorSelected))
+        {
+            Toast.makeText(GoodsActivity.this, "请选择颜色", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(CommonUtils.isValueEmpty(sizeSelected))
+        {
+            Toast.makeText(GoodsActivity.this, "请选择尺码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AddAppShopcart addAppShopcart = new AddAppShopcart();
         AppuserId appuserId = new AppuserId();
         appuserId.setUserId(user.getUserId());
@@ -566,8 +592,21 @@ public class GoodsActivity extends UActivity {
                         {
                             DefaultSliderView sliderView = new DefaultSliderView(GoodsActivity.this);
                             // initialize a SliderLayout
-                            sliderView.image(imgList[a]);
+                            final String imageUrl = imgList[a];
+                            sliderView.image(imageUrl);
                             sliderView.setScaleType(BaseSliderView.ScaleType.Fit);
+
+                            sliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                @Override
+                                public void onSliderClick(BaseSliderView slider) {
+                                    Intent intent = new Intent(GoodsActivity.this, ScaleImageViewActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("url", imageUrl);
+                                    intent.putExtras(bundle);
+
+                                    startActivity(intent);
+                                }
+                            });
 
                             slider.addSlider(sliderView);
                         }

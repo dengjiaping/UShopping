@@ -13,7 +13,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.impl.client.HttpClients;
@@ -67,12 +66,11 @@ public class HttpClientUtil
         }
     }
 
-    public static String get(String url, List<NameValuePair> params) throws Exception {
+    public static String get(String url, String paramsString) throws Exception {
         // 创建HttpClient实例
         HttpClient client = getHttpClient();
-        // 根据URL创建HttpPost实例
-        String paramsString = URLEncodedUtils.format(params, HTTP.UTF_8);
-        HttpGet get = new HttpGet(url + "?" + paramsString);
+
+        HttpGet get = new HttpGet(url + "/" + paramsString);
 
         // 发送请求，得到响应体
         HttpResponse response = client.execute(get);

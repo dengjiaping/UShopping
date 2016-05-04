@@ -28,6 +28,7 @@ import com.brand.ushopping.R;
 import com.brand.ushopping.action.MainpageAction;
 import com.brand.ushopping.activity.AroundActivity;
 import com.brand.ushopping.activity.GoodsActivity;
+import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.MoreGoodsActivity;
 import com.brand.ushopping.activity.SearchActivity;
 import com.brand.ushopping.activity.SignActivity;
@@ -105,6 +106,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     private TextView moreGoodsBtn;
     private TextView moreGoods2Btn;
 
+    private MainActivity mainActivity;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -128,11 +131,14 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         appContext = (AppContext) getActivity().getApplicationContext();
         user = appContext.getUser();
 
+        mainActivity = (MainActivity) getActivity();
+
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainActivity.setButtomBarEnable(false);
         View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
 
         searchBtn = (ImageView) view.findViewById(R.id.search);
@@ -371,6 +377,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         // 启动定位
         locationClient.startLocation();
 
+        mainActivity.setButtomBarEnable(true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

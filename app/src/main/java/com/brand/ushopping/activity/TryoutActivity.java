@@ -45,7 +45,7 @@ public class TryoutActivity extends Activity {
     private FrameLayout warningLayout;
     private TextView warningTextView;
     ArrayList<OrderItem> orderList;
-    private int currentOrderType;
+    private Integer currentOrderType;
     private ViewGroup contentViewGroup;
     private TimeoutbleProgressDialog orderTimeoutDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -78,7 +78,7 @@ public class TryoutActivity extends Activity {
         unpaidTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentOrderType = StaticValues.TRYOUT_ORDER_FLAG_UNPAID;
+                currentOrderType = StaticValues.TRYOUT_ORDER_FLAG_ALL;
                 reload();
             }
         });
@@ -86,7 +86,7 @@ public class TryoutActivity extends Activity {
         paidTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentOrderType = StaticValues.TRYOUT_ORDER_FLAG_PAID;
+                currentOrderType = StaticValues.TRYOUT_ORDER_FLAG_UNPAID;
                 reload();
             }
         });
@@ -151,7 +151,11 @@ public class TryoutActivity extends Activity {
         OrderAll orderAll = new OrderAll();
         orderAll.setUserId(user.getUserId());
         orderAll.setSessionid(user.getSessionid());
-        orderAll.setFlag(currentOrderType);
+
+        if(currentOrderType != StaticValues.TRYOUT_ORDER_FLAG_ALL)
+        {
+            orderAll.setFlag(currentOrderType);
+        }
 
         //没有数据时的提示
         warningLayout.setVisibility(View.GONE);
@@ -228,15 +232,16 @@ public class TryoutActivity extends Activity {
 
         switch (currentOrderType)
         {
-            case StaticValues.ORDER_FLAG_UNPAY:
+            case StaticValues.TRYOUT_ORDER_FLAG_ALL:
                 unpaidIdc.setVisibility(View.VISIBLE);
                 break;
 
-            case StaticValues.ORDER_FLAG_PAID:
+            case StaticValues.TRYOUT_ORDER_FLAG_UNPAID:
+            case StaticValues.TRYOUT_ORDER_FLAG_PAID:
                 paidIdc.setVisibility(View.VISIBLE);
                 break;
 
-            case StaticValues.ORDER_FLAG_DELIVERED:
+            case StaticValues.TRYOUT_ORDER_FLAG_DELIVERED:
                 deliveredIdc.setVisibility(View.VISIBLE);
                 break;
 

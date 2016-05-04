@@ -1,6 +1,7 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -131,6 +132,18 @@ public class ProfileActivity extends Activity {
         });
 
         setMode(MODE_VIEW);
+
+        headImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ScaleImageViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", user.getHeadImg());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

@@ -80,7 +80,7 @@ public class ReservationActivity extends Activity {
         unpaidTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentOrderType = StaticValues.RESERVATION_ORDER_FLAG_UNPAID;
+                currentOrderType = StaticValues.RESERVATION_ORDER_FLAG_ALL;
                 reload();
 
             }
@@ -90,7 +90,7 @@ public class ReservationActivity extends Activity {
         paidTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentOrderType = StaticValues.RESERVATION_ORDER_FLAG_PAID;
+                currentOrderType = StaticValues.RESERVATION_ORDER_FLAG_UNPAID;
                 reload();
 
             }
@@ -160,7 +160,10 @@ public class ReservationActivity extends Activity {
         OrderAll orderAll = new OrderAll();
         orderAll.setUserId(user.getUserId());
         orderAll.setSessionid(user.getSessionid());
-        orderAll.setFlag(currentOrderType);
+        if(currentOrderType != StaticValues.RESERVATION_ORDER_FLAG_ALL)
+        {
+            orderAll.setFlag(currentOrderType);
+        }
 
         //没有数据时的提示
         warningLayout.setVisibility(View.GONE);
@@ -238,11 +241,12 @@ public class ReservationActivity extends Activity {
 
         switch (currentOrderType)
         {
-            case StaticValues.ORDER_FLAG_UNPAY:
+            case StaticValues.RESERVATION_ORDER_FLAG_ALL:
                 unpaidIdc.setVisibility(View.VISIBLE);
                 break;
 
-            case StaticValues.ORDER_FLAG_PAID:
+            case StaticValues.RESERVATION_ORDER_FLAG_UNPAID:
+            case StaticValues.RESERVATION_ORDER_FLAG_PAID:
                 paidIdc.setVisibility(View.VISIBLE);
                 break;
 

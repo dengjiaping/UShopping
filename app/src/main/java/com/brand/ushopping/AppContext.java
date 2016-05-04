@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.socialize.PlatformConfig;
 
 import java.io.File;
@@ -104,6 +105,9 @@ public class AppContext  extends Application
         PlatformConfig.setWeixin("wx632d6c8a00776b9d", "0e141405d57f49123643fd771dacc039");
         PlatformConfig.setSinaWeibo("866304116", "f233c114205bd034797fd4904553d71e");
         PlatformConfig.setQQZone("1105140517", "xTKlL6zUVLeXgUgN");
+
+        //bugly崩溃统计
+        CrashReport.initCrashReport(getApplicationContext(), "900028246", false);
 
     }
 

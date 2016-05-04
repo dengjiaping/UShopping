@@ -105,6 +105,7 @@ public class OrderSubmitPopup extends PopupWindow
             @Override
             public void onClick(View v) {
                 //确认付款
+                activity.chargedCheck = true;
 //                activity.upPay();
                 confirmBtn.setEnabled(false);
                 if (CommonUtils.isValueEmpty(payMethod))

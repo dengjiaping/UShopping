@@ -59,7 +59,7 @@ public class StaticValues
     //---------------------------银联--------------------------------
 //    public static final String UNION_PAY_SERVER_MODE = "00";
 
-    //订单分类flag      //0 未付款, 1 已付款, 2 已发货
+    //订单分类flag      //0 未付款, 1 已付款, 2 已发货, 3 已收货
     public static final int ORDER_FLAG_ALL = 9;
     public static final int ORDER_FLAG_UNPAY = 0;
     public static final int ORDER_FLAG_PAID = 1;
@@ -76,13 +76,13 @@ public class StaticValues
     public static final int CART_TYPE_RESERVATION = 2;    //到店预订
     public static final int CART_TYPE_TRYIT = 3;          //上门试衣
 
-    // 预约订单分类flag   0 未付款, 1 已付款, 2 已发货
+    // 预约订单分类flag   0 未付款, 1 已付款, 2 已发货, 3 已收货
     public static final int RESERVATION_ORDER_FLAG_ALL = 9;
     public static final int RESERVATION_ORDER_FLAG_UNPAID = 0;
     public static final int RESERVATION_ORDER_FLAG_PAID = 1;
     public static final int RESERVATION_ORDER_FLAG_DELIVERED = 2;
 
-    // 上门试衣订单分类flag flag: 0 未付款, 1 已付款, 2 已发货
+    // 上门试衣订单分类flag flag: -1 删减, 0 未付款, 1 已付款
     public static final int TRYOUT_ORDER_FLAG_ALL = 9;
     public static final int TRYOUT_ORDER_FLAG_UNPAID = 0;
     public static final int TRYOUT_ORDER_FLAG_PAID = 1;

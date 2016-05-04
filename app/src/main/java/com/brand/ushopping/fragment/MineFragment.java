@@ -23,6 +23,7 @@ import com.brand.ushopping.activity.BrandFavouriteActivity;
 import com.brand.ushopping.activity.GoodsFavouriteActivity;
 import com.brand.ushopping.activity.HelpActivity;
 import com.brand.ushopping.activity.LoginActivity;
+import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.OrderActivity;
 import com.brand.ushopping.activity.ProfileActivity;
 import com.brand.ushopping.activity.RefActivity;
@@ -87,6 +88,7 @@ public class MineFragment extends Fragment {
     private ViewGroup deliveredBtn;
 
     private ArrayList<AppgoodsId> goodsViewHistory;
+    private MainActivity mainActivity;
 
     /**
      * Use this factory method to create a new instance of
@@ -107,12 +109,14 @@ public class MineFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = (MainActivity) getActivity();
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainActivity.setButtomBarEnable(false);
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         // Inflate the layout for this fragment
         loginBtn = (TextView) view.findViewById(R.id.login);
@@ -471,6 +475,7 @@ public class MineFragment extends Fragment {
 
         }
 
+        mainActivity.setButtomBarEnable(true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

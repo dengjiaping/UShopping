@@ -13,12 +13,14 @@ import com.brand.ushopping.model.AppGoodsCollect;
 import com.brand.ushopping.model.AppGoodsCollectItem;
 import com.brand.ushopping.model.AppGoodsTypeId;
 import com.brand.ushopping.model.AppgoodsId;
+import com.brand.ushopping.model.Charge;
 import com.brand.ushopping.model.ClientCharge;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.GoodsInfo;
 import com.brand.ushopping.model.SaveAppEvaluate;
 import com.brand.ushopping.model.SaveAppGoodsCollect;
 import com.brand.ushopping.model.SearchAppGoods;
+import com.brand.ushopping.model.SelectChargeId;
 import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.UDBHelper;
 
@@ -86,6 +88,7 @@ public class GoodsAction
         try
         {
             resultString = HttpClientUtil.post("ReturnClientChargeAction.action", params);
+//            Log.v("charge", resultString);
 
             if(resultString != null)
             {
@@ -515,5 +518,49 @@ public class GoodsAction
 //
 //        return unionpay;
 //    }
+
+    //支付查询charge对象是否存在
+    public SelectChargeId selectChargeIdPingAction(SelectChargeId selectChargeId)
+    {
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(selectChargeId);
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("param", jsonParam));
+
+        try
+        {
+            resultString = HttpClientUtil.post("SelectChargeIdPingAction.action", params);
+
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                    String data = dataObject.toString();
+                    selectChargeId.setCharge(JSON.parseObject(data, Charge.class));
+                    selectChargeId.setSuccess(true);
+                }
+                else
+                {
+                    selectChargeId.setSuccess(false);
+                    selectChargeId.setMsg(jsonObject.getString("msg"));
+                }
+            }
+            else
+            {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return selectChargeId;
+
+    }
+
+
+
 
 }

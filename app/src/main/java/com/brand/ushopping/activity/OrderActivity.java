@@ -31,7 +31,7 @@ import java.util.Comparator;
 public class OrderActivity extends Activity {
     private AppContext appContext;
     private static User user;
-    private int currentType;
+    private Integer currentType;
     private ImageView backBtn;
     private TextView titleTextView;
 
@@ -170,7 +170,12 @@ public class OrderActivity extends Activity {
         OrderAll orderAll = new OrderAll();
         orderAll.setUserId(user.getUserId());
         orderAll.setSessionid(user.getSessionid());
-        orderAll.setFlag(currentType);
+
+        if(currentType != StaticValues.ORDER_FLAG_UNPAY)
+        {
+            orderAll.setFlag(currentType);
+        }
+
 
         //没有数据时的提示
         warningLayout.setVisibility(View.GONE);

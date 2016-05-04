@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.GoodsAction;
 import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.action.VoucherAction;
 import com.brand.ushopping.adapter.GoodsVoucherAdapter;
@@ -39,6 +41,7 @@ import com.brand.ushopping.model.ManJianVoucherItem;
 import com.brand.ushopping.model.OrderSave;
 import com.brand.ushopping.model.OrderSaveList;
 import com.brand.ushopping.model.OrderSuccess;
+import com.brand.ushopping.model.SelectChargeId;
 import com.brand.ushopping.model.SmOrderSave;
 import com.brand.ushopping.model.SmOrderSaveList;
 import com.brand.ushopping.model.User;
@@ -67,7 +70,7 @@ public class OrderConfirmActivity extends Activity {
     private AppbrandId appbrandId;
     private ArrayList<Goods> goodsList;
     private View rootView;
-    private Charge chargeObj;
+    private Charge chargeObj = null;
     private int paymentMode;
     private int operation = StaticValues.ORDER_COMFIRM_GEN_ORDER;
 
@@ -115,6 +118,8 @@ public class OrderConfirmActivity extends Activity {
     private List manjianListDatalistData = new ArrayList<Map<String,Object>>();
 
     private EditText commentEditText;
+
+    public boolean chargedCheck = false;
 
     public OrderConfirmActivity() {
     }
@@ -251,6 +256,11 @@ public class OrderConfirmActivity extends Activity {
                                     clientCharge.setBodyVal(comment);
 
                                 }
+                                else
+                                {
+                                    clientCharge.setSubjectVal("暂无备注");
+                                    clientCharge.setBodyVal("暂无备注");
+                                }
 
                                 orderSubmitPopup = new OrderSubmitPopup(OrderConfirmActivity.this, clientCharge);
                                 orderSubmitPopup.showAtLocation(rootView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -258,14 +268,16 @@ public class OrderConfirmActivity extends Activity {
                                 break;
 
                             case StaticValues.BOUTHT_TYPE_RESERVATION:
-                                //预约订单
+                                //生成预约订单
                                 YyOrderSaveList yyOrderSaveList = new YyOrderSaveList();
 
                                 yyOrderSaveList.setUserId(user.getUserId());
                                 yyOrderSaveList.setSessionid(user.getSessionid());
 
                                 ArrayList<YyOrderSave> yyOrderSaveArrayList = new ArrayList<YyOrderSave>();
-                                for (Goods goods : goodsList) {
+                                for(int a=0; a<goodsList.size(); a++)
+                                {
+                                    Goods goods = goodsList.get(a);
                                     YyOrderSave yyOrderSave = new YyOrderSave();
 
                                     yyOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
@@ -286,7 +298,19 @@ public class OrderConfirmActivity extends Activity {
                                     yyOrderSave.setAttribute(goods.getAttribute());
                                     yyOrderSave.setQuantity(goods.getCount());
 
-                                    yyOrderSave.setMoney(goods.getPromotionPrice() * goods.getCount());
+                                    yyOrderSave.setMoney(goods.getPromotionPrice());
+                                    //优惠券扣除到第一个商品中
+                                    if(a == 0)
+                                    {
+                                        double money = yyOrderSave.getMoney();
+                                        for(UserVoucherItem userVoucherItem: userVoucherItems)
+                                        {
+                                            money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                                        }
+                                        yyOrderSave.setMoney(money);
+
+                                    }
 
                                     yyOrderSave.setTimeShop(new Date(reservationDate));
 
@@ -311,14 +335,16 @@ public class OrderConfirmActivity extends Activity {
                                 break;
 
                             case StaticValues.BOUTHT_TYPE_TRYIT:
-                                //上门
+                                //生成上门订单
                                 SmOrderSaveList smOrderSaveList = new SmOrderSaveList();
 
                                 smOrderSaveList.setUserId(user.getUserId());
                                 smOrderSaveList.setSessionid(user.getSessionid());
 
                                 ArrayList<SmOrderSave> smOrderSaveArrayList = new ArrayList<SmOrderSave>();
-                                for (Goods goods : goodsList) {
+                                for(int a=0; a<goodsList.size(); a++)
+                                {
+                                    Goods goods = goodsList.get(a);
                                     SmOrderSave smOrderSave = new SmOrderSave();
 
                                     smOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
@@ -339,7 +365,19 @@ public class OrderConfirmActivity extends Activity {
                                     smOrderSave.setAttribute(goods.getAttribute());
                                     smOrderSave.setQuantity(goods.getCount());
 
-                                    smOrderSave.setMoney(goods.getPromotionPrice() * goods.getCount());
+                                    smOrderSave.setMoney(goods.getPromotionPrice());
+                                    //优惠券扣除到第一个商品中
+                                    if(a == 0)
+                                    {
+                                        double money = smOrderSave.getMoney();
+                                        for(UserVoucherItem userVoucherItem: userVoucherItems)
+                                        {
+                                            money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                                        }
+                                        smOrderSave.setMoney(money);
+
+                                    }
 
                                     smOrderSave.setTimeShop(new Date(reservationDate));
 
@@ -390,6 +428,11 @@ public class OrderConfirmActivity extends Activity {
                                     clientCharge.setSubjectVal(comment);
                                     clientCharge.setBodyVal(comment);
 
+                                }
+                                else
+                                {
+                                    clientCharge.setSubjectVal("暂无备注");
+                                    clientCharge.setBodyVal("暂无备注");
                                 }
 
                                 orderSubmitPopup = new OrderSubmitPopup(OrderConfirmActivity.this, clientCharge);
@@ -445,6 +488,19 @@ public class OrderConfirmActivity extends Activity {
 
         new ManJainAllActionTask().execute(manJainVoucher);
         */
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if(chargedCheck)
+        {
+            Log.v("charge", "charge check");
+
+        }
+
     }
 
     //唤起支付对象
@@ -466,132 +522,66 @@ public class OrderConfirmActivity extends Activity {
         if (requestCode == StaticValues.REQUEST_CODE_PAYMENT) {
             if (resultCode == Activity.RESULT_OK) {
                 String result = data.getExtras().getString("pay_result");
-            /* 处理返回值
-             * "success" - payment succeed
-             * "fail"    - payment failed
-             * "cancel"  - user canceld
-             * "invalid" - payment plugin not installed
-             *
-             * 如果是银联渠道返回 invalid，调用 UPPayAssistEx.installUPPayPlugin(this); 安装银联安全支付控件。
-             */
-                if(result.equals(StaticValues.PAYMENT_RESULT_SUCCESS))
+                /* 处理返回值
+                 * "success" - payment succeed
+                 * "fail"    - payment failed
+                 * "cancel"  - user canceld
+                 * "invalid" - payment plugin not installed
+                 *
+                 * 如果是银联渠道返回 invalid，调用 UPPayAssistEx.installUPPayPlugin(this); 安装银联安全支付控件。
+                 */
+                if(!CommonUtils.isValueEmpty(result))
                 {
-                    //支付成功
-                    OrderSuccess orderSuccess;
-                    switch (boughtType)
+                    if(result.equals(StaticValues.PAYMENT_RESULT_SUCCESS))
                     {
-                        case StaticValues.BOUTHT_TYPE_NORMAL:
-                            // 生成普通订单
-                            ArrayList<OrderSave> orderSaveArrayList = new ArrayList<OrderSave>();
-                            for (Goods goods: goodsList)
-                            {
-                                OrderSave orderSave = new OrderSave();
+                        //支付成功校验
+                        if(!CommonUtils.isValueEmpty(chargeObj.getId()))
+                        {
+                            SelectChargeId selectChargeId = new SelectChargeId();
+                            selectChargeId.setUserId(user.getUserId());
+                            selectChargeId.setSessionid(user.getSessionid());
+                            selectChargeId.setCharge_id(chargeObj.getId());
 
-                                orderSave.setOrderNo(chargeObj.getOrderNo());
-                                orderSave.setMoney(summary);
-
-                                orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
-                                String channel = chargeObj.getChannel();
-
-                                orderSave.setPaymentMode(putPaymentMode(channel));
-
-                                orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
-
-                                AppuserId appuserId = new AppuserId();
-                                appuserId.setUserId(user.getUserId());
-                                orderSave.setAppuserId(appuserId);
-
-                                AppaddressId appaddressId = new AppaddressId();
-                                appaddressId.setId(addressId);
-                                orderSave.setAppaddressId(appaddressId);
-
-                                orderSave.setRemark(chargeObj.getBody());
-
-                                //商品信息
-                                AppgoodsId appgoodsId = new AppgoodsId();
-                                appgoodsId.setId(goods.getId());
-                                orderSave.setAppgoodsId(appgoodsId);
-
-                                orderSave.setAttribute(goods.getAttribute());
-                                orderSave.setQuantity(goods.getCount());
-
-                                orderSaveArrayList.add(orderSave);
-
-                            }
-
-                            //添加优惠券
-                            StringBuffer userVoucherId = new StringBuffer();
-                            for(UserVoucherItem userVoucherItem: userVoucherItems)
-                            {
-                                userVoucherId.append(userVoucherItem.getId());
-                                userVoucherId.append(',');
-
-                            }
-                            orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
-                            //添加满减券
-//                            orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
-
-                            OrderSaveList orderSaveList = new OrderSaveList();
-                            orderSaveList.setUserId(user.getUserId());
-                            orderSaveList.setSessionid(user.getSessionid());
-                            orderSaveList.setOrder(orderSaveArrayList);
-
-                            new OrderSaveTask().execute(orderSaveList);
-
-                            break;
-
-                        case StaticValues.BOUTHT_TYPE_RESERVATION:
-                            // 到店预订订单
-                            orderSuccess = new OrderSuccess();
-                            orderSuccess.setUserId(user.getUserId());
-                            orderSuccess.setSessionid(user.getSessionid());
-                            orderSuccess.setOrderNo(orderNo);
-                            orderSuccess.setFlag(1);
-
-                            String channel = chargeObj.getChannel();
-                            orderSuccess.setPaymentMode(putPaymentMode(channel));
-
-                            new YyOrderSuccessActionTask().execute(orderSuccess);
-                            break;
-                        case StaticValues.BOUTHT_TYPE_TRYIT:
-                            // 上门试衣订单
-                            orderSuccess = new OrderSuccess();
-                            orderSuccess.setUserId(user.getUserId());
-                            orderSuccess.setSessionid(user.getSessionid());
-                            orderSuccess.setOrderNo(orderNo);
-                            orderSuccess.setFlag(1);
-
-                            String channel1 = chargeObj.getChannel();
-                            orderSuccess.setPaymentMode(putPaymentMode(channel1));
-
-                            new SmOrderSuccessActionTask().execute(orderSuccess);
-
-                            break;
+                            new SelectChargeIdPingActionTask().execute(selectChargeId);
+                        }
 
                     }
+                    if(result.equals(StaticValues.PAYMENT_RESULT_FAIL))
+                    {
 
-                }
-                if(result.equals(StaticValues.PAYMENT_RESULT_FAIL))
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("支付失败");
-                    builder.setTitle("提示");
-                    builder.setPositiveButton("OK", null);
-                    builder.create().show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                        builder.setMessage("支付失败");
+                        builder.setTitle("提示");
+                        builder.setPositiveButton("OK", null);
+                        builder.setCancelable(false);
+                        builder.create().show();
 
-                }
-                if(result.equals(StaticValues.PAYMENT_RESULT_CANCEL))
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("支付取消");
-                    builder.setTitle("提示");
-                    builder.setPositiveButton("OK", null);
-                    builder.create().show();
+                    }
+                    if(result.equals(StaticValues.PAYMENT_RESULT_CANCEL))
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                        builder.setMessage("支付取消");
+                        builder.setTitle("提示");
+                        builder.setPositiveButton("OK", null);
+                        builder.setCancelable(false);
+                        builder.create().show();
+                    }
+                    if(result.equals(StaticValues.PAYMENT_RESULT_INVALID))
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                        builder.setMessage("您尚未安装银联安全支付控件");
+                        builder.setTitle("提示");
+                        builder.setPositiveButton("OK", null);
+                        builder.setCancelable(false);
+                        builder.create().show();
+                    }
+
                 }
 
             }
         }
 
+        // 添加地址
         if (requestCode == StaticValues.CODE_ADDRESSES_PICK)
         {
             if (resultCode == Activity.RESULT_OK) {
@@ -1207,5 +1197,163 @@ public class OrderConfirmActivity extends Activity {
 
         return result;
     }
+
+    //Charge对象查询
+    public class SelectChargeIdPingActionTask extends AsyncTask<SelectChargeId, Void, SelectChargeId>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected SelectChargeId doInBackground(SelectChargeId... selectChargeId) {
+            return new GoodsAction().selectChargeIdPingAction(selectChargeId[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(SelectChargeId result) {
+            if(result != null)
+            {
+                paidSuccess();
+
+            }
+            else
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                builder.setMessage("您是否已成功支付?");
+                builder.setTitle("提示");
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        paidSuccess();
+
+                    }
+                });
+
+                builder.setNegativeButton("否", null);
+
+                builder.setCancelable(false);
+                builder.create().show();
+
+            }
+
+        }
+    }
+
+    //支付成功
+    private void paidSuccess()
+    {
+        OrderSuccess orderSuccess;
+        switch (boughtType)
+        {
+            case StaticValues.BOUTHT_TYPE_NORMAL:
+                // 生成普通订单
+                ArrayList<OrderSave> orderSaveArrayList = new ArrayList<OrderSave>();
+//                for (Goods goods: goodsList)
+                for(int a=0; a<goodsList.size(); a++)
+                {
+                    Goods goods = goodsList.get(a);
+                    OrderSave orderSave = new OrderSave();
+
+                    orderSave.setOrderNo(chargeObj.getOrderNo());
+//                    orderSave.setMoney(summary);
+                    orderSave.setMoney(goods.getPromotionPrice());
+                    //优惠券扣除到第一个商品中
+                    if(a == 0)
+                    {
+                        double money = orderSave.getMoney();
+                        for(UserVoucherItem userVoucherItem: userVoucherItems)
+                        {
+                            money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                        }
+                        orderSave.setMoney(money);
+
+                    }
+
+                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
+                    String channel = chargeObj.getChannel();
+
+                    orderSave.setPaymentMode(putPaymentMode(channel));
+
+                    orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
+
+                    AppuserId appuserId = new AppuserId();
+                    appuserId.setUserId(user.getUserId());
+                    orderSave.setAppuserId(appuserId);
+
+                    AppaddressId appaddressId = new AppaddressId();
+                    appaddressId.setId(addressId);
+                    orderSave.setAppaddressId(appaddressId);
+
+                    orderSave.setRemark(chargeObj.getBody());
+
+                    //商品信息
+                    AppgoodsId appgoodsId = new AppgoodsId();
+                    appgoodsId.setId(goods.getId());
+                    orderSave.setAppgoodsId(appgoodsId);
+
+                    orderSave.setAttribute(goods.getAttribute());
+                    orderSave.setQuantity(goods.getCount());
+
+                    orderSaveArrayList.add(orderSave);
+
+                }
+
+                //添加优惠券
+                StringBuffer userVoucherId = new StringBuffer();
+                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                {
+                    userVoucherId.append(userVoucherItem.getId());
+                    userVoucherId.append(',');
+
+                }
+                orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
+                //添加满减券
+//                            orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+
+                OrderSaveList orderSaveList = new OrderSaveList();
+                orderSaveList.setUserId(user.getUserId());
+                orderSaveList.setSessionid(user.getSessionid());
+                orderSaveList.setOrder(orderSaveArrayList);
+
+                new OrderSaveTask().execute(orderSaveList);
+
+                break;
+
+            case StaticValues.BOUTHT_TYPE_RESERVATION:
+                // 到店预订订单
+                orderSuccess = new OrderSuccess();
+                orderSuccess.setUserId(user.getUserId());
+                orderSuccess.setSessionid(user.getSessionid());
+                orderSuccess.setOrderNo(orderNo);
+                orderSuccess.setFlag(1);
+
+                String channel = chargeObj.getChannel();
+                orderSuccess.setPaymentMode(putPaymentMode(channel));
+
+                new YyOrderSuccessActionTask().execute(orderSuccess);
+                break;
+            case StaticValues.BOUTHT_TYPE_TRYIT:
+                // 上门试衣订单
+                orderSuccess = new OrderSuccess();
+                orderSuccess.setUserId(user.getUserId());
+                orderSuccess.setSessionid(user.getSessionid());
+                orderSuccess.setOrderNo(orderNo);
+                orderSuccess.setFlag(1);
+
+                String channel1 = chargeObj.getChannel();
+                orderSuccess.setPaymentMode(putPaymentMode(channel1));
+
+                new SmOrderSuccessActionTask().execute(orderSuccess);
+
+                break;
+
+        }
+
+    }
+
 
 }

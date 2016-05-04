@@ -11,7 +11,7 @@ public class OrderAll
     private String sessionid;
     private boolean success;
     private String msg;
-    private int flag;
+    private Integer flag;
     private ArrayList<OrderItem> orderList;
 
     public long getUserId() {
@@ -46,11 +46,11 @@ public class OrderAll
         this.msg = msg;
     }
 
-    public int getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(int flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 

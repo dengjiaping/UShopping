@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.CartAction;
+import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.OrderConfirmActivity;
 import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
@@ -70,6 +71,8 @@ public class CartFragment extends Fragment {
     private TextView warningTextView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private MainActivity mainActivity;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -93,11 +96,14 @@ public class CartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mainActivity = (MainActivity) getActivity();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainActivity.setButtomBarEnable(false);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
@@ -214,6 +220,7 @@ public class CartFragment extends Fragment {
 
         reload();
 
+        mainActivity.setButtomBarEnable(true);
     }
 
     public void reload()

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.ThemeAction;
+import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.SearchActivity;
 import com.brand.ushopping.adapter.ThemeItemAdapter;
 import com.brand.ushopping.model.AppTheme;
@@ -52,6 +53,8 @@ public class ThemeFragment extends Fragment {
     private User user;
     private ArrayList<AppThemeItem> appThemeItems;
 
+    private MainActivity mainActivity;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -73,11 +76,14 @@ public class ThemeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mainActivity = (MainActivity) getActivity();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainActivity.setButtomBarEnable(false);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_theme, container, false);
         titleTextView = (TextView) view.findViewById(R.id.title);
@@ -128,6 +134,7 @@ public class ThemeFragment extends Fragment {
         user = appContext.getUser();
 
         reload();
+        mainActivity.setButtomBarEnable(true);
     }
 
     private void reload()

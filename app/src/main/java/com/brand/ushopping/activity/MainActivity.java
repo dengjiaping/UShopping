@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +20,16 @@ import android.widget.Toast;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.fragment.BrandFragment;
 import com.brand.ushopping.fragment.CartFragment;
 import com.brand.ushopping.fragment.MainpageFragment;
 import com.brand.ushopping.fragment.MineFragment;
 import com.brand.ushopping.fragment.ThemeFragment;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.model.Version;
+import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.EnvValues;
 import com.brand.ushopping.utils.StaticValues;
 
 public class MainActivity extends UActivity
@@ -62,6 +67,8 @@ public class MainActivity extends UActivity
 
     private int initTab = StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE;
 
+    private boolean buttomBarEnable = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,17 +92,24 @@ public class MainActivity extends UActivity
         mainpageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainpageFragment = new MainpageFragment();
+                if(buttomBarEnable)
+                {
+                    if(mainpageFragment == null)
+                    {
+                        mainpageFragment = new MainpageFragment();
+                        Bundle bundle = new Bundle();
+                        mainpageFragment.setArguments(bundle);
+                    }
 
-                Bundle bundle = new Bundle();
-                mainpageFragment.setArguments(bundle);
-                manager = getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.content, mainpageFragment);
-                transaction.commit();
+                    manager = getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.content, mainpageFragment);
+                    transaction.commit();
 
-                iconUnselect();
-                mainpageIcon.setBackgroundResource(R.drawable.tab_home_s);
+                    iconUnselect();
+                    mainpageIcon.setBackgroundResource(R.drawable.tab_home_s);
+                }
+
             }
         });
 
@@ -103,17 +117,24 @@ public class MainActivity extends UActivity
         brandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                brandFragment = new BrandFragment();
+                if(buttomBarEnable)
+                {
+                    if(brandFragment == null)
+                    {
+                        brandFragment = new BrandFragment();
+                        Bundle bundle = new Bundle();
+                        brandFragment.setArguments(bundle);
+                    }
 
-                Bundle bundle = new Bundle();
-                brandFragment.setArguments(bundle);
-                manager = getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.content, brandFragment);
-                transaction.commit();
+                    manager = getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.content, brandFragment);
+                    transaction.commit();
 
-                iconUnselect();
-                brandIcon.setBackgroundResource(R.drawable.tab_brand_s);
+                    iconUnselect();
+                    brandIcon.setBackgroundResource(R.drawable.tab_brand_s);
+                }
+
             }
         });
 
@@ -121,17 +142,24 @@ public class MainActivity extends UActivity
         themeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                themeFragment = new ThemeFragment();
+                if(buttomBarEnable)
+                {
+                    if(themeFragment == null)
+                    {
+                        themeFragment = new ThemeFragment();
+                        Bundle bundle = new Bundle();
+                        themeFragment.setArguments(bundle);
+                    }
 
-                Bundle bundle = new Bundle();
-                themeFragment.setArguments(bundle);
-                manager = getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.content, themeFragment);
-                transaction.commit();
+                    manager = getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.content, themeFragment);
+                    transaction.commit();
 
-                iconUnselect();
-                themeIcon.setBackgroundResource(R.drawable.tab_theme_s);
+                    iconUnselect();
+                    themeIcon.setBackgroundResource(R.drawable.tab_theme_s);
+                }
+
             }
         });
 
@@ -139,17 +167,24 @@ public class MainActivity extends UActivity
         mineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mineFragment = new MineFragment();
+                if(buttomBarEnable)
+                {
+                    if(mineFragment == null)
+                    {
+                        mineFragment = new MineFragment();
+                        Bundle bundle = new Bundle();
+                        mineFragment.setArguments(bundle);
+                    }
 
-                Bundle bundle = new Bundle();
-                mineFragment.setArguments(bundle);
-                manager = getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.content, mineFragment);
-                transaction.commit();
+                    manager = getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.content, mineFragment);
+                    transaction.commit();
 
-                iconUnselect();
-                mineIcon.setBackgroundResource(R.drawable.tab_mine_s);
+                    iconUnselect();
+                    mineIcon.setBackgroundResource(R.drawable.tab_mine_s);
+                }
+
             }
         });
 
@@ -157,14 +192,21 @@ public class MainActivity extends UActivity
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartFragment = new CartFragment();
+                if(buttomBarEnable)
+                {
+                    if(cartFragment == null)
+                    {
+                        cartFragment = new CartFragment();
+                        Bundle bundle = new Bundle();
+                        cartFragment.setArguments(bundle);
+                    }
 
-                Bundle bundle = new Bundle();
-                cartFragment.setArguments(bundle);
-                manager = getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.content, cartFragment);
-                transaction.commit();
+                    manager = getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.content, cartFragment);
+                    transaction.commit();
+                }
+
             }
         });
 
@@ -209,6 +251,17 @@ public class MainActivity extends UActivity
         }
 
         transaction.commit();
+
+        //检查更新
+        Version version = new Version();
+        if(user != null)
+        {
+            version.setUserId(user.getUserId());
+            version.setSessionid(user.getSessionid());
+        }
+        version.setSystemtype(StaticValues.SYSTEM_TYPE_ANDROID);
+        version.setVersionNumber(CommonUtils.getVersionCode(MainActivity.this));
+        new GetMaxVersionTask().execute(version);
 
     }
 
@@ -311,4 +364,56 @@ public class MainActivity extends UActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+    public boolean isButtomBarEnable() {
+        return buttomBarEnable;
+    }
+
+    public void setButtomBarEnable(boolean buttomBarEnable) {
+        this.buttomBarEnable = buttomBarEnable;
+    }
+
+    //检查版本
+    public class GetMaxVersionTask extends AsyncTask<Version, Void, Version>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Version doInBackground(Version... versions) {
+            return new AppAction().getMaxVersionAction(versions[0]);
+        }
+
+        @Override
+        protected void onPostExecute(final Version result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    //退出确认
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage(result.getExplains());
+                    builder.setTitle("检测到新版本,是否升级");
+                    builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            appContext.downloadApp(EnvValues.serverPath + result.getDownloadUrl() + result.getAppName());
+                            Toast.makeText(MainActivity.this, "下载开始", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                    builder.create().show();
+
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, "当前已是最新版,无需升级", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }
+    }
+
 }

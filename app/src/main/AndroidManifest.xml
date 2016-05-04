@@ -487,7 +487,12 @@
             android:name=".activity.ReturnRulesActivity"
             android:label="@string/title_activity_return_rules"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.UPayActivity"></activity>
+        <activity android:name=".activity.UPayActivity" />
+        <activity
+            android:name=".activity.ScaleImageViewActivity"
+            android:label="图片预览"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

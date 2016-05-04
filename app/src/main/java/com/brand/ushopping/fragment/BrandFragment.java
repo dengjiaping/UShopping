@@ -22,6 +22,7 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.BrandAction;
 import com.brand.ushopping.activity.BrandActivity;
+import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.SearchActivity;
 import com.brand.ushopping.adapter.BrandAdapter;
 import com.brand.ushopping.adapter.BrandAllAdapter;
@@ -58,6 +59,8 @@ public class BrandFragment extends Fragment {
     private ArrayList<Brand> appBrandAll;
     private ArrayList<Brand> recommend;
 
+    private MainActivity mainActivity;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -79,11 +82,14 @@ public class BrandFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mainActivity = (MainActivity) getActivity();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainActivity.setButtomBarEnable(false);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_brand, container, false);
 
@@ -181,6 +187,7 @@ public class BrandFragment extends Fragment {
 
         new BrandLoadTask().execute(brandRecommend);
 
+        mainActivity.setButtomBarEnable(true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -22,6 +22,7 @@ import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.EnvValues;
 import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -214,7 +215,7 @@ public class SettingsActivity extends Activity {
                     builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            appContext.downloadApp(result.getDownloadUrl());
+                            appContext.downloadApp(EnvValues.serverPath + result.getDownloadUrl() + result.getAppName());
                             Toast.makeText(SettingsActivity.this, "下载开始", Toast.LENGTH_SHORT).show();
                         }
                     });
