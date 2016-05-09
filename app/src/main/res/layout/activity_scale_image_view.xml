@@ -6,8 +6,44 @@
     tools:context="com.brand.ushopping.activity.ScaleImageViewActivity"
     android:background="@android:color/black">
 
-    <com.brand.ushopping.widget.ScaleImageView
+    <ViewFlipper
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/imgview" />
+        android:id="@+id/flipper"
+        android:layout_above="@+id/linearLayout7">
+
+    </ViewFlipper>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout7">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:text="&lt;"
+            android:id="@+id/prev"
+            android:layout_weight="1"
+            android:textColor="@color/text_white"
+            android:background="@android:color/black"
+            android:textSize="24dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:text=">"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textColor="@color/text_white"
+            android:background="@android:color/black"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>

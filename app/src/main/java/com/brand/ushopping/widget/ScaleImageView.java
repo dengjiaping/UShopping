@@ -4,6 +4,7 @@ package com.brand.ushopping.widget;
         import android.graphics.Matrix;
         import android.graphics.drawable.Drawable;
         import android.util.AttributeSet;
+        import android.util.Log;
         import android.view.GestureDetector;
         import android.view.GestureDetector.SimpleOnGestureListener;
         import android.view.MotionEvent;
@@ -111,6 +112,7 @@ public class ScaleImageView extends ImageView {
     }
 
     private void updateMatrix() {
+        Log.v("scale", Float.toString(mCurrentScale));
         mMatrix.setScale(mCurrentScale, mCurrentScale);
         mMatrix.postTranslate(mCurrentX, mCurrentY);
         setImageMatrix(mMatrix);

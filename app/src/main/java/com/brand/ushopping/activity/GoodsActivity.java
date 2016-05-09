@@ -584,10 +584,11 @@ public class GoodsActivity extends UActivity {
 //                    appExpressPriceTextView.setText(Double.toString(appexpressId.getPrice()));
                     goodsIntroTextView.setText(goods.getGoodsIntro());
 
+                    slider.removeAllSliders();
                     String imgStr = goods.getImages();
                     if(imgStr != null && !imgStr.isEmpty())
                     {
-                        String[] imgList = imgStr.split(";");
+                        final String[] imgList = imgStr.split(";");
                         for(int a = 0; a<imgList.length; a++)
                         {
                             DefaultSliderView sliderView = new DefaultSliderView(GoodsActivity.this);
@@ -601,7 +602,7 @@ public class GoodsActivity extends UActivity {
                                 public void onSliderClick(BaseSliderView slider) {
                                     Intent intent = new Intent(GoodsActivity.this, ScaleImageViewActivity.class);
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("url", imageUrl);
+                                    bundle.putStringArray("imgList", imgList);
                                     intent.putExtras(bundle);
 
                                     startActivity(intent);
