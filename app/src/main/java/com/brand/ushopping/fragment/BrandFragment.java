@@ -264,7 +264,7 @@ public class BrandFragment extends Fragment {
                         line.put("id", brand.getId());
                         line.put("name", brand.getBrandName());
                         line.put("logopic", brand.getLogopic());
-                        line.put("intro", brand.getIntro());
+                        line.put("intro", brand.getDetail());
                         line.put("favouriteCount", 123);
 
                         listData.add(line);

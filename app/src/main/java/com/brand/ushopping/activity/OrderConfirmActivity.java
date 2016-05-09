@@ -154,7 +154,10 @@ public class OrderConfirmActivity extends Activity {
         orderNo = bundle.getString("orderNo", null);
         appbrandId = goodsList.get(0).getAppbrandId();
 
-        consigneeTextView.setText(user.getUserName());
+        if(!CommonUtils.isValueEmpty(user.getUserName()))
+        {
+            consigneeTextView.setText(user.getUserName());
+        }
         mobileTextView.setText(user.getMobile());
 
         addressId = appContext.getDefaultAddressId();

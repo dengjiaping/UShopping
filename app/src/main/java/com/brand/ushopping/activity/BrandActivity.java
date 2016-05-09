@@ -323,7 +323,7 @@ public class BrandActivity extends Activity {
         ImageLoader.getInstance().displayImage(brand.getShowpic(), showpicImageView);
 
         nameTextView.setText(brand.getBrandName());
-        descriptionTextView.setText(brand.getIntro());
+        descriptionTextView.setText(brand.getDetail());
 
         reloadGoods();
     }

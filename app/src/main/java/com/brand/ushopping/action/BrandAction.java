@@ -73,7 +73,11 @@ public class BrandAction
 
         try
         {
-            resultString = mCache.getAsString("SaveAppBrandCollectAction.action");
+            if(mCache != null)
+            {
+                resultString = mCache.getAsString("SaveAppBrandCollectAction.action");
+            }
+
             if(CommonUtils.isValueEmpty(resultString))
             {
                 resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
@@ -117,7 +121,11 @@ public class BrandAction
 
         try
         {
-            resultString = mCache.getAsString("GetListAppBrandCollectUserIdAction.action");
+            if(mCache != null)
+            {
+                resultString = mCache.getAsString("GetListAppBrandCollectUserIdAction.action");
+            }
+
             if(CommonUtils.isValueEmpty(resultString))
             {
                 resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);

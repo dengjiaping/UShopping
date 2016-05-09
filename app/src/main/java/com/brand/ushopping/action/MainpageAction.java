@@ -41,7 +41,11 @@ public class MainpageAction
 
         try
         {
-            resultString = mCache.getAsString("HomeAction.action");
+            if(mCache != null)
+            {
+                resultString = mCache.getAsString("HomeAction.action");
+            }
+
             if(resultString == null)
             {
 //                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
@@ -95,7 +99,11 @@ public class MainpageAction
 
         try
         {
-            resultString = mCache.getAsString("HomeReAction.action" + homeRe.getMin());
+            if(mCache != null)
+            {
+                resultString = mCache.getAsString("HomeReAction.action" + homeRe.getMin());
+            }
+
             if(CommonUtils.isValueEmpty(resultString))
             {
                 resultString = HttpClientUtil.post("HomeReAction.action", params);

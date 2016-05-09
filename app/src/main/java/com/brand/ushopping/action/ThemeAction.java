@@ -37,7 +37,11 @@ public class ThemeAction
 
         try
         {
-            resultString = mCache.getAsString("GetAppThemeAllAction.action");
+            if(mCache != null)
+            {
+                resultString = mCache.getAsString("GetAppThemeAllAction.action");
+            }
+
             if(CommonUtils.isValueEmpty(resultString))
             {
                 resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);

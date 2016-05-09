@@ -560,7 +560,4 @@ public class GoodsAction
 
     }
 
-
-
-
 }
