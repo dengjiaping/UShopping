@@ -200,7 +200,7 @@ public class CommonUtils {
 
     }
 
-    public static java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+    public static java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");
 
     //设置优先使用的网络
 //    public static void setPreferredNetwork(Context context, int networkType) {

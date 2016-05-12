@@ -1,16 +1,15 @@
 package com.brand.ushopping.widget;
 
         import android.content.Context;
-        import android.graphics.Matrix;
-        import android.graphics.drawable.Drawable;
-        import android.util.AttributeSet;
-        import android.util.Log;
-        import android.view.GestureDetector;
-        import android.view.GestureDetector.SimpleOnGestureListener;
-        import android.view.MotionEvent;
-        import android.view.ScaleGestureDetector;
-        import android.view.ScaleGestureDetector.OnScaleGestureListener;
-        import android.widget.ImageView;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.ScaleGestureDetector.OnScaleGestureListener;
+import android.widget.ImageView;
 
 /**
  * ImageView with scale animation, which supports pinch-in, pinch-out and
@@ -112,7 +111,7 @@ public class ScaleImageView extends ImageView {
     }
 
     private void updateMatrix() {
-        Log.v("scale", Float.toString(mCurrentScale));
+//        Log.v("scale", Float.toString(mCurrentScale));
         mMatrix.setScale(mCurrentScale, mCurrentScale);
         mMatrix.postTranslate(mCurrentX, mCurrentY);
         setImageMatrix(mMatrix);

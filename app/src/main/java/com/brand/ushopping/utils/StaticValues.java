@@ -190,4 +190,6 @@ public class StaticValues
     //API环境
     public final static boolean MODEL_ANDROID = false;
 
+    public static final int WIDTH_LIMIT = 800;     //图片宽度
+
 }
