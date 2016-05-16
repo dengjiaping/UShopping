@@ -18,6 +18,8 @@ public class DevActivity extends Activity {
     private Button weiboShare;
     private Button wxShare;
     private Button qqShare;
+    private Button kuaidiBtn;
+
 //    private RecyclerView recyclerViewTest;
 //    private LinearLayoutManager linearLayoutManager;
 //    private RecyclerViewAdapter recyclerViewAdapter;
@@ -83,6 +85,16 @@ public class DevActivity extends Activity {
 //                        .withTargetUrl("https://www.baidu.com/")
                 //.withMedia(new UMEmoji(ShareActivity.this,"http://img.newyx.net/news_img/201306/20/1371714170_1812223777.gif"))
                 shareAction.share();
+            }
+        });
+
+        kuaidiBtn = (Button) findViewById(R.id.kuaidi);
+        kuaidiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DevActivity.this, KuaidiActivity.class);
+                startActivity(intent);
+
             }
         });
 

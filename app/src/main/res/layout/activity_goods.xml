@@ -519,18 +519,18 @@
         </TableLayout>
     </ScrollView>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/goods_detail"
         android:layout_below="@+id/action_bar"
         android:layout_above="@+id/linearLayout">
 
-        <WebView
+        <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/detail_view" />
-    </ScrollView>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

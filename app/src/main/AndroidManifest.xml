@@ -491,8 +491,9 @@
         <activity
             android:name=".activity.ScaleImageViewActivity"
             android:label="图片预览"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.KuaidiActivity"></activity>
     </application>
 
 </manifest>

@@ -103,6 +103,7 @@ public class AddressesActivity extends Activity {
 
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelable("obj", address);
+                                bundle.putInt("enterMode", enterMode);
                                 bundle.putInt("action", StaticValues.ADDRESS_ACTION_UPDATE);
                                 intent.putExtras(bundle);
 

@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -26,6 +26,7 @@ import com.brand.ushopping.action.BrandAction;
 import com.brand.ushopping.action.CartAction;
 import com.brand.ushopping.action.GoodsAction;
 import com.brand.ushopping.adapter.GoodsCommentAdapter;
+import com.brand.ushopping.adapter.GoodsDetailAdapter;
 import com.brand.ushopping.model.AddAppShopcart;
 import com.brand.ushopping.model.AppEvaluate;
 import com.brand.ushopping.model.AppEvaluateItem;
@@ -97,9 +98,9 @@ public class GoodsActivity extends UActivity {
     private ImageView detailIdc;
     private ImageView commentIdc;
     private ScrollView infoView;
-    private ScrollView detailView;
+    private RelativeLayout detailView;
     private ViewGroup commentView;
-    private WebView detailWebView;
+    private ListView detailListView;
     private ViewGroup goodsIntroBtn;
     private ViewGroup goodsIntroContainerView;
     private TextView goodsIntroTextView;
@@ -107,6 +108,7 @@ public class GoodsActivity extends UActivity {
     private FrameLayout warningLayout;
     private TextView warningTextView;
     private ImageView cartBtn;
+    private String[] imgList;
 
     private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
     private int goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
@@ -345,7 +347,7 @@ public class GoodsActivity extends UActivity {
         commentIdc = (ImageView) findViewById(R.id.comment_idc);
 
         infoView = (ScrollView) findViewById(R.id.goods_info);
-        detailView = (ScrollView) findViewById(R.id.goods_detail);
+        detailView = (RelativeLayout) findViewById(R.id.goods_detail);
         commentView = (ViewGroup) findViewById(R.id.goods_comment);
 
         hideAllPages();
@@ -368,7 +370,7 @@ public class GoodsActivity extends UActivity {
             }
         });
 
-        detailWebView = (WebView) findViewById(R.id.detail_view);
+        detailListView = (ListView) findViewById(R.id.detail_view);
 
         goodsIntroContainerView.setVisibility(View.GONE);
         goodsIntroBtn.setOnClickListener(new View.OnClickListener() {
@@ -588,7 +590,7 @@ public class GoodsActivity extends UActivity {
                     String imgStr = goods.getImages();
                     if(imgStr != null && !imgStr.isEmpty())
                     {
-                        final String[] imgList = imgStr.split(";");
+                        imgList = imgStr.split(";");
                         for(int a = 0; a<imgList.length; a++)
                         {
                             DefaultSliderView sliderView = new DefaultSliderView(GoodsActivity.this);
@@ -677,9 +679,23 @@ public class GoodsActivity extends UActivity {
                             break;
                     }
 
+                    //商品详情
+                    ArrayList<Map<String,Object>> goodsDetailListData = new ArrayList<Map<String,Object>>();
+                    for(String img: imgList)
+                    {
+                        Map line = new HashMap();
+
+                        line.put("img", img);
+
+                        goodsDetailListData.add(line);
+
+                    }
+                    GoodsDetailAdapter goodsDetailAdapter = new GoodsDetailAdapter(goodsDetailListData, GoodsActivity.this);
+                    detailListView.setAdapter(goodsDetailAdapter);
+
                     if(!CommonUtils.isValueEmpty(goods.getGoodsDetail()))
                     {
-                        detailWebView.loadData(goods.getGoodsDetail(), "text/html", "utf-8");
+//                        detailWebView.loadData(goods.getGoodsDetail(), "text/html", "utf-8");
 //                        ImageLoader.getInstance().displayImage( goods.getGoodsDetail(), detailImageView, options);
 
                     }
