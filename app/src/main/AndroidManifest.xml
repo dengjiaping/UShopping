@@ -493,7 +493,11 @@
             android:label="图片预览"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.KuaidiActivity"></activity>
+        <activity
+            android:name=".activity.KuaidiActivity"
+            android:label="快递查询"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

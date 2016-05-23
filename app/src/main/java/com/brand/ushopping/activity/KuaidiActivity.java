@@ -25,7 +25,9 @@ public class KuaidiActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_kuaidi);
 
-//        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
+        String type = bundle.getString("type");
+        String postid = bundle.getString("postid");
 
         webView = (WebView) findViewById(R.id.web_view);
 
@@ -46,8 +48,8 @@ public class KuaidiActivity extends AppCompatActivity {
                 return false;// false 显示frameset, true 不显示Frameset
             }
         });
-
-        String url = "http://m.kuaidi100.com/index_all.html?type=yunda&postid=1901463879501";
+        //1901463879501 yunda
+        String url = "http://m.kuaidi100.com/index_all.html?type="+type+"&postid="+postid;
 
         webView.loadUrl(url);
 

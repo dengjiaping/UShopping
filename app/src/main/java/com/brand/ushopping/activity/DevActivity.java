@@ -4,26 +4,36 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.brand.ushopping.R;
+import com.brand.ushopping.utils.CommonUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
+import java.util.ArrayList;
+
 public class DevActivity extends Activity {
     private Button weiboShare;
     private Button wxShare;
     private Button qqShare;
     private Button kuaidiBtn;
+    private Spinner kuaidiTypeSpinner;
+    private EditText kuaidiPostidEditText;
 
 //    private RecyclerView recyclerViewTest;
 //    private LinearLayoutManager linearLayoutManager;
 //    private RecyclerViewAdapter recyclerViewAdapter;
-
+    private String kuaidiType = null;
+    private String kuaidiPostid = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +97,53 @@ public class DevActivity extends Activity {
                 shareAction.share();
             }
         });
+        kuaidiTypeSpinner = (Spinner) findViewById(R.id.kuaidi_type);
+
+        ArrayList<String> kuaidiTypeList = new ArrayList<String>();
+        kuaidiTypeList.add("aae全球专递");
+        kuaidiTypeList.add("安捷快递");
+        kuaidiTypeList.add("安信达快递");
+        kuaidiTypeList.add("彪记快递");
+        kuaidiTypeList.add("韵达快运");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, kuaidiTypeList);
+        kuaidiTypeSpinner.setAdapter(arrayAdapter);
+        kuaidiTypeSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                kuaidiType = arrayAdapter.getItem(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                kuaidiType = null;
+            }
+        });
+
+        kuaidiPostidEditText = (EditText) findViewById(R.id.kuaidi_postid);
 
         kuaidiBtn = (Button) findViewById(R.id.kuaidi);
         kuaidiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                kuaidiPostid = kuaidiPostidEditText.getText().toString();
+                if(CommonUtils.isValueEmpty(kuaidiPostid))
+                {
+                    Toast.makeText(DevActivity.this, "请填写单号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(CommonUtils.isValueEmpty(kuaidiType))
+                {
+                    Toast.makeText(DevActivity.this, "选择快递公司", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Intent intent = new Intent(DevActivity.this, KuaidiActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("type", kuaidiType);
+                bundle.putString("postid", kuaidiPostid);
+
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }

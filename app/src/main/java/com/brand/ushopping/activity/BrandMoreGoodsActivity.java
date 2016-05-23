@@ -207,6 +207,7 @@ public class BrandMoreGoodsActivity extends Activity {
 
 //        goodsGridView.removeAllViewsInLayout();
 
+
         goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
