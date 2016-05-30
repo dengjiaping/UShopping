@@ -10,7 +10,7 @@ public class Sign
     private boolean success;
     private String msg;
     private int fate;
-    private int flag;       //1 积分 2 券
+    private int flag;       //1 积分 2 券 3 随机
     private String present; //礼品
     private long reTime;    //签到时间
 

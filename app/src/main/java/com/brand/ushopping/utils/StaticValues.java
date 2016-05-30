@@ -192,4 +192,9 @@ public class StaticValues
 
     public static final int WIDTH_LIMIT = 800;     //图片宽度
 
+    //签到积分类型
+    public static final int SIGN_REWARD_UCOIN = 1;
+    public static final int SIGN_REWARD_VOUCHER = 2;
+    public static final int SIGN_REWARD_RANDOM = 3;
+
 }

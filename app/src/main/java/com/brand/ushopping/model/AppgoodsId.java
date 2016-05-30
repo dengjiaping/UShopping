@@ -12,6 +12,7 @@ public class AppgoodsId
     private double promotionPrice;
     private AppbrandId appbrandId;
     private long reTime;
+    private AppexpressId appexpressId;
 
     public String getBarCode() {
         return barCode;
@@ -67,5 +68,13 @@ public class AppgoodsId
 
     public void setReTime(long reTime) {
         this.reTime = reTime;
+    }
+
+    public AppexpressId getAppexpressId() {
+        return appexpressId;
+    }
+
+    public void setAppexpressId(AppexpressId appexpressId) {
+        this.appexpressId = appexpressId;
     }
 }

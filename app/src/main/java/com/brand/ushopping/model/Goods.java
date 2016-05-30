@@ -22,6 +22,7 @@ public class Goods implements Parcelable
     private AppbrandId appbrandId;
     private AppexpressId appexpressId;
     private String goodsDetail;
+    private String goodsNewDetail;
     private String goodsIntro;
     private String images;
     private String barCode;
@@ -115,6 +116,14 @@ public class Goods implements Parcelable
         this.goodsDetail = goodsDetail;
     }
 
+    public String getGoodsNewDetail() {
+        return goodsNewDetail;
+    }
+
+    public void setGoodsNewDetail(String goodsNewDetail) {
+        this.goodsNewDetail = goodsNewDetail;
+    }
+
     public String getGoodsIntro() {
         return goodsIntro;
     }
@@ -174,6 +183,7 @@ public class Goods implements Parcelable
         dest.writeInt(count);
         dest.writeParcelable(appbrandId, flags);
         dest.writeString(goodsDetail);
+        dest.writeString(goodsNewDetail);
         dest.writeString(goodsIntro);
         dest.writeString(images);
         dest.writeString(barCode);
@@ -193,6 +203,7 @@ public class Goods implements Parcelable
         count = in.readInt();
         appbrandId = in.readParcelable(AppbrandId.class.getClassLoader());
         goodsDetail = in.readString();
+        goodsNewDetail = in.readString();
         goodsIntro = in.readString();
         images = in.readString();
         barCode = in.readString();

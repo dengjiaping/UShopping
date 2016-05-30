@@ -29,6 +29,7 @@ import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
 import com.brand.ushopping.model.AppShopcartIdList;
 import com.brand.ushopping.model.AppgoodsId;
+import com.brand.ushopping.model.AppsmShopcart;
 import com.brand.ushopping.model.AppyyShopcart;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.User;
@@ -434,7 +435,16 @@ public class CartFragment extends Fragment {
                 appyyShopcart.setAppyyshopcartId(shopcartId);
 
                 new UpdateAppyyShopcart().execute(appyyShopcart);
+                break;
 
+            case StaticValues.BOUTHT_TYPE_TRYIT:
+                AppsmShopcart appsmShopcart = new AppsmShopcart();
+                appsmShopcart.setUserId(user.getUserId());
+                appsmShopcart.setSessionid(user.getSessionid());
+                appsmShopcart.setAppsmshopcartId(shopcartId);
+
+                new UpdateAppsmShopcart().execute(appsmShopcart);
+                break;
         }
 
     }
@@ -490,6 +500,42 @@ public class CartFragment extends Fragment {
 
         @Override
         protected void onPostExecute(AppyyShopcart result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    //刷新
+                    Toast.makeText(getActivity(), "购物车商品已删除", Toast.LENGTH_SHORT).show();
+                    reload();
+
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(getActivity(), "购物车删除商品失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //删除上门购物车
+    protected class UpdateAppsmShopcart extends AsyncTask<AppsmShopcart, Void, AppsmShopcart>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected AppsmShopcart doInBackground(AppsmShopcart... appsmShopcarts) {
+            return new CartAction().updateAppsmShopcart(appsmShopcarts[0]);
+        }
+
+        @Override
+        protected void onPostExecute(AppsmShopcart result) {
             if(result != null)
             {
                 if(result.isSuccess())

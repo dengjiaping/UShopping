@@ -28,6 +28,7 @@ import com.brand.ushopping.model.OrderGoodsItem;
 import com.brand.ushopping.model.OrderItem;
 import com.brand.ushopping.model.OrderSuccess;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class TryitOrderItemView extends LinearLayout
             line.put("goodsId", appgoodsId.getId());
             line.put("goodsName", appgoodsId.getGoodsName());
             line.put("attribute", orderGoodsItem.getAttribute());
-            line.put("price", orderGoodsItem.getMoney());
+            line.put("price",  CommonUtils.df.format(orderGoodsItem.getMoney()));
             line.put("count", orderGoodsItem.getQuantity());
             line.put("customerFlag", StaticValues.CUSTOMER_FLAG_NONE);
 
@@ -115,7 +116,7 @@ public class TryitOrderItemView extends LinearLayout
         ((MarginLayoutParams)params).setMargins(10, 10, 10, 10);
         orderListView.setLayoutParams(params);
 
-        moneyTextView.setText(Double.toString(money));
+        moneyTextView.setText(CommonUtils.df.format(money));
         quantityTextView.setText(Integer.toString(quantity));
 
         payOnlineBtn.setVisibility(View.GONE);

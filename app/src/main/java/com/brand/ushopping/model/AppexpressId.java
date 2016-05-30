@@ -7,6 +7,8 @@ public class AppexpressId {
     private long id;
     private String company;
     private double price;
+    private String code;
+    private String expressNo;
 
     public long getId() {
         return id;
@@ -30,5 +32,21 @@ public class AppexpressId {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getExpressNo() {
+        return expressNo;
+    }
+
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo;
     }
 }

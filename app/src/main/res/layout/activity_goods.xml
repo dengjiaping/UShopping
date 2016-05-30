@@ -527,9 +527,16 @@
         android:layout_above="@+id/linearLayout">
 
         <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/detail_view" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/detail_view"
+            android:visibility="gone" />
+
+        <WebView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/detail_webview"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -20,6 +20,7 @@ import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.GoodsInfo;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -91,7 +92,7 @@ public class GoodsAttributePopup extends PopupWindow
 
         ImageLoader.getInstance().displayImage(goods.getLogopicUrl(), imgView);
 
-        priceTextView.setText(Double.toString(goods.getPromotionPrice()));
+        priceTextView.setText(CommonUtils.df.format(goods.getPromotionPrice()));
 
         attributes = goodsInfo.getAttribute();
 

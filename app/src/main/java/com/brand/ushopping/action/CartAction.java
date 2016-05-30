@@ -8,6 +8,7 @@ import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
 import com.brand.ushopping.model.AppShopcartIdList;
 import com.brand.ushopping.model.AppbrandId;
+import com.brand.ushopping.model.AppsmShopcart;
 import com.brand.ushopping.model.AppyyShopcart;
 import com.brand.ushopping.utils.HttpClientUtil;
 
@@ -130,10 +131,12 @@ public class CartAction {
 
     }
 
+    //删除购物车商品
     public AppShopcartIdList deleteShopcartId(AppShopcartIdList appShopcartIdList)
     {
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
+        Log.v("DeleteShopcartIdAction", jsonParam);
         List params = new ArrayList();
         params.add(new BasicNameValuePair("param", jsonParam));
 
@@ -232,6 +235,39 @@ public class CartAction {
         }
 
         return appyyShopcart;
+    }
+
+    //删除上门购物车
+    public AppsmShopcart updateAppsmShopcart(AppsmShopcart appsmShopcart)
+    {
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(appsmShopcart);
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("param", jsonParam));
+
+        try
+        {
+            resultString = HttpClientUtil.post("UpdateAppsmShopcartAction.action", params);
+
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                    String data = dataObject.toString();
+                    appsmShopcart = JSON.parseObject(data, AppsmShopcart.class);
+                    appsmShopcart.setSuccess(true);
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return appsmShopcart;
     }
 
     // --  根据用户ID查询预约购物车  --

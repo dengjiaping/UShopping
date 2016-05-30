@@ -3,7 +3,9 @@ package com.brand.ushopping.widget;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,16 @@ import android.widget.Toast;
 
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
+import com.brand.ushopping.activity.KuaidiActivity;
 import com.brand.ushopping.activity.OrderActivity;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
+import com.brand.ushopping.model.AppexpressId;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.ConfirmOrder;
 import com.brand.ushopping.model.OrderGoodsItem;
 import com.brand.ushopping.model.OrderItem;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
@@ -37,7 +42,6 @@ public class OrderItemView extends LinearLayout {
     private Context context;
     private OrderActivity activity;
     private User user;
-
     private TextView orderNoTextView;
     private TextView statusTextView;
     private ListView orderGoodsListView;
@@ -45,7 +49,11 @@ public class OrderItemView extends LinearLayout {
     private OrderItem orderItem;
     private TextView moneyTextView;
     private TextView quantityTextView;
+    private Button kuaidiBtn;
     private Button confirmBtn;
+    private String expressCompany = "";
+    private String expressNo = "";
+
 
     public OrderItemView(final Context context, final OrderActivity activity, AttributeSet attrs, final OrderItem orderItem, final User user) {
         super(context, attrs);
@@ -68,6 +76,9 @@ public class OrderItemView extends LinearLayout {
 
         orderNoTextView.setText(orderItem.getOrderNo());
         confirmBtn.setVisibility(View.GONE);
+
+        kuaidiBtn = (Button) view.findViewById(R.id.kuaidi);
+        kuaidiBtn.setVisibility(View.GONE);
 
         int quantity = 0;
         double money =0;
@@ -95,7 +106,7 @@ public class OrderItemView extends LinearLayout {
                 line.put("endTime", orderGoodsItem.getCustomerEndTime());
                 line.put("orderId", orderGoodsItem.getId());
                 line.put("orderNo", orderItem.getOrderNo());
-                line.put("money", orderGoodsItem.getMoney());
+                line.put("money", CommonUtils.df.format(orderGoodsItem.getMoney()));
                 line.put("flag", orderItem.getFlag());
 
                 listData.add(line);
@@ -104,6 +115,15 @@ public class OrderItemView extends LinearLayout {
                 money += (orderGoodsItem.getMoney() * orderGoodsItem.getQuantity());
 
             }
+
+            AppexpressId appexpressId = appgoodsId.getAppexpressId();
+            if(appexpressId != null)
+            {
+                expressCompany = appexpressId.getCompany();
+                expressNo = appexpressId.getExpressNo();
+
+            }
+
         }
 
         OrderGoodsItemAdapter adapter = new OrderGoodsItemAdapter(listData, activity);
@@ -112,7 +132,20 @@ public class OrderItemView extends LinearLayout {
         switch (orderItem.getFlag())
         {
             case StaticValues.ORDER_FLAG_DELIVERED:
+                kuaidiBtn.setVisibility(View.VISIBLE);
                 confirmBtn.setVisibility(View.VISIBLE);
+
+                kuaidiBtn.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, KuaidiActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("type", expressCompany);
+                        bundle.putString("postid", expressNo);
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
+                    }
+                });
 
                 confirmBtn.setOnClickListener(new OnClickListener() {
                     @Override
@@ -159,7 +192,7 @@ public class OrderItemView extends LinearLayout {
         ((MarginLayoutParams)params).setMargins(10, 10, 10, 10);
         orderListView.setLayoutParams(params);
 
-        moneyTextView.setText(Double.toString(money));
+        moneyTextView.setText(CommonUtils.df.format(money));
         quantityTextView.setText(Integer.toString(quantity));
 
     }

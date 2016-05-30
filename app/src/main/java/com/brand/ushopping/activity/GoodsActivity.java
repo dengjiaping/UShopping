@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -99,6 +100,7 @@ public class GoodsActivity extends UActivity {
     private ImageView commentIdc;
     private ScrollView infoView;
     private RelativeLayout detailView;
+    private WebView detailWebView;
     private ViewGroup commentView;
     private ListView detailListView;
     private ViewGroup goodsIntroBtn;
@@ -348,6 +350,7 @@ public class GoodsActivity extends UActivity {
 
         infoView = (ScrollView) findViewById(R.id.goods_info);
         detailView = (RelativeLayout) findViewById(R.id.goods_detail);
+        detailWebView = (WebView) findViewById(R.id.detail_webview);
         commentView = (ViewGroup) findViewById(R.id.goods_comment);
 
         hideAllPages();
@@ -680,22 +683,29 @@ public class GoodsActivity extends UActivity {
                     }
 
                     //商品详情
-                    ArrayList<Map<String,Object>> goodsDetailListData = new ArrayList<Map<String,Object>>();
-                    for(String img: imgList)
+                    if(!CommonUtils.isValueEmpty(goods.getGoodsNewDetail()))
                     {
-                        Map line = new HashMap();
+                        String[] detailImgList = goods.getGoodsNewDetail().split(";");
 
-                        line.put("img", img);
+                        ArrayList<Map<String,Object>> goodsDetailListData = new ArrayList<Map<String,Object>>();
+                        for(String img: detailImgList)
+                        {
+                            Map line = new HashMap();
 
-                        goodsDetailListData.add(line);
+                            line.put("img", img);
 
+                            goodsDetailListData.add(line);
+
+                        }
+                        GoodsDetailAdapter goodsDetailAdapter = new GoodsDetailAdapter(goodsDetailListData, GoodsActivity.this);
+                        detailListView.setAdapter(goodsDetailAdapter);
+                        detailListView.setVisibility(View.VISIBLE);
                     }
-                    GoodsDetailAdapter goodsDetailAdapter = new GoodsDetailAdapter(goodsDetailListData, GoodsActivity.this);
-                    detailListView.setAdapter(goodsDetailAdapter);
 
                     if(!CommonUtils.isValueEmpty(goods.getGoodsDetail()))
                     {
-//                        detailWebView.loadData(goods.getGoodsDetail(), "text/html", "utf-8");
+                        detailWebView.setVisibility(View.VISIBLE);
+                        detailWebView.loadData(goods.getGoodsDetail(), "text/html", "utf-8");
 //                        ImageLoader.getInstance().displayImage( goods.getGoodsDetail(), detailImageView, options);
 
                     }

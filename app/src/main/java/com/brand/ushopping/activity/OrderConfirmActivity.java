@@ -64,7 +64,6 @@ import static com.brand.ushopping.R.id.root_view;
 
 public class OrderConfirmActivity extends Activity {
     private AppContext appContext;
-
     private User user;
     private Goods goods;
     private AppbrandId appbrandId;
@@ -1173,6 +1172,8 @@ public class OrderConfirmActivity extends Activity {
             }
 
         }
+
+        summary = Double.valueOf(CommonUtils.df.format(summary));
 
         totalCountTextView.setText(Integer.toString(totalCount));
         summaryTextView.setText(CommonUtils.df.format(summary));

@@ -20,6 +20,7 @@ import com.brand.ushopping.action.SignAction;
 import com.brand.ushopping.model.Sign;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.StaticValues;
 
 public class SignActivity extends Activity {
     private AppContext appContext;
@@ -121,7 +122,7 @@ public class SignActivity extends Activity {
                         if(CommonUtils.isSameDay(reTime, System.currentTimeMillis()))
                         {
                             warningTextView.setText("您今天已签到");
-
+                            signBtn.setEnabled(false);
                         }
                         else
                         {
@@ -187,17 +188,27 @@ public class SignActivity extends Activity {
             {
                 if(result.isSuccess())
                 {
-                    Toast.makeText(SignActivity.this, "签到已完成", Toast.LENGTH_SHORT).show();
+                    switch (result.getFlag())
+                    {
+                        case StaticValues.SIGN_REWARD_UCOIN:
+                        case StaticValues.SIGN_REWARD_RANDOM:
+                            Toast.makeText(SignActivity.this, "签到已完成,获得积分 "+result.getPresent()+" 个", Toast.LENGTH_SHORT).show();
+                            break;
 
-                    fate += 1;
+                        case StaticValues.SIGN_REWARD_VOUCHER:
+                            Toast.makeText(SignActivity.this, "签到已完成,获得优惠券 "+result.getPresent(), Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+
+//                    fate += 1;
 //                    Sign sign = new Sign();
 //                    sign.setFate(fate);
 //                    sign.setReTime(new Date().getTime());
 //                    new RefAction().setSign(SignActivity.this, result);
+//                    fateTextView.setText(Integer.toString(fate));
+//                    signBtn.setEnabled(false);
+                    reload();
 
-                    fateTextView.setText(Integer.toString(fate));
-
-                    signBtn.setEnabled(false);
                 }
                 else
                 {
