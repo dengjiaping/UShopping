@@ -263,7 +263,7 @@ public class BrandActivity extends Activity {
         categoryUndef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                brandGoodsType = StaticValues.BRAND_GOODS_TYPE_UNDEF;
+                brandGoodsType = StaticValues.BRAND_GOODS_TYPE_FILTER;
                 selectTab();
                 reloadGoods();
                 brandGoodsTypePrev = brandGoodsType;
@@ -564,7 +564,7 @@ public class BrandActivity extends Activity {
             case StaticValues.BRAND_GOODS_TYPE_SALE:
                 categorySaleIdc.setVisibility(View.VISIBLE);
                 break;
-            case StaticValues.BRAND_GOODS_TYPE_UNDEF:
+            case StaticValues.BRAND_GOODS_TYPE_FILTER:
                 categoryUndefIdc.setVisibility(View.VISIBLE);
                 break;
         }

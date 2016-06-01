@@ -98,7 +98,7 @@ public class StaticValues
     public static final int BRAND_GOODS_TYPE_NEW = 1;
     public static final int BRAND_GOODS_TYPE_PRICE = 2;
     public static final int BRAND_GOODS_TYPE_SALE = 3;
-    public static final int BRAND_GOODS_TYPE_UNDEF = 4;
+    public static final int BRAND_GOODS_TYPE_FILTER = 4;
 
     public static final int GOODS_VIEW_PAGE_INFO = 1;
     public static final int GOODS_VIEW_PAGE_DETAIL = 2;

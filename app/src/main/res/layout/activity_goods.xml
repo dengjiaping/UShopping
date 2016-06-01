@@ -229,7 +229,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="月销51笔"
+                    android:text="销量"
                     android:layout_column="2"
                     android:layout_row="1"
                     android:layout_columnSpan="1"
@@ -237,8 +237,20 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="100dp"
                     android:textColor="@color/text_grey"
-                    android:visibility="gone"
                     style="@style/TextViewStyle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/sale_count"
+                    android:layout_column="3"
+                    android:layout_columnSpan="1"
+                    android:layout_row="1"
+                    android:layout_rowSpan="1"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/text_grey" />
             </GridLayout>
             <TableLayout
                 android:layout_width="match_parent"

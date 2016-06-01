@@ -497,7 +497,16 @@
             android:name=".activity.KuaidiActivity"
             android:label="快递查询"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ThemeActivity"
+            android:label="@string/title_activity_theme"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.AnimationActivity"
+            android:label="动画效果"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>

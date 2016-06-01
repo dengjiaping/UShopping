@@ -27,6 +27,7 @@ public class Goods implements Parcelable
     private String images;
     private String barCode;
     private int flag;
+    private int saleCount;
 
     public AppexpressId getAppexpressId() {
         return appexpressId;
@@ -148,6 +149,14 @@ public class Goods implements Parcelable
         this.flag = flag;
     }
 
+    public int getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(int saleCount) {
+        this.saleCount = saleCount;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Goods createFromParcel(Parcel in) {
             return new Goods(in);
@@ -188,6 +197,7 @@ public class Goods implements Parcelable
         dest.writeString(images);
         dest.writeString(barCode);
         dest.writeInt(flag);
+        dest.writeInt(saleCount);
 
     }
 
@@ -208,6 +218,7 @@ public class Goods implements Parcelable
         images = in.readString();
         barCode = in.readString();
         flag = in.readInt();
+        saleCount = in.readInt();
 
     }
 }

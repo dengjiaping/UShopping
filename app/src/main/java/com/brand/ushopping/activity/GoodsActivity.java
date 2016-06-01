@@ -111,6 +111,7 @@ public class GoodsActivity extends UActivity {
     private TextView warningTextView;
     private ImageView cartBtn;
     private String[] imgList;
+    private TextView saleCountTextView;
 
     private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
     private int goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
@@ -411,6 +412,8 @@ public class GoodsActivity extends UActivity {
                 break;
         }
 
+        saleCountTextView = (TextView) findViewById(R.id.sale_count);
+
     }
 
 
@@ -588,6 +591,7 @@ public class GoodsActivity extends UActivity {
                     AppexpressId appexpressId = goods.getAppexpressId();
 //                    appExpressPriceTextView.setText(Double.toString(appexpressId.getPrice()));
                     goodsIntroTextView.setText(goods.getGoodsIntro());
+                    saleCountTextView.setText(Integer.toString(goods.getSaleCount()));
 
                     slider.removeAllSliders();
                     String imgStr = goods.getImages();

@@ -75,4 +75,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="动画效果"
+        android:id="@+id/animation"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/qq_share"
+        android:layout_toEndOf="@+id/qq_share" />
+
 </RelativeLayout>

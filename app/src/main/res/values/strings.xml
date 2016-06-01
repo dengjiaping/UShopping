@@ -54,5 +54,6 @@
     <string name="title_activity_sns_share">分享</string>
     <string name="title_activity_more_goods">更多商品</string>
     <string name="title_activity_return_rules">退货规则</string>
+    <string name="title_activity_theme">ThemeActivity</string>
 
 </resources>

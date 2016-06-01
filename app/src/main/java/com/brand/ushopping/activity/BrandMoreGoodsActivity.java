@@ -7,7 +7,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -24,6 +26,7 @@ import com.brand.ushopping.model.BrandGoodsList;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.EndlessGridRecyclerOnScrollListener;
 import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.widget.GoodsFilterPopup;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +48,7 @@ public class BrandMoreGoodsActivity extends Activity {
     private MoreGoodsAdapter moreGoodsAdapter;
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ViewGroup rootView;
 
     private long brandId;
     private String brandName;
@@ -52,16 +56,18 @@ public class BrandMoreGoodsActivity extends Activity {
     private TextView categoryNew;
     private TextView categoryPrice;
     private TextView categorySale;
-    private TextView categoryUndef;
+    private TextView categoryFilter;
     private ImageView categoryNewIdc;
     private ImageView categoryPriceIdc;
     private ImageView categorySaleIdc;
-    private ImageView categoryUndefIdc;
+    private ImageView categoryFilterIdc;
 
     private int brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
 //    private int brandGoodsTypePrev;
     private int currentArrenge = StaticValues.ARRENGE_TIME_DESC;
     private int boughtType;
+
+    private GoodsFilterPopup goodsFilterPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,22 +167,26 @@ public class BrandMoreGoodsActivity extends Activity {
 
             }
         });
-        categoryUndef = (TextView) findViewById(R.id.category_undef);
-        categoryUndef.setOnClickListener(new View.OnClickListener() {
+        categoryFilter = (TextView) findViewById(R.id.category_filter);
+        categoryFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                brandGoodsType = StaticValues.BRAND_GOODS_TYPE_UNDEF;
+                brandGoodsType = StaticValues.BRAND_GOODS_TYPE_FILTER;
                 selectTab();
+
+                callGoodsFilterPopup();
 
             }
         });
         categoryNewIdc = (ImageView) findViewById(R.id.category_new_idc);
         categoryPriceIdc = (ImageView) findViewById(R.id.category_price_idc);
         categorySaleIdc = (ImageView) findViewById(R.id.category_sale_idc);
-        categoryUndefIdc = (ImageView) findViewById(R.id.category_undef_idc);
+        categoryFilterIdc = (ImageView) findViewById(R.id.category_filter_idc);
 
         brandGoodsType = StaticValues.BRAND_GOODS_TYPE_NEW;
 //        brandGoodsTypePrev = brandGoodsType;
+
+        rootView = (ViewGroup) findViewById(R.id.root_view);
 
         selectTab();
 
@@ -359,7 +369,7 @@ public class BrandMoreGoodsActivity extends Activity {
         categoryNewIdc.setVisibility(View.INVISIBLE);
         categoryPriceIdc.setVisibility(View.INVISIBLE);
         categorySaleIdc.setVisibility(View.INVISIBLE);
-        categoryUndefIdc.setVisibility(View.INVISIBLE);
+        categoryFilterIdc.setVisibility(View.INVISIBLE);
 
         switch (brandGoodsType)
         {
@@ -374,8 +384,8 @@ public class BrandMoreGoodsActivity extends Activity {
             case StaticValues.BRAND_GOODS_TYPE_SALE:
                 categorySaleIdc.setVisibility(View.VISIBLE);
                 break;
-            case StaticValues.BRAND_GOODS_TYPE_UNDEF:
-                categoryUndefIdc.setVisibility(View.VISIBLE);
+            case StaticValues.BRAND_GOODS_TYPE_FILTER:
+                categoryFilterIdc.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -481,6 +491,17 @@ public class BrandMoreGoodsActivity extends Activity {
 
             return price2.compareTo(price1);
         }
+    }
+
+    private void callGoodsFilterPopup()
+    {
+        if(goodsFilterPopup == null)
+        {
+            goodsFilterPopup = new GoodsFilterPopup(BrandMoreGoodsActivity.this);
+
+        }
+        goodsFilterPopup.showAtLocation(rootView, Gravity.LEFT | Gravity.CENTER_HORIZONTAL, 0, 0);
+
     }
 
     //去重操作

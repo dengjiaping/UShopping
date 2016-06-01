@@ -33,124 +33,131 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout5"
-        android:layout_below="@+id/action_bar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="新品"
-            android:id="@+id/category_new"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textAlignment="center"
-            android:textColor="@color/text_green"
-            android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TextViewStyle" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="价格"
-            android:id="@+id/category_price"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textAlignment="center"
-            android:textColor="@color/text_green"
-            android:gravity="center"
-            style="@style/TextViewStyle" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="销量"
-            android:id="@+id/category_sale"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textAlignment="center"
-            android:textColor="@color/text_green"
-            android:gravity="center"
-            style="@style/TextViewStyle" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="筛选"
-            android:id="@+id/category_undef"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textAlignment="center"
-            android:textColor="@color/text_green"
-            android:gravity="center"
-            style="@style/TextViewStyle" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout5"
-        android:id="@+id/linearLayout6">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/category_new_idc"
-            android:layout_weight="1"
-            android:src="@drawable/tab_bar_yellow" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/category_price_idc"
-            android:layout_weight="1"
-            android:src="@drawable/tab_bar_yellow" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/category_sale_idc"
-            android:layout_weight="1"
-            android:src="@drawable/tab_bar_yellow" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/category_undef_idc"
-            android:layout_weight="1"
-            android:src="@drawable/tab_bar_yellow" />
-    </LinearLayout>
-
-    <android.support.v4.widget.SwipeRefreshLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/swipe"
-        android:layout_below="@+id/linearLayout6">
+        android:layout_below="@+id/action_bar"
+        android:id="@+id/root_view">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/goods_grid"
-            android:numColumns="2"
-            android:layout_alignTop="@+id/swipe"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout5"
+            android:layout_below="@+id/action_bar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="新品"
+                android:id="@+id/category_new"
+                android:layout_weight="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/text_green"
+                android:layout_gravity="center"
+                android:gravity="center"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="价格"
+                android:id="@+id/category_price"
+                android:layout_weight="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/text_green"
+                android:gravity="center"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="销量"
+                android:id="@+id/category_sale"
+                android:layout_weight="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/text_green"
+                android:gravity="center"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="筛选"
+                android:id="@+id/category_filter"
+                android:layout_weight="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/text_green"
+                android:gravity="center"
+                style="@style/TextViewStyle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_below="@+id/linearLayout5"
+            android:id="@+id/linearLayout6">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/category_new_idc"
+                android:layout_weight="1"
+                android:src="@drawable/tab_bar_yellow" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/category_price_idc"
+                android:layout_weight="1"
+                android:src="@drawable/tab_bar_yellow" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/category_sale_idc"
+                android:layout_weight="1"
+                android:src="@drawable/tab_bar_yellow" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/category_filter_idc"
+                android:layout_weight="1"
+                android:src="@drawable/tab_bar_yellow" />
+        </LinearLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe"
+            android:layout_below="@+id/linearLayout6">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/goods_grid"
+                android:numColumns="2"
+                android:layout_alignTop="@+id/swipe"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </TableLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"

@@ -28,6 +28,7 @@ public class DevActivity extends Activity {
     private Button kuaidiBtn;
     private Spinner kuaidiTypeSpinner;
     private EditText kuaidiPostidEditText;
+    private Button animationBtn;
 
 //    private RecyclerView recyclerViewTest;
 //    private LinearLayoutManager linearLayoutManager;
@@ -144,6 +145,16 @@ public class DevActivity extends Activity {
                 bundle.putString("postid", kuaidiPostid);
 
                 intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
+        animationBtn = (Button) findViewById(R.id.animation);
+        animationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DevActivity.this, AnimationActivity.class);
                 startActivity(intent);
 
             }
