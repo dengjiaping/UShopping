@@ -162,6 +162,9 @@ public class StaticValues
     public final static int ARRENGE_TIME_DESC = 2;
     public final static int ARRENGE_PRICE_ASC = 3;
     public final static int ARRENGE_PRICE_DESC = 4;
+    public final static int ARRENGE_SALE_ASC = 5;
+    public final static int ARRENGE_SALE_DESC = 6;
+
 
     public final static int CACHE_LIFE = 60;
 
@@ -196,5 +199,10 @@ public class StaticValues
     public static final int SIGN_REWARD_UCOIN = 1;
     public static final int SIGN_REWARD_VOUCHER = 2;
     public static final int SIGN_REWARD_RANDOM = 3;
+
+    //第三方登录方式
+    public static final int THIRD_PARTY_LOGIN_WEIBO = 2;
+    public static final int THIRD_PARTY_LOGIN_QQ = 3;
+    public static final int THIRD_PARTY_LOGIN_WEIXIN = 4;
 
 }

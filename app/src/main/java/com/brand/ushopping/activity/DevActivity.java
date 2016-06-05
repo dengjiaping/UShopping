@@ -29,6 +29,7 @@ public class DevActivity extends Activity {
     private Spinner kuaidiTypeSpinner;
     private EditText kuaidiPostidEditText;
     private Button animationBtn;
+    private Button themeActivityBtn;
 
 //    private RecyclerView recyclerViewTest;
 //    private LinearLayoutManager linearLayoutManager;
@@ -155,6 +156,16 @@ public class DevActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DevActivity.this, AnimationActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        themeActivityBtn = (Button) findViewById(R.id.theme_activity);
+        themeActivityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DevActivity.this, ThemeActivity.class);
                 startActivity(intent);
 
             }

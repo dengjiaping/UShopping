@@ -19,6 +19,7 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.action.UserAction;
+import com.brand.ushopping.model.ThirdPartyUser;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
@@ -139,7 +140,13 @@ public class LoginActivity extends Activity {
                 mShareAPI.doOauthVerify(LoginActivity.this, platform, new UMAuthListener() {
                     @Override
                     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                        Toast.makeText( getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                        ThirdPartyUser thirdPartyUser = new ThirdPartyUser();
+                        thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_WEIBO);
+                        thirdPartyUser.setSinaId(map.get("uid"));
+                        thirdPartyUser.setUserName("userName");
+
+                        new ThirdPartyLoginTask().execute(thirdPartyUser);
+
                     }
 
                     @Override
@@ -166,7 +173,12 @@ public class LoginActivity extends Activity {
                 mShareAPI.doOauthVerify(LoginActivity.this, platform, new UMAuthListener() {
                     @Override
                     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                        Toast.makeText( getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                        ThirdPartyUser thirdPartyUser = new ThirdPartyUser();
+                        thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_QQ);
+                        thirdPartyUser.setSinaId(map.get("uid"));
+                        thirdPartyUser.setUserName("userName");
+
+                        new ThirdPartyLoginTask().execute(thirdPartyUser);
                     }
 
                     @Override
@@ -201,7 +213,12 @@ public class LoginActivity extends Activity {
                 mShareAPI.doOauthVerify(LoginActivity.this, platform, new UMAuthListener() {
                     @Override
                     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                        Toast.makeText( getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                        ThirdPartyUser thirdPartyUser = new ThirdPartyUser();
+                        thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_WEIXIN);
+                        thirdPartyUser.setSinaId(map.get("uid"));
+                        thirdPartyUser.setUserName("userName");
+
+                        new ThirdPartyLoginTask().execute(thirdPartyUser);
                     }
 
                     @Override
@@ -351,9 +368,46 @@ public class LoginActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         mShareAPI.onActivityResult(requestCode, resultCode, data);
 
-
-
     }
+
+    //第三方登录事件
+    public class ThirdPartyLoginTask extends AsyncTask<ThirdPartyUser, Void, User>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected User doInBackground(ThirdPartyUser... thirdPartyUsers) {
+            return new UserAction().thirdPartyLogin(thirdPartyUsers[0]);
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            if(user != null)
+            {
+                if(user.getSuccess())
+                {
+                    //登录成功
+                    new RefAction().setUser(LoginActivity.this, user);
+                    appContext.setUser(user);
+                    appContext.setSessionid(user.getSessionid());
+
+                    LoginActivity.this.finish();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, user.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 //    /**
 //     * 当 SSO 授权 Activity 退出时，该函数被调用。
 //     *
@@ -434,43 +488,6 @@ public class LoginActivity extends Activity {
 //        }
 //    }
 //
-//    //微博登录事件
-//    public class SinaLoginTask extends AsyncTask<WeiboUser, Void, User>
-//    {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected User doInBackground(WeiboUser... weiboUsers) {
-//            return new UserAction().sinaRegistered(weiboUsers[0]);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(User user) {
-//            if(user != null)
-//            {
-//                if(user.getSuccess())
-//                {
-//                    //登录成功
-//                    new RefAction().setUser(LoginActivity.this, user);
-//                    appContext.setUser(user);
-//                    appContext.setSessionid(user.getSessionid());
-//
-//                    LoginActivity.this.finish();
-//                }
-//                else
-//                {
-//                    Toast.makeText(LoginActivity.this, user.getMsg(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            else
-//            {
-//                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
 //
 //    public class TencentUiListener implements IUiListener {
 //        @Override

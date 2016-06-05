@@ -3,8 +3,8 @@ package com.brand.ushopping.action;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.brand.ushopping.model.ThirdPartyUser;
 import com.brand.ushopping.model.User;
-import com.brand.ushopping.model.WeiboUser;
 import com.brand.ushopping.utils.HttpClientUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -100,12 +100,12 @@ public class UserAction
 
     }
 
-    //微博登录
-    public User sinaRegistered(WeiboUser weiboUser)
+    //第三方登录 //2 weibo 3 qq 4 weixin
+    public User thirdPartyLogin(ThirdPartyUser thirdPartyUser)
     {
         User user = null;
         String resultString = null;
-        String jsonParam = JSON.toJSONString(weiboUser);
+        String jsonParam = JSON.toJSONString(thirdPartyUser);
         List params = new ArrayList();
         params.add(new BasicNameValuePair("param", jsonParam));
 

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.brand.ushopping.model.AppOnlineshopping;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
+import com.brand.ushopping.model.OnlineshoppingGoods;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
@@ -26,12 +28,15 @@ import simplecache.ACache;
  */
 public class MainpageAction
 {
-    private ACache mCache;
+    private ACache mCache = null;
 
     //首页信息
     public Main home(Context context, User user)
     {
-        mCache = ACache.get(context);
+        if(context != null)
+        {
+            mCache = ACache.get(context);
+        }
 
         Main result = new Main();
         String resultString = null;
@@ -90,7 +95,10 @@ public class MainpageAction
     //首页下拉
     public HomeRe homeRe(Context context, HomeRe homeRe)
     {
-        mCache = ACache.get(context);
+        if(context != null)
+        {
+            mCache = ACache.get(context);
+        }
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(homeRe);
@@ -152,5 +160,82 @@ public class MainpageAction
         return homeRe;
 
     }
+
+    //首页主题活动
+    public OnlineshoppingGoods onlineshoppingGoodsAction(Context context, OnlineshoppingGoods onlineshoppingGoods)
+    {
+        if(context != null)
+        {
+            mCache = ACache.get(context);
+        }
+
+        OnlineshoppingGoods result = new OnlineshoppingGoods();
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(onlineshoppingGoods);
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("param", jsonParam));
+
+        try
+        {
+            if(mCache != null)
+            {
+                resultString = mCache.getAsString("OnlineshoppingGoodsAction.action");
+            }
+
+            if(resultString == null)
+            {
+                resultString = HttpClientUtil.post("OnlineshoppingGoodsAction.action", params);
+
+            }
+
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+
+                result.setSuccess(jsonObject.getBoolean("success"));
+                if(result.isSuccess())
+                {
+                    //赋值
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+
+                    ArrayList<AppgoodsId> appGoodes = new ArrayList<AppgoodsId>();
+                    JSONArray appGoodsJSONArray = dataObject.getJSONArray("appGoods");
+                    for(int a=0; a<appGoodsJSONArray.length(); a++)
+                    {
+                        JSONObject appGoodsJSONObject = appGoodsJSONArray.getJSONObject(a);
+                        String data = appGoodsJSONObject.toString();
+                        appGoodes.add(JSON.parseObject(data, AppgoodsId.class));
+                    }
+                    result.setAppgoodsIds(appGoodes);
+
+                    JSONObject appOnlineshoppingJSONObject = dataObject.getJSONObject("appOnlineshopping");
+                    String data = appOnlineshoppingJSONObject.toString();
+                    AppOnlineshopping appOnlineshopping = JSON.parseObject(data, AppOnlineshopping.class);
+                    result.setAppOnlineshopping(appOnlineshopping);
+
+                    result.setSuccess(true);
+
+                    //存入缓存
+                    mCache.put("OnlineshoppingGoodsAction.action", resultString, StaticValues.CACHE_LIFE);
+
+                }
+                else
+                {
+                    result.setMsg(jsonObject.getString("msg"));
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return result;
+
+    }
+
+
 
 }

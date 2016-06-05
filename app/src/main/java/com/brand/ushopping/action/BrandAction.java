@@ -30,7 +30,10 @@ public class BrandAction
 
     public BrandRecommend getRecommendAppBrandAction(Context context, BrandRecommend brand)
     {
-        mCache = ACache.get(context);
+        if(context != null)
+        {
+            mCache = ACache.get(context);
+        }
 
         BrandRecommend result = null;
         String resultString = null;
@@ -64,7 +67,11 @@ public class BrandAction
     // --  收藏品牌  --
     public SaveAppBrandCollect saveAppBrandCollectAction(Context context, SaveAppBrandCollect saveAppBrandCollect)
     {
-        mCache = ACache.get(context);
+        if(context != null)
+        {
+            mCache = ACache.get(context);
+        }
+
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppBrandCollect);
@@ -112,7 +119,10 @@ public class BrandAction
     // --  查询收藏列表  --
     public AppBrandCollect getListAppBrandCollectUserIdAction(Context context, AppBrandCollect appBrandCollect)
     {
-        mCache = ACache.get(context);
+        if(context != null)
+        {
+            mCache = ACache.get(context);
+        }
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(appBrandCollect);

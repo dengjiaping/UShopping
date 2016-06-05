@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/weibo_share"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout8">
 
         <Spinner
             android:layout_width="100dp"
@@ -83,5 +84,14 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/qq_share"
         android:layout_toEndOf="@+id/qq_share" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="主题活动"
+        android:id="@+id/theme_activity"
+        android:layout_below="@+id/linearLayout8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
