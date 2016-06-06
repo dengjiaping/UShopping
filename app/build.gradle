@@ -15,6 +15,8 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
+        // Enabling multidex support.
+        multiDexEnabled true
 
     }
 
@@ -73,16 +75,10 @@ dependencies {
     compile files('libs/fastjson-1.1.43.android.jar')
     compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
     //    compile files('libs/nineoldroid.jar')
-    compile files('libs/libammsdk.jar')
-    compile files('libs/UPPayAssistEx.jar')
-    compile files('libs/UPPayPluginExStd.jar')
-    compile files('libs/alipaySDK-20150818.jar')
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/MobCommons-2016.0223.1655.jar')
     compile files('libs/MobTools-2016.0223.1655.jar')
     compile files('libs/umeng_social_sdk.jar')
-    compile files('libs/SocialSDK_WeiXin_1.jar')
-    compile files('libs/SocialSDK_WeiXin_2.jar')
     compile files('libs/SocialSDK_Sina.jar')
     compile files('libs/weiboSDKCore_3.1.4.jar')
     compile files('libs/mta-sdk-1.6.2.jar')
@@ -102,6 +98,7 @@ dependencies {
     compile 'com.smssdk:smssdk:2.0.2@aar'
     compile 'com.android.support:design:23.2.1'
     compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.9
+    compile project(':lib:pingpp')
 
 }
 
