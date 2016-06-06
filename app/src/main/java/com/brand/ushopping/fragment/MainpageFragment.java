@@ -634,7 +634,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                     line.put("img", appgoodsId.getLogopicUrl());
                     line.put("name", appgoodsId.getGoodsName());
                     line.put("price", appgoodsId.getPromotionPrice());
-                    line.put("favouriteCount", 123);
+                    line.put("salesCount", appgoodsId.getSaleCount());
 
                     homeReListData.add(line);
                 }
@@ -736,7 +736,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                                 line.put("img", appgoodsId.getLogopicUrl());
                                 line.put("name", appgoodsId.getGoodsName());
                                 line.put("price", appgoodsId.getPromotionPrice());
-                                line.put("favouriteCount", 123);
+                                line.put("salesCount", appgoodsId.getSaleCount());
 
                                 homeReListData.add(line);
                             }

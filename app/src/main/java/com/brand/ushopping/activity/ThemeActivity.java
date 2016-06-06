@@ -3,6 +3,7 @@ package com.brand.ushopping.activity;
  * 主题活动
  */
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ public class ThemeActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private List listData;
     private MoreGoodsAdapter goodsAdapter;
+    private RelativeLayout actionBarLayout;
 
     private int brandGoodsType = StaticValues.BRAND_GOODS_TYPE_PRICE;
     private int currentArrenge = StaticValues.ARRENGE_NONE;
@@ -154,6 +157,8 @@ public class ThemeActivity extends AppCompatActivity {
             }
         });
 
+        actionBarLayout = (RelativeLayout) findViewById(R.id.action_bar);
+
     }
 
     @Override
@@ -226,6 +231,8 @@ public class ThemeActivity extends AppCompatActivity {
                     ImageLoader.getInstance().displayImage(images[0], bannerImageView1);
                     ImageLoader.getInstance().displayImage(images[1], bannerImageView2);
 
+                    int color = Color.parseColor(appOnlineshopping.getBrannerColor());
+                    actionBarLayout.setBackgroundColor(color);
 
                 }
 
@@ -244,6 +251,7 @@ public class ThemeActivity extends AppCompatActivity {
                         line.put("img", appgoodsId.getLogopicUrl());
                         line.put("name", appgoodsId.getGoodsName());
                         line.put("price", appgoodsId.getPromotionPrice());
+                        line.put("salesCount", appgoodsId.getSaleCount());
 
                         listData.add(line);
 

@@ -71,6 +71,21 @@
                 android:layout_marginTop="4dp"
                 android:visibility="gone"
                 style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销量"
+                style="@style/TextViewStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/sales_count"
+                style="@style/TextViewStyle"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
         </LinearLayout>
     </TableLayout>
 </LinearLayout>

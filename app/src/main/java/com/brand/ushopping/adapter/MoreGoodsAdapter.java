@@ -84,6 +84,7 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
                 context.startActivity(intent);
             }
         });
+        holder.salesCount.setText(list.get(position).get("salesCount").toString());
 
     }
 
@@ -98,12 +99,14 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
         public ImageView img;
         public TextView name;
         public TextView price;
+        public TextView salesCount;
 
         public ViewHolder(View view){
             super(view);
             img = (ImageView) view.findViewById(R.id.img);
             name = (TextView) view.findViewById(R.id.name);
             price = (TextView) view.findViewById(R.id.price);
+            salesCount = (TextView) view.findViewById(R.id.sales_count);
 
         }
     }

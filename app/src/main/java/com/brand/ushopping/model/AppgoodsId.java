@@ -13,6 +13,7 @@ public class AppgoodsId
     private AppbrandId appbrandId;
     private long reTime;
     private AppexpressId appexpressId;
+    private int saleCount;
 
     public String getBarCode() {
         return barCode;
@@ -76,5 +77,13 @@ public class AppgoodsId
 
     public void setAppexpressId(AppexpressId appexpressId) {
         this.appexpressId = appexpressId;
+    }
+
+    public int getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(int saleCount) {
+        this.saleCount = saleCount;
     }
 }

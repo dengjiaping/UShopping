@@ -65,6 +65,7 @@ public class BrandGoodsAdapter extends BaseAdapter{
             holder.name=(TextView)convertView.findViewById(R.id.name);
             holder.promotionPrice=(TextView)convertView.findViewById(R.id.promotion_price);
             holder.originalPrice=(TextView)convertView.findViewById(R.id.original_price);
+            holder.salesCount = (TextView) convertView.findViewById(R.id.sales_count);
 
             //为view设置标签
             convertView.setTag(holder);
@@ -76,6 +77,7 @@ public class BrandGoodsAdapter extends BaseAdapter{
         holder.name.setText(list.get(position).get("name").toString());
         holder.promotionPrice.setText(list.get(position).get("promotionPrice").toString());
         holder.originalPrice.setText(list.get(position).get("originalPrice").toString());
+        holder.salesCount.setText(list.get(position).get("salesCount").toString());
 
         width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
         height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
@@ -93,6 +95,7 @@ public class BrandGoodsAdapter extends BaseAdapter{
         TextView name;
         TextView promotionPrice;
         TextView originalPrice;
+        TextView salesCount;
 
     }
 

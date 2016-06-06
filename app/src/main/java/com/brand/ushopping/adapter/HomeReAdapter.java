@@ -66,6 +66,7 @@ public class HomeReAdapter extends BaseAdapter
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.price = (TextView) convertView.findViewById(R.id.price);
             holder.favouriteCount = (TextView) convertView.findViewById(R.id.favourite_count);
+            holder.salesCount = (TextView) convertView.findViewById(R.id.sales_count);
 
             //为view设置标签
             convertView.setTag(holder);
@@ -82,7 +83,7 @@ public class HomeReAdapter extends BaseAdapter
 
         holder.name.setText(list.get(position).get("name").toString());
         holder.price.setText(list.get(position).get("price").toString());
-        holder.favouriteCount.setText(list.get(position).get("favouriteCount").toString());
+        holder.salesCount.setText(list.get(position).get("salesCount").toString());
 
         width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
         height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
@@ -97,6 +98,7 @@ public class HomeReAdapter extends BaseAdapter
         TextView name;
         TextView price;
         TextView favouriteCount;
+        TextView salesCount;
 
     }
 }

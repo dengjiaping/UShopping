@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,8 +78,8 @@ public class BrandActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_brand);
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
@@ -400,10 +399,9 @@ public class BrandActivity extends Activity {
 
                             line.put("promotionPrice", appgoodsId.getPromotionPrice());
                             line.put("originalPrice", appgoodsId.getPromotionPrice());
-
                             line.put("reTime",appgoodsId.getReTime());
-
                             line.put("boughtType", boughtType);
+                            line.put("salesCount", appgoodsId.getSaleCount());
 
                             listData.add(line);
                         }

@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,8 +47,8 @@ public class MoreGoodsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_more_goods);
 
         appContext = (AppContext) getApplicationContext();
@@ -171,7 +170,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
                                 line.put("name", appgoodsId.getGoodsName());
                                 line.put("price", appgoodsId.getPromotionPrice());
                                 line.put("boughtType", boughtType);
-                                line.put("favouriteCount", 123);
+                                line.put("salesCount", appgoodsId.getSaleCount());
 
                                 goodsListData.add(line);
                             }
