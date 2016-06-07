@@ -159,6 +159,8 @@ public class ThemeActivity extends AppCompatActivity {
 
         actionBarLayout = (RelativeLayout) findViewById(R.id.action_bar);
 
+        currentArrenge = StaticValues.ARRENGE_SALE_DESC;
+
     }
 
     @Override
@@ -252,6 +254,7 @@ public class ThemeActivity extends AppCompatActivity {
                         line.put("name", appgoodsId.getGoodsName());
                         line.put("price", appgoodsId.getPromotionPrice());
                         line.put("salesCount", appgoodsId.getSaleCount());
+                        line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
 
                         listData.add(line);
 
