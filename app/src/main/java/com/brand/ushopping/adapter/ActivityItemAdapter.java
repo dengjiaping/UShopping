@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.brand.ushopping.R;
+import com.brand.ushopping.activity.ThemeActivity;
 import com.brand.ushopping.activity.VoucherActivity;
 import com.brand.ushopping.activity.WebViewActivity;
 import com.brand.ushopping.utils.StaticValues;
@@ -110,6 +111,9 @@ public class ActivityItemAdapter extends BaseAdapter {
                         context.startActivity(intent);
 
                         break;
+                    case StaticValues.ACTIVITY_FLAG_THEME_ACTIVITY:
+                        intent.setClass(context, ThemeActivity.class);
+                        context.startActivity(intent);
 
                 }
                 

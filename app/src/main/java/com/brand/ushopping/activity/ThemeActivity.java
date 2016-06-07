@@ -94,14 +94,14 @@ public class ThemeActivity extends AppCompatActivity {
                 selectTab();
                 reload();
 
-                if(currentArrenge == StaticValues.ARRENGE_TIME_ASC)
+                if(currentArrenge == StaticValues.ARRENGE_SALE_ASC)
                 {
-                    currentArrenge = StaticValues.ARRENGE_TIME_DESC;
+                    currentArrenge = StaticValues.ARRENGE_SALE_DESC;
 
                 }
                 else
                 {
-                    currentArrenge = StaticValues.ARRENGE_TIME_ASC;
+                    currentArrenge = StaticValues.ARRENGE_SALE_ASC;
 
                 }
 
@@ -114,14 +114,14 @@ public class ThemeActivity extends AppCompatActivity {
                 selectTab();
                 reload();
 
-                if(currentArrenge == StaticValues.ARRENGE_TIME_ASC)
+                if(currentArrenge == StaticValues.ARRENGE_PRICE_ASC)
                 {
-                    currentArrenge = StaticValues.ARRENGE_TIME_DESC;
+                    currentArrenge = StaticValues.ARRENGE_PRICE_DESC;
 
                 }
                 else
                 {
-                    currentArrenge = StaticValues.ARRENGE_TIME_ASC;
+                    currentArrenge = StaticValues.ARRENGE_PRICE_ASC;
 
                 }
 
@@ -305,6 +305,29 @@ public class ThemeActivity extends AppCompatActivity {
         }
     }
 
+    //根据价格排序
+    class GoodsSalesAscComparator implements Comparator<Map<String, Object>>
+    {
+        @Override
+        public int compare(Map<String, Object> lhs, Map<String, Object> rhs) {
+            Integer salesCount1 = (Integer) lhs.get("salesCount");
+            Integer salesCount2 = (Integer)rhs.get("salesCount");
+
+            return salesCount1.compareTo(salesCount2);
+        }
+    }
+
+    class GoodsSalesDescComparator implements Comparator<Map<String, Object>>
+    {
+        @Override
+        public int compare(Map<String, Object> lhs, Map<String, Object> rhs) {
+            Integer salesCount1 = (Integer) lhs.get("salesCount");
+            Integer salesCount2 = (Integer)rhs.get("salesCount");
+
+            return salesCount2.compareTo(salesCount1);
+        }
+    }
+
     private void arrange()
     {
         switch (currentArrenge)
@@ -312,13 +335,13 @@ public class ThemeActivity extends AppCompatActivity {
             case StaticValues.ARRENGE_SALE_ASC:
                 categorySale.setText("销量 ↑");
                 categoryPrice.setText("价格");
-//                Collections.sort(listData, new BrandGoodsTimeAscComparator());
+                Collections.sort(listData, new GoodsSalesAscComparator());
 
                 break;
             case StaticValues.ARRENGE_SALE_DESC:
                 categorySale.setText("销量 ↓");
                 categoryPrice.setText("价格");
-//                Collections.sort(listData, new BrandGoodsTimeDescComparator());
+                Collections.sort(listData, new GoodsSalesDescComparator());
 
                 break;
             case StaticValues.ARRENGE_PRICE_ASC:

@@ -179,6 +179,7 @@ public class StaticValues
     //活动类型
     public final static int ACTIVITY_FLAG_WEBPAGE = 0;  //网页
     public final static int ACTIVITY_FLAG_VOUCHER = 3;  //优惠券
+    public final static int ACTIVITY_FLAG_THEME_ACTIVITY = 4;  //主题活动
 
     //注册handler
     public final static int GET_SMS_CODE_HANDLER = 1000;
