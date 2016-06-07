@@ -97,9 +97,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.smssdk:smssdk:2.0.2@aar'
     compile 'com.android.support:design:23.2.1'
-    compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.9
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.9
     compile project(':lib:pingpp')
-
+    compile files('libs/SocialSDK_WeiXin_1.jar')
 }
 
 
