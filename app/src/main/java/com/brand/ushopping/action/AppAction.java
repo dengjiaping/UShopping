@@ -1,6 +1,9 @@
 package com.brand.ushopping.action;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -16,6 +19,8 @@ import com.brand.ushopping.utils.StaticValues;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +110,7 @@ public class AppAction {
         homeRe.setMax(StaticValues.RECOMMEND_PAGE_COUNT);
         appContext.setHomeRe(new MainpageAction().homeRe(context, homeRe));
 
+        new AppAction().downloadSplash(context, "http://static.oschina.net/uploads/img/201208/13122559_L8G0.png");
     }
 
     //反馈
@@ -146,6 +152,44 @@ public class AppAction {
         }
 
         return feedback;
+    }
+
+    public void downloadSplash(Context context, String url)
+    {
+        try
+        {
+            FileOutputStream fileOutputStream = context.openFileOutput("splash.png", Context.MODE_PRIVATE);
+
+            byte[] byteArray = HttpClientUtil.getImageFromWeb(url);
+            fileOutputStream.write(byteArray);
+
+            fileOutputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public Bitmap loadSplash(Context context)
+    {
+        String url = Environment.getExternalStorageDirectory() + "/splash.png";
+        try
+        {
+            File file = new File(url);
+            if (file.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(url);
+                return bitmap;
+            }
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 
 }

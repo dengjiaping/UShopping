@@ -34,6 +34,7 @@ public class StartActivity extends Activity {
 //            Intent intent = new Intent(StartActivity.this, SplashActivity.class);
 //            startActivity(intent);
 //        }
+
         Intent intent = new Intent(StartActivity.this, SplashActivity.class);
         startActivity(intent);
 
