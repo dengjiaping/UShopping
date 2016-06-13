@@ -1,5 +1,7 @@
 package com.brand.ushopping.model;
 
+import com.brand.ushopping.utils.StaticValues;
+
 /**
  * Created by Administrator on 2015/12/16.
  */
@@ -17,6 +19,7 @@ public class OrderSave
     private AppgoodsId appgoodsId;
     private String attribute;
     private int quantity;
+    private Integer client = StaticValues.ORDER_SAVE_PLATFORM;
 
     public String getOrderNo() {
         return orderNo;
@@ -114,4 +117,11 @@ public class OrderSave
         this.appVoucherId = appVoucherId;
     }
 
+    public int getClient() {
+        return client;
+    }
+
+    public void setClient(int client) {
+        this.client = client;
+    }
 }

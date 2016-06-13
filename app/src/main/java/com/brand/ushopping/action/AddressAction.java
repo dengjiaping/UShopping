@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Address;
-import com.brand.ushopping.model.Main;
 import com.brand.ushopping.utils.HttpClientUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -30,7 +29,6 @@ public class AddressAction
         try
         {
             resultString = HttpClientUtil.post("GetAppAddressAllAction.action", params);
-            //{"data":[{"area":"asdasd","consignee":"孙成","deaddress":"ssssss","flag":0,"id":1,"latitude":12,"longitude":12,"mobile":"23123123","zipcode":123213},{"area":"山东省滨州市","consignee":"张三","deaddress":"阳信县xxx乡xxx村","flag":1,"id":2,"latitude":36.686382,"longitude":117.092626,"mobile":"15634828386"}],"sessionid":"4BBF9AE348D080F1A065A0932DA089A9","success":true,"userId":6}
 
             if(resultString != null)
             {

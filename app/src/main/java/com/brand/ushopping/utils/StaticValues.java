@@ -206,4 +206,7 @@ public class StaticValues
     public static final int THIRD_PARTY_LOGIN_QQ = 3;
     public static final int THIRD_PARTY_LOGIN_WEIXIN = 4;
 
+    //客户端类型 0: ios    1: android
+    public static final int ORDER_SAVE_PLATFORM = 1;
+
 }

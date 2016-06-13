@@ -549,9 +549,11 @@ public class OrderConfirmActivity extends Activity {
                     }
                     if(result.equals(StaticValues.PAYMENT_RESULT_FAIL))
                     {
+                        String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
+                        String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                        builder.setMessage("支付失败");
+                        builder.setMessage("支付失败 " + errorMsg + " " + extraMsg);
                         builder.setTitle("提示");
                         builder.setPositiveButton("OK", null);
                         builder.setCancelable(false);
