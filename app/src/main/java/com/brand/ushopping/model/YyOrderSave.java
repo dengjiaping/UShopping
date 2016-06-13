@@ -1,5 +1,7 @@
 package com.brand.ushopping.model;
 
+import com.brand.ushopping.utils.StaticValues;
+
 import java.util.Date;
 
 /**
@@ -19,6 +21,7 @@ public class YyOrderSave
     private int quantity;
     private String userVoucherId;
     private long appVoucherId;
+    private Integer client = StaticValues.ORDER_SAVE_PLATFORM;
 
     public double getMoney() {
         return money;
@@ -114,5 +117,13 @@ public class YyOrderSave
 
     public void setAppVoucherId(long appVoucherId) {
         this.appVoucherId = appVoucherId;
+    }
+
+    public Integer getClient() {
+        return client;
+    }
+
+    public void setClient(Integer client) {
+        this.client = client;
     }
 }
