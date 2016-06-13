@@ -136,34 +136,39 @@
         <!-- <service android:name="com.sina.weibo.sdk.net.DownloadService" -->
         <!-- android:exported="false"></service> -->
 
-
-        <!-- Ping++ sdk -->
+        <!-- Ping++ SDK -->
         <activity
             android:name="com.pingplusplus.android.PaymentActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 微信支付 sdk ，也是 Ping++ sdk 调用入口 -->
+
+        <!-- 微信支付 -->
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:targetActivity="com.pingplusplus.android.PaymentActivity" />
-        <!-- 支付宝 sdk -->
+
+        <!-- 支付宝 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind" />
+            android:screenOrientation="behind" >
+        </activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind" />
+            android:screenOrientation="behind" >
+        </activity>
 
         <!-- 银联支付 sdk -->
-        <activity android:name="com.unionpay.uppay.PayActivity" />
+        <activity
+            android:name="com.unionpay.uppay.PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize" />
 
-        <!-- 百付宝 sdk -->
+        <!-- 百度钱包 -->
         <activity
             android:name="com.baidu.paysdk.login.LoginActivity"
             android:configChanges="keyboardHidden|navigation|orientation|screenSize"
@@ -390,12 +395,7 @@
             android:name="UMENG_APPKEY"
             android:value="56e0f3ede0f55a0e0a00167d" />
 
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity
             android:name=".WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
