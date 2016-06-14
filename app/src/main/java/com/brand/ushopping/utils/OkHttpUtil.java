@@ -18,23 +18,14 @@ public class OkHttpUtil
         return BASE_URL + relativeUrl;
     }
 
-    public static String post(String url, String json) {
-        try
-        {
-            RequestBody body = RequestBody.create(JSONMediaType, json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+    public static String post(String url, String json) throws Exception{
+        RequestBody body = RequestBody.create(JSONMediaType, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
 
     }
 

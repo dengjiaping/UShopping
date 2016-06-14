@@ -52,6 +52,7 @@ public class VoucherActivity extends Activity {
     private TextView voucherRuleTextView;
     private int pickType = StaticValues.VOUCHER_PICK_SINGLE;
     private int enterType = StaticValues.VOUCHER_ENTER_LIST;
+    private long currentTime = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,8 +288,8 @@ public class VoucherActivity extends Activity {
                     appVoucherSelect.setSessionid(user.getSessionid());
 
                 }
-                appVoucherSelect.setFlag(pickType);
-                appVoucherSelect.setModel(StaticValues.MODEL_ANDROID);
+//                appVoucherSelect.setFlag(pickType);
+//                appVoucherSelect.setModel(StaticValues.MODEL_ANDROID);
                 new AppVoucherSelectGeneralActionTask().execute(appVoucherSelect);
 
                 break;
@@ -357,7 +358,12 @@ public class VoucherActivity extends Activity {
                         line.put("flag", voucherItem.getFlag());
                         line.put("pickType", pickType);
 
-                        listData.add(line);
+                        //过期时间限制
+                        if(currentTime > voucherItem.getValidity() && currentTime < voucherItem.getDays())
+                        {
+                            listData.add(line);
+
+                        }
 
                     }
                     voucherAdapter = new VoucherAdapter(listData, VoucherActivity.this);

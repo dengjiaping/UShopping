@@ -10,10 +10,10 @@ public class AppVoucherSelect
     private long userId;
     private String sessionid;
     private ArrayList<VoucherItem> voucherItems;
-    private int flag;
+    private Integer flag;
     private boolean success;
     private String msg;
-    private boolean model;
+    private Boolean model;
 
     public long getUserId() {
         return userId;
@@ -55,19 +55,19 @@ public class AppVoucherSelect
         this.voucherItems = voucherItems;
     }
 
-    public int getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(int flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 
-    public boolean isModel() {
+    public Boolean isModel() {
         return model;
     }
 
-    public void setModel(boolean model) {
+    public void setModel(Boolean model) {
         this.model = model;
     }
 }
