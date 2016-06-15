@@ -460,6 +460,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
     private void setValue()
     {
+        slider.removeAllSliders();
+
         main = appContext.getMain();
         homeRe = appContext.getHomeRe();
 

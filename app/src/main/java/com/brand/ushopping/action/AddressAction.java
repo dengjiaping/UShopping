@@ -5,6 +5,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.OkHttpUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -97,7 +98,8 @@ public class AddressAction
 
         try
         {
-            resultString = HttpClientUtil.post("UpdateAddressAction.action", params);
+//            resultString = HttpClientUtil.post("UpdateAddressAction.action", params);
+            resultString = OkHttpUtil.post("UpdateAddressAction.action", jsonParam);
 
             if(resultString != null)
             {

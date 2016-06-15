@@ -328,7 +328,7 @@ public class OrderConfirmActivity extends Activity {
                                 }
                                 yyOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
                                 //添加满减券
-//                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
 
@@ -395,7 +395,7 @@ public class OrderConfirmActivity extends Activity {
                                 }
                                 smOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
                                 //添加满减券
-//                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 smOrderSaveList.setSmorder(smOrderSaveArrayList);
 
@@ -482,13 +482,11 @@ public class OrderConfirmActivity extends Activity {
         manjianVoucherListView = (MyListView) findViewById(R.id.manjian_voucher_list);
 
         //满减
-        /*
         ManJainVoucher manJainVoucher = new ManJainVoucher();
         manJainVoucher.setUserId(user.getUserId());
         manJainVoucher.setSessionid(user.getSessionid());
 
         new ManJainAllActionTask().execute(manJainVoucher);
-        */
 
     }
 
@@ -1052,7 +1050,6 @@ public class OrderConfirmActivity extends Activity {
         }
 
         // 满减券停用
-        /*
         manjianVoucherListView.removeAllViewsInLayout();
         manjianListDatalistData.clear();
         manJianVoucherItems.clear();
@@ -1087,7 +1084,6 @@ public class OrderConfirmActivity extends Activity {
         {
             manjianVoucherAdapter.notifyDataSetChanged();
         }
-        */
     }
 
     public int getBoughtType() {
