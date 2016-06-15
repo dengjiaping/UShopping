@@ -9,11 +9,9 @@ import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.OnlineshoppingGoods;
-import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.OkHttpUtil;
-import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -22,17 +20,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import simplecache.ACache;
-
 /**
  * Created by Administrator on 2015/11/9.
  */
 public class MainpageAction
 {
-    private ACache mCache = null;
+//    private ACache mCache = null;
 
     //首页信息
-    public Main home(Context context, User user)
+    public Main home(Context context, Main mMain)
     {
         if(context != null)
         {
@@ -41,16 +37,16 @@ public class MainpageAction
 
         Main result = new Main();
         String resultString = null;
-        String jsonParam = JSON.toJSONString(user);
+        String jsonParam = JSON.toJSONString(mMain);
         List params = new ArrayList();
         params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-            if(mCache != null)
-            {
-                resultString = mCache.getAsString("HomeAction.action");
-            }
+//            if(mCache != null)
+//            {
+//                resultString = mCache.getAsString("HomeAction.action");
+//            }
 
             if(resultString == null)
             {
@@ -75,7 +71,7 @@ public class MainpageAction
                     result.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("HomeAction.action", resultString, StaticValues.CACHE_LIFE);
+//                    mCache.put("HomeAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else
@@ -98,10 +94,10 @@ public class MainpageAction
     //首页下拉
     public HomeRe homeRe(Context context, HomeRe homeRe)
     {
-        if(context != null)
-        {
+//        if(context != null)
+//        {
 //            mCache = ACache.get(context);
-        }
+//        }
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(homeRe);
@@ -110,10 +106,10 @@ public class MainpageAction
 
         try
         {
-            if(mCache != null)
-            {
-                resultString = mCache.getAsString("HomeReAction.action" + homeRe.getMin());
-            }
+//            if(mCache != null)
+//            {
+//                resultString = mCache.getAsString("HomeReAction.action" + homeRe.getMin());
+//            }
 
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -144,7 +140,7 @@ public class MainpageAction
                     homeRe.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("HomeReAction.action" + homeRe.getMin(), resultString, StaticValues.CACHE_LIFE);
+//                    mCache.put("HomeReAction.action" + homeRe.getMin(), resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else
@@ -168,10 +164,10 @@ public class MainpageAction
     //首页主题活动
     public OnlineshoppingGoods onlineshoppingGoodsAction(Context context, OnlineshoppingGoods onlineshoppingGoods)
     {
-        if(context != null)
-        {
+//        if(context != null)
+//        {
 //            mCache = ACache.get(context);
-        }
+//        }
 
         OnlineshoppingGoods result = new OnlineshoppingGoods();
         String resultString = null;
@@ -181,10 +177,10 @@ public class MainpageAction
 
         try
         {
-            if(mCache != null)
-            {
-                resultString = mCache.getAsString("OnlineshoppingGoodsAction.action");
-            }
+//            if(mCache != null)
+//            {
+//                resultString = mCache.getAsString("OnlineshoppingGoodsAction.action");
+//            }
 
             if(resultString == null)
             {
@@ -220,7 +216,7 @@ public class MainpageAction
                     result.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("OnlineshoppingGoodsAction.action", resultString, StaticValues.CACHE_LIFE);
+//                    mCache.put("OnlineshoppingGoodsAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else

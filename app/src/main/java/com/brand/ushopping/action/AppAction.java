@@ -11,10 +11,10 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.Feedback;
 import com.brand.ushopping.model.HomeRe;
+import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.HttpClientUtil;
-import com.brand.ushopping.utils.OkHttpUtil;
 import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -39,8 +39,8 @@ public class AppAction {
         Log.v("version jsonParam", jsonParam);
         try
         {
-//            resultString = HttpClientUtil.post("GetMaxVersionAction.action", params);
-            resultString = OkHttpUtil.post("GetMaxVersionAction.action", jsonParam);
+            resultString = HttpClientUtil.post("GetMaxVersionAction.action", params);
+//            resultString = OkHttpUtil.post("GetMaxVersionAction.action", jsonParam);
 
             Log.v("version", resultString);
 
@@ -101,7 +101,24 @@ public class AppAction {
         }
 
         //首页
-        appContext.setMain(new MainpageAction().home(context, user));
+        Main mMain = new Main();
+        if(user != null)
+        {
+            mMain.setUserId(user.getUserId());
+            mMain.setSessionid(user.getSessionid());
+
+        }
+        Main result = null;
+        try
+        {
+            result = new MainpageAction().home(context, mMain);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        appContext.setMain(result);
+
         //首页下拉
         HomeRe homeRe = new HomeRe();
         if(user != null)
@@ -126,8 +143,8 @@ public class AppAction {
 
         try
         {
-//            resultString = HttpClientUtil.post("FeedbackSaveAction.action", params);
-            resultString = OkHttpUtil.post("FeedbackSaveAction.action", jsonParam);
+            resultString = HttpClientUtil.post("FeedbackSaveAction.action", params);
+//            resultString = OkHttpUtil.post("FeedbackSaveAction.action", jsonParam);
 
             if(resultString != null)
             {

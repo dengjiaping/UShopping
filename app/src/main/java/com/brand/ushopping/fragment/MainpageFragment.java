@@ -307,14 +307,14 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
 
-                User user1 = new User();
+                Main main = new Main();
                 if(user != null)
                 {
-                    user1.setUserId(user.getUserId());
-                    user1.setSessionid(user.getSessionid());
+                    main.setUserId(user.getUserId());
+                    main.setSessionid(user.getSessionid());
                 }
 
-                new MainpageLoadTask().execute(user1);
+                new MainpageLoadTask().execute(main);
 
                 swipeRefreshLayout.setRefreshing(false);
 
@@ -606,14 +606,14 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         }
         else
         {
-            User user1 = new User();
+            Main main = new Main();
             if(user != null)
             {
-                user1.setUserId(user.getUserId());
-                user1.setSessionid(user.getSessionid());
+                main.setUserId(user.getUserId());
+                main.setSessionid(user.getSessionid());
             }
 
-            new MainpageLoadTask().execute(user1);
+            new MainpageLoadTask().execute(main);
 
         }
 
@@ -779,7 +779,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     }
 
     //首页加载
-    public class MainpageLoadTask extends AsyncTask<User, Void, Main>
+    public class MainpageLoadTask extends AsyncTask<Main, Void, Main>
     {
         @Override
         protected void onPreExecute() {
@@ -788,8 +788,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         }
 
         @Override
-        protected Main doInBackground(User... users) {
-            return new MainpageAction().home(getActivity(), users[0]);
+        protected Main doInBackground(Main... mains) {
+            return new MainpageAction().home(getActivity(), mains[0]);
         }
 
         @Override
