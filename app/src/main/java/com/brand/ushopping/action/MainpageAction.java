@@ -12,6 +12,7 @@ import com.brand.ushopping.model.OnlineshoppingGoods;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.OkHttpUtil;
 import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -35,7 +36,7 @@ public class MainpageAction
     {
         if(context != null)
         {
-            mCache = ACache.get(context);
+//            mCache = ACache.get(context);
         }
 
         Main result = new Main();
@@ -54,7 +55,9 @@ public class MainpageAction
             if(resultString == null)
             {
 //                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
-                resultString = HttpClientUtil.post("HomeAction.action", params);
+//                resultString = HttpClientUtil.post("HomeAction.action", params);
+                resultString = OkHttpUtil.post("HomeAction.action", jsonParam);
+
                 Log.v("home", resultString);
             }
 
@@ -97,7 +100,7 @@ public class MainpageAction
     {
         if(context != null)
         {
-            mCache = ACache.get(context);
+//            mCache = ACache.get(context);
         }
 
         String resultString = null;
@@ -114,7 +117,8 @@ public class MainpageAction
 
             if(CommonUtils.isValueEmpty(resultString))
             {
-                resultString = HttpClientUtil.post("HomeReAction.action", params);
+//                resultString = HttpClientUtil.post("HomeReAction.action", params);
+                resultString = OkHttpUtil.post("HomeReAction.action", jsonParam);
             }
 
             if(resultString != null)
@@ -166,7 +170,7 @@ public class MainpageAction
     {
         if(context != null)
         {
-            mCache = ACache.get(context);
+//            mCache = ACache.get(context);
         }
 
         OnlineshoppingGoods result = new OnlineshoppingGoods();

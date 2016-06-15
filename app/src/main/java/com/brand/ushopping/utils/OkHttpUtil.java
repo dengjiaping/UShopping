@@ -17,14 +17,13 @@ public class OkHttpUtil
     public static final MediaType JSONMediaType  = MediaType.parse("application/json; charset=utf-8");
 
     public static String post(String url, String json) throws Exception{
-
         RequestBody formBody = new FormBody.Builder()
                 .add("param", json)
                 .build();
 
 //        RequestBody body = RequestBody.create(JSONMediaType, json);
         Request request = new Request.Builder()
-                .url(url)
+                .url(getAbsoluteUrl(url))
                 .post(formBody)
                 .build();
         Response response = client.newCall(request).execute();

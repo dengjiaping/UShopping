@@ -208,8 +208,8 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
                 amapLocation.getCityCode();//城市编码
                 amapLocation.getAdCode();//地区编码
                 */
-                areaEditText.setText(amapLocation.getProvince()+" "+amapLocation.getCity()+" "+amapLocation.getDistrict());
-                deaddressEditText.setText(amapLocation.getAddress());
+                areaEditText.setText(amapLocation.getProvince() + amapLocation.getCity() + amapLocation.getDistrict());
+//                deaddressEditText.setText(amapLocation.getAddress());
 
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。

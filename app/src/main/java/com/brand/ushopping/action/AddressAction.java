@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Address;
-import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.OkHttpUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -29,7 +28,8 @@ public class AddressAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetAppAddressAllAction.action", params);
+//            resultString = HttpClientUtil.post("GetAppAddressAllAction.action", params);
+            resultString = OkHttpUtil.post("GetAppAddressAllAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -61,7 +61,8 @@ public class AddressAction
 
         try
         {
-            resultString = HttpClientUtil.post("SaveAppAddressAction.action", params);
+//            resultString = HttpClientUtil.post("SaveAppAddressAction.action", params);
+            resultString = OkHttpUtil.post("SaveAppAddressAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -137,7 +138,9 @@ public class AddressAction
 
         try
         {
-            resultString = HttpClientUtil.post("DeleteAddressAction.action", params);
+//            resultString = HttpClientUtil.post("DeleteAddressAction.action", params);
+            resultString = OkHttpUtil.post("DeleteAddressAction.action", jsonParam);
+
             Log.v("delete address", resultString);
             if(resultString != null)
             {
@@ -172,7 +175,9 @@ public class AddressAction
 
         try
         {
-            resultString = HttpClientUtil.post("DefaultAddressAction.action", params);
+//            resultString = HttpClientUtil.post("DefaultAddressAction.action", params);
+            resultString = OkHttpUtil.post("DefaultAddressAction.action", jsonParam);
+
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
