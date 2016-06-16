@@ -10,7 +10,7 @@ import com.brand.ushopping.model.BrandRecommend;
 import com.brand.ushopping.model.SaveAppBrandCollect;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
-import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.utils.OkHttpUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -19,21 +19,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import simplecache.ACache;
-
 /**
  * Created by Administrator on 2015/11/16.
  */
 public class BrandAction
 {
-    private ACache mCache;
+//    private ACache mCache;
 
     public BrandRecommend getRecommendAppBrandAction(Context context, BrandRecommend brand)
     {
-        if(context != null)
-        {
-            mCache = ACache.get(context);
-        }
+//        if(context != null)
+//        {
+//            mCache = ACache.get(context);
+//        }
 
         BrandRecommend result = null;
         String resultString = null;
@@ -43,7 +41,9 @@ public class BrandAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetRecommendAppBrandAction.action", params);
+//            resultString = HttpClientUtil.post("GetRecommendAppBrandAction.action", params);
+            resultString = OkHttpUtil.post("GetRecommendAppBrandAction.action", jsonParam);
+
             Log.v("ushopping brands", resultString);
             if(resultString != null)
             {
@@ -69,7 +69,7 @@ public class BrandAction
     {
         if(context != null)
         {
-            mCache = ACache.get(context);
+//            mCache = ACache.get(context);
         }
 
 
@@ -80,10 +80,10 @@ public class BrandAction
 
         try
         {
-            if(mCache != null)
-            {
-                resultString = mCache.getAsString("SaveAppBrandCollectAction.action");
-            }
+//            if(mCache != null)
+//            {
+//                resultString = mCache.getAsString("SaveAppBrandCollectAction.action");
+//            }
 
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -103,7 +103,7 @@ public class BrandAction
                     saveAppBrandCollect.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("SaveAppBrandCollectAction.action", resultString, StaticValues.CACHE_LIFE);
+//                    mCache.put("SaveAppBrandCollectAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
             }
@@ -119,10 +119,10 @@ public class BrandAction
     // --  查询收藏列表  --
     public AppBrandCollect getListAppBrandCollectUserIdAction(Context context, AppBrandCollect appBrandCollect)
     {
-        if(context != null)
-        {
-            mCache = ACache.get(context);
-        }
+//        if(context != null)
+//        {
+//            mCache = ACache.get(context);
+//        }
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(appBrandCollect);
@@ -131,10 +131,10 @@ public class BrandAction
 
         try
         {
-            if(mCache != null)
-            {
-                resultString = mCache.getAsString("GetListAppBrandCollectUserIdAction.action");
-            }
+//            if(mCache != null)
+//            {
+//                resultString = mCache.getAsString("GetListAppBrandCollectUserIdAction.action");
+//            }
 
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -164,7 +164,7 @@ public class BrandAction
                     appBrandCollect.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("GetListAppBrandCollectUserIdAction.action", resultString, StaticValues.CACHE_LIFE);
+//                    mCache.put("GetListAppBrandCollectUserIdAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else

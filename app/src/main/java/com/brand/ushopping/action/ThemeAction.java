@@ -8,7 +8,6 @@ import com.brand.ushopping.model.AppTheme;
 import com.brand.ushopping.model.AppThemeItem;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
-import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -17,18 +16,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import simplecache.ACache;
-
 /**
  * Created by Administrator on 2016/1/20.
  */
 public class ThemeAction
 {
-    private ACache mCache;
+//    private ACache mCache;
 
     public AppTheme getAppThemeAllAction(Context context, AppTheme appTheme)
     {
-        mCache = ACache.get(context);
+//        mCache = ACache.get(context);
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(appTheme);
@@ -37,10 +34,10 @@ public class ThemeAction
 
         try
         {
-            if(mCache != null)
-            {
-                resultString = mCache.getAsString("GetAppThemeAllAction.action");
-            }
+//            if(mCache != null)
+//            {
+//                resultString = mCache.getAsString("GetAppThemeAllAction.action");
+//            }
 
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -70,7 +67,7 @@ public class ThemeAction
                     appTheme.setSuccess(true);
 
                     //存入缓存
-                    mCache.put("GetAppThemeAllAction.action", resultString, StaticValues.CACHE_LIFE);
+//                    mCache.put("GetAppThemeAllAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else

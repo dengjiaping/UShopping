@@ -8,9 +8,7 @@ import com.brand.ushopping.model.AppStoresList;
 import com.brand.ushopping.model.AppStoresListItem;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.BrandGoodsList;
-import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
-import com.brand.ushopping.utils.StaticValues;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -19,14 +17,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import simplecache.ACache;
-
 /**
  * Created by Administrator on 2015/12/23.
  */
 public class StoreAction
 {
-    private ACache mCache;
+//    private ACache mCache;
 
     public AppStoresList gettAppStoresList(AppStoresList appStoresList)
     {
