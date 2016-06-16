@@ -603,20 +603,17 @@ public class OrderConfirmActivity extends Activity {
                 UserVoucherItem userVoucherItem = bundle.getParcelable("voucher");
                 AppvoucherId appvoucherId = userVoucherItem.getAppvoucherId();
 
-                //判断是否允许添加
+                // 判定是否允许添加优惠券
                 AppbrandId appbrandId = appvoucherId.getAppbrandId();
 
                 //已有判断
                 for(UserVoucherItem userVoucherItem1: userVoucherItems)
                 {
-
                     if(userVoucherItem.getId() == userVoucherItem1.getId())
                     {
                         Toast.makeText(OrderConfirmActivity.this, "您已添加此优惠券,不能重复添加", Toast.LENGTH_SHORT).show();
                         return;
-
                     }
-
                 }
 
                 //金额限制
@@ -624,29 +621,6 @@ public class OrderConfirmActivity extends Activity {
                 {
                     Toast.makeText(OrderConfirmActivity.this, "未达到优惠券满减金额", Toast.LENGTH_SHORT).show();
                     return;
-
-                }
-
-                //品牌限制
-                if(appbrandId.getId() != 0)
-                {
-                    boolean brandAvaliable = false;
-                    for(Goods goods: goodsList)
-                    {
-                        if(goods.getId() == appbrandId.getId())
-                        {
-                            brandAvaliable = true;
-
-                        }
-
-                    }
-
-                    if(brandAvaliable == false)
-                    {
-                        Toast.makeText(OrderConfirmActivity.this, "只能使用该品牌的优惠券", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
                 }
 
                 //过期时间限制
@@ -654,12 +628,55 @@ public class OrderConfirmActivity extends Activity {
                 {
                     Toast.makeText(OrderConfirmActivity.this, "优惠券已过期,无法添加", Toast.LENGTH_SHORT).show();
                     return;
+                }
+
+                //每个品牌限用一张 通用限用一张
+                if(appbrandId.getId() != 0)
+                {
+                    //品牌优惠券
+                    boolean brandAvaliable = false;
+
+                    for(Goods goods: goodsList)
+                    {
+                        if(goods.getId() == appbrandId.getId())
+                        {
+                            brandAvaliable = true;
+                        }
+                    }
+
+                    /*
+                    if(brandAvaliable == false)
+                    {
+                        Toast.makeText(OrderConfirmActivity.this, "只能使用该品牌的优惠券", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    */
+
+                }
+                else
+                {
+                    //通用优惠券
+                    //已有判断
+                    boolean commonVoucherAvaliable = true;
+                    for(UserVoucherItem userVoucherItem1: userVoucherItems)
+                    {
+                        if(userVoucherItem1.getAppvoucherId().getAppbrandId().getId() == 0)
+                        {
+                            commonVoucherAvaliable = false;
+                            break;
+                        }
+                    }
+
+                    if(commonVoucherAvaliable)
+                    {
+                        userVoucherItems.add(userVoucherItem);
+                    }
 
                 }
 
                 //改为只能使用一张优惠券
-                userVoucherItems.clear();
-                userVoucherItems.add(userVoucherItem);
+//                userVoucherItems.clear();
+
 
                 voucherReload();
                 calculateSummary();
