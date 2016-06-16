@@ -17,6 +17,7 @@ import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.OkHttpUtil;
 import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
@@ -41,7 +42,8 @@ public class AppAction {
         try
         {
 //            resultString = HttpClientUtil.post("GetMaxVersionAction.action", params);
-            resultString = OkHttpUtil.post("GetMaxVersionAction.action", jsonParam);
+//            resultString = OkHttpUtil.post("GetMaxVersionAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("GetMaxVersionAction.action", jsonParam);
 
             Log.v("version", resultString);
 
@@ -131,7 +133,7 @@ public class AppAction {
         homeRe.setMax(StaticValues.RECOMMEND_PAGE_COUNT);
         appContext.setHomeRe(new MainpageAction().homeRe(context, homeRe));
 
-        new AppAction().downloadSplash(context, "http://static.oschina.net/uploads/img/201208/13122559_L8G0.png");
+//        new AppAction().downloadSplash(context, "http://static.oschina.net/uploads/img/201208/13122559_L8G0.png");
     }
 
     //反馈

@@ -1,5 +1,8 @@
 package com.brand.ushopping.utils;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -16,13 +19,46 @@ public class URLConnectionUtil
         return BASE_URL + relativeUrl;
     }
 
-    public static void post(String path, String paramsString) throws Exception
+    public static String post(String path, String paramsString) throws Exception
     {
         URL url = new URL(getAbsoluteUrl(path));
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         conn.setDoOutput(true);
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+        PrintWriter printWriter = null;
+        BufferedReader bufferedReader = null;
+        StringBuffer responseResult = new StringBuffer();
+        StringBuffer params = new StringBuffer();
+        params.append("param="+paramsString);
+
+        // 发送POST请求必须设置如下两行
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+        // 获取URLConnection对象对应的输出流
+        printWriter = new PrintWriter(conn.getOutputStream());
+        // 发送请求参数
+        printWriter.write(params.toString());
+        // flush输出流的缓冲
+        printWriter.flush();
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            return null;
+        }
+        else
+        {
+            // 定义BufferedReader输入流来读取URL的ResponseData
+            bufferedReader = new BufferedReader(new InputStreamReader(
+                    conn.getInputStream()));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                responseResult.append(line);
+            }
+
+            return responseResult.toString();
+        }
 
     }
 

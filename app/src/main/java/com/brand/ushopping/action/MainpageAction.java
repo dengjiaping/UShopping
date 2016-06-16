@@ -12,6 +12,7 @@ import com.brand.ushopping.model.OnlineshoppingGoods;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.OkHttpUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -52,7 +53,8 @@ public class MainpageAction
             {
 //                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
 //                resultString = HttpClientUtil.post("HomeAction.action", params);
-                resultString = OkHttpUtil.post("HomeAction.action", jsonParam);
+//                resultString = OkHttpUtil.post("HomeAction.action", jsonParam);
+                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
 
                 Log.v("home", resultString);
             }
@@ -114,7 +116,8 @@ public class MainpageAction
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("HomeReAction.action", params);
-                resultString = OkHttpUtil.post("HomeReAction.action", jsonParam);
+//                resultString = OkHttpUtil.post("HomeReAction.action", jsonParam);
+                resultString = URLConnectionUtil.post("HomeReAction.action", jsonParam);
             }
 
             if(resultString != null)
