@@ -8,7 +8,7 @@ import com.brand.ushopping.model.AppStoresList;
 import com.brand.ushopping.model.AppStoresListItem;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.BrandGoodsList;
-import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -33,7 +33,8 @@ public class StoreAction
 
         try
         {
-            resultString = HttpClientUtil.post("GettAppStoresList.action", params);
+//            resultString = HttpClientUtil.post("GettAppStoresList.action", params);
+            resultString = URLConnectionUtil.post("GettAppStoresList.action", jsonParam);
             Log.v("ushopping around", resultString);
             if(resultString != null)
             {
@@ -83,7 +84,8 @@ public class StoreAction
             }
             */
 
-            resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
+//            resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
+            resultString = URLConnectionUtil.post("GetAppStoresIdAll.action", jsonParam);
             Log.v("brand goods", resultString);
 
             if(resultString != null)

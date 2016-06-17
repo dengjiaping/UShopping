@@ -12,7 +12,7 @@ import com.brand.ushopping.model.OrderSuccess;
 import com.brand.ushopping.model.OrderUpdate;
 import com.brand.ushopping.model.SmOrderSaveList;
 import com.brand.ushopping.model.YyOrderSaveList;
-import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -36,7 +36,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("OrderSaveAction.action", params);
+//            resultString = HttpClientUtil.post("OrderSaveAction.action", params);
+            resultString = URLConnectionUtil.post("OrderSaveAction.action", jsonParam);
             Log.v("OrderSaveAction", resultString);
             if(resultString != null)
             {
@@ -77,7 +78,8 @@ public class OrderAction
         String result = null;
         try
         {
-            resultString = HttpClientUtil.post("GetOrderAllAction.action", params);
+//            resultString = HttpClientUtil.post("GetOrderAllAction.action", params);
+            resultString = URLConnectionUtil.post("GetOrderAllAction.action", jsonParam);
             Log.v("order", resultString);
             if(resultString != null)
             {
@@ -152,7 +154,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("YyOrderSaveAction.action", params);
+//            resultString = HttpClientUtil.post("YyOrderSaveAction.action", params);
+            resultString = URLConnectionUtil.post("YyOrderSaveAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -193,7 +196,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetYyOrderAllAction.action", params);
+//            resultString = HttpClientUtil.post("GetYyOrderAllAction.action", params);
+            resultString = URLConnectionUtil.post("GetYyOrderAllAction.action", jsonParam);
             Log.v("GetYyOrderAllAction", resultString);
             if(resultString != null)
             {
@@ -269,7 +273,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetSmOrderAllAction.action", params);
+//            resultString = HttpClientUtil.post("GetSmOrderAllAction.action", params);
+            resultString = URLConnectionUtil.post("GetSmOrderAllAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -344,7 +349,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("SmOrderSaveAction.action", params);
+//            resultString = HttpClientUtil.post("SmOrderSaveAction.action", params);
+            resultString = URLConnectionUtil.post("SmOrderSaveAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -386,7 +392,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("YyOrderUpdateAction.action", params);
+//            resultString = HttpClientUtil.post("YyOrderUpdateAction.action", params);
+            resultString = URLConnectionUtil.post("YyOrderUpdateAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -427,7 +434,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("SmOrderUpdateAction.action", params);
+//            resultString = HttpClientUtil.post("SmOrderUpdateAction.action", params);
+            resultString = URLConnectionUtil.post("SmOrderUpdateAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -468,7 +476,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("SmOrderSuccessAction.action", params);
+//            resultString = HttpClientUtil.post("SmOrderSuccessAction.action", params);
+            resultString = URLConnectionUtil.post("SmOrderSuccessAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -509,7 +518,8 @@ public class OrderAction
 
         try
         {
-            resultString = HttpClientUtil.post("YyOrderSuccessAction.action", params);
+//            resultString = HttpClientUtil.post("YyOrderSuccessAction.action", params);
+            resultString = URLConnectionUtil.post("YyOrderSuccessAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -550,7 +560,8 @@ public class OrderAction
         Log.v("ConfirmOrderAction", jsonParam);
         try
         {
-            resultString = HttpClientUtil.post("ConfirmOrderAction.action", params);
+//            resultString = HttpClientUtil.post("ConfirmOrderAction.action", params);
+            resultString = URLConnectionUtil.post("ConfirmOrderAction.action", jsonParam);
 
             if(resultString != null)
             {

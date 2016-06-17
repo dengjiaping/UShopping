@@ -10,7 +10,7 @@ import com.brand.ushopping.model.AppShopcartIdList;
 import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.AppsmShopcart;
 import com.brand.ushopping.model.AppyyShopcart;
-import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -32,7 +32,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("AddAppShopcartAction.action", params);
+//            resultString = HttpClientUtil.post("AddAppShopcartAction.action", params);
+            resultString = URLConnectionUtil.post("AddAppShopcartAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -65,7 +66,9 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("GetAppShopcartIdListAction.action", params);
+//            resultString = HttpClientUtil.post("GetAppShopcartIdListAction.action", params);
+            resultString = URLConnectionUtil.post("GetAppShopcartIdListAction.action", jsonParam);
+
             if(resultString != null)
             {
                 Log.v("cart", resultString);
@@ -142,7 +145,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("DeleteShopcartIdAction.action", params);
+//            resultString = HttpClientUtil.post("DeleteShopcartIdAction.action", params);
+            resultString = URLConnectionUtil.post("DeleteShopcartIdAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -175,7 +179,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("SaveInsertAppyyShopcart.action", params);
+//            resultString = HttpClientUtil.post("SaveInsertAppyyShopcart.action", params);
+            resultString = URLConnectionUtil.post("SaveInsertAppyyShopcart.action", jsonParam);
 
             if(resultString != null)
             {
@@ -214,7 +219,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("UpdateAppyyShopcart.action", params);
+//            resultString = HttpClientUtil.post("UpdateAppyyShopcart.action", params);
+            resultString = URLConnectionUtil.post("UpdateAppyyShopcart.action", jsonParam);
 
             if(resultString != null)
             {
@@ -247,7 +253,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("UpdateAppsmShopcartAction.action", params);
+//            resultString = HttpClientUtil.post("UpdateAppsmShopcartAction.action", params);
+            resultString = URLConnectionUtil.post("UpdateAppsmShopcartAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -280,7 +287,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("GetAppyyShopcartIdList.action", params);
+//            resultString = HttpClientUtil.post("GetAppyyShopcartIdList.action", params);
+            resultString = URLConnectionUtil.post("GetAppyyShopcartIdList.action", jsonParam);
 
             if(resultString != null)
             {
@@ -354,7 +362,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("SaveInsertAppsmShopcart.action", params);
+//            resultString = HttpClientUtil.post("SaveInsertAppsmShopcart.action", params);
+            resultString = URLConnectionUtil.post("SaveInsertAppsmShopcart.action", jsonParam);
 
             if(resultString != null)
             {
@@ -387,7 +396,8 @@ public class CartAction {
 
         try
         {
-            resultString = HttpClientUtil.post("GetAppsmShopcartIdList.action", params);
+//            resultString = HttpClientUtil.post("GetAppsmShopcartIdList.action", params);
+            resultString = URLConnectionUtil.post("GetAppsmShopcartIdList.action", jsonParam);
 
             if(resultString != null)
             {

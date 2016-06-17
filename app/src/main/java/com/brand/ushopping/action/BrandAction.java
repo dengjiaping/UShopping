@@ -9,8 +9,7 @@ import com.brand.ushopping.model.AppBrandCollectItem;
 import com.brand.ushopping.model.BrandRecommend;
 import com.brand.ushopping.model.SaveAppBrandCollect;
 import com.brand.ushopping.utils.CommonUtils;
-import com.brand.ushopping.utils.HttpClientUtil;
-import com.brand.ushopping.utils.OkHttpUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -42,7 +41,8 @@ public class BrandAction
         try
         {
 //            resultString = HttpClientUtil.post("GetRecommendAppBrandAction.action", params);
-            resultString = OkHttpUtil.post("GetRecommendAppBrandAction.action", jsonParam);
+//            resultString = OkHttpUtil.post("GetRecommendAppBrandAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("GetRecommendAppBrandAction.action", jsonParam);
 
             Log.v("ushopping brands", resultString);
             if(resultString != null)
@@ -87,7 +87,9 @@ public class BrandAction
 
             if(CommonUtils.isValueEmpty(resultString))
             {
-                resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
+//                resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
+                resultString = URLConnectionUtil.post("SaveAppBrandCollectAction.action", jsonParam);
+
                 Log.v("brand favourite", resultString);
 
             }
@@ -138,7 +140,8 @@ public class BrandAction
 
             if(CommonUtils.isValueEmpty(resultString))
             {
-                resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
+//                resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
+                resultString = URLConnectionUtil.post("GetListAppBrandCollectUserIdAction.action", jsonParam);
 
             }
             Log.v("brand collect", resultString);

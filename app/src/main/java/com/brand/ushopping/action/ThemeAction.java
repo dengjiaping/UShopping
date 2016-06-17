@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.AppTheme;
 import com.brand.ushopping.model.AppThemeItem;
 import com.brand.ushopping.utils.CommonUtils;
-import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -41,7 +41,8 @@ public class ThemeAction
 
             if(CommonUtils.isValueEmpty(resultString))
             {
-                resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);
+//                resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);
+                resultString = URLConnectionUtil.post("GetAppThemeAllAction.action", jsonParam);
                 Log.v("theme", resultString);
 
             }

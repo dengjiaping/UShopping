@@ -10,8 +10,6 @@ import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.OnlineshoppingGoods;
 import com.brand.ushopping.utils.CommonUtils;
-import com.brand.ushopping.utils.HttpClientUtil;
-import com.brand.ushopping.utils.OkHttpUtil;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -187,7 +185,8 @@ public class MainpageAction
 
             if(resultString == null)
             {
-                resultString = HttpClientUtil.post("OnlineshoppingGoodsAction.action", params);
+//                resultString = HttpClientUtil.post("OnlineshoppingGoodsAction.action", params);
+                resultString = URLConnectionUtil.post("OnlineshoppingGoodsAction.action", jsonParam);
 
             }
 

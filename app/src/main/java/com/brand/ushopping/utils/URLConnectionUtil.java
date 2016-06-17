@@ -5,10 +5,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by Administrator on 2016/3/15.
- * 废弃
  *
  */
 public class URLConnectionUtil
@@ -22,20 +22,28 @@ public class URLConnectionUtil
     public static String post(String path, String paramsString) throws Exception
     {
         URL url = new URL(getAbsoluteUrl(path));
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
-        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
         PrintWriter printWriter = null;
         BufferedReader bufferedReader = null;
-        StringBuffer responseResult = new StringBuffer();
+        StringBuffer responseResult = null;
         StringBuffer params = new StringBuffer();
-        params.append("param="+paramsString);
+        params.append("param=" + URLEncoder.encode(paramsString, "UTF-8"));
 
+//        if (params.length() > 0) {
+//            params.deleteCharAt(params.length() - 1);
+//        }
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
         // 发送POST请求必须设置如下两行
         conn.setDoOutput(true);
         conn.setDoInput(true);
+        // 设置通用的请求属性
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Content-Length", String.valueOf(params.length()));
+        conn.setUseCaches(false);
+        conn.setInstanceFollowRedirects(true);
+
         // 获取URLConnection对象对应的输出流
         printWriter = new PrintWriter(conn.getOutputStream());
         // 发送请求参数
@@ -44,20 +52,34 @@ public class URLConnectionUtil
         printWriter.flush();
 
         int responseCode = conn.getResponseCode();
-        if (responseCode != 200) {
-            return null;
-        }
-        else
+        if (responseCode == 200)
         {
             // 定义BufferedReader输入流来读取URL的ResponseData
             bufferedReader = new BufferedReader(new InputStreamReader(
                     conn.getInputStream()));
             String line;
+            responseResult = new StringBuffer();
             while ((line = bufferedReader.readLine()) != null) {
                 responseResult.append(line);
             }
 
+        }
+
+        if (printWriter != null) {
+            printWriter.close();
+        }
+        if (bufferedReader != null) {
+            bufferedReader.close();
+        }
+        conn.disconnect();
+
+        if(responseResult != null)
+        {
             return responseResult.toString();
+        }
+        else
+        {
+            return null;
         }
 
     }

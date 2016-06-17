@@ -5,6 +5,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.utils.OkHttpUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -29,7 +30,8 @@ public class AddressAction
         try
         {
 //            resultString = HttpClientUtil.post("GetAppAddressAllAction.action", params);
-            resultString = OkHttpUtil.post("GetAppAddressAllAction.action", jsonParam);
+//            resultString = OkHttpUtil.post("GetAppAddressAllAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("GetAppAddressAllAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -63,6 +65,7 @@ public class AddressAction
         {
 //            resultString = HttpClientUtil.post("SaveAppAddressAction.action", params);
             resultString = OkHttpUtil.post("SaveAppAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("SaveAppAddressAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -100,7 +103,8 @@ public class AddressAction
         try
         {
 //            resultString = HttpClientUtil.post("UpdateAddressAction.action", params);
-            resultString = OkHttpUtil.post("UpdateAddressAction.action", jsonParam);
+//            resultString = OkHttpUtil.post("UpdateAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("UpdateAddressAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -139,7 +143,8 @@ public class AddressAction
         try
         {
 //            resultString = HttpClientUtil.post("DeleteAddressAction.action", params);
-            resultString = OkHttpUtil.post("DeleteAddressAction.action", jsonParam);
+//            resultString = OkHttpUtil.post("DeleteAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("DeleteAddressAction.action", jsonParam);
 
             Log.v("delete address", resultString);
             if(resultString != null)
@@ -176,7 +181,8 @@ public class AddressAction
         try
         {
 //            resultString = HttpClientUtil.post("DefaultAddressAction.action", params);
-            resultString = OkHttpUtil.post("DefaultAddressAction.action", jsonParam);
+//            resultString = OkHttpUtil.post("DefaultAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post("DefaultAddressAction.action", jsonParam);
 
             if(resultString != null)
             {

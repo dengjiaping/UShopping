@@ -11,7 +11,7 @@ import com.brand.ushopping.model.ManJianVoucherItem;
 import com.brand.ushopping.model.SaveUserVoucher;
 import com.brand.ushopping.model.UserVoucherItem;
 import com.brand.ushopping.model.VoucherItem;
-import com.brand.ushopping.utils.HttpClientUtil;
+import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -35,7 +35,8 @@ public class VoucherAction
 
         try
         {
-            resultString = HttpClientUtil.post("AppVoucherSelectGeneralAction.action", params);
+//            resultString = HttpClientUtil.post("AppVoucherSelectGeneralAction.action", params);
+            resultString = URLConnectionUtil.post("AppVoucherSelectGeneralAction.action", jsonParam);
             Log.v("voucher", resultString);
             if(resultString != null)
             {
@@ -81,7 +82,8 @@ public class VoucherAction
 
         try
         {
-            resultString = HttpClientUtil.post("SaveUserVoucherAction.action", params);
+//            resultString = HttpClientUtil.post("SaveUserVoucherAction.action", params);
+            resultString = URLConnectionUtil.post("SaveUserVoucherAction.action", jsonParam);
 
             if(resultString != null)
             {
@@ -120,7 +122,8 @@ public class VoucherAction
 
         try
         {
-            resultString = HttpClientUtil.post("GetUserVoucherIdAction.action", params);
+//            resultString = HttpClientUtil.post("GetUserVoucherIdAction.action", params);
+            resultString = URLConnectionUtil.post("GetUserVoucherIdAction.action", jsonParam);
             Log.v("user voucher", resultString);
             if(resultString != null)
             {
@@ -168,7 +171,8 @@ public class VoucherAction
 
         try
         {
-            resultString = HttpClientUtil.post("ManJainAllAction.action", params);
+//            resultString = HttpClientUtil.post("ManJainAllAction.action", params);
+            resultString = URLConnectionUtil.post("ManJainAllAction.action", jsonParam);
             Log.v("manjian", resultString);
             if(resultString != null)
             {
@@ -216,7 +220,8 @@ public class VoucherAction
 
         try
         {
-            resultString = HttpClientUtil.post("BatchSaveUserVoucherAction.action", params);
+//            resultString = HttpClientUtil.post("BatchSaveUserVoucherAction.action", params);
+            resultString = URLConnectionUtil.post("BatchSaveUserVoucherAction.action", jsonParam);
 
             if(resultString != null)
             {
