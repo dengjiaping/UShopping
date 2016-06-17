@@ -435,7 +435,11 @@ public class VoucherActivity extends Activity {
                         line.put("enterType", enterType);
                         line.put("flag", userVoucherItem.getFlag());
 
-                        listData.add(line);
+                        //过期时间限制
+                        if(currentTime > appvoucherId.getValidity() && currentTime < appvoucherId.getDays())
+                        {
+                            listData.add(line);
+                        }
 
                     }
                     voucherAdapter = new VoucherAdapter(listData, VoucherActivity.this);

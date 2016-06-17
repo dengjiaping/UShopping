@@ -39,8 +39,10 @@ public class URLConnectionUtil
         conn.setDoOutput(true);
         conn.setDoInput(true);
         // 设置通用的请求属性
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
         conn.setRequestProperty("Content-Length", String.valueOf(params.length()));
+        conn.setRequestProperty("Accept-Charset", "utf-8");
+        conn.setRequestProperty("contentType", "utf-8");
         conn.setUseCaches(false);
         conn.setInstanceFollowRedirects(true);
 
@@ -52,7 +54,7 @@ public class URLConnectionUtil
         printWriter.flush();
 
         int responseCode = conn.getResponseCode();
-        if (responseCode == 200)
+        if (responseCode == HttpURLConnection.HTTP_OK)
         {
             // 定义BufferedReader输入流来读取URL的ResponseData
             bufferedReader = new BufferedReader(new InputStreamReader(
