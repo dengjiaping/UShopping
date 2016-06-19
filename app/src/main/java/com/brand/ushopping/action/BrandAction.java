@@ -42,7 +42,7 @@ public class BrandAction
         {
 //            resultString = HttpClientUtil.post("GetRecommendAppBrandAction.action", params);
 //            resultString = OkHttpUtil.post("GetRecommendAppBrandAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("GetRecommendAppBrandAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetRecommendAppBrandAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("ushopping brands", resultString);
             if(resultString != null)
@@ -88,7 +88,7 @@ public class BrandAction
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
-                resultString = URLConnectionUtil.post("SaveAppBrandCollectAction.action", jsonParam);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppBrandCollectAction.action"), CommonUtils.generateParams(jsonParam));
 
                 Log.v("brand favourite", resultString);
 
@@ -141,7 +141,7 @@ public class BrandAction
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
-                resultString = URLConnectionUtil.post("GetListAppBrandCollectUserIdAction.action", jsonParam);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetListAppBrandCollectUserIdAction.action"), CommonUtils.generateParams(jsonParam));
 
             }
             Log.v("brand collect", resultString);

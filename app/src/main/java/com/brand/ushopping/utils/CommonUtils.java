@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -201,6 +202,18 @@ public class CommonUtils {
     }
 
     public static java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");
+
+    public static String getAbsoluteUrl(String relativeUrl) {
+        return EnvValues.serverPath + relativeUrl;
+    }
+
+    public static Map<String, Object> generateParams(String jsonString)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("param", jsonString);
+
+        return map;
+    }
 
     //设置优先使用的网络
 //    public static void setPreferredNetwork(Context context, int networkType) {

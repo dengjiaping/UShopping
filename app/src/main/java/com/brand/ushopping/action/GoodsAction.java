@@ -21,6 +21,7 @@ import com.brand.ushopping.model.SaveAppEvaluate;
 import com.brand.ushopping.model.SaveAppGoodsCollect;
 import com.brand.ushopping.model.SearchAppGoods;
 import com.brand.ushopping.model.SelectChargeId;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.UDBHelper;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
@@ -46,7 +47,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("GetAppGoodsIdAction.action", params);
-            resultString = URLConnectionUtil.post("GetAppGoodsIdAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsIdAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("ushopping goods", resultString);
             if(resultString != null)
@@ -90,7 +91,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("ReturnClientChargeAction.action", params);
-            resultString = URLConnectionUtil.post("ReturnClientChargeAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("ReturnClientChargeAction.action"), CommonUtils.generateParams(jsonParam));
 
 //            Log.v("charge", resultString);
             if(resultString != null)
@@ -125,7 +126,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);
-            resultString = URLConnectionUtil.post("GetAppGoodsTypeId.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -176,7 +177,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("SearchAppGoodsAction.action", params);
-            resultString = URLConnectionUtil.post("SearchAppGoodsAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SearchAppGoodsAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("search result", resultString);
             if(resultString != null)
@@ -226,7 +227,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("SaveAppGoodsCollectAction.action", params);
-            resultString = URLConnectionUtil.post("SaveAppGoodsCollectAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppGoodsCollectAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -258,7 +259,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("GetListAppGoodsCollectUserIdAction.action", params);
-            resultString = URLConnectionUtil.post("GetListAppGoodsCollectUserIdAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetListAppGoodsCollectUserIdAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -305,7 +306,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("GetAppEvaluateAction.action", params);
-            resultString = URLConnectionUtil.post("GetAppEvaluateAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppEvaluateAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("ushopping evaluate", resultString);
 
             if(resultString != null)
@@ -355,7 +356,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("SaveAppCustomerAction.action", params);
-            resultString = URLConnectionUtil.post("SaveAppCustomerAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppCustomerAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -388,7 +389,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("SaveAppEvaluateAction.action", params);
-            resultString = URLConnectionUtil.post("SaveAppEvaluateAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppEvaluateAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -541,7 +542,7 @@ public class GoodsAction
         try
         {
 //            resultString = HttpClientUtil.post("SelectChargeIdPingAction.action", params);
-            resultString = URLConnectionUtil.post("SelectChargeIdPingAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SelectChargeIdPingAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
