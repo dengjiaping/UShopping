@@ -42,7 +42,7 @@ public class ThemeAction
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);
-                resultString = URLConnectionUtil.post("GetAppThemeAllAction.action", jsonParam);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppThemeAllAction.action"), CommonUtils.generateParams(jsonParam));
                 Log.v("theme", resultString);
 
             }

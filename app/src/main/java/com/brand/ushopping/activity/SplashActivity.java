@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
@@ -44,6 +45,10 @@ public class SplashActivity extends Activity {
         appContext.setScreenHeight(metrics.heightPixels);
 
         currentTimeMil = System.currentTimeMillis();
+
+        //获取手机的信息
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+        appContext.setImie(tm.getDeviceId());
 
         //检测是否登录
         User user = new RefAction().getUser(SplashActivity.this);

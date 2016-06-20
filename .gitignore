@@ -40,3 +40,7 @@ captures/
 /app/src/main/java/com/brand/ushopping/utils/EnvValues.java
 
 app/app.iml
+
+lib/bdwallet_pay_sdk/
+lib/pingpp/
+lib/pingpp_one/

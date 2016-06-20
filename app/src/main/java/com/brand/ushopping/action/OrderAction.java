@@ -12,6 +12,7 @@ import com.brand.ushopping.model.OrderSuccess;
 import com.brand.ushopping.model.OrderUpdate;
 import com.brand.ushopping.model.SmOrderSaveList;
 import com.brand.ushopping.model.YyOrderSaveList;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -37,7 +38,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("OrderSaveAction.action", params);
-            resultString = URLConnectionUtil.post("OrderSaveAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("OrderSaveAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("OrderSaveAction", resultString);
             if(resultString != null)
             {
@@ -79,7 +80,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("GetOrderAllAction.action", params);
-            resultString = URLConnectionUtil.post("GetOrderAllAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetOrderAllAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("order", resultString);
             if(resultString != null)
             {
@@ -155,7 +156,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("YyOrderSaveAction.action", params);
-            resultString = URLConnectionUtil.post("YyOrderSaveAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("YyOrderSaveAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -197,7 +198,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("GetYyOrderAllAction.action", params);
-            resultString = URLConnectionUtil.post("GetYyOrderAllAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetYyOrderAllAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("GetYyOrderAllAction", resultString);
             if(resultString != null)
             {
@@ -274,7 +275,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("GetSmOrderAllAction.action", params);
-            resultString = URLConnectionUtil.post("GetSmOrderAllAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetSmOrderAllAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -350,7 +351,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("SmOrderSaveAction.action", params);
-            resultString = URLConnectionUtil.post("SmOrderSaveAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SmOrderSaveAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -393,7 +394,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("YyOrderUpdateAction.action", params);
-            resultString = URLConnectionUtil.post("YyOrderUpdateAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("YyOrderUpdateAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -435,7 +436,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("SmOrderUpdateAction.action", params);
-            resultString = URLConnectionUtil.post("SmOrderUpdateAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SmOrderUpdateAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -477,7 +478,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("SmOrderSuccessAction.action", params);
-            resultString = URLConnectionUtil.post("SmOrderSuccessAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SmOrderSuccessAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -519,7 +520,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("YyOrderSuccessAction.action", params);
-            resultString = URLConnectionUtil.post("YyOrderSuccessAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("YyOrderSuccessAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -561,7 +562,7 @@ public class OrderAction
         try
         {
 //            resultString = HttpClientUtil.post("ConfirmOrderAction.action", params);
-            resultString = URLConnectionUtil.post("ConfirmOrderAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("ConfirmOrderAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {

@@ -1,6 +1,7 @@
 package com.brand.ushopping.action;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -10,6 +11,7 @@ import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.OnlineshoppingGoods;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -42,6 +44,7 @@ public class MainpageAction
 
         try
         {
+            resultString = DataCache.getData(context, "HomeAction.action");
 //            if(mCache != null)
 //            {
 //                resultString = mCache.getAsString("HomeAction.action");
@@ -52,7 +55,7 @@ public class MainpageAction
 //                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
 //                resultString = HttpClientUtil.post("HomeAction.action", params);
 //                resultString = OkHttpUtil.post("HomeAction.action", jsonParam);
-                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("HomeAction.action"), CommonUtils.generateParams(jsonParam));
 
                 Log.v("home", resultString);
             }
@@ -71,6 +74,7 @@ public class MainpageAction
                     result.setSuccess(true);
 
                     //存入缓存
+                    DataCache.putData(context, "HomeAction.action", resultString);
 //                    mCache.put("HomeAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
@@ -115,7 +119,7 @@ public class MainpageAction
             {
 //                resultString = HttpClientUtil.post("HomeReAction.action", params);
 //                resultString = OkHttpUtil.post("HomeReAction.action", jsonParam);
-                resultString = URLConnectionUtil.post("HomeReAction.action", jsonParam);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("HomeReAction.action"), CommonUtils.generateParams(jsonParam));
             }
 
             if(resultString != null)
@@ -186,7 +190,7 @@ public class MainpageAction
             if(resultString == null)
             {
 //                resultString = HttpClientUtil.post("OnlineshoppingGoodsAction.action", params);
-                resultString = URLConnectionUtil.post("OnlineshoppingGoodsAction.action", jsonParam);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("OnlineshoppingGoodsAction.action"), CommonUtils.generateParams(jsonParam));
 
             }
 

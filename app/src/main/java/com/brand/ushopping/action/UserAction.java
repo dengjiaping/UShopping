@@ -5,6 +5,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.ThirdPartyUser;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -29,7 +30,7 @@ public class UserAction
         try
         {
 //            resultString = HttpClientUtil.post("GetLoginAction.action", params);
-            resultString = URLConnectionUtil.post("GetLoginAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetLoginAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("ushopping login", resultString);
             if(resultString != null)
             {
@@ -70,7 +71,7 @@ public class UserAction
         try
         {
 //            resultString = HttpClientUtil.post("RegisteredAction.action", params);
-            resultString = URLConnectionUtil.post("RegisteredAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("RegisteredAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -114,7 +115,7 @@ public class UserAction
         try
         {
 //            resultString = HttpClientUtil.post("SinaRegistered.action", params);
-            resultString = URLConnectionUtil.post("SinaRegistered.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SinaRegistered.action"), CommonUtils.generateParams(jsonParam));
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -154,7 +155,7 @@ public class UserAction
         try
         {
 //            resultString = HttpClientUtil.post("UpdateAppUser.action", params);
-            resultString = URLConnectionUtil.post("UpdateAppUser.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("UpdateAppUser.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {

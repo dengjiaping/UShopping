@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Sign;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -28,7 +29,7 @@ public class SignAction
         try
         {
 //            resultString = HttpClientUtil.post("GetSignAction.action", params);
-            resultString = URLConnectionUtil.post("GetSignAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetSignAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("last sign", resultString);
 
             if(resultString != null)
@@ -66,7 +67,7 @@ public class SignAction
         try
         {
 //            resultString = HttpClientUtil.post("SignAction.action", params);
-            resultString = URLConnectionUtil.post("SignAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SignAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {

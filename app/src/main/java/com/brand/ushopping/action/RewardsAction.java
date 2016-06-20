@@ -5,6 +5,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.RewardGoodsItem;
 import com.brand.ushopping.model.UserReward;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -30,7 +31,7 @@ public class RewardsAction
         try
         {
 //            resultString = HttpClientUtil.post("GetAppUserRewards.action", params);
-            resultString = URLConnectionUtil.post("GetAppUserRewards.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppUserRewards.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -68,7 +69,7 @@ public class RewardsAction
         try
         {
 //            resultString = HttpClientUtil.post("GetAppUshopAll.action", params);
-            resultString = URLConnectionUtil.post("GetAppUshopAll.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppUshopAll.action"), CommonUtils.generateParams(jsonParam));
             Log.v("reward", resultString);
 
             if(resultString != null)
@@ -101,7 +102,7 @@ public class RewardsAction
         try
         {
 //            resultString = HttpClientUtil.post("AppUshopBuy.action", params);
-            resultString = URLConnectionUtil.post("AppUshopBuy.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("AppUshopBuy.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {

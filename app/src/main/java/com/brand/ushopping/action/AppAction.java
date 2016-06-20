@@ -14,6 +14,7 @@ import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.utils.URLConnectionUtil;
@@ -42,7 +43,7 @@ public class AppAction {
         {
 //            resultString = HttpClientUtil.post("GetMaxVersionAction.action", params);
 //            resultString = OkHttpUtil.post("GetMaxVersionAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("GetMaxVersionAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetMaxVersionAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("version", resultString);
 
@@ -147,7 +148,7 @@ public class AppAction {
         {
 //            resultString = HttpClientUtil.post("FeedbackSaveAction.action", params);
 //            resultString = OkHttpUtil.post("FeedbackSaveAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("FeedbackSaveAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("FeedbackSaveAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {

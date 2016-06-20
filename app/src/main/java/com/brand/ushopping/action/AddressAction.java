@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Address;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.OkHttpUtil;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/11/11.
@@ -24,14 +26,14 @@ public class AddressAction
         ArrayList<Address> result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
+//        List params = new ArrayList();
+//        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
 //            resultString = HttpClientUtil.post("GetAppAddressAllAction.action", params);
 //            resultString = OkHttpUtil.post("GetAppAddressAllAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("GetAppAddressAllAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppAddressAllAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -65,7 +67,7 @@ public class AddressAction
         {
 //            resultString = HttpClientUtil.post("SaveAppAddressAction.action", params);
             resultString = OkHttpUtil.post("SaveAppAddressAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("SaveAppAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -104,7 +106,7 @@ public class AddressAction
         {
 //            resultString = HttpClientUtil.post("UpdateAddressAction.action", params);
 //            resultString = OkHttpUtil.post("UpdateAddressAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("UpdateAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("UpdateAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -144,7 +146,7 @@ public class AddressAction
         {
 //            resultString = HttpClientUtil.post("DeleteAddressAction.action", params);
 //            resultString = OkHttpUtil.post("DeleteAddressAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("DeleteAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("DeleteAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("delete address", resultString);
             if(resultString != null)
@@ -182,7 +184,7 @@ public class AddressAction
         {
 //            resultString = HttpClientUtil.post("DefaultAddressAction.action", params);
 //            resultString = OkHttpUtil.post("DefaultAddressAction.action", jsonParam);
-            resultString = URLConnectionUtil.post("DefaultAddressAction.action", jsonParam);
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("DefaultAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {

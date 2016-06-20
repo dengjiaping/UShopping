@@ -9,8 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.utils.CommonUtils;
 import com.umeng.socialize.ShareAction;
@@ -30,7 +32,8 @@ public class DevActivity extends Activity {
     private EditText kuaidiPostidEditText;
     private Button animationBtn;
     private Button themeActivityBtn;
-
+    private TextView imieTextView;
+    private AppContext appContext;
 //    private RecyclerView recyclerViewTest;
 //    private LinearLayoutManager linearLayoutManager;
 //    private RecyclerViewAdapter recyclerViewAdapter;
@@ -41,6 +44,7 @@ public class DevActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dev);
+        appContext = (AppContext) getApplicationContext();
 
         weiboShare = (Button) findViewById(R.id.weibo_share);
         weiboShare.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +179,8 @@ public class DevActivity extends Activity {
 //        linearLayoutManager = new LinearLayoutManager(this);
 //        recyclerViewTest.setLayoutManager();
 
+        imieTextView = (TextView) findViewById(R.id.imie);
+        imieTextView.setText(appContext.getImie());
 
     }
 
