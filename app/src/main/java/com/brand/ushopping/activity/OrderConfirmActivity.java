@@ -527,6 +527,7 @@ public class OrderConfirmActivity extends Activity {
                  * "cancel"  - user canceld
                  * "invalid" - payment plugin not installed
                  *
+                 *
                  * 如果是银联渠道返回 invalid，调用 UPPayAssistEx.installUPPayPlugin(this); 安装银联安全支付控件。
                  */
                 if(!CommonUtils.isValueEmpty(result))
@@ -614,7 +615,6 @@ public class OrderConfirmActivity extends Activity {
                         Toast.makeText(OrderConfirmActivity.this, "您已添加此优惠券,不能重复添加", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                 }
 
                 //商品判断
@@ -651,61 +651,6 @@ public class OrderConfirmActivity extends Activity {
                 }
 
                 userVoucherItems.add(userVoucherItem);
-
-//                //每个品牌限用一张 通用限用一张
-//                if(appbrandId.getId() != 0)
-//                {
-//                    //品牌优惠券
-//
-//                    //遍历现有的
-//
-//
-//
-//
-
-//                    boolean brandAvaliable = false;
-//
-//                    for(Goods goods: goodsList)
-//                    {
-//                        if(goods.getId() == appbrandId.getId())
-//                        {
-//                            brandAvaliable = true;
-//                        }
-//                    }
-
-                    /*
-                    if(brandAvaliable == false)
-                    {
-                        Toast.makeText(OrderConfirmActivity.this, "只能使用该品牌的优惠券", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    */
-//
-//                }
-//                else
-//                {
-//                    //通用优惠券
-//                    //已有判断
-//                    boolean commonVoucherAvaliable = true;
-//                    for(UserVoucherItem userVoucherItem1: userVoucherItems)
-//                    {
-//                        if(userVoucherItem1.getAppvoucherId().getAppbrandId().getId() == 0)
-//                        {
-//                            commonVoucherAvaliable = false;
-//                            break;
-//                        }
-//                    }
-//
-//                    if(commonVoucherAvaliable)
-//                    {
-//                        userVoucherItems.add(userVoucherItem);
-//                    }
-//
-//                }
-
-                //改为只能使用一张优惠券
-//                userVoucherItems.clear();
-
 
                 voucherReload();
                 calculateSummary();

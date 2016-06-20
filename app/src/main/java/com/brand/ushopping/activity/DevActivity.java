@@ -1,8 +1,13 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -182,6 +187,10 @@ public class DevActivity extends Activity {
         imieTextView = (TextView) findViewById(R.id.imie);
         imieTextView.setText(appContext.getImie());
 
+//        TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+        Log.v("ushopping", getHandSetInfo());
+
+
     }
 
     private UMShareListener testmulListener = new UMShareListener() {
@@ -206,6 +215,32 @@ public class DevActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         /** attention to this below ,must add this**/
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    private String getHandSetInfo(){
+        String handSetInfo=
+                "手机型号:" + android.os.Build.MODEL +
+                        ",SDK版本:" + android.os.Build.VERSION.SDK +
+                        ",系统版本:" + android.os.Build.VERSION.RELEASE+
+                        ",软件版本:"+getAppVersionName(DevActivity.this);
+        return handSetInfo;
+
+    }
+
+    //获取当前版本号
+    private  String getAppVersionName(Context context) {
+        String versionName = "";
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo("cn.testgethandsetinfo", 0);
+            versionName = packageInfo.versionName;
+            if (TextUtils.isEmpty(versionName)) {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return versionName;
     }
 
 //    public class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
