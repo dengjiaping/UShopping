@@ -19,6 +19,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ScaleImageViewActivity extends Activity  implements android.view.GestureDetector.OnGestureListener{
     private ScaleImageView imageview;
+    private ImageView closeBtn;
 
     private ViewFlipper flipper;
     private GestureDetector gestureDetector;
@@ -67,6 +68,14 @@ public class ScaleImageViewActivity extends Activity  implements android.view.Ge
             @Override
             public void onClick(View v) {
                 flipNext();
+            }
+        });
+
+        closeBtn = (ImageView) findViewById(R.id.close);
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScaleImageViewActivity.this.finish();
             }
         });
 

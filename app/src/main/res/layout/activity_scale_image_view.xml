@@ -46,4 +46,12 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:id="@+id/close"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+
 </RelativeLayout>

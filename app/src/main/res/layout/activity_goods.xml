@@ -116,6 +116,7 @@
         android:layout_height="match_parent"
         android:id="@+id/swipe"
         android:layout_below="@+id/action_bar"
+        android:layout_above="@+id/linearLayout"
         >
         <ScrollView
         android:layout_width="fill_parent"
