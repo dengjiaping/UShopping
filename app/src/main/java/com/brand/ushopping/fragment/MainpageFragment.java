@@ -313,7 +313,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                     main.setUserId(user.getUserId());
                     main.setSessionid(user.getSessionid());
                 }
-
+                main.setUseCache(false);
                 new MainpageLoadTask().execute(main);
 
                 swipeRefreshLayout.setRefreshing(false);
@@ -744,21 +744,6 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                             }
 
                             homeReAdapter.notifyDataSetChanged();
-
-                            /*
-                            int totalHeight = 0;
-                            for (int i = 0; i < appgoodsIds.size(); i++) {
-                                View listItem = homeReAdapter.getView(i, null, homeReLayout);
-                                listItem.measure(0, 0);
-                                totalHeight += listItem.getMeasuredHeight();
-
-                            }
-
-                            ViewGroup.LayoutParams params = homeReLayout.getLayoutParams();
-                            params.height += (totalHeight + 100);
-                            ((ViewGroup.MarginLayoutParams)params).setMargins(10, 10, 10, 10);
-                            homeReLayout.setLayoutParams(params);
-                            */
                         }
 
                     }

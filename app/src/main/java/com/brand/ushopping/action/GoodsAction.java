@@ -125,12 +125,13 @@ public class GoodsAction
     {
         String resultString = null;
         String jsonParam = JSON.toJSONString(appGoodsTypeId);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-            resultString = DataCache.getData(context, "GetAppGoodsTypeId.action", appGoodsTypeId.getAppcategoryId(),appGoodsTypeId.getMin());
+            if(appGoodsTypeId.getUseCache())
+            {
+                resultString = DataCache.getData(context, "GetAppGoodsTypeId.action", appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
+            }
             if(resultString == null)
             {
                 //            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);

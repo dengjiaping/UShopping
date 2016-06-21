@@ -111,6 +111,7 @@ public class AppAction {
             mMain.setSessionid(user.getSessionid());
 
         }
+        mMain.setUseCache(true);
         Main result = null;
         try
         {
@@ -131,6 +132,7 @@ public class AppAction {
         }
         homeRe.setMin(0);
         homeRe.setMax(StaticValues.RECOMMEND_PAGE_COUNT);
+        homeRe.setUseCache(true);
         appContext.setHomeRe(new MainpageAction().homeRe(context, homeRe));
 
 //        new AppAction().downloadSplash(context, "http://static.oschina.net/uploads/img/201208/13122559_L8G0.png");

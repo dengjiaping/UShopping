@@ -1,7 +1,6 @@
 package com.brand.ushopping.action;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -26,29 +25,19 @@ import java.util.List;
  */
 public class MainpageAction
 {
-//    private ACache mCache = null;
-
     //首页信息
     public Main home(Context context, Main mMain)
     {
-        if(context != null)
-        {
-//            mCache = ACache.get(context);
-        }
-
         Main result = new Main();
         String resultString = null;
         String jsonParam = JSON.toJSONString(mMain);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-            resultString = DataCache.getData(context, "HomeAction.action");
-//            if(mCache != null)
-//            {
-//                resultString = mCache.getAsString("HomeAction.action");
-//            }
+            if(mMain.getUseCache())
+            {
+                resultString = DataCache.getData(context, "HomeAction.action");
+            }
 
             if(resultString == null)
             {
@@ -75,7 +64,6 @@ public class MainpageAction
 
                     //存入缓存
                     DataCache.putData(context, "HomeAction.action", resultString);
-//                    mCache.put("HomeAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else
@@ -98,22 +86,16 @@ public class MainpageAction
     //首页下拉
     public HomeRe homeRe(Context context, HomeRe homeRe)
     {
-//        if(context != null)
-//        {
-//            mCache = ACache.get(context);
-//        }
 
         String resultString = null;
         String jsonParam = JSON.toJSONString(homeRe);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            if(mCache != null)
-//            {
-//                resultString = mCache.getAsString("HomeReAction.action" + homeRe.getMin());
-//            }
+            if(homeRe.getUseCache())
+            {
+                resultString = DataCache.getData(context, "HomeReAction.action");
+            }
 
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -145,8 +127,7 @@ public class MainpageAction
                     homeRe.setSuccess(true);
 
                     //存入缓存
-//                    mCache.put("HomeReAction.action" + homeRe.getMin(), resultString, StaticValues.CACHE_LIFE);
-
+                    DataCache.putData(context, "HomeReAction.action", resultString);
                 }
                 else
                 {
@@ -169,11 +150,6 @@ public class MainpageAction
     //首页主题活动
     public OnlineshoppingGoods onlineshoppingGoodsAction(Context context, OnlineshoppingGoods onlineshoppingGoods)
     {
-//        if(context != null)
-//        {
-//            mCache = ACache.get(context);
-//        }
-
         OnlineshoppingGoods result = new OnlineshoppingGoods();
         String resultString = null;
         String jsonParam = JSON.toJSONString(onlineshoppingGoods);
@@ -182,10 +158,7 @@ public class MainpageAction
 
         try
         {
-//            if(mCache != null)
-//            {
-//                resultString = mCache.getAsString("OnlineshoppingGoodsAction.action");
-//            }
+            resultString = DataCache.getData(context, "OnlineshoppingGoodsAction.action");
 
             if(resultString == null)
             {
@@ -222,8 +195,7 @@ public class MainpageAction
                     result.setSuccess(true);
 
                     //存入缓存
-//                    mCache.put("OnlineshoppingGoodsAction.action", resultString, StaticValues.CACHE_LIFE);
-
+                    DataCache.putData(context, "OnlineshoppingGoodsAction.action", resultString);
                 }
                 else
                 {
