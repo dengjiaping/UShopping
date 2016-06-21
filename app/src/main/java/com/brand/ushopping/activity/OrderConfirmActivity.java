@@ -505,7 +505,7 @@ public class OrderConfirmActivity extends Activity {
     //唤起支付对象
     public void startPay(String charge)
     {
-        this.chargeObj = JSON.parseObject(charge, Charge.class);;
+        this.chargeObj = JSON.parseObject(charge, Charge.class);
 
         Intent intent = new Intent();
         String packageName = getPackageName();

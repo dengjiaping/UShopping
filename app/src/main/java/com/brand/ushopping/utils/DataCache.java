@@ -14,19 +14,25 @@ public class DataCache {
 
     public static void putData(Context context, String key, String value)
     {
-        doPutData(context, key, value, 0);
+        doPutData(context, key, value, 0, 0);
     }
 
     public static void putData(Context context, String key, String value, long page)
     {
-        doPutData(context, key, value, page);
+        doPutData(context, key, value, 0, page);
     }
 
+    public static void putData(Context context, String key, String value, long id, long page)
+    {
+        doPutData(context, key, value, id, page);
+    }
+
+
     //缓存写入
-    public static boolean doPutData(Context context, String key, String value, long page)
+    public static boolean doPutData(Context context, String key, String value, long id, long page)
     {
         try {
-            ref = context.getSharedPreferences(key+'_'+page,Context.MODE_PRIVATE);
+            ref = context.getSharedPreferences(key+'_'+id+'_'+page,Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = ref.edit();
             editor.putString("value", value);
             editor.putLong("timestamp", System.currentTimeMillis());
@@ -45,20 +51,20 @@ public class DataCache {
 
     public static String getData(Context context, String key)
     {
-        return doGetData(context, key, 0);
+        return doGetData(context, key, 0, 0);
     }
 
-    public static String getData(Context context, String key, long page)
+    public static String getData(Context context, String key, long id, long page)
     {
-        return doGetData(context, key, page);
+        return doGetData(context, key, id, page);
     }
 
     //缓存读取
-    public static String doGetData(Context context, String key, long page)
+    public static String doGetData(Context context, String key, long id, long page)
     {
         String result = null;
         try {
-            ref = context.getSharedPreferences(key+'_'+page,Context.MODE_PRIVATE);
+            ref = context.getSharedPreferences(key+'_'+id+'_'+page,Context.MODE_PRIVATE);
             if(ref != null)
             {
                 long aliveTime = ref.getLong("aliveTime", 0);

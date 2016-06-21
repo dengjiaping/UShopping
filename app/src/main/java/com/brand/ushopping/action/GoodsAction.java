@@ -1,6 +1,7 @@
 package com.brand.ushopping.action;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.brand.ushopping.model.SaveAppGoodsCollect;
 import com.brand.ushopping.model.SearchAppGoods;
 import com.brand.ushopping.model.SelectChargeId;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.UDBHelper;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
@@ -37,17 +39,18 @@ import java.util.List;
  */
 public class GoodsAction
 {
-    public GoodsInfo getAppGoodsIdAction(GoodsInfo goodsInfo)
+    public GoodsInfo getAppGoodsIdAction(Context context, GoodsInfo goodsInfo)
     {
         String resultString = null;
         String jsonParam = JSON.toJSONString(goodsInfo);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppGoodsIdAction.action", params);
-            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsIdAction.action"), CommonUtils.generateParams(jsonParam));
+            resultString = DataCache.getData(context, "GetAppGoodsIdAction.action", goodsInfo.getGoodsId(), 0);
+            if(resultString == null)
+            {
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsIdAction.action"), CommonUtils.generateParams(jsonParam));
+            }
 
             Log.v("ushopping goods", resultString);
             if(resultString != null)
@@ -62,6 +65,8 @@ public class GoodsAction
                     goodsInfo = JSON.parseObject(data, GoodsInfo.class);
                     goodsInfo.setSuccess(true);
 
+                    //存入缓存
+                    DataCache.putData(context, "GetAppGoodsIdAction.action", resultString, goodsInfo.getGoodsId(), 0);
                 }
                 else
                 {
@@ -116,7 +121,7 @@ public class GoodsAction
         return result;
     }
 
-    public AppGoodsTypeId getAppGoodsTypeId(AppGoodsTypeId appGoodsTypeId)
+    public AppGoodsTypeId getAppGoodsTypeId(Context context, AppGoodsTypeId appGoodsTypeId)
     {
         String resultString = null;
         String jsonParam = JSON.toJSONString(appGoodsTypeId);
@@ -125,8 +130,12 @@ public class GoodsAction
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);
-            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
+            resultString = DataCache.getData(context, "GetAppGoodsTypeId.action", appGoodsTypeId.getAppcategoryId(),appGoodsTypeId.getMin());
+            if(resultString == null)
+            {
+                //            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
+            }
 
             if(resultString != null)
             {
@@ -149,6 +158,8 @@ public class GoodsAction
 
                     appGoodsTypeId.setSuccess(true);
 
+                    //存入缓存
+                    DataCache.putData(context, "GetAppGoodsTypeId.action", resultString, appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
                 }
                 else
                 {

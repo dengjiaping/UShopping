@@ -9,6 +9,7 @@ import com.brand.ushopping.model.AppBrandCollectItem;
 import com.brand.ushopping.model.BrandRecommend;
 import com.brand.ushopping.model.SaveAppBrandCollect;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -23,26 +24,19 @@ import java.util.List;
  */
 public class BrandAction
 {
-//    private ACache mCache;
-
     public BrandRecommend getRecommendAppBrandAction(Context context, BrandRecommend brand)
     {
-//        if(context != null)
-//        {
-//            mCache = ACache.get(context);
-//        }
-
         BrandRecommend result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(brand);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetRecommendAppBrandAction.action", params);
-//            resultString = OkHttpUtil.post("GetRecommendAppBrandAction.action", jsonParam);
-            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetRecommendAppBrandAction.action"), CommonUtils.generateParams(jsonParam));
+            resultString = DataCache.getData(context, "GetRecommendAppBrandAction.action");
+            if(resultString == null)
+            {
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetRecommendAppBrandAction.action"), CommonUtils.generateParams(jsonParam));
+            }
 
             Log.v("ushopping brands", resultString);
             if(resultString != null)
@@ -54,6 +48,9 @@ public class BrandAction
                     String data = dataObject.toString();
                     result = JSON.parseObject(data, BrandRecommend.class);
                     result.setSuccess(true);
+
+                    //存入缓存
+                    DataCache.putData(context, "GetRecommendAppBrandAction.action", resultString);
                 }
             }
         } catch (Exception e) {

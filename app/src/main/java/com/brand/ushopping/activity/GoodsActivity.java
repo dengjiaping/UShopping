@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +112,7 @@ public class GoodsActivity extends UActivity {
     private ImageView cartBtn;
     private String[] imgList;
     private TextView saleCountTextView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
     private int goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
@@ -413,6 +415,15 @@ public class GoodsActivity extends UActivity {
 
         saleCountTextView = (TextView) findViewById(R.id.sale_count);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
+            }
+        });
+
     }
 
 
@@ -539,7 +550,11 @@ public class GoodsActivity extends UActivity {
     protected void onStart() {
         super.onStart();
         user = appContext.getUser();
+        reload();
+    }
 
+    private void reload()
+    {
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setGoodsId(goodsId);
 
@@ -560,7 +575,6 @@ public class GoodsActivity extends UActivity {
         appEvaluate.setGoodsId(goodsId);
 
         new GetAppEvaluateTask().execute(appEvaluate);
-
     }
 
     //获取商品详情
@@ -573,11 +587,12 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected GoodsInfo doInBackground(GoodsInfo... goodsInfos) {
-            return new GoodsAction().getAppGoodsIdAction(goodsInfos[0]);
+            return new GoodsAction().getAppGoodsIdAction(GoodsActivity.this, goodsInfos[0]);
         }
 
         @Override
         protected void onPostExecute(GoodsInfo result) {
+            swipeRefreshLayout.setRefreshing(false);
             if(result != null)
             {
                 if(result.isSuccess())

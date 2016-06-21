@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -214,7 +215,9 @@ public class SettingsActivity extends Activity {
                     builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            appContext.downloadApp(EnvValues.serverPath + result.getDownloadUrl() + result.getAppName());
+                            String url = EnvValues.serverPath + result.getDownloadUrl() + result.getAppName();
+                            Log.v("ushopping", url);
+                            appContext.downloadApp(url);
                             Toast.makeText(SettingsActivity.this, "下载开始", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -227,6 +230,10 @@ public class SettingsActivity extends Activity {
                     Toast.makeText(SettingsActivity.this, "当前已是最新版,无需升级", Toast.LENGTH_SHORT).show();
 
                 }
+            }
+            else
+            {
+                Toast.makeText(SettingsActivity.this, "当前已是最新版,无需升级", Toast.LENGTH_SHORT).show();
             }
         }
     }

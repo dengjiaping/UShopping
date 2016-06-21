@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class BrandFragment extends Fragment {
     private ListView recommendListView;
     private OnFragmentInteractionListener mListener;
     private TimeoutbleProgressDialog getinfoDialog;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<Brand> appBrandAll;
     private ArrayList<Brand> recommend;
 
@@ -168,6 +169,16 @@ public class BrandFragment extends Fragment {
                 builder.create().show();
             }
         });
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
+            }
+        });
+
         return view;
     }
 
@@ -178,6 +189,13 @@ public class BrandFragment extends Fragment {
         appContext = (AppContext) getActivity().getApplicationContext();
         user = appContext.getUser();
 
+        reload();
+
+        mainActivity.setButtomBarEnable(true);
+    }
+
+    private void reload()
+    {
         BrandRecommend brandRecommend = new BrandRecommend();
         if(user != null)
         {
@@ -186,8 +204,6 @@ public class BrandFragment extends Fragment {
         }
 
         new BrandLoadTask().execute(brandRecommend);
-
-        mainActivity.setButtomBarEnable(true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -247,6 +263,7 @@ public class BrandFragment extends Fragment {
         @Override
         protected void onPostExecute(BrandRecommend result) {
             getinfoDialog.dismiss();
+            swipeRefreshLayout.setRefreshing(false);
 
             if(result != null)
             {
