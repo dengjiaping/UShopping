@@ -55,7 +55,7 @@ public class AppContext  extends Application
     private UDBHelper udbHelper;
     private double longitude;
     private double latitude;
-    private String imie;
+    private String imie = "";
 
     @Override
     public void onCreate() {

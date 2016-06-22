@@ -48,8 +48,13 @@ public class SplashActivity extends Activity {
         currentTimeMil = System.currentTimeMillis();
 
         //获取手机的信息
-        TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
-        appContext.setImie(tm.getDeviceId());
+        try {
+            TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+            appContext.setImie(tm.getDeviceId());
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         //检测是否登录
         User user = new RefAction().getUser(SplashActivity.this);

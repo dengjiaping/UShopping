@@ -211,18 +211,6 @@ public class OrderConfirmActivity extends Activity {
             }
         });
 
-//        int totalHeight = 0;
-//        for (int i = 0; i < adapter.getCount(); i++) {
-//            View listItem = adapter.getView(i, null, goodsListView);
-//            listItem.measure(0, 0);
-//            totalHeight += listItem.getMeasuredHeight();
-//        }
-
-//        ViewGroup.LayoutParams params = goodsListView.getLayoutParams();
-//        params.height = totalHeight + (goodsListView.getDividerHeight() * (adapter.getCount() - 1));
-//        ((ViewGroup.MarginLayoutParams)params).setMargins(10, 10, 10, 10);
-//        goodsListView.setLayoutParams(params);
-
         if(appbrandId != null)
         {
             storeNameTextView.setText(appbrandId.getBrandName());
