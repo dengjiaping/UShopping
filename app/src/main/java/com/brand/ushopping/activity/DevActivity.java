@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,6 +43,7 @@ public class DevActivity extends Activity {
 //    private RecyclerViewAdapter recyclerViewAdapter;
     private String kuaidiType = null;
     private String kuaidiPostid = null;
+    private TextView handleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +188,9 @@ public class DevActivity extends Activity {
         imieTextView.setText(appContext.getImie());
 
 //        TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        Log.v("ushopping", getHandSetInfo());
+
+        handleTextView = (TextView) findViewById(R.id.handle_info);
+        handleTextView.setText(getHandSetInfo());
 
 
     }
@@ -218,13 +220,19 @@ public class DevActivity extends Activity {
     }
 
     private String getHandSetInfo(){
-        String handSetInfo=
-                "手机型号:" + android.os.Build.MODEL +
-                        ",SDK版本:" + android.os.Build.VERSION.SDK +
-                        ",系统版本:" + android.os.Build.VERSION.RELEASE+
-                        ",软件版本:"+getAppVersionName(DevActivity.this);
-        return handSetInfo;
-
+        try{
+            String handSetInfo=
+                    "手机型号:" + android.os.Build.MODEL +
+                            ",SDK版本:" + android.os.Build.VERSION.SDK +
+                            ",系统版本:" + android.os.Build.VERSION.RELEASE+
+                            ",软件版本:"+getAppVersionName(DevActivity.this);
+            return handSetInfo;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     //获取当前版本号
