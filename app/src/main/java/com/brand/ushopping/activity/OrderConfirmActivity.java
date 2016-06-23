@@ -116,9 +116,10 @@ public class OrderConfirmActivity extends Activity {
     private List manjianListDatalistData = new ArrayList<Map<String,Object>>();
 
     private EditText commentEditText;
-
+    private String payMethod = null;
     public boolean chargedCheck = false;
-
+    private ClientCharge clientCharge = null;
+    private String charge;
     public OrderConfirmActivity() {
     }
 
@@ -490,16 +491,23 @@ public class OrderConfirmActivity extends Activity {
 
     }
 
-    //唤起支付对象
+    //开始支付,先生成订单再支付
     public void startPay(String charge)
     {
+        this.charge = charge;
         this.chargeObj = JSON.parseObject(charge, Charge.class);
+        generateOrder();
 
+    }
+
+    //唤起支付对象
+    public void callClientCharge()
+    {
         Intent intent = new Intent();
         String packageName = getPackageName();
         ComponentName componentName = new ComponentName(packageName, packageName + ".wxapi.WXPayEntryActivity");
         intent.setComponent(componentName);
-        intent.putExtra(PaymentActivity.EXTRA_CHARGE, charge);
+        intent.putExtra(PaymentActivity.EXTRA_CHARGE, this.charge);
         startActivityForResult(intent, StaticValues.REQUEST_CODE_PAYMENT);
 
     }
@@ -669,39 +677,9 @@ public class OrderConfirmActivity extends Activity {
                 {
                     orderSubmitPopup.dismiss();
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("订单生成成功,分享链接领取优惠券");
-                    builder.setTitle("提示");
-                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-
-                            //弹出分享优惠券
-                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                            startActivity(intent);
-                            OrderConfirmActivity.this.finish();
-
-                        }
-                    });
-
-                    builder.setNegativeButton("查看订单", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent intent = new Intent(OrderConfirmActivity.this, OrderActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-
-                            OrderConfirmActivity.this.finish();
-
-                        }
-                    });
-
-                    builder.setCancelable(false);
-                    builder.create().show();
+                    //发起付款请求
+//                    new ReturnClientChargeTask().execute(clientCharge);
+                    callClientCharge();
 
                 }
                 else
@@ -1227,77 +1205,39 @@ public class OrderConfirmActivity extends Activity {
         switch (boughtType)
         {
             case StaticValues.BOUTHT_TYPE_NORMAL:
-                // 生成普通订单
-                ArrayList<OrderSave> orderSaveArrayList = new ArrayList<OrderSave>();
-//                for (Goods goods: goodsList)
-                for(int a=0; a<goodsList.size(); a++)
-                {
-                    Goods goods = goodsList.get(a);
-                    OrderSave orderSave = new OrderSave();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                    builder.setMessage("订单生成成功,分享链接领取优惠券");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
 
-                    orderSave.setOrderNo(chargeObj.getOrderNo());
-//                    orderSave.setMoney(summary);
-                    orderSave.setMoney(goods.getPromotionPrice());
-                    //优惠券扣除到第一个商品中
-                    if(a == 0)
-                    {
-                        double money = orderSave.getMoney();
-                        for(UserVoucherItem userVoucherItem: userVoucherItems)
-                        {
-                            money -= userVoucherItem.getAppvoucherId().getMoney01();
+                            //弹出分享优惠券
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+                            OrderConfirmActivity.this.finish();
 
                         }
-                        orderSave.setMoney(money);
+                    });
 
-                    }
+                    builder.setNegativeButton("查看订单", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
-                    String channel = chargeObj.getChannel();
+                            Intent intent = new Intent(OrderConfirmActivity.this, OrderActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
 
-                    orderSave.setPaymentMode(putPaymentMode(channel));
+                            OrderConfirmActivity.this.finish();
 
-                    orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
+                        }
+                    });
 
-                    AppuserId appuserId = new AppuserId();
-                    appuserId.setUserId(user.getUserId());
-                    orderSave.setAppuserId(appuserId);
-
-                    AppaddressId appaddressId = new AppaddressId();
-                    appaddressId.setId(addressId);
-                    orderSave.setAppaddressId(appaddressId);
-
-                    orderSave.setRemark(chargeObj.getBody());
-
-                    //商品信息
-                    AppgoodsId appgoodsId = new AppgoodsId();
-                    appgoodsId.setId(goods.getId());
-                    orderSave.setAppgoodsId(appgoodsId);
-
-                    orderSave.setAttribute(goods.getAttribute());
-                    orderSave.setQuantity(goods.getCount());
-
-                    orderSaveArrayList.add(orderSave);
-
-                }
-
-                //添加优惠券
-                StringBuffer userVoucherId = new StringBuffer();
-                for(UserVoucherItem userVoucherItem: userVoucherItems)
-                {
-                    userVoucherId.append(userVoucherItem.getId());
-                    userVoucherId.append(',');
-
-                }
-                orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
-                //添加满减券
-//                            orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
-
-                OrderSaveList orderSaveList = new OrderSaveList();
-                orderSaveList.setUserId(user.getUserId());
-                orderSaveList.setSessionid(user.getSessionid());
-                orderSaveList.setOrder(orderSaveArrayList);
-
-                new OrderSaveTask().execute(orderSaveList);
+                    builder.setCancelable(false);
+                    builder.create().show();
 
                 break;
 
@@ -1333,5 +1273,87 @@ public class OrderConfirmActivity extends Activity {
 
     }
 
+    //生成普通订单
+    private void generateOrder()
+    {
+        ArrayList<OrderSave> orderSaveArrayList = new ArrayList<OrderSave>();
+//                for (Goods goods: goodsList)
+        for(int a=0; a<goodsList.size(); a++)
+        {
+            Goods goods = goodsList.get(a);
+            OrderSave orderSave = new OrderSave();
+
+            orderSave.setOrderNo(this.chargeObj.getOrderNo());
+            orderSave.setMoney(goods.getPromotionPrice());
+            //优惠券扣除到第一个商品中
+            if(a == 0)
+            {
+                double money = orderSave.getMoney();
+                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                {
+                    money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                }
+                orderSave.setMoney(money);
+
+            }
+
+            orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
+            String channel = chargeObj.getChannel();
+
+            orderSave.setPaymentMode(putPaymentMode(channel));
+
+            orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
+
+            AppuserId appuserId = new AppuserId();
+            appuserId.setUserId(user.getUserId());
+            orderSave.setAppuserId(appuserId);
+
+            AppaddressId appaddressId = new AppaddressId();
+            appaddressId.setId(addressId);
+            orderSave.setAppaddressId(appaddressId);
+
+            orderSave.setRemark(chargeObj.getBody());
+
+            //商品信息
+            AppgoodsId appgoodsId = new AppgoodsId();
+            appgoodsId.setId(goods.getId());
+            orderSave.setAppgoodsId(appgoodsId);
+
+            orderSave.setAttribute(goods.getAttribute());
+            orderSave.setQuantity(goods.getCount());
+
+            orderSaveArrayList.add(orderSave);
+
+        }
+
+        //添加优惠券
+        if(userVoucherItems != null && !userVoucherItems.isEmpty())
+        {
+            StringBuffer userVoucherId = new StringBuffer();
+
+            for(UserVoucherItem userVoucherItem: userVoucherItems)
+            {
+                userVoucherId.append(userVoucherItem.getId());
+                userVoucherId.append(',');
+
+            }
+            orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
+        }
+        else
+        {
+            orderSaveArrayList.get(0).setUserVoucherId(null);
+        }
+
+        //添加满减券
+//        orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+
+        OrderSaveList orderSaveList = new OrderSaveList();
+        orderSaveList.setUserId(user.getUserId());
+        orderSaveList.setSessionid(user.getSessionid());
+        orderSaveList.setOrder(orderSaveArrayList);
+
+        new OrderSaveTask().execute(orderSaveList);
+    }
 
 }
