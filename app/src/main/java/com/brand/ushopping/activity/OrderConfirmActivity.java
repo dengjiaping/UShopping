@@ -308,14 +308,8 @@ public class OrderConfirmActivity extends Activity {
                                 }
 
                                 //添加优惠券
-                                userVoucherId = new StringBuffer();
-                                for(UserVoucherItem userVoucherItem: userVoucherItems)
-                                {
-                                    userVoucherId.append(userVoucherItem.getId());
-                                    userVoucherId.append(',');
+                                yyOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
-                                }
-                                yyOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
                                 //添加满减券
                                 yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
@@ -375,14 +369,8 @@ public class OrderConfirmActivity extends Activity {
                                 }
 
                                 //添加优惠券
-                                userVoucherId = new StringBuffer();
-                                for(UserVoucherItem userVoucherItem: userVoucherItems)
-                                {
-                                    userVoucherId.append(userVoucherItem.getId());
-                                    userVoucherId.append(',');
+                                smOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
-                                }
-                                smOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
                                 //添加满减券
                                 smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
@@ -1328,22 +1316,7 @@ public class OrderConfirmActivity extends Activity {
         }
 
         //添加优惠券
-        if(userVoucherItems != null && !userVoucherItems.isEmpty())
-        {
-            StringBuffer userVoucherId = new StringBuffer();
-
-            for(UserVoucherItem userVoucherItem: userVoucherItems)
-            {
-                userVoucherId.append(userVoucherItem.getId());
-                userVoucherId.append(',');
-
-            }
-            orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
-        }
-        else
-        {
-            orderSaveArrayList.get(0).setUserVoucherId(null);
-        }
+        orderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
         //添加满减券
 //        orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
@@ -1354,6 +1327,27 @@ public class OrderConfirmActivity extends Activity {
         orderSaveList.setOrder(orderSaveArrayList);
 
         new OrderSaveTask().execute(orderSaveList);
+    }
+
+    //添加优惠券
+    private String addVouchers(ArrayList<UserVoucherItem> userVoucherItems)
+    {
+        if(userVoucherItems != null && !userVoucherItems.isEmpty())
+        {
+            StringBuffer userVoucherId = new StringBuffer();
+
+            for(UserVoucherItem userVoucherItem: userVoucherItems)
+            {
+                userVoucherId.append(userVoucherItem.getId());
+                userVoucherId.append(',');
+
+            }
+            return userVoucherId.toString();
+        }
+        else
+        {
+            return null;
+        }
     }
 
 }
