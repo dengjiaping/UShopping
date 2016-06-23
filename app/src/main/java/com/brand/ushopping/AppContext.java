@@ -135,7 +135,11 @@ public class AppContext  extends Application
         );
         request.setTitle("升级包下载中...");
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-
+        // request.setDescription(“MeiLiShuo desc”); //设置下载中通知栏提示的介绍
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.allowScanningByMediaScanner();
+        // 设置为可见和可管理
+        request.setVisibleInDownloadsUi(true);
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         registerReceiver(receiver, filter);
 

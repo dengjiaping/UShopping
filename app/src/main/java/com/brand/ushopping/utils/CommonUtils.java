@@ -1,8 +1,10 @@
 package com.brand.ushopping.utils;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -10,7 +12,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.Uri;
+import android.provider.MediaStore;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -213,6 +218,29 @@ public class CommonUtils {
         map.put("param", jsonString);
 
         return map;
+    }
+
+    /**
+     * 转换 path路径
+     * */
+    public static String getFilePathFromUri(Context c, Uri uri) {
+        String filePath = null;
+        if ("content".equals(uri.getScheme())) {
+            String[] filePathColumn = { MediaStore.MediaColumns.DATA };
+            ContentResolver contentResolver = c.getContentResolver();
+
+            Cursor cursor = contentResolver.query(uri, filePathColumn, null,
+                    null, null);
+
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            filePath = cursor.getString(columnIndex);
+            cursor.close();
+        } else if ("file".equals(uri.getScheme())) {
+            filePath = new File(uri.getPath()).getAbsolutePath();
+        }
+        return filePath;
     }
 
     //设置优先使用的网络
