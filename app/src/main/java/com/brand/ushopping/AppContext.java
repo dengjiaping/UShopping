@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.AppBrandCollectItem;
@@ -117,7 +116,13 @@ public class AppContext  extends Application
         @Override
         public void onReceive(Context context, Intent intent) {
             try{
-                ParcelFileDescriptor pfd = dMgr.openDownloadedFile(downloadId);
+//                ParcelFileDescriptor pfd = dMgr.openDownloadedFile(downloadId);
+                Intent install = new Intent(Intent.ACTION_VIEW);
+                Uri downloadFileUri = dMgr.getUriForDownloadedFile(downloadId);
+                install.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
+                install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(install);
+
 
 
             }catch (Exception e)
@@ -133,18 +138,20 @@ public class AppContext  extends Application
         DownloadManager.Request request = new DownloadManager.Request(
                 Uri.parse(url)
         );
+
+        // 设置下载路径和文件名
         request.setTitle("升级包下载中...");
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
         // request.setDescription(“MeiLiShuo desc”); //设置下载中通知栏提示的介绍
+        request.setDestinationInExternalPublicDir("download", "UShopping.apk");
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.allowScanningByMediaScanner();
-        // 设置为可见和可管理
-        request.setVisibleInDownloadsUi(true);
+        request.setMimeType("application/vnd.android.package-archive");
+        request.allowScanningByMediaScanner();    // 设置为可被媒体扫描器找到
+        request.setVisibleInDownloadsUi(true);  // 设置为可见和可管理
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         registerReceiver(receiver, filter);
 
         downloadId = dMgr.enqueue(request);
-
     }
 
     //收藏
