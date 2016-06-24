@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/11/9.
  */
-public class AppgoodsId
+public class AppgoodsId extends BaseModel
 {
     private String barCode;
     private String goodsName;

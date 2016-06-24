@@ -320,7 +320,7 @@ public class VoucherActivity extends Activity {
 
         @Override
         protected AppVoucherSelect doInBackground(AppVoucherSelect... appVoucherSelects) {
-            return new VoucherAction().appVoucherSelectGeneralAction(appVoucherSelects[0]);
+            return new VoucherAction(VoucherActivity.this).appVoucherSelectGeneralAction(appVoucherSelects[0]);
 
         }
 
@@ -397,7 +397,7 @@ public class VoucherActivity extends Activity {
 
         @Override
         protected GetUserVoucher doInBackground(GetUserVoucher... getUserVouchers) {
-            return new VoucherAction().getUserVoucherIdAction(getUserVouchers[0]);
+            return new VoucherAction(VoucherActivity.this).getUserVoucherIdAction(getUserVouchers[0]);
 
         }
 
@@ -470,7 +470,7 @@ public class VoucherActivity extends Activity {
 
         @Override
         protected SaveUserVoucher doInBackground(SaveUserVoucher... saveUserVouchers) {
-            return new VoucherAction().saveUserVoucherAction(saveUserVouchers[0]);
+            return new VoucherAction(VoucherActivity.this).saveUserVoucherAction(saveUserVouchers[0]);
 
         }
 
@@ -509,7 +509,7 @@ public class VoucherActivity extends Activity {
 
         @Override
         protected BatchSaveUserVoucher doInBackground(BatchSaveUserVoucher... batchSaveUserVouchers) {
-            return new VoucherAction().batchSaveUserVoucherAction(batchSaveUserVouchers[0]);
+            return new VoucherAction(VoucherActivity.this).batchSaveUserVoucherAction(batchSaveUserVouchers[0]);
 
         }
 

@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/11/19.
  */
-public class AppexpressId {
+public class AppexpressId extends BaseModel {
     private long id;
     private String company;
     private double price;

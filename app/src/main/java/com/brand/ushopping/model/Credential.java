@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/14.
  */
-public class Credential
+public class Credential extends BaseModel
 {
     private String object;
     private Upacp upacp;

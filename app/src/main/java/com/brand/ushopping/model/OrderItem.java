@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/12/29.
  */
-public class OrderItem
+public class OrderItem extends BaseModel
 {
     private long id;
     private ArrayList<OrderGoodsItem> orderGoodsItems;

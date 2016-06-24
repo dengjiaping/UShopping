@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/11/17.
  */
-public class WeiboUser
+public class WeiboUser extends BaseModel
 {
     private String sina_id;
     private String access_token;

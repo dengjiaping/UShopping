@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Administrator on 2015/12/5.
  */
-public class AppuserId implements Parcelable {
+public class AppuserId extends BaseModel implements Parcelable {
     private long userId;
     private String userName;
 

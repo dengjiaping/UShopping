@@ -57,7 +57,7 @@ public class SplashActivity extends Activity {
         }
 
         //检测是否登录
-        User user = new RefAction().getUser(SplashActivity.this);
+        User user = new RefAction(SplashActivity.this).getUser(SplashActivity.this);
         if(user != null)
         {
             appContext.setUser(user);
@@ -65,7 +65,7 @@ public class SplashActivity extends Activity {
 
         }
 
-        if(new RefAction().firstOpen(SplashActivity.this) == true)
+        if(new RefAction(SplashActivity.this).firstOpen(SplashActivity.this) == true)
         {
             Intent intent = new Intent(SplashActivity.this, GuidanceActivity.class);
             startActivity(intent);
@@ -105,7 +105,7 @@ public class SplashActivity extends Activity {
             appContext.setNeetworkEnable(networkEnabled);
             if(networkEnabled)
             {
-                new AppAction().appDataInit(SplashActivity.this, user);
+                new AppAction(SplashActivity.this).appDataInit(user);
 
             }
 

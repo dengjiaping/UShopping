@@ -372,7 +372,7 @@ public class OrderPayActivity extends Activity {
 
         @Override
         protected OrderSaveList doInBackground(OrderSaveList... orderSaveLists) {
-            return new OrderAction().orderSaveAction(orderSaveLists[0]);
+            return new OrderAction(OrderPayActivity.this).orderSaveAction(orderSaveLists[0]);
         }
 
         @Override
@@ -420,7 +420,7 @@ public class OrderPayActivity extends Activity {
 
         @Override
         protected YyOrderSaveList doInBackground(YyOrderSaveList... yyOrderSaveLists) {
-            return new OrderAction().yyOrderSaveAction(yyOrderSaveLists[0]);
+            return new OrderAction(OrderPayActivity.this).yyOrderSaveAction(yyOrderSaveLists[0]);
         }
 
         @Override
@@ -466,7 +466,7 @@ public class OrderPayActivity extends Activity {
 
         @Override
         protected SmOrderSaveList doInBackground(SmOrderSaveList... smOrderSaveLists) {
-            return  new OrderAction().smOrderSaveAction(smOrderSaveLists[0]);
+            return  new OrderAction(OrderPayActivity.this).smOrderSaveAction(smOrderSaveLists[0]);
 
         }
 

@@ -224,7 +224,7 @@ public class ProfileActivity extends Activity {
 
         @Override
         protected User doInBackground(User... users) {
-            return new UserAction().updateAppUser(users[0]);
+            return new UserAction(ProfileActivity.this).updateAppUser(users[0]);
         }
 
         @Override
@@ -241,7 +241,7 @@ public class ProfileActivity extends Activity {
                     user.setAddress(addressEditText.getText().toString());
                     user.setBirthday(birthdayEditText.getText().toString());
                     appContext.setUser(user);
-                    new RefAction().setUser(ProfileActivity.this, user);
+                    new RefAction(ProfileActivity.this).setUser(user);
 
                     setMode(MODE_VIEW);
 

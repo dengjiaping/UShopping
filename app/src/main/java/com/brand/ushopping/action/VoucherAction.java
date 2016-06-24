@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -24,11 +25,16 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/1.
  */
-public class VoucherAction
+public class VoucherAction extends BaseAction
 {
+    public VoucherAction(Context context) {
+        super(context);
+    }
+
     // -- 查询优惠券 --
     public AppVoucherSelect appVoucherSelectGeneralAction(AppVoucherSelect appVoucherSelect)
     {
+        appVoucherSelect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appVoucherSelect);
         List params = new ArrayList();
@@ -76,6 +82,7 @@ public class VoucherAction
     // --  用户领取优惠券  --
     public SaveUserVoucher saveUserVoucherAction(SaveUserVoucher saveUserVoucher)
     {
+        saveUserVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveUserVoucher);
         List params = new ArrayList();
@@ -116,6 +123,7 @@ public class VoucherAction
     // --  查询用户优惠券  --
     public GetUserVoucher getUserVoucherIdAction(GetUserVoucher getUserVoucher)
     {
+        getUserVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(getUserVoucher);
         List params = new ArrayList();
@@ -165,6 +173,7 @@ public class VoucherAction
     //查询满减券
     public ManJainVoucher manJainAllAction(ManJainVoucher manJainVoucher)
     {
+        manJainVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(manJainVoucher);
         List params = new ArrayList();
@@ -214,6 +223,7 @@ public class VoucherAction
     // 一键领取大礼包
     public BatchSaveUserVoucher batchSaveUserVoucherAction(BatchSaveUserVoucher batchSaveUserVoucher)
     {
+        batchSaveUserVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(batchSaveUserVoucher);
         List params = new ArrayList();

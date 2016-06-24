@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/19.
  */
-public class ApporderId {
+public class ApporderId extends BaseModel {
     private long id;
 
     public long getId() {

@@ -130,7 +130,7 @@ public class SettingsActivity extends Activity {
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        new RefAction().removeUser(SettingsActivity.this);
+                        new RefAction(SettingsActivity.this).removeUser(SettingsActivity.this);
                         appContext.setUser(null);
 
                         Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
@@ -199,7 +199,7 @@ public class SettingsActivity extends Activity {
 
         @Override
         protected Version doInBackground(Version... versions) {
-            return new AppAction().getMaxVersionAction(versions[0]);
+            return new AppAction(SettingsActivity.this).getMaxVersionAction(versions[0]);
         }
 
         @Override

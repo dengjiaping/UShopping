@@ -215,7 +215,7 @@ public class ThemeActivity extends AppCompatActivity {
 
         @Override
         protected OnlineshoppingGoods doInBackground(OnlineshoppingGoods... onlineshoppingGoodses) {
-            return new MainpageAction().onlineshoppingGoodsAction(ThemeActivity.this, onlineshoppingGoodses[0]);
+            return new MainpageAction(ThemeActivity.this).onlineshoppingGoodsAction(ThemeActivity.this, onlineshoppingGoodses[0]);
         }
 
         @Override

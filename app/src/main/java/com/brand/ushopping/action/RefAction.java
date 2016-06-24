@@ -13,9 +13,13 @@ import java.util.Set;
 /**
  * Created by Administrator on 2015/11/4.
  */
-public class RefAction
+public class RefAction extends BaseAction
 {
-    public void setUser(Context context, User user)
+    public RefAction(Context context) {
+        super(context);
+    }
+
+    public void setUser(User user)
     {
         //用户信息写入ref
         SharedPreferences ref = context.getSharedPreferences("user", Context.MODE_PRIVATE);

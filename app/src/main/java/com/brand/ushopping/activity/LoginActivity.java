@@ -332,7 +332,7 @@ public class LoginActivity extends Activity {
 
         @Override
         protected User doInBackground(User... user) {
-            return new UserAction().login(user[0]);
+            return new UserAction(LoginActivity.this).login(user[0]);
         }
 
         @Override
@@ -345,7 +345,7 @@ public class LoginActivity extends Activity {
                 if(user.getSuccess())
                 {
                     //登录成功
-                    new RefAction().setUser(LoginActivity.this, user);
+                    new RefAction(LoginActivity.this).setUser(user);
                     appContext.setUser(user);
                     appContext.setSessionid(user.getSessionid());
 
@@ -379,7 +379,7 @@ public class LoginActivity extends Activity {
 
         @Override
         protected User doInBackground(ThirdPartyUser... thirdPartyUsers) {
-            return new UserAction().thirdPartyLogin(thirdPartyUsers[0]);
+            return new UserAction(LoginActivity.this).thirdPartyLogin(thirdPartyUsers[0]);
         }
 
         @Override
@@ -389,7 +389,7 @@ public class LoginActivity extends Activity {
                 if(user.getSuccess())
                 {
                     //登录成功
-                    new RefAction().setUser(LoginActivity.this, user);
+                    new RefAction(LoginActivity.this).setUser(user);
                     appContext.setUser(user);
                     appContext.setSessionid(user.getSessionid());
 

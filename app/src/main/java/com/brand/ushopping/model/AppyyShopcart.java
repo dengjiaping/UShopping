@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/24.
  */
-public class AppyyShopcart
+public class AppyyShopcart extends BaseModel
 {
     private long userId;
     private String sessionid;

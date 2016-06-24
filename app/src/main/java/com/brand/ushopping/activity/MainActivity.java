@@ -382,7 +382,7 @@ public class MainActivity extends UActivity
 
         @Override
         protected Version doInBackground(Version... versions) {
-            return new AppAction().getMaxVersionAction(versions[0]);
+            return new AppAction(MainActivity.this).getMaxVersionAction(versions[0]);
         }
 
         @Override

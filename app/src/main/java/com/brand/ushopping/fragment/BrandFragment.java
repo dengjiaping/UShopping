@@ -257,7 +257,7 @@ public class BrandFragment extends Fragment {
 
         @Override
         protected BrandRecommend doInBackground(BrandRecommend... brands) {
-            return new BrandAction().getRecommendAppBrandAction(getActivity(), brands[0]);
+            return new BrandAction(getActivity()).getRecommendAppBrandAction(getActivity(), brands[0]);
         }
 
         @Override

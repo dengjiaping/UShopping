@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/3/1.
  */
-public class AppVoucherSelect
+public class AppVoucherSelect extends BaseModel
 {
     private long userId;
     private String sessionid;

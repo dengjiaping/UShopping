@@ -137,7 +137,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
 
         @Override
         protected HomeRe doInBackground(HomeRe... homeRe) {
-            return new MainpageAction().homeRe(MoreGoodsActivity.this, homeRe[0]);
+            return new MainpageAction(MoreGoodsActivity.this).homeRe(homeRe[0]);
         }
 
         @Override

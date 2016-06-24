@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/4/19.
  */
-public class ManJainVoucher
+public class ManJainVoucher extends BaseModel
 {
     private long userId;
     private String sessionid;

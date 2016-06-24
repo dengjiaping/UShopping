@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2015/12/25.
  */
-public class YyOrderSave
+public class YyOrderSave extends BaseModel
 {
     private double money;
     private int paymentMode;

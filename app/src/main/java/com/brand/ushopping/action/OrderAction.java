@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -25,11 +26,16 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/27.
  */
-public class OrderAction
+public class OrderAction extends BaseAction
 {
+    public OrderAction(Context context) {
+        super(context);
+    }
+
     //提交订单
     public OrderSaveList orderSaveAction(OrderSaveList orderSaveList)
     {
+        orderSaveList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderSaveList);
         List params = new ArrayList();
@@ -71,6 +77,7 @@ public class OrderAction
 
     public OrderAll getOrderAction(OrderAll orderAll)
     {
+        orderAll.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderAll);
         List params = new ArrayList();
@@ -148,6 +155,7 @@ public class OrderAction
     // --  预约订单保存  --
     public YyOrderSaveList yyOrderSaveAction(YyOrderSaveList yyOrderSaveList)
     {
+        yyOrderSaveList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(yyOrderSaveList);
         List params = new ArrayList();
@@ -190,6 +198,7 @@ public class OrderAction
     //    --  查询预约订单列表  --
     public OrderAll getYyOrderAllAction(OrderAll orderAll)
     {
+        orderAll.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderAll);
         List params = new ArrayList();
@@ -267,6 +276,7 @@ public class OrderAction
     //    --  查询上门订单列表  --
     public OrderAll getSmOrderAllAction(OrderAll orderAll)
     {
+        orderAll.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderAll);
         List params = new ArrayList();
@@ -343,6 +353,7 @@ public class OrderAction
     // 上门订单保存
     public SmOrderSaveList smOrderSaveAction(SmOrderSaveList smOrderSaveList)
     {
+        smOrderSaveList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(smOrderSaveList);
         List params = new ArrayList();
@@ -386,6 +397,7 @@ public class OrderAction
     // --  删减到店订单列表  --
     public OrderUpdate yyOrderUpdateAction(OrderUpdate orderUpdate)
     {
+        orderUpdate.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderUpdate);
         List params = new ArrayList();
@@ -428,6 +440,7 @@ public class OrderAction
     // --  删减上门订单列表  --
     public OrderUpdate smOrderUpdateAction(OrderUpdate orderUpdate)
     {
+        orderUpdate.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderUpdate);
         List params = new ArrayList();
@@ -470,6 +483,7 @@ public class OrderAction
     // --  上门支付成功  --
     public OrderSuccess smOrderSuccessAction(OrderSuccess orderSuccess)
     {
+        orderSuccess.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderSuccess);
         List params = new ArrayList();
@@ -512,6 +526,7 @@ public class OrderAction
     //  --  预约支付成功  --
     public OrderSuccess yyOrderSuccessAction(OrderSuccess orderSuccess)
     {
+        orderSuccess.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderSuccess);
         List params = new ArrayList();
@@ -554,6 +569,7 @@ public class OrderAction
     // --  确认收货  --
     public ConfirmOrder confirmOrderAction(ConfirmOrder confirmOrder)
     {
+        confirmOrder.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(confirmOrder);
         List params = new ArrayList();

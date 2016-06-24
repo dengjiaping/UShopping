@@ -225,7 +225,7 @@ public class CategoryActivity extends Activity {
 
         @Override
         protected AppGoodsTypeId doInBackground(AppGoodsTypeId... appGoodsTypeIds) {
-            return new GoodsAction().getAppGoodsTypeId(CategoryActivity.this, appGoodsTypeIds[0]);
+            return new GoodsAction(CategoryActivity.this).getAppGoodsTypeId(appGoodsTypeIds[0]);
 
         }
 

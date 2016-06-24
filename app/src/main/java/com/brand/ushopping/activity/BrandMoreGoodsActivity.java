@@ -269,7 +269,7 @@ public class BrandMoreGoodsActivity extends Activity {
 
         @Override
         protected BrandGoodsList doInBackground(BrandGoodsList... brandGoodsLists) {
-            return new StoreAction().getAppStoresIdAll(BrandMoreGoodsActivity.this, brandGoodsLists[0]);
+            return new StoreAction(BrandMoreGoodsActivity.this).getAppStoresIdAll(brandGoodsLists[0]);
         }
 
         @Override

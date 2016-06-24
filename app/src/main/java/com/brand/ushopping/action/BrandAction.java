@@ -22,10 +22,15 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/16.
  */
-public class BrandAction
+public class BrandAction extends BaseAction
 {
+    public BrandAction(Context context) {
+        super(context);
+    }
+
     public BrandRecommend getRecommendAppBrandAction(Context context, BrandRecommend brand)
     {
+        brand.addVersion(context);   //添加App版本信息
         BrandRecommend result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(brand);
@@ -62,14 +67,9 @@ public class BrandAction
     }
 
     // --  收藏品牌  --
-    public SaveAppBrandCollect saveAppBrandCollectAction(Context context, SaveAppBrandCollect saveAppBrandCollect)
+    public SaveAppBrandCollect saveAppBrandCollectAction(SaveAppBrandCollect saveAppBrandCollect)
     {
-        if(context != null)
-        {
-//            mCache = ACache.get(context);
-        }
-
-
+        saveAppBrandCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppBrandCollect);
         List params = new ArrayList();
@@ -77,11 +77,6 @@ public class BrandAction
 
         try
         {
-//            if(mCache != null)
-//            {
-//                resultString = mCache.getAsString("SaveAppBrandCollectAction.action");
-//            }
-
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
@@ -101,9 +96,6 @@ public class BrandAction
                     saveAppBrandCollect = JSON.parseObject(data, SaveAppBrandCollect.class);
                     saveAppBrandCollect.setSuccess(true);
 
-                    //存入缓存
-//                    mCache.put("SaveAppBrandCollectAction.action", resultString, StaticValues.CACHE_LIFE);
-
                 }
             }
         } catch (Exception e) {
@@ -116,25 +108,14 @@ public class BrandAction
     }
 
     // --  查询收藏列表  --
-    public AppBrandCollect getListAppBrandCollectUserIdAction(Context context, AppBrandCollect appBrandCollect)
+    public AppBrandCollect getListAppBrandCollectUserIdAction(AppBrandCollect appBrandCollect)
     {
-//        if(context != null)
-//        {
-//            mCache = ACache.get(context);
-//        }
-
+        appBrandCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appBrandCollect);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            if(mCache != null)
-//            {
-//                resultString = mCache.getAsString("GetListAppBrandCollectUserIdAction.action");
-//            }
-
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
@@ -162,9 +143,6 @@ public class BrandAction
                     appBrandCollect.setAppBrandCollectItems(appBrandCollectItems);
 
                     appBrandCollect.setSuccess(true);
-
-                    //存入缓存
-//                    mCache.put("GetListAppBrandCollectUserIdAction.action", resultString, StaticValues.CACHE_LIFE);
 
                 }
                 else

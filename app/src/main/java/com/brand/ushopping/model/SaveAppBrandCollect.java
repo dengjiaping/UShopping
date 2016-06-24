@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/17.
  */
-public class SaveAppBrandCollect
+public class SaveAppBrandCollect extends BaseModel
 {
     private long userId;
     private String sessionid;

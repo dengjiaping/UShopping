@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/4/29.
  */
-public class SelectChargeId
+public class SelectChargeId extends BaseModel
 {
     private Long userId;
     private String sessionid;

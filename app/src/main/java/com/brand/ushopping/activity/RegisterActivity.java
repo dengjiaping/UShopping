@@ -267,7 +267,7 @@ public class RegisterActivity extends Activity {
 
         @Override
         protected User doInBackground(User... user) {
-            return new UserAction().register(user[0]);
+            return new UserAction(RegisterActivity.this).register(user[0]);
         }
 
         @Override
@@ -280,7 +280,7 @@ public class RegisterActivity extends Activity {
                 if(user.getSuccess())
                 {
                     //注册成功
-                    new RefAction().setUser(RegisterActivity.this, user);
+                    new RefAction(RegisterActivity.this).setUser(user);
                     appContext.setUser(user);
                     appContext.setSessionid(user.getSessionid());
 

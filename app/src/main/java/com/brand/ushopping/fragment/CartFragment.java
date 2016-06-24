@@ -314,13 +314,13 @@ public class CartFragment extends Fragment {
             switch (boughtType)
             {
                 case StaticValues.BOUTHT_TYPE_NORMAL:
-                    return new CartAction().getAppShopcartIdListAction(appShopcartIdLists[0]);
+                    return new CartAction(getActivity()).getAppShopcartIdListAction(appShopcartIdLists[0]);
 
                 case StaticValues.BOUTHT_TYPE_RESERVATION:
-                    return new CartAction().getAppyyShopcartIdList(appShopcartIdLists[0]);
+                    return new CartAction(getActivity()).getAppyyShopcartIdList(appShopcartIdLists[0]);
 
                 case StaticValues.BOUTHT_TYPE_TRYIT:
-                    return new CartAction().getAppsmShopcartIdList(appShopcartIdLists[0]);
+                    return new CartAction(getActivity()).getAppsmShopcartIdList(appShopcartIdLists[0]);
 
                 default:
                     return null;
@@ -459,7 +459,7 @@ public class CartFragment extends Fragment {
 
         @Override
         protected AppShopcartIdList doInBackground(AppShopcartIdList... appShopcartIdList) {
-            return new CartAction().deleteShopcartId(appShopcartIdList[0]);
+            return new CartAction(getActivity()).deleteShopcartId(appShopcartIdList[0]);
         }
 
         @Override
@@ -495,7 +495,7 @@ public class CartFragment extends Fragment {
 
         @Override
         protected AppyyShopcart doInBackground(AppyyShopcart... appyyShopcarts) {
-            return new CartAction().updateAppyyShopcart(appyyShopcarts[0]);
+            return new CartAction(getActivity()).updateAppyyShopcart(appyyShopcarts[0]);
         }
 
         @Override
@@ -531,7 +531,7 @@ public class CartFragment extends Fragment {
 
         @Override
         protected AppsmShopcart doInBackground(AppsmShopcart... appsmShopcarts) {
-            return new CartAction().updateAppsmShopcart(appsmShopcarts[0]);
+            return new CartAction(getActivity()).updateAppsmShopcart(appsmShopcarts[0]);
         }
 
         @Override

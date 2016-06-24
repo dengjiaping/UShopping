@@ -203,7 +203,7 @@ public class AfterSaleServiceActivity extends Activity {
 
         @Override
         protected AppCustomer doInBackground(AppCustomer... appCustomers) {
-            return new GoodsAction().saveAppCustomerAction(appCustomers[0]);
+            return new GoodsAction(AfterSaleServiceActivity.this).saveAppCustomerAction(appCustomers[0]);
         }
 
         @Override

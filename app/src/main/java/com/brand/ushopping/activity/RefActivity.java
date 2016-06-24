@@ -89,7 +89,7 @@ public class RefActivity extends Activity {
 
         @Override
         protected Feedback doInBackground(Feedback... feedbacks) {
-            return new AppAction().feedbackSaveAction(feedbacks[0]);
+            return new AppAction(RefActivity.this).feedbackSaveAction(feedbacks[0]);
         }
 
         @Override

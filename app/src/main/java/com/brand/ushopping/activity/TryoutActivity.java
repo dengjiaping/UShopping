@@ -174,7 +174,7 @@ public class TryoutActivity extends Activity {
 
         @Override
         protected OrderAll doInBackground(OrderAll... orderAlls) {
-            return new OrderAction().getSmOrderAllAction(orderAlls[0]);
+            return new OrderAction(TryoutActivity.this).getSmOrderAllAction(orderAlls[0]);
         }
 
         @Override

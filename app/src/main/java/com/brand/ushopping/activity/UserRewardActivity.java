@@ -128,7 +128,7 @@ public class UserRewardActivity extends Activity {
 
         @Override
         protected UserReward doInBackground(UserReward... userRewards) {
-            return new RewardsAction().getAppUserRewards(userRewards[0]);
+            return new RewardsAction(UserRewardActivity.this).getAppUserRewards(userRewards[0]);
         }
 
         @Override
@@ -163,7 +163,7 @@ public class UserRewardActivity extends Activity {
 
         @Override
         protected UserReward doInBackground(UserReward... userRewards) {
-            return new RewardsAction().getAppUshopAll(userRewards[0]);
+            return new RewardsAction(UserRewardActivity.this).getAppUshopAll(userRewards[0]);
         }
 
         @Override
@@ -214,7 +214,7 @@ public class UserRewardActivity extends Activity {
 
         @Override
         protected UserReward doInBackground(UserReward... userRewards) {
-            return new RewardsAction().appUshopBuy(userRewards[0]);
+            return new RewardsAction(UserRewardActivity.this).appUshopBuy(userRewards[0]);
         }
 
         @Override

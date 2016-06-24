@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/12/22.
  */
-public class UserReward
+public class UserReward extends BaseModel
 {
     private long userId;
     private String sessionid;

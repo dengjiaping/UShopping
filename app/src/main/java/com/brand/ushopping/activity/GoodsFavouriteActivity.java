@@ -124,7 +124,7 @@ public class GoodsFavouriteActivity extends Activity {
 
         @Override
         protected AppGoodsCollect doInBackground(AppGoodsCollect... appGoodsCollects) {
-            return new GoodsAction().getListAppGoodsCollectUserIdAction(appGoodsCollects[0]);
+            return new GoodsAction(GoodsFavouriteActivity.this).getListAppGoodsCollectUserIdAction(appGoodsCollects[0]);
 
         }
 

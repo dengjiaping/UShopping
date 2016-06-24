@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/29.
  */
-public class OrderUpdate
+public class OrderUpdate extends BaseModel
 {
     private long userId;
     private String sessionid;

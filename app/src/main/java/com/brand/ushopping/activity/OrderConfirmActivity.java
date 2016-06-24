@@ -654,7 +654,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected OrderSaveList doInBackground(OrderSaveList... orderSaveLists) {
-            return new OrderAction().orderSaveAction(orderSaveLists[0]);
+            return new OrderAction(OrderConfirmActivity.this).orderSaveAction(orderSaveLists[0]);
         }
 
         @Override
@@ -693,7 +693,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected YyOrderSaveList doInBackground(YyOrderSaveList... yyOrderSaveLists) {
-            return new OrderAction().yyOrderSaveAction(yyOrderSaveLists[0]);
+            return new OrderAction(OrderConfirmActivity.this).yyOrderSaveAction(yyOrderSaveLists[0]);
         }
 
         @Override
@@ -743,7 +743,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected SmOrderSaveList doInBackground(SmOrderSaveList... smOrderSaveLists) {
-            return  new OrderAction().smOrderSaveAction(smOrderSaveLists[0]);
+            return  new OrderAction(OrderConfirmActivity.this).smOrderSaveAction(smOrderSaveLists[0]);
 
         }
 
@@ -793,7 +793,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
-            return new OrderAction().yyOrderSuccessAction(orderSuccesses[0]);
+            return new OrderAction(OrderConfirmActivity.this).yyOrderSuccessAction(orderSuccesses[0]);
 
         }
 
@@ -856,7 +856,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
-            return new OrderAction().smOrderSuccessAction(orderSuccesses[0]);
+            return new OrderAction(OrderConfirmActivity.this).smOrderSuccessAction(orderSuccesses[0]);
 
         }
 
@@ -919,7 +919,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected ManJainVoucher doInBackground(ManJainVoucher... manJainVouchers) {
-            return new VoucherAction().manJainAllAction(manJainVouchers[0]);
+            return new VoucherAction(OrderConfirmActivity.this).manJainAllAction(manJainVouchers[0]);
 
         }
 
@@ -1152,7 +1152,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected SelectChargeId doInBackground(SelectChargeId... selectChargeId) {
-            return new GoodsAction().selectChargeIdPingAction(selectChargeId[0]);
+            return new GoodsAction(OrderConfirmActivity.this).selectChargeIdPingAction(selectChargeId[0]);
 
         }
 

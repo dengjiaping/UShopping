@@ -1,11 +1,9 @@
 package com.brand.ushopping.model;
 
-import java.util.HashMap;
-
 /**
  * Created by Administrator on 2015/12/14.
  */
-public class Refunds
+public class Refunds extends BaseModel
 {
     private Object data;
     private boolean hasMore;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class AppStoresList
+public class AppStoresList extends BaseModel
 {
     private long userId;
     private String sessionid;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/11/9.
  */
-public class HomeRe
+public class HomeRe extends BaseModel
 {
     private long userId;
     private String msg;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/6/5.
  * 主题活动商品
  */
-public class OnlineshoppingGoods
+public class OnlineshoppingGoods extends BaseModel
 {
     private String sessionid;
     private Long userId;

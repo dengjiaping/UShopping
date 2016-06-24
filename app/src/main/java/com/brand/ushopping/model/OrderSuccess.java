@@ -4,7 +4,7 @@ package com.brand.ushopping.model;
  * Created by Administrator on 2015/12/29.
  * 支付成功
  */
-public class OrderSuccess
+public class OrderSuccess extends BaseModel
 {
     private long userId;
     private String sessionid;

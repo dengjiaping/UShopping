@@ -97,7 +97,7 @@ public class SignActivity extends Activity {
 
         @Override
         protected Sign doInBackground(Sign... signs) {
-            return new SignAction().getSignAction(signs[0]);
+            return new SignAction(SignActivity.this).getSignAction(signs[0]);
         }
 
         @Override
@@ -178,7 +178,7 @@ public class SignActivity extends Activity {
 
         @Override
         protected Sign doInBackground(Sign... signs) {
-            return new SignAction().signAction(signs[0]);
+            return new SignAction(SignActivity.this).signAction(signs[0]);
         }
 
         @Override

@@ -587,7 +587,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected GoodsInfo doInBackground(GoodsInfo... goodsInfos) {
-            return new GoodsAction().getAppGoodsIdAction(GoodsActivity.this, goodsInfos[0]);
+            return new GoodsAction(GoodsActivity.this).getAppGoodsIdAction(GoodsActivity.this, goodsInfos[0]);
         }
 
         @Override
@@ -729,7 +729,7 @@ public class GoodsActivity extends UActivity {
                     }
 
                     //添加到浏览历史
-                    if(!new GoodsAction().isGoodsViewHistoryExists(appContext.getUdbHelper(), goods.getId()))
+                    if(!new GoodsAction(GoodsActivity.this).isGoodsViewHistoryExists(appContext.getUdbHelper(), goods.getId()))
                     {
                         AppgoodsId appgoodsId = new AppgoodsId();
 
@@ -738,7 +738,7 @@ public class GoodsActivity extends UActivity {
                         appgoodsId.setLogopicUrl(goods.getLogopicUrl());
                         appgoodsId.setPromotionPrice(goods.getPromotionPrice());
 
-                        new GoodsAction().addGoodsViewHistory(appContext.getUdbHelper(), appgoodsId);
+                        new GoodsAction(GoodsActivity.this).addGoodsViewHistory(appContext.getUdbHelper(), appgoodsId);
 //                    appContext.addGoodsViewHistory(appgoodsId);
 
                     }
@@ -886,13 +886,13 @@ public class GoodsActivity extends UActivity {
             switch (boughtType)
             {
                 case StaticValues.BOUTHT_TYPE_NORMAL:
-                    return new CartAction().addAppShopcartAction(addAppShopcarts[0]);
+                    return new CartAction(GoodsActivity.this).addAppShopcartAction(addAppShopcarts[0]);
 
                 case StaticValues.BOUTHT_TYPE_RESERVATION:
-                    return new CartAction().saveInsertAppyyShopcart(addAppShopcarts[0]);
+                    return new CartAction(GoodsActivity.this).saveInsertAppyyShopcart(addAppShopcarts[0]);
 
                 case StaticValues.BOUTHT_TYPE_TRYIT:
-                    return new CartAction().SaveInsertAppsmShopcart(addAppShopcarts[0]);
+                    return new CartAction(GoodsActivity.this).SaveInsertAppsmShopcart(addAppShopcarts[0]);
 
                 default:
                     return null;
@@ -936,7 +936,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected SaveAppGoodsCollect doInBackground(SaveAppGoodsCollect... saveAppGoodsCollects) {
-            return new GoodsAction().saveAppGoodsCollectAction(saveAppGoodsCollects[0]);
+            return new GoodsAction(GoodsActivity.this).saveAppGoodsCollectAction(saveAppGoodsCollects[0]);
         }
 
         @Override
@@ -974,7 +974,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected AppEvaluate doInBackground(AppEvaluate... appEvaluates) {
-            return new GoodsAction().getAppEvaluateAction(appEvaluates[0]);
+            return new GoodsAction(GoodsActivity.this).getAppEvaluateAction(appEvaluates[0]);
         }
 
         @Override
@@ -1037,7 +1037,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected SaveAppBrandCollect doInBackground(SaveAppBrandCollect... saveAppBrandCollects) {
-            return new BrandAction().saveAppBrandCollectAction(GoodsActivity.this, saveAppBrandCollects[0]);
+            return new BrandAction(GoodsActivity.this).saveAppBrandCollectAction(saveAppBrandCollects[0]);
 
         }
 

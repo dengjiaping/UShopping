@@ -221,7 +221,7 @@ public class OrderSubmitPopup extends PopupWindow
 
         @Override
         protected String doInBackground(ClientCharge... clientCharges) {
-            return new GoodsAction().returnClientChargeAction(clientCharges[0]);
+            return new GoodsAction(context).returnClientChargeAction(clientCharges[0]);
         }
 
         @Override

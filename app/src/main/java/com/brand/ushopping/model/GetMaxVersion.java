@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/30.
  */
-public class GetMaxVersion
+public class GetMaxVersion extends BaseModel
 {
     private int systemtype = 1; //1 android, 2 ios
     private int versionNumber;

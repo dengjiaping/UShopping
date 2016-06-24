@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/12/17.
  */
-public class OrderAll
+public class OrderAll extends BaseModel
 {
     private long userId;
     private String sessionid;

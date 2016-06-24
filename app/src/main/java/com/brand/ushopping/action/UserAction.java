@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -17,11 +18,16 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/3.
  */
-public class UserAction
+public class UserAction extends BaseAction
 {
+    public UserAction(Context context) {
+        super(context);
+    }
+
     //登录
     public User login(User user)
     {
+        user.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(user);
         List params = new ArrayList();
@@ -63,6 +69,7 @@ public class UserAction
     //注册
     public User register(User user)
     {
+        user.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(user);
         List params = new ArrayList();
@@ -147,6 +154,7 @@ public class UserAction
     //更新用户信息
     public User updateAppUser(User user)
     {
+        user.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(user);
         List params = new ArrayList();

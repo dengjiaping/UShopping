@@ -212,7 +212,7 @@ public class ReservationOrderItemView extends LinearLayout {
 
         @Override
         protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
-            return new OrderAction().yyOrderSuccessAction(orderSuccesses[0]);
+            return new OrderAction(context).yyOrderSuccessAction(orderSuccesses[0]);
 
         }
 

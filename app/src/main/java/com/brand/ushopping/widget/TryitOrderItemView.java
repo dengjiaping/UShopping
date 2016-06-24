@@ -204,7 +204,7 @@ public class TryitOrderItemView extends LinearLayout
 
         @Override
         protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
-            return new OrderAction().smOrderSuccessAction(orderSuccesses[0]);
+            return new OrderAction(context).smOrderSuccessAction(orderSuccesses[0]);
 
         }
 

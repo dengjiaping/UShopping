@@ -362,7 +362,7 @@ public class BrandActivity extends Activity {
 
         @Override
         protected BrandGoodsList doInBackground(BrandGoodsList... brandGoodsLists) {
-            return new StoreAction().getAppStoresIdAll(BrandActivity.this, brandGoodsLists[0]);
+            return new StoreAction(BrandActivity.this).getAppStoresIdAll(brandGoodsLists[0]);
         }
 
         @Override
@@ -478,7 +478,7 @@ public class BrandActivity extends Activity {
 
         @Override
         protected SaveAppBrandCollect doInBackground(SaveAppBrandCollect... saveAppBrandCollects) {
-            return new BrandAction().saveAppBrandCollectAction(BrandActivity.this, saveAppBrandCollects[0]);
+            return new BrandAction(BrandActivity.this).saveAppBrandCollectAction(saveAppBrandCollects[0]);
 
         }
 

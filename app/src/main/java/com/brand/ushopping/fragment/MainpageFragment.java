@@ -714,7 +714,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
         @Override
         protected HomeRe doInBackground(HomeRe... homeRe) {
-            return new MainpageAction().homeRe(getActivity(), homeRe[0]);
+            return new MainpageAction(getActivity()).homeRe(homeRe[0]);
         }
 
         @Override
@@ -775,7 +775,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
         @Override
         protected Main doInBackground(Main... mains) {
-            return new MainpageAction().home(getActivity(), mains[0]);
+            return new MainpageAction(getActivity()).home(getActivity(), mains[0]);
         }
 
         @Override

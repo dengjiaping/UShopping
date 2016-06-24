@@ -20,10 +20,15 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/1/20.
  */
-public class ThemeAction
+public class ThemeAction extends BaseAction
 {
+    public ThemeAction(Context context) {
+        super(context);
+    }
+
     public AppTheme getAppThemeAllAction(Context context, AppTheme appTheme)
     {
+        appTheme.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appTheme);
         List params = new ArrayList();

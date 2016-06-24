@@ -155,7 +155,7 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
                 appContext.setDefaultAddress(address.getDeaddress());
                 appContext.setDefaultAddressId(address.getAddressId());
 
-                new RefAction().setDefaultAddress(AddAddressActivity.this, address);
+                new RefAction(AddAddressActivity.this).setDefaultAddress(AddAddressActivity.this, address);
 
                 Toast.makeText(AddAddressActivity.this, "默认地址已设置", Toast.LENGTH_SHORT).show();
 
@@ -230,7 +230,7 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
 
         @Override
         protected Address doInBackground(Address... address) {
-            return new AddressAction().addAddress(address[0]);
+            return new AddressAction(AddAddressActivity.this).addAddress(address[0]);
         }
 
         @Override
@@ -260,7 +260,7 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
 
         @Override
         protected Address doInBackground(Address... address) {
-            return new AddressAction().updateAddress(address[0]);
+            return new AddressAction(AddAddressActivity.this).updateAddress(address[0]);
         }
 
         @Override

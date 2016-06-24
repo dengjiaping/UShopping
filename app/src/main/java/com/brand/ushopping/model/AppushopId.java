@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/22.
  */
-public class AppushopId
+public class AppushopId extends BaseModel
 {
     private long id;
     private String attribute;

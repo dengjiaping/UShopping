@@ -143,7 +143,7 @@ public class AddressAdapter extends BaseAdapter {
 
         @Override
         protected Address doInBackground(Address... address) {
-            return new AddressAction().deleteAddress(address[0]);
+            return new AddressAction(context).deleteAddress(address[0]);
         }
 
         @Override
