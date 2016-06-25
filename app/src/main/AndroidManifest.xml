@@ -136,6 +136,7 @@
         <!-- <service android:name="com.sina.weibo.sdk.net.DownloadService" -->
         <!-- android:exported="false"></service> -->
 
+
         <!-- Ping++ SDK -->
         <activity
             android:name="com.pingplusplus.android.PaymentActivity"
@@ -154,14 +155,12 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
 
         <!-- 银联支付 sdk -->
         <activity
@@ -395,7 +394,6 @@
             android:name="UMENG_APPKEY"
             android:value="56e0f3ede0f55a0e0a00167d" />
 
-
         <activity
             android:name=".WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -507,7 +505,13 @@
             android:label="动画效果"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.SplashAdActivity"></activity>
+        <activity android:name=".activity.SplashAdActivity" />
+        <activity
+            android:name=".activity.OrderStatusActivity"
+            android:label="订单状态"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>

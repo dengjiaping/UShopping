@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.activity.OrderConfirmActivity;
+import com.brand.ushopping.activity.OrderStatusActivity;
 import com.brand.ushopping.activity.ReservationActivity;
 import com.brand.ushopping.activity.SnsShareActivity;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
@@ -50,6 +51,7 @@ public class ReservationOrderItemView extends LinearLayout {
     private ListView orderGoodsListView;
     private Button payOnlineBtn;
     private Button payOfflineBtn;
+    private Button orderStatusBtn;
     private ListView orderListView;
     private OrderItem orderItem;
     private TextView moneyTextView;
@@ -70,6 +72,7 @@ public class ReservationOrderItemView extends LinearLayout {
         orderGoodsListView = (ListView) view.findViewById(R.id.goods_list);
         payOnlineBtn = (Button) view.findViewById(R.id.pay_online);
         payOfflineBtn = (Button) view.findViewById(R.id.pay_offline);
+        orderStatusBtn = (Button) findViewById(R.id.order_status);
         orderListView = (ListView) view.findViewById(R.id.goods_list);
         moneyTextView = (TextView) view.findViewById(R.id.money);
         quantityTextView = (TextView) view.findViewById(R.id.quantity);
@@ -121,6 +124,7 @@ public class ReservationOrderItemView extends LinearLayout {
 
         payOnlineBtn.setVisibility(View.GONE);
         payOfflineBtn.setVisibility(View.GONE);
+        orderStatusBtn.setVisibility(View.GONE);
 
         if(orderItem.getFlag() == StaticValues.RESERVATION_ORDER_FLAG_UNPAID)
         {
@@ -198,6 +202,19 @@ public class ReservationOrderItemView extends LinearLayout {
 
             payOnlineBtn.setVisibility(View.VISIBLE);
             payOfflineBtn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            //已支付显示订单状态
+            orderStatusBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, OrderStatusActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+
+            orderStatusBtn.setVisibility(View.VISIBLE);
         }
 
     }

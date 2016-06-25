@@ -311,7 +311,7 @@ public class OrderConfirmActivity extends Activity {
                                 yyOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
                                 //添加满减券
-                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+//                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
 
@@ -372,7 +372,7 @@ public class OrderConfirmActivity extends Activity {
                                 smOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
                                 //添加满减券
-                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+//                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 smOrderSaveList.setSmorder(smOrderSaveArrayList);
 
