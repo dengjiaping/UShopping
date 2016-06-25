@@ -16,6 +16,7 @@ import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.model.WeiboUser;
 import com.brand.ushopping.utils.UDBHelper;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
@@ -55,6 +56,7 @@ public class AppContext  extends Application
     private double longitude;
     private double latitude;
     private String imie = "";
+    private WeiboUser weiboUser = null;
 
     @Override
     public void onCreate() {
@@ -314,5 +316,13 @@ public class AppContext  extends Application
 
     public void setImie(String imie) {
         this.imie = imie;
+    }
+
+    public WeiboUser getWeiboUser() {
+        return weiboUser;
+    }
+
+    public void setWeiboUser(WeiboUser weiboUser) {
+        this.weiboUser = weiboUser;
     }
 }
