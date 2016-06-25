@@ -124,6 +124,8 @@ public class OrderSubmitPopup extends PopupWindow
 
                     } else {
                         new ReturnClientChargeTask().execute(clientCharge);
+//                        activity.startPay(result);
+//                        activity.startPay(clientCharge);
 
                     }
 
@@ -208,7 +210,7 @@ public class OrderSubmitPopup extends PopupWindow
 
     }
 
-    //发起付款请求
+    //发起付款请求 获取Charge对象
     public class ReturnClientChargeTask extends AsyncTask<ClientCharge, Void, String>
     {
         @Override
@@ -219,15 +221,16 @@ public class OrderSubmitPopup extends PopupWindow
 
         @Override
         protected String doInBackground(ClientCharge... clientCharges) {
-            return new GoodsAction().returnClientChargeAction(clientCharges[0]);
+            return new GoodsAction(context).returnClientChargeAction(clientCharges[0]);
         }
 
         @Override
         protected void onPostExecute(String result) {
-            confirmBtn.setEnabled(true);
             if(!CommonUtils.isValueEmpty(result))
             {
+                //支付对象获取成功
                 activity.startPay(result);
+//                callClientCharge(result);
 
             }
             else
@@ -238,6 +241,5 @@ public class OrderSubmitPopup extends PopupWindow
 
         }
     }
-
 
 }

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class ThemeFragment extends Fragment {
     private AppContext appContext;
     private User user;
     private ArrayList<AppThemeItem> appThemeItems;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     private MainActivity mainActivity;
 
     /**
@@ -121,7 +122,15 @@ public class ThemeFragment extends Fragment {
 
         themeListView = (ListView) view.findViewById(R.id.theme_list);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
 
+            }
+        });
 
         return view;
     }
@@ -202,12 +211,13 @@ public class ThemeFragment extends Fragment {
 
         @Override
         protected AppTheme doInBackground(AppTheme... appThemes) {
-            return new ThemeAction().getAppThemeAllAction(getActivity(), appThemes[0]);
+            return new ThemeAction(getActivity()).getAppThemeAllAction(getActivity(), appThemes[0]);
         }
 
         @Override
         protected void onPostExecute(AppTheme result) {
             getinfoDialog.dismiss();
+            swipeRefreshLayout.setRefreshing(false);
 
             if(result != null)
             {

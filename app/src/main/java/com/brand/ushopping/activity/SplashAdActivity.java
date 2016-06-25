@@ -22,7 +22,7 @@ public class SplashAdActivity extends AppCompatActivity {
 
         splashAdImageView = (ImageView) findViewById(R.id.splash_ad);
 
-        Bitmap bitmap = new AppAction().loadSplash(SplashAdActivity.this);
+        Bitmap bitmap = new AppAction(SplashAdActivity.this).loadSplash(SplashAdActivity.this);
         if(bitmap != null)
         {
 

@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,7 @@ public class BrandActivity extends Activity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    private TextView moreGoodsBtn;
+    private Button moreGoodsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,7 +290,7 @@ public class BrandActivity extends Activity {
             }
         });
 
-        moreGoodsBtn = (TextView) findViewById(R.id.more_goods);
+        moreGoodsBtn = (Button) findViewById(R.id.more_goods);
         moreGoodsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -361,7 +362,7 @@ public class BrandActivity extends Activity {
 
         @Override
         protected BrandGoodsList doInBackground(BrandGoodsList... brandGoodsLists) {
-            return new StoreAction().getAppStoresIdAll(BrandActivity.this, brandGoodsLists[0]);
+            return new StoreAction(BrandActivity.this).getAppStoresIdAll(brandGoodsLists[0]);
         }
 
         @Override
@@ -477,7 +478,7 @@ public class BrandActivity extends Activity {
 
         @Override
         protected SaveAppBrandCollect doInBackground(SaveAppBrandCollect... saveAppBrandCollects) {
-            return new BrandAction().saveAppBrandCollectAction(BrandActivity.this, saveAppBrandCollects[0]);
+            return new BrandAction(BrandActivity.this).saveAppBrandCollectAction(saveAppBrandCollects[0]);
 
         }
 

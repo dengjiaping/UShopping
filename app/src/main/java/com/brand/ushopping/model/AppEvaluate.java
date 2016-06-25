@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/1/18.
  */
-public class AppEvaluate {
+public class AppEvaluate extends BaseModel {
     private long userId;
     private String sessionid;
     private boolean success;

@@ -329,13 +329,14 @@
                         android:numColumns="2"
                         android:layout_marginTop="4dp" />
 
-                    <TextView
+                    <Button
                         android:layout_width="fill_parent"
-                        android:layout_height="38dp"
+                        android:layout_height="wrap_content"
                         android:text="查看更多"
-                        style="@style/TextViewStyle"
-                        android:gravity="center"
-                        android:id="@+id/more_goods_2" />
+                        android:id="@+id/more_goods_2"
+                        style="@style/BtnStyle"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp" />
 
                 </TableLayout>
             </com.brand.ushopping.widget.ScrollViewX>

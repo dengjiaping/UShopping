@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/30.
  */
-public class Feedback {
+public class Feedback extends BaseModel {
     private long userId;
     private String sessionid;
     private boolean success;

@@ -207,7 +207,7 @@ public class OrderItemView extends LinearLayout {
 
         @Override
         protected ConfirmOrder doInBackground(ConfirmOrder... confirmOrders) {
-            return new OrderAction().confirmOrderAction(confirmOrders[0]);
+            return new OrderAction(context).confirmOrderAction(confirmOrders[0]);
         }
 
         @Override

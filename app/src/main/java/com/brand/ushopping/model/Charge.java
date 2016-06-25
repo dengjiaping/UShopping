@@ -3,13 +3,10 @@ package com.brand.ushopping.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.HashMap;
-import java.util.Objects;
-
 /**
  * Created by Administrator on 2015/12/14.
  */
-public class Charge implements Parcelable
+public class Charge extends BaseModel implements Parcelable
 {
     private long amount;
     private int amountRefunded;

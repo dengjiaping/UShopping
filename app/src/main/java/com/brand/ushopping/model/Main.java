@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/11/9.
  */
-public class Main
+public class Main extends BaseModel
 {
     private long userId;
     private String sessionid;
@@ -13,6 +13,7 @@ public class Main
     private ArrayList<Banner> banner;
     private ArrayList<Category> category;
     private ArrayList<Recommend> recommend;
+    private Boolean useCache = true;    //是否使用缓存
 
     private boolean success;
     private String msg;
@@ -79,5 +80,13 @@ public class Main
 
     public void setRecommend(ArrayList<Recommend> recommend) {
         this.recommend = recommend;
+    }
+
+    public Boolean getUseCache() {
+        return useCache;
+    }
+
+    public void setUseCache(Boolean useCache) {
+        this.useCache = useCache;
     }
 }

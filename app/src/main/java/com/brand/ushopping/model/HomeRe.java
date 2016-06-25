@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/11/9.
  */
-public class HomeRe
+public class HomeRe extends BaseModel
 {
     private long userId;
     private String msg;
@@ -14,6 +14,7 @@ public class HomeRe
     private int max;
     private boolean success;
     private ArrayList<AppgoodsId> appgoodsId;
+    private Boolean useCache = true;    //是否使用缓存
 
     public long getUserId() {
         return userId;
@@ -69,5 +70,13 @@ public class HomeRe
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public Boolean getUseCache() {
+        return useCache;
+    }
+
+    public void setUseCache(Boolean useCache) {
+        this.useCache = useCache;
     }
 }

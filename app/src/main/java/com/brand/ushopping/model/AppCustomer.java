@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/19.
  */
-public class AppCustomer {
+public class AppCustomer extends BaseModel {
     private long userId;
     private String sessionid;
     private AppuserId appuserId;

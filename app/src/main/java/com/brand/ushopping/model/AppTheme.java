@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/1/20.
  */
-public class AppTheme {
+public class AppTheme extends BaseModel {
     private long userId;
     private String sessionid;
     private boolean success;

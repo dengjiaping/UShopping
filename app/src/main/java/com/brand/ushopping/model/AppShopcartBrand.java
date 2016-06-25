@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/12/9.
  */
-public class AppShopcartBrand
+public class AppShopcartBrand extends BaseModel
 {
     private long id;
     private String brandName;

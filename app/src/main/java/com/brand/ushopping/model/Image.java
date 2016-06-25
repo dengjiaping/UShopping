@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/5/10.
  */
-public class Image
+public class Image extends BaseModel
 {
     private String url;
     private String msg;

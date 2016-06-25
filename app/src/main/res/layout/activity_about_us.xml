@@ -253,10 +253,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dev"
                 android:id="@+id/dev"
-                android:visibility="visible"
-                android:layout_column="13" />
+                android:layout_column="13"
+                android:alpha="0"
+                android:clickable="false" />
+
         </TableRow>
 
     </TableLayout>

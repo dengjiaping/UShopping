@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.AppTheme;
 import com.brand.ushopping.model.AppThemeItem;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -19,14 +20,15 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/1/20.
  */
-public class ThemeAction
+public class ThemeAction extends BaseAction
 {
-//    private ACache mCache;
+    public ThemeAction(Context context) {
+        super(context);
+    }
 
     public AppTheme getAppThemeAllAction(Context context, AppTheme appTheme)
     {
-//        mCache = ACache.get(context);
-
+        appTheme.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appTheme);
         List params = new ArrayList();
@@ -34,11 +36,7 @@ public class ThemeAction
 
         try
         {
-//            if(mCache != null)
-//            {
-//                resultString = mCache.getAsString("GetAppThemeAllAction.action");
-//            }
-
+            resultString = DataCache.getData(context, "GetAppThemeAllAction.action");
             if(CommonUtils.isValueEmpty(resultString))
             {
 //                resultString = HttpClientUtil.post("GetAppThemeAllAction.action", params);
@@ -68,8 +66,7 @@ public class ThemeAction
                     appTheme.setSuccess(true);
 
                     //存入缓存
-//                    mCache.put("GetAppThemeAllAction.action", resultString, StaticValues.CACHE_LIFE);
-
+                    DataCache.putData(context, "GetAppThemeAllAction.action", resultString);
                 }
                 else
                 {

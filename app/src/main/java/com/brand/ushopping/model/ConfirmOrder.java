@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/2/2.
  */
-public class ConfirmOrder {
+public class ConfirmOrder extends BaseModel{
     private long userId;
     private String sessionid;
     private String orderNo;

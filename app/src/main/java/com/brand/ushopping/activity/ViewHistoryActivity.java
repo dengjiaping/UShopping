@@ -78,7 +78,7 @@ public class ViewHistoryActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        new GoodsAction().goodsViewHistoryClear(appContext.getUdbHelper());
+                        new GoodsAction(ViewHistoryActivity.this).goodsViewHistoryClear(appContext.getUdbHelper());
                         ViewHistoryActivity.this.finish();
 
                     }
@@ -105,7 +105,7 @@ public class ViewHistoryActivity extends Activity {
 
     private void reload()
     {
-        goodsViewHistory = new GoodsAction().getGoodsViewHistory(appContext.getUdbHelper());
+        goodsViewHistory = new GoodsAction(ViewHistoryActivity.this).getGoodsViewHistory(appContext.getUdbHelper());
 //        goodsViewHistory = appContext.getGoodsViewHistory();
 
         if(goodsViewHistory != null && !goodsViewHistory.isEmpty())

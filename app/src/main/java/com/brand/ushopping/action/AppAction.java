@@ -30,7 +30,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/12/30.
  */
-public class AppAction {
+public class AppAction extends BaseAction{
+    public AppAction(Context context) {
+        super(context);
+    }
+
     //获取版本号
     public Version getMaxVersionAction(Version version)
     {
@@ -78,7 +82,7 @@ public class AppAction {
     }
 
     //启动初始化
-    public void appDataInit(Context context, User user)
+    public void appDataInit(User user)
     {
         AppContext appContext = (AppContext) context.getApplicationContext();
 
@@ -89,7 +93,7 @@ public class AppAction {
             address.setUserId(user.getUserId());
             address.setSessionid(user.getSessionid());
 
-            ArrayList<Address> addresses = new AddressAction().GetAppAddressAllAction(address);
+            ArrayList<Address> addresses = new AddressAction(context).GetAppAddressAllAction(address);
             if(addresses != null && !addresses.isEmpty())
             {
                 appContext.setAddressList(addresses);
@@ -97,7 +101,7 @@ public class AppAction {
             }
 
             //获取默认地址
-            Address addressDefault = new RefAction().getDefaultAddress(context);
+            Address addressDefault = new RefAction(context).getDefaultAddress(context);
             appContext.setDefaultAddress(addressDefault.getDeaddress());
             appContext.setDefaultAddressId(addressDefault.getAddressId());
 
@@ -111,10 +115,11 @@ public class AppAction {
             mMain.setSessionid(user.getSessionid());
 
         }
+        mMain.setUseCache(true);
         Main result = null;
         try
         {
-            result = new MainpageAction().home(context, mMain);
+            result = new MainpageAction(context).home(context, mMain);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -131,7 +136,8 @@ public class AppAction {
         }
         homeRe.setMin(0);
         homeRe.setMax(StaticValues.RECOMMEND_PAGE_COUNT);
-        appContext.setHomeRe(new MainpageAction().homeRe(context, homeRe));
+        homeRe.setUseCache(true);
+        appContext.setHomeRe(new MainpageAction(context).homeRe(homeRe));
 
 //        new AppAction().downloadSplash(context, "http://static.oschina.net/uploads/img/201208/13122559_L8G0.png");
     }
@@ -139,6 +145,7 @@ public class AppAction {
     //反馈
     public Feedback feedbackSaveAction(Feedback feedback)
     {
+        feedback.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(feedback);
         List params = new ArrayList();

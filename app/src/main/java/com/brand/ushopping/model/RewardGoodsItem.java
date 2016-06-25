@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/22.
  */
-public class RewardGoodsItem
+public class RewardGoodsItem extends BaseModel
 {
     private long id;
     private int flag;

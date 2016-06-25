@@ -1,12 +1,11 @@
 package com.brand.ushopping.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/1/17.
  */
-public class AppGoodsCollect
+public class AppGoodsCollect extends BaseModel
 {
     private long userId;
     private String sessionid;

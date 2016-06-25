@@ -116,9 +116,10 @@ public class OrderConfirmActivity extends Activity {
     private List manjianListDatalistData = new ArrayList<Map<String,Object>>();
 
     private EditText commentEditText;
-
+    private String payMethod = null;
     public boolean chargedCheck = false;
-
+    private ClientCharge clientCharge = null;
+    private String charge;
     public OrderConfirmActivity() {
     }
 
@@ -210,18 +211,6 @@ public class OrderConfirmActivity extends Activity {
 
             }
         });
-
-//        int totalHeight = 0;
-//        for (int i = 0; i < adapter.getCount(); i++) {
-//            View listItem = adapter.getView(i, null, goodsListView);
-//            listItem.measure(0, 0);
-//            totalHeight += listItem.getMeasuredHeight();
-//        }
-
-//        ViewGroup.LayoutParams params = goodsListView.getLayoutParams();
-//        params.height = totalHeight + (goodsListView.getDividerHeight() * (adapter.getCount() - 1));
-//        ((ViewGroup.MarginLayoutParams)params).setMargins(10, 10, 10, 10);
-//        goodsListView.setLayoutParams(params);
 
         if(appbrandId != null)
         {
@@ -319,16 +308,10 @@ public class OrderConfirmActivity extends Activity {
                                 }
 
                                 //添加优惠券
-                                userVoucherId = new StringBuffer();
-                                for(UserVoucherItem userVoucherItem: userVoucherItems)
-                                {
-                                    userVoucherId.append(userVoucherItem.getId());
-                                    userVoucherId.append(',');
+                                yyOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
-                                }
-                                yyOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
                                 //添加满减券
-                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+//                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
 
@@ -386,16 +369,10 @@ public class OrderConfirmActivity extends Activity {
                                 }
 
                                 //添加优惠券
-                                userVoucherId = new StringBuffer();
-                                for(UserVoucherItem userVoucherItem: userVoucherItems)
-                                {
-                                    userVoucherId.append(userVoucherItem.getId());
-                                    userVoucherId.append(',');
+                                smOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
 
-                                }
-                                smOrderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
                                 //添加满减券
-                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+//                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
 
                                 smOrderSaveList.setSmorder(smOrderSaveArrayList);
 
@@ -502,16 +479,23 @@ public class OrderConfirmActivity extends Activity {
 
     }
 
-    //唤起支付对象
+    //开始支付,先生成订单再支付
     public void startPay(String charge)
     {
-        this.chargeObj = JSON.parseObject(charge, Charge.class);;
+        this.charge = charge;
+        this.chargeObj = JSON.parseObject(charge, Charge.class);
+        generateOrder();
 
+    }
+
+    //唤起支付对象
+    public void callClientCharge()
+    {
         Intent intent = new Intent();
         String packageName = getPackageName();
         ComponentName componentName = new ComponentName(packageName, packageName + ".wxapi.WXPayEntryActivity");
         intent.setComponent(componentName);
-        intent.putExtra(PaymentActivity.EXTRA_CHARGE, charge);
+        intent.putExtra(PaymentActivity.EXTRA_CHARGE, this.charge);
         startActivityForResult(intent, StaticValues.REQUEST_CODE_PAYMENT);
 
     }
@@ -526,6 +510,7 @@ public class OrderConfirmActivity extends Activity {
                  * "fail"    - payment failed
                  * "cancel"  - user canceld
                  * "invalid" - payment plugin not installed
+                 *
                  *
                  * 如果是银联渠道返回 invalid，调用 UPPayAssistEx.installUPPayPlugin(this); 安装银联安全支付控件。
                  */
@@ -614,7 +599,6 @@ public class OrderConfirmActivity extends Activity {
                         Toast.makeText(OrderConfirmActivity.this, "您已添加此优惠券,不能重复添加", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                 }
 
                 //商品判断
@@ -652,61 +636,6 @@ public class OrderConfirmActivity extends Activity {
 
                 userVoucherItems.add(userVoucherItem);
 
-//                //每个品牌限用一张 通用限用一张
-//                if(appbrandId.getId() != 0)
-//                {
-//                    //品牌优惠券
-//
-//                    //遍历现有的
-//
-//
-//
-//
-
-//                    boolean brandAvaliable = false;
-//
-//                    for(Goods goods: goodsList)
-//                    {
-//                        if(goods.getId() == appbrandId.getId())
-//                        {
-//                            brandAvaliable = true;
-//                        }
-//                    }
-
-                    /*
-                    if(brandAvaliable == false)
-                    {
-                        Toast.makeText(OrderConfirmActivity.this, "只能使用该品牌的优惠券", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    */
-//
-//                }
-//                else
-//                {
-//                    //通用优惠券
-//                    //已有判断
-//                    boolean commonVoucherAvaliable = true;
-//                    for(UserVoucherItem userVoucherItem1: userVoucherItems)
-//                    {
-//                        if(userVoucherItem1.getAppvoucherId().getAppbrandId().getId() == 0)
-//                        {
-//                            commonVoucherAvaliable = false;
-//                            break;
-//                        }
-//                    }
-//
-//                    if(commonVoucherAvaliable)
-//                    {
-//                        userVoucherItems.add(userVoucherItem);
-//                    }
-//
-//                }
-
-                //改为只能使用一张优惠券
-//                userVoucherItems.clear();
-
-
                 voucherReload();
                 calculateSummary();
 
@@ -725,7 +654,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected OrderSaveList doInBackground(OrderSaveList... orderSaveLists) {
-            return new OrderAction().orderSaveAction(orderSaveLists[0]);
+            return new OrderAction(OrderConfirmActivity.this).orderSaveAction(orderSaveLists[0]);
         }
 
         @Override
@@ -736,39 +665,9 @@ public class OrderConfirmActivity extends Activity {
                 {
                     orderSubmitPopup.dismiss();
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                    builder.setMessage("订单生成成功,分享链接领取优惠券");
-                    builder.setTitle("提示");
-                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-
-                            //弹出分享优惠券
-                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
-                            startActivity(intent);
-                            OrderConfirmActivity.this.finish();
-
-                        }
-                    });
-
-                    builder.setNegativeButton("查看订单", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent intent = new Intent(OrderConfirmActivity.this, OrderActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-
-                            OrderConfirmActivity.this.finish();
-
-                        }
-                    });
-
-                    builder.setCancelable(false);
-                    builder.create().show();
+                    //发起付款请求
+//                    new ReturnClientChargeTask().execute(clientCharge);
+                    callClientCharge();
 
                 }
                 else
@@ -794,7 +693,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected YyOrderSaveList doInBackground(YyOrderSaveList... yyOrderSaveLists) {
-            return new OrderAction().yyOrderSaveAction(yyOrderSaveLists[0]);
+            return new OrderAction(OrderConfirmActivity.this).yyOrderSaveAction(yyOrderSaveLists[0]);
         }
 
         @Override
@@ -844,7 +743,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected SmOrderSaveList doInBackground(SmOrderSaveList... smOrderSaveLists) {
-            return  new OrderAction().smOrderSaveAction(smOrderSaveLists[0]);
+            return  new OrderAction(OrderConfirmActivity.this).smOrderSaveAction(smOrderSaveLists[0]);
 
         }
 
@@ -894,7 +793,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
-            return new OrderAction().yyOrderSuccessAction(orderSuccesses[0]);
+            return new OrderAction(OrderConfirmActivity.this).yyOrderSuccessAction(orderSuccesses[0]);
 
         }
 
@@ -957,7 +856,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected OrderSuccess doInBackground(OrderSuccess... orderSuccesses) {
-            return new OrderAction().smOrderSuccessAction(orderSuccesses[0]);
+            return new OrderAction(OrderConfirmActivity.this).smOrderSuccessAction(orderSuccesses[0]);
 
         }
 
@@ -1020,7 +919,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected ManJainVoucher doInBackground(ManJainVoucher... manJainVouchers) {
-            return new VoucherAction().manJainAllAction(manJainVouchers[0]);
+            return new VoucherAction(OrderConfirmActivity.this).manJainAllAction(manJainVouchers[0]);
 
         }
 
@@ -1253,7 +1152,7 @@ public class OrderConfirmActivity extends Activity {
 
         @Override
         protected SelectChargeId doInBackground(SelectChargeId... selectChargeId) {
-            return new GoodsAction().selectChargeIdPingAction(selectChargeId[0]);
+            return new GoodsAction(OrderConfirmActivity.this).selectChargeIdPingAction(selectChargeId[0]);
 
         }
 
@@ -1294,77 +1193,39 @@ public class OrderConfirmActivity extends Activity {
         switch (boughtType)
         {
             case StaticValues.BOUTHT_TYPE_NORMAL:
-                // 生成普通订单
-                ArrayList<OrderSave> orderSaveArrayList = new ArrayList<OrderSave>();
-//                for (Goods goods: goodsList)
-                for(int a=0; a<goodsList.size(); a++)
-                {
-                    Goods goods = goodsList.get(a);
-                    OrderSave orderSave = new OrderSave();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                    builder.setMessage("订单生成成功,分享链接领取优惠券");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("分享链接", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
 
-                    orderSave.setOrderNo(chargeObj.getOrderNo());
-//                    orderSave.setMoney(summary);
-                    orderSave.setMoney(goods.getPromotionPrice());
-                    //优惠券扣除到第一个商品中
-                    if(a == 0)
-                    {
-                        double money = orderSave.getMoney();
-                        for(UserVoucherItem userVoucherItem: userVoucherItems)
-                        {
-                            money -= userVoucherItem.getAppvoucherId().getMoney01();
+                            //弹出分享优惠券
+                            Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            startActivity(intent);
+                            OrderConfirmActivity.this.finish();
 
                         }
-                        orderSave.setMoney(money);
+                    });
 
-                    }
+                    builder.setNegativeButton("查看订单", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
-                    String channel = chargeObj.getChannel();
+                            Intent intent = new Intent(OrderConfirmActivity.this, OrderActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
 
-                    orderSave.setPaymentMode(putPaymentMode(channel));
+                            OrderConfirmActivity.this.finish();
 
-                    orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
+                        }
+                    });
 
-                    AppuserId appuserId = new AppuserId();
-                    appuserId.setUserId(user.getUserId());
-                    orderSave.setAppuserId(appuserId);
-
-                    AppaddressId appaddressId = new AppaddressId();
-                    appaddressId.setId(addressId);
-                    orderSave.setAppaddressId(appaddressId);
-
-                    orderSave.setRemark(chargeObj.getBody());
-
-                    //商品信息
-                    AppgoodsId appgoodsId = new AppgoodsId();
-                    appgoodsId.setId(goods.getId());
-                    orderSave.setAppgoodsId(appgoodsId);
-
-                    orderSave.setAttribute(goods.getAttribute());
-                    orderSave.setQuantity(goods.getCount());
-
-                    orderSaveArrayList.add(orderSave);
-
-                }
-
-                //添加优惠券
-                StringBuffer userVoucherId = new StringBuffer();
-                for(UserVoucherItem userVoucherItem: userVoucherItems)
-                {
-                    userVoucherId.append(userVoucherItem.getId());
-                    userVoucherId.append(',');
-
-                }
-                orderSaveArrayList.get(0).setUserVoucherId(userVoucherId.toString());
-                //添加满减券
-//                            orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
-
-                OrderSaveList orderSaveList = new OrderSaveList();
-                orderSaveList.setUserId(user.getUserId());
-                orderSaveList.setSessionid(user.getSessionid());
-                orderSaveList.setOrder(orderSaveArrayList);
-
-                new OrderSaveTask().execute(orderSaveList);
+                    builder.setCancelable(false);
+                    builder.create().show();
 
                 break;
 
@@ -1400,5 +1261,93 @@ public class OrderConfirmActivity extends Activity {
 
     }
 
+    //生成普通订单
+    private void generateOrder()
+    {
+        ArrayList<OrderSave> orderSaveArrayList = new ArrayList<OrderSave>();
+//                for (Goods goods: goodsList)
+        for(int a=0; a<goodsList.size(); a++)
+        {
+            Goods goods = goodsList.get(a);
+            OrderSave orderSave = new OrderSave();
+
+            orderSave.setOrderNo(this.chargeObj.getOrderNo());
+            orderSave.setMoney(goods.getPromotionPrice());
+            //优惠券扣除到第一个商品中
+            if(a == 0)
+            {
+                double money = orderSave.getMoney();
+                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                {
+                    money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                }
+                orderSave.setMoney(money);
+
+            }
+
+            orderSave.setPaymentMode(StaticValues.ORDER_PAY_CASH);
+            String channel = chargeObj.getChannel();
+
+            orderSave.setPaymentMode(putPaymentMode(channel));
+
+            orderSave.setFlag(StaticValues.ORDER_FLAG_PAID);
+
+            AppuserId appuserId = new AppuserId();
+            appuserId.setUserId(user.getUserId());
+            orderSave.setAppuserId(appuserId);
+
+            AppaddressId appaddressId = new AppaddressId();
+            appaddressId.setId(addressId);
+            orderSave.setAppaddressId(appaddressId);
+
+            orderSave.setRemark(chargeObj.getBody());
+
+            //商品信息
+            AppgoodsId appgoodsId = new AppgoodsId();
+            appgoodsId.setId(goods.getId());
+            orderSave.setAppgoodsId(appgoodsId);
+
+            orderSave.setAttribute(goods.getAttribute());
+            orderSave.setQuantity(goods.getCount());
+
+            orderSaveArrayList.add(orderSave);
+
+        }
+
+        //添加优惠券
+        orderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
+
+        //添加满减券
+//        orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+
+        OrderSaveList orderSaveList = new OrderSaveList();
+        orderSaveList.setUserId(user.getUserId());
+        orderSaveList.setSessionid(user.getSessionid());
+        orderSaveList.setOrder(orderSaveArrayList);
+
+        new OrderSaveTask().execute(orderSaveList);
+    }
+
+    //添加优惠券
+    private String addVouchers(ArrayList<UserVoucherItem> userVoucherItems)
+    {
+        if(userVoucherItems != null && !userVoucherItems.isEmpty())
+        {
+            StringBuffer userVoucherId = new StringBuffer();
+
+            for(UserVoucherItem userVoucherItem: userVoucherItems)
+            {
+                userVoucherId.append(userVoucherItem.getId());
+                userVoucherId.append(',');
+
+            }
+            return userVoucherId.toString();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 }

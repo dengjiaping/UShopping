@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/6/5.
  */
-public class AppOnlineshopping
+public class AppOnlineshopping extends BaseModel
 {
     private Long id;
     private String brannerColor;

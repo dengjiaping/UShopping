@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/18.
  */
-public class AppEvaluateItem
+public class AppEvaluateItem extends BaseModel
 {
     private long id;
     private AppgoodsId appgoodsId;

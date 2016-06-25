@@ -30,6 +30,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 类目
+ */
 public class CategoryActivity extends Activity {
     private AppContext appContext;
     private User user;
@@ -88,66 +91,6 @@ public class CategoryActivity extends Activity {
         titleTextView.setText(categoryName);
 
         goodsGridView = (RecyclerView) findViewById(R.id.goods_grid);
-
-//        goodsGridView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                int lastVisibleItem = ((GridLayoutManager) gridLayoutManager).findLastVisibleItemPosition();
-//                int totalItemCount = gridLayoutManager.getItemCount();
-//                //lastVisibleItem >= totalItemCount - 4 表示剩下4个item自动加载，各位自由选择
-//                // dy>0 表示向下滑动
-//                if (lastVisibleItem >= totalItemCount - 4 && dy > 0) {
-//                    Log.d("ushopping", "load more!");
-//                    reload();
-//
-//                }
-//            }
-//        });
-
-        /*
-        goodsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CategoryActivity.this, GoodsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putLong("goodsId", id);
-                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-            }
-        });
-
-        goodsGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                switch (scrollState) {
-                    // 当不滚动时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                        // 判断滚动到底部
-                        if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
-                            AppGoodsTypeId appGoodsTypeId = new AppGoodsTypeId();
-                            if(user != null)
-                            {
-                                appGoodsTypeId.setUserId(user.getUserId());
-                                appGoodsTypeId.setSessionid(user.getSessionid());
-                            }
-                            appGoodsTypeId.setAppcategoryId(categoryId);
-                            appGoodsTypeId.setMin(currentGoodsCount);
-                            appGoodsTypeId.setMax(StaticValues.GOODS_PAGE_COUNT);
-
-                            new GetAppGoodsTypeIdTask().execute(appGoodsTypeId);
-
-                        }
-                        break;
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            }
-        });
-        */
 
         //没有数据时的提示
         warningLayout = (FrameLayout) findViewById(R.id.warning_layout);
@@ -282,7 +225,7 @@ public class CategoryActivity extends Activity {
 
         @Override
         protected AppGoodsTypeId doInBackground(AppGoodsTypeId... appGoodsTypeIds) {
-            return new GoodsAction().getAppGoodsTypeId(appGoodsTypeIds[0]);
+            return new GoodsAction(CategoryActivity.this).getAppGoodsTypeId(appGoodsTypeIds[0]);
 
         }
 

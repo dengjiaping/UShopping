@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -104,7 +105,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private TextView moreGoodsBtn;
-    private TextView moreGoods2Btn;
+    private Button moreGoods2Btn;
 
     private MainActivity mainActivity;
 
@@ -313,7 +314,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                     main.setUserId(user.getUserId());
                     main.setSessionid(user.getSessionid());
                 }
-
+                main.setUseCache(false);
                 new MainpageLoadTask().execute(main);
 
                 swipeRefreshLayout.setRefreshing(false);
@@ -329,7 +330,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
             }
         });
-        moreGoods2Btn = (TextView) view.findViewById(R.id.more_goods_2);
+        moreGoods2Btn = (Button) view.findViewById(R.id.more_goods_2);
         moreGoods2Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -713,7 +714,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
         @Override
         protected HomeRe doInBackground(HomeRe... homeRe) {
-            return new MainpageAction().homeRe(getActivity(), homeRe[0]);
+            return new MainpageAction(getActivity()).homeRe(homeRe[0]);
         }
 
         @Override
@@ -744,21 +745,6 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                             }
 
                             homeReAdapter.notifyDataSetChanged();
-
-                            /*
-                            int totalHeight = 0;
-                            for (int i = 0; i < appgoodsIds.size(); i++) {
-                                View listItem = homeReAdapter.getView(i, null, homeReLayout);
-                                listItem.measure(0, 0);
-                                totalHeight += listItem.getMeasuredHeight();
-
-                            }
-
-                            ViewGroup.LayoutParams params = homeReLayout.getLayoutParams();
-                            params.height += (totalHeight + 100);
-                            ((ViewGroup.MarginLayoutParams)params).setMargins(10, 10, 10, 10);
-                            homeReLayout.setLayoutParams(params);
-                            */
                         }
 
                     }
@@ -789,7 +775,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
 
         @Override
         protected Main doInBackground(Main... mains) {
-            return new MainpageAction().home(getActivity(), mains[0]);
+            return new MainpageAction(getActivity()).home(getActivity(), mains[0]);
         }
 
         @Override

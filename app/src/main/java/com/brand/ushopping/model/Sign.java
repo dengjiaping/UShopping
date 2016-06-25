@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/21.
  */
-public class Sign
+public class Sign extends BaseModel
 {
     private long userId;
     private String sessionid;

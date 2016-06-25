@@ -1,7 +1,6 @@
 package com.brand.ushopping.action;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -24,23 +23,25 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/9.
  */
-public class MainpageAction
+public class MainpageAction extends BaseAction
 {
-//    private ACache mCache = null;
+    public MainpageAction(Context context) {
+        super(context);
+    }
 
     //首页信息
     public Main home(Context context, Main mMain)
     {
-        Main result = new Main();
+        mMain.addVersion(context);  //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(mMain);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-            //读取缓存
-            resultString = DataCache.getData(context, "HomeAction.action");
+            if(mMain.getUseCache())
+            {
+                resultString = DataCache.getData(context, "HomeAction.action");
+            }
 
             if(resultString == null)
             {
@@ -56,14 +57,14 @@ public class MainpageAction
             {
                 JSONObject jsonObject = new JSONObject(resultString);
 
-                result.setSuccess(jsonObject.getBoolean("success"));
-                if(result.isSuccess())
+                mMain.setSuccess(jsonObject.getBoolean("success"));
+                if(mMain.isSuccess())
                 {
                     //赋值
                     JSONObject dataObject = jsonObject.getJSONObject("data");
                     String data = dataObject.toString();
-                    result = JSON.parseObject(data, Main.class);
-                    result.setSuccess(true);
+                    mMain = JSON.parseObject(data, Main.class);
+                    mMain.setSuccess(true);
 
                     //存入缓存
                     DataCache.putData(context, "HomeAction.action", resultString);
@@ -71,7 +72,7 @@ public class MainpageAction
                 }
                 else
                 {
-                    result.setMsg(jsonObject.getString("msg"));
+                    mMain.setMsg(jsonObject.getString("msg"));
 
                 }
 
@@ -82,22 +83,23 @@ public class MainpageAction
             return null;
         }
 
-        return result;
+        return mMain;
 
     }
 
     //首页下拉
-    public HomeRe homeRe(Context context, HomeRe homeRe)
+    public HomeRe homeRe(HomeRe homeRe)
     {
+        homeRe.addVersion(context);  //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(homeRe);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-            //读取缓存
-            resultString = DataCache.getData(context, "HomeReAction.action",homeRe.getMin());
+            if(homeRe.getUseCache())
+            {
+                resultString = DataCache.getData(context, "HomeReAction.action");
+            }
 
             if(CommonUtils.isValueEmpty(resultString))
             {
@@ -129,8 +131,7 @@ public class MainpageAction
                     homeRe.setSuccess(true);
 
                     //存入缓存
-                    DataCache.putData(context, "HomeReAction.action", resultString, homeRe.getMin());
-
+                    DataCache.putData(context, "HomeReAction.action", resultString);
                 }
                 else
                 {
@@ -153,7 +154,7 @@ public class MainpageAction
     //首页主题活动
     public OnlineshoppingGoods onlineshoppingGoodsAction(Context context, OnlineshoppingGoods onlineshoppingGoods)
     {
-        OnlineshoppingGoods result = new OnlineshoppingGoods();
+        onlineshoppingGoods.addVersion(context);  //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(onlineshoppingGoods);
         List params = new ArrayList();
@@ -175,8 +176,8 @@ public class MainpageAction
             {
                 JSONObject jsonObject = new JSONObject(resultString);
 
-                result.setSuccess(jsonObject.getBoolean("success"));
-                if(result.isSuccess())
+                onlineshoppingGoods.setSuccess(jsonObject.getBoolean("success"));
+                if(onlineshoppingGoods.isSuccess())
                 {
                     //赋值
                     JSONObject dataObject = jsonObject.getJSONObject("data");
@@ -189,14 +190,14 @@ public class MainpageAction
                         String data = appGoodsJSONObject.toString();
                         appGoodes.add(JSON.parseObject(data, AppgoodsId.class));
                     }
-                    result.setAppgoodsIds(appGoodes);
+                    onlineshoppingGoods.setAppgoodsIds(appGoodes);
 
                     JSONObject appOnlineshoppingJSONObject = dataObject.getJSONObject("appOnlineshopping");
                     String data = appOnlineshoppingJSONObject.toString();
                     AppOnlineshopping appOnlineshopping = JSON.parseObject(data, AppOnlineshopping.class);
-                    result.setAppOnlineshopping(appOnlineshopping);
+                    onlineshoppingGoods.setAppOnlineshopping(appOnlineshopping);
 
-                    result.setSuccess(true);
+                    onlineshoppingGoods.setSuccess(true);
 
                     //存入缓存
                     DataCache.putData(context, "OnlineshoppingGoodsAction.action", resultString);
@@ -204,7 +205,7 @@ public class MainpageAction
                 }
                 else
                 {
-                    result.setMsg(jsonObject.getString("msg"));
+                    onlineshoppingGoods.setMsg(jsonObject.getString("msg"));
 
                 }
 
@@ -215,7 +216,7 @@ public class MainpageAction
             return null;
         }
 
-        return result;
+        return onlineshoppingGoods;
 
     }
 

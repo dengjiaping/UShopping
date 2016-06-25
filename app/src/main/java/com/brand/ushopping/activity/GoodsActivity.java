@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +112,7 @@ public class GoodsActivity extends UActivity {
     private ImageView cartBtn;
     private String[] imgList;
     private TextView saleCountTextView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
     private int goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
@@ -413,6 +415,15 @@ public class GoodsActivity extends UActivity {
 
         saleCountTextView = (TextView) findViewById(R.id.sale_count);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                reload();
+            }
+        });
+
     }
 
 
@@ -539,7 +550,11 @@ public class GoodsActivity extends UActivity {
     protected void onStart() {
         super.onStart();
         user = appContext.getUser();
+        reload();
+    }
 
+    private void reload()
+    {
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setGoodsId(goodsId);
 
@@ -560,7 +575,6 @@ public class GoodsActivity extends UActivity {
         appEvaluate.setGoodsId(goodsId);
 
         new GetAppEvaluateTask().execute(appEvaluate);
-
     }
 
     //获取商品详情
@@ -573,11 +587,12 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected GoodsInfo doInBackground(GoodsInfo... goodsInfos) {
-            return new GoodsAction().getAppGoodsIdAction(goodsInfos[0]);
+            return new GoodsAction(GoodsActivity.this).getAppGoodsIdAction(GoodsActivity.this, goodsInfos[0]);
         }
 
         @Override
         protected void onPostExecute(GoodsInfo result) {
+            swipeRefreshLayout.setRefreshing(false);
             if(result != null)
             {
                 if(result.isSuccess())
@@ -714,7 +729,7 @@ public class GoodsActivity extends UActivity {
                     }
 
                     //添加到浏览历史
-                    if(!new GoodsAction().isGoodsViewHistoryExists(appContext.getUdbHelper(), goods.getId()))
+                    if(!new GoodsAction(GoodsActivity.this).isGoodsViewHistoryExists(appContext.getUdbHelper(), goods.getId()))
                     {
                         AppgoodsId appgoodsId = new AppgoodsId();
 
@@ -723,7 +738,7 @@ public class GoodsActivity extends UActivity {
                         appgoodsId.setLogopicUrl(goods.getLogopicUrl());
                         appgoodsId.setPromotionPrice(goods.getPromotionPrice());
 
-                        new GoodsAction().addGoodsViewHistory(appContext.getUdbHelper(), appgoodsId);
+                        new GoodsAction(GoodsActivity.this).addGoodsViewHistory(appContext.getUdbHelper(), appgoodsId);
 //                    appContext.addGoodsViewHistory(appgoodsId);
 
                     }
@@ -871,13 +886,13 @@ public class GoodsActivity extends UActivity {
             switch (boughtType)
             {
                 case StaticValues.BOUTHT_TYPE_NORMAL:
-                    return new CartAction().addAppShopcartAction(addAppShopcarts[0]);
+                    return new CartAction(GoodsActivity.this).addAppShopcartAction(addAppShopcarts[0]);
 
                 case StaticValues.BOUTHT_TYPE_RESERVATION:
-                    return new CartAction().saveInsertAppyyShopcart(addAppShopcarts[0]);
+                    return new CartAction(GoodsActivity.this).saveInsertAppyyShopcart(addAppShopcarts[0]);
 
                 case StaticValues.BOUTHT_TYPE_TRYIT:
-                    return new CartAction().SaveInsertAppsmShopcart(addAppShopcarts[0]);
+                    return new CartAction(GoodsActivity.this).SaveInsertAppsmShopcart(addAppShopcarts[0]);
 
                 default:
                     return null;
@@ -921,7 +936,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected SaveAppGoodsCollect doInBackground(SaveAppGoodsCollect... saveAppGoodsCollects) {
-            return new GoodsAction().saveAppGoodsCollectAction(saveAppGoodsCollects[0]);
+            return new GoodsAction(GoodsActivity.this).saveAppGoodsCollectAction(saveAppGoodsCollects[0]);
         }
 
         @Override
@@ -959,7 +974,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected AppEvaluate doInBackground(AppEvaluate... appEvaluates) {
-            return new GoodsAction().getAppEvaluateAction(appEvaluates[0]);
+            return new GoodsAction(GoodsActivity.this).getAppEvaluateAction(appEvaluates[0]);
         }
 
         @Override
@@ -1022,7 +1037,7 @@ public class GoodsActivity extends UActivity {
 
         @Override
         protected SaveAppBrandCollect doInBackground(SaveAppBrandCollect... saveAppBrandCollects) {
-            return new BrandAction().saveAppBrandCollectAction(GoodsActivity.this, saveAppBrandCollects[0]);
+            return new BrandAction(GoodsActivity.this).saveAppBrandCollectAction(saveAppBrandCollects[0]);
 
         }
 

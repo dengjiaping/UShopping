@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class AppStoresListItem implements Parcelable{
+public class AppStoresListItem extends BaseModel implements Parcelable{
     private long id;
     private String shopName;
     private String shopAddr;

@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
+import android.view.WindowManager;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
@@ -28,8 +30,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
         appContext = (AppContext)getApplicationContext();
@@ -45,8 +47,17 @@ public class SplashActivity extends Activity {
 
         currentTimeMil = System.currentTimeMillis();
 
+        //获取手机的信息
+        try {
+            TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+            appContext.setImie(tm.getDeviceId());
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         //检测是否登录
-        User user = new RefAction().getUser(SplashActivity.this);
+        User user = new RefAction(SplashActivity.this).getUser(SplashActivity.this);
         if(user != null)
         {
             appContext.setUser(user);
@@ -54,7 +65,7 @@ public class SplashActivity extends Activity {
 
         }
 
-        if(new RefAction().firstOpen(SplashActivity.this) == true)
+        if(new RefAction(SplashActivity.this).firstOpen(SplashActivity.this) == true)
         {
             Intent intent = new Intent(SplashActivity.this, GuidanceActivity.class);
             startActivity(intent);
@@ -94,7 +105,7 @@ public class SplashActivity extends Activity {
             appContext.setNeetworkEnable(networkEnabled);
             if(networkEnabled)
             {
-                new AppAction().appDataInit(SplashActivity.this, user);
+                new AppAction(SplashActivity.this).appDataInit(user);
 
             }
 

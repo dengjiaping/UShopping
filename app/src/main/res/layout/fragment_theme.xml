@@ -35,12 +35,22 @@
                 android:layout_marginRight="4dp" />
         </RelativeLayout>
 
-        <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/theme_list"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe"
             android:layout_below="@+id/action_bar"
-            android:layout_centerHorizontal="true" />
+            >
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/theme_list"
+                android:layout_below="@+id/action_bar"
+                android:layout_centerHorizontal="true" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
     </RelativeLayout>
 </FrameLayout>

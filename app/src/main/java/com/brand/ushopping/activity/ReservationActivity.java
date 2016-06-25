@@ -183,7 +183,7 @@ public class ReservationActivity extends Activity {
 
         @Override
         protected OrderAll doInBackground(OrderAll... orderAlls) {
-            return new OrderAction().getYyOrderAllAction(orderAlls[0]);
+            return new OrderAction(ReservationActivity.this).getYyOrderAllAction(orderAlls[0]);
         }
 
         @Override

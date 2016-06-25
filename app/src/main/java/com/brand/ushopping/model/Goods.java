@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Administrator on 2015/11/19.
  */
-public class Goods implements Parcelable
+public class Goods extends BaseModel implements Parcelable
 {
 
     private String goodsName;

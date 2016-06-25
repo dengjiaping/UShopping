@@ -76,7 +76,7 @@ public class StaticValues
     public static final int CART_TYPE_RESERVATION = 2;    //到店预订
     public static final int CART_TYPE_TRYIT = 3;          //上门试衣
 
-    // 预约订单分类flag   0 未付款, 1 已付款, 2 已发货, 3 已收货
+    // 预约订单分类flag   0 未付款, 1 已付款, 2 店铺接单, 3 配送中 4 订单完成
     public static final int RESERVATION_ORDER_FLAG_ALL = 9;
     public static final int RESERVATION_ORDER_FLAG_UNPAID = 0;
     public static final int RESERVATION_ORDER_FLAG_PAID = 1;

@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -14,15 +15,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2015/11/11.
  */
-public class AddressAction
+public class AddressAction extends BaseAction
 {
+    public AddressAction(Context context) {
+        super(context);
+    }
+
     public ArrayList<Address> GetAppAddressAllAction(Address address)
     {
+        address.addVersion(context); //添加App版本信息
         ArrayList<Address> result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
@@ -58,6 +63,7 @@ public class AddressAction
 
     public Address addAddress(Address address)
     {
+        address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
         List params = new ArrayList();
@@ -97,6 +103,7 @@ public class AddressAction
 
     public Address updateAddress(Address address)
     {
+        address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
         List params = new ArrayList();
@@ -137,6 +144,7 @@ public class AddressAction
 
     public Address deleteAddress(Address address)
     {
+        address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
         List params = new ArrayList();
@@ -175,6 +183,7 @@ public class AddressAction
 
     public Address setDefaultAddress(Address address)
     {
+        address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
         List params = new ArrayList();

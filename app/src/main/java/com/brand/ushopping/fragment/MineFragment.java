@@ -468,7 +468,7 @@ public class MineFragment extends Fragment {
 
         }
 
-        goodsViewHistory = new GoodsAction().getGoodsViewHistory(appContext.getUdbHelper());
+        goodsViewHistory = new GoodsAction(getActivity()).getGoodsViewHistory(appContext.getUdbHelper());
         if(goodsViewHistory != null && !goodsViewHistory.isEmpty())
         {
             viewHistoryCountTextView.setText(Integer.toString(goodsViewHistory.size()));
@@ -528,7 +528,7 @@ public class MineFragment extends Fragment {
 
         @Override
         protected AppGoodsCollect doInBackground(AppGoodsCollect... appGoodsCollects) {
-            return new GoodsAction().getListAppGoodsCollectUserIdAction(appGoodsCollects[0]);
+            return new GoodsAction(getActivity()).getListAppGoodsCollectUserIdAction(appGoodsCollects[0]);
 
         }
 
@@ -557,7 +557,7 @@ public class MineFragment extends Fragment {
 
         @Override
         protected AppBrandCollect doInBackground(AppBrandCollect... appBrandCollects) {
-            return new BrandAction().getListAppBrandCollectUserIdAction(getActivity(), appBrandCollects[0]);
+            return new BrandAction(getActivity()).getListAppBrandCollectUserIdAction(appBrandCollects[0]);
 
         }
 

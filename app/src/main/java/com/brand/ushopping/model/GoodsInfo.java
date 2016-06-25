@@ -1,12 +1,11 @@
 package com.brand.ushopping.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by Administrator on 2015/11/19.
  */
-public class GoodsInfo
+public class GoodsInfo extends BaseModel
 {
     private HashMap<String, String[]> attribute;
     private Goods goods;

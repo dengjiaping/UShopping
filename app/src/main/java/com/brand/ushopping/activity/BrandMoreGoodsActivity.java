@@ -164,6 +164,19 @@ public class BrandMoreGoodsActivity extends Activity {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_SALE;
                 selectTab();
 
+                reload();
+
+                if(currentArrenge == StaticValues.ARRENGE_SALE_ASC)
+                {
+                    currentArrenge = StaticValues.ARRENGE_SALE_DESC;
+
+                }
+                else
+                {
+                    currentArrenge = StaticValues.ARRENGE_SALE_ASC;
+                }
+
+
             }
         });
         categoryFilter = (TextView) findViewById(R.id.category_filter);
@@ -173,7 +186,7 @@ public class BrandMoreGoodsActivity extends Activity {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_FILTER;
                 selectTab();
 
-                callGoodsFilterPopup();
+//                callGoodsFilterPopup();
 
             }
         });
@@ -256,7 +269,7 @@ public class BrandMoreGoodsActivity extends Activity {
 
         @Override
         protected BrandGoodsList doInBackground(BrandGoodsList... brandGoodsLists) {
-            return new StoreAction().getAppStoresIdAll(BrandMoreGoodsActivity.this, brandGoodsLists[0]);
+            return new StoreAction(BrandMoreGoodsActivity.this).getAppStoresIdAll(brandGoodsLists[0]);
         }
 
         @Override
@@ -396,27 +409,47 @@ public class BrandMoreGoodsActivity extends Activity {
             case StaticValues.ARRENGE_TIME_ASC:
                 categoryNew.setText("新品 ↑");
                 categoryPrice.setText("价格");
+                categorySale.setText("销量");
                 Collections.sort(listData, new BrandGoodsTimeAscComparator());
 
                 break;
             case StaticValues.ARRENGE_TIME_DESC:
                 categoryNew.setText("新品 ↓");
                 categoryPrice.setText("价格");
+                categorySale.setText("销量");
                 Collections.sort(listData, new BrandGoodsTimeDescComparator());
 
                 break;
             case StaticValues.ARRENGE_PRICE_ASC:
                 categoryNew.setText("新品");
                 categoryPrice.setText("价格 ↑");
+                categorySale.setText("销量");
                 Collections.sort(listData, new BrandGoodsPriceAscComparator());
 
                 break;
             case StaticValues.ARRENGE_PRICE_DESC:
                 categoryNew.setText("新品");
                 categoryPrice.setText("价格 ↓");
+                categorySale.setText("销量");
                 Collections.sort(listData, new BrandGoodsPriceDescComparator());
 
                 break;
+
+            case StaticValues.ARRENGE_SALE_ASC:
+                categoryNew.setText("新品");
+                categoryPrice.setText("价格");
+                categorySale.setText("销量 ↑");
+                Collections.sort(listData, new BrandGoodsSalseCountAscComparator());
+
+                break;
+            case StaticValues.ARRENGE_SALE_DESC:
+                categoryNew.setText("新品");
+                categoryPrice.setText("价格");
+                categorySale.setText("销量 ↓");
+                Collections.sort(listData, new BrandGoodsSalseCountDescComparator());
+
+                break;
+
         }
 
     }
@@ -500,6 +533,29 @@ public class BrandMoreGoodsActivity extends Activity {
         }
         goodsFilterPopup.showAtLocation(rootView, Gravity.LEFT | Gravity.CENTER_HORIZONTAL, 0, 0);
 
+    }
+
+    //根据销量排序
+    class BrandGoodsSalseCountAscComparator implements Comparator<Map<String, Object>>
+    {
+        @Override
+        public int compare(Map<String, Object> lhs, Map<String, Object> rhs) {
+            Integer salesCount1 = (Integer) lhs.get("salesCount");
+            Integer salesCount2 = (Integer)rhs.get("salesCount");
+
+            return salesCount1.compareTo(salesCount2);
+        }
+    }
+
+    class BrandGoodsSalseCountDescComparator implements Comparator<Map<String, Object>>
+    {
+        @Override
+        public int compare(Map<String, Object> lhs, Map<String, Object> rhs) {
+            Integer salesCount1 = (Integer)lhs.get("salesCount");
+            Integer salesCount2 = (Integer)rhs.get("salesCount");
+
+            return salesCount2.compareTo(salesCount1);
+        }
     }
 
     //去重操作

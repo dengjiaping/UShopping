@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ScaleImageViewActivity extends Activity  implements android.view.GestureDetector.OnGestureListener{
     private ScaleImageView imageview;
+    private ImageView closeBtn;
 
     private ViewFlipper flipper;
     private GestureDetector gestureDetector;
@@ -32,8 +34,8 @@ public class ScaleImageViewActivity extends Activity  implements android.view.Ge
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_scale_image_view);
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
@@ -67,6 +69,14 @@ public class ScaleImageViewActivity extends Activity  implements android.view.Ge
             @Override
             public void onClick(View v) {
                 flipNext();
+            }
+        });
+
+        closeBtn = (ImageView) findViewById(R.id.close);
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScaleImageViewActivity.this.finish();
             }
         });
 

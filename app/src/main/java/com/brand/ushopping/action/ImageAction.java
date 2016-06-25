@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -12,8 +13,12 @@ import org.json.JSONObject;
 /**
  * Created by Administrator on 2016/5/10.
  */
-public class ImageAction
+public class ImageAction extends BaseAction
 {
+    public ImageAction(Context context) {
+        super(context);
+    }
+
     //图片上传 返回url
     public Image ImageUpload(Bitmap bitmap)
     {

@@ -157,7 +157,7 @@ public class AroundActivity extends Activity {
 
         @Override
         protected AppStoresList doInBackground(AppStoresList... appStoresLists) {
-            return new StoreAction().gettAppStoresList(appStoresLists[0]);
+            return new StoreAction(AroundActivity.this).gettAppStoresList(appStoresLists[0]);
         }
 
         @Override

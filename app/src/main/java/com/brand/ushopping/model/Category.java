@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/11/9.
  */
-public class Category
+public class Category extends BaseModel
 {
     long id;
     String name;

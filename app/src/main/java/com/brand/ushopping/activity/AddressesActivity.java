@@ -168,7 +168,7 @@ public class AddressesActivity extends Activity {
 
         @Override
         protected ArrayList<Address> doInBackground(Address... address) {
-            return new AddressAction().GetAppAddressAllAction(address[0]);
+            return new AddressAction(AddressesActivity.this).GetAppAddressAllAction(address[0]);
         }
 
         @Override

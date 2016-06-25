@@ -21,12 +21,16 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class StoreAction
+public class StoreAction extends BaseAction
 {
+    public StoreAction(Context context) {
+        super(context);
+    }
 //    private ACache mCache;
 
     public AppStoresList gettAppStoresList(AppStoresList appStoresList)
     {
+        appStoresList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appStoresList);
         List params = new ArrayList();
@@ -64,27 +68,14 @@ public class StoreAction
     }
 
     // 根据实体店铺查询店铺商品
-    public BrandGoodsList getAppStoresIdAll(Context context, BrandGoodsList brandGoodsList)
+    public BrandGoodsList getAppStoresIdAll(BrandGoodsList brandGoodsList)
     {
-//        mCache = ACache.get(context);
-
+        brandGoodsList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(brandGoodsList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-            /*
-            resultString = mCache.getAsString("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin());
-            if(CommonUtils.isValueEmpty(resultString))
-            {
-                resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
-                Log.v("brand goods", resultString);
-
-            }
-            */
-
 //            resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppStoresIdAll.action"), CommonUtils.generateParams(jsonParam));
             Log.v("brand goods", resultString);
@@ -99,10 +90,6 @@ public class StoreAction
                     brandGoodsList.setAppgoodsIds((ArrayList<AppgoodsId>) JSON.parseArray(data, AppgoodsId.class));
 
                     brandGoodsList.setSuccess(true);
-
-                    //存入缓存
-                    // mCache.put("GetAppStoresIdAll.action" + brandGoodsList.getAppbrandId() + brandGoodsList.getMin(), resultString, StaticValues.CACHE_LIFE);
-
                 }
                 else
                 {

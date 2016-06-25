@@ -1,6 +1,7 @@
 package com.brand.ushopping.action;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.brand.ushopping.model.SaveAppGoodsCollect;
 import com.brand.ushopping.model.SearchAppGoods;
 import com.brand.ushopping.model.SelectChargeId;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.UDBHelper;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
@@ -35,19 +37,25 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/19.
  */
-public class GoodsAction
+public class GoodsAction extends BaseAction
 {
-    public GoodsInfo getAppGoodsIdAction(GoodsInfo goodsInfo)
+    public GoodsAction(Context context) {
+        super(context);
+    }
+
+    public GoodsInfo getAppGoodsIdAction(Context context, GoodsInfo goodsInfo)
     {
+        goodsInfo.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(goodsInfo);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppGoodsIdAction.action", params);
-            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsIdAction.action"), CommonUtils.generateParams(jsonParam));
+            resultString = DataCache.getData(context, "GetAppGoodsIdAction.action", goodsInfo.getGoodsId(), 0);
+            if(resultString == null)
+            {
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsIdAction.action"), CommonUtils.generateParams(jsonParam));
+            }
 
             Log.v("ushopping goods", resultString);
             if(resultString != null)
@@ -62,6 +70,8 @@ public class GoodsAction
                     goodsInfo = JSON.parseObject(data, GoodsInfo.class);
                     goodsInfo.setSuccess(true);
 
+                    //存入缓存
+                    DataCache.putData(context, "GetAppGoodsIdAction.action", resultString, goodsInfo.getGoodsId(), 0);
                 }
                 else
                 {
@@ -82,6 +92,7 @@ public class GoodsAction
 
     public String returnClientChargeAction(ClientCharge clientCharge)
     {
+        clientCharge.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(clientCharge);
         List params = new ArrayList();
@@ -118,15 +129,21 @@ public class GoodsAction
 
     public AppGoodsTypeId getAppGoodsTypeId(AppGoodsTypeId appGoodsTypeId)
     {
+        appGoodsTypeId.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appGoodsTypeId);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);
-            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
+            if(appGoodsTypeId.getUseCache())
+            {
+                resultString = DataCache.getData(context, "GetAppGoodsTypeId.action", appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
+            }
+            if(resultString == null)
+            {
+                //            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);
+                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
+            }
 
             if(resultString != null)
             {
@@ -149,6 +166,8 @@ public class GoodsAction
 
                     appGoodsTypeId.setSuccess(true);
 
+                    //存入缓存
+                    DataCache.putData(context, "GetAppGoodsTypeId.action", resultString, appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
                 }
                 else
                 {
@@ -169,6 +188,7 @@ public class GoodsAction
 
     public SearchAppGoods searchAppGoodsAction(SearchAppGoods searchAppGoods)
     {
+        searchAppGoods.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(searchAppGoods);
         List params = new ArrayList();
@@ -219,6 +239,7 @@ public class GoodsAction
     // --  商品收藏  --
     public SaveAppGoodsCollect saveAppGoodsCollectAction(SaveAppGoodsCollect saveAppGoodsCollect)
     {
+        saveAppGoodsCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppGoodsCollect);
         List params = new ArrayList();
@@ -251,6 +272,7 @@ public class GoodsAction
     // --  查询收藏列表  --
     public AppGoodsCollect getListAppGoodsCollectUserIdAction(AppGoodsCollect appGoodsCollect)
     {
+        appGoodsCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appGoodsCollect);
         List params = new ArrayList();
@@ -298,6 +320,7 @@ public class GoodsAction
 
     public AppEvaluate getAppEvaluateAction(AppEvaluate appEvaluate)
     {
+        appEvaluate.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appEvaluate);
         List params = new ArrayList();
@@ -348,6 +371,7 @@ public class GoodsAction
     // --  保存售后  --
     public AppCustomer saveAppCustomerAction(AppCustomer appCustomer)
     {
+        appCustomer.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appCustomer);
         List params = new ArrayList();
@@ -381,6 +405,7 @@ public class GoodsAction
     //发布商品评价
     public SaveAppEvaluate saveAppEvaluateAction(SaveAppEvaluate saveAppEvaluate)
     {
+        saveAppEvaluate.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppEvaluate);
         List params = new ArrayList();

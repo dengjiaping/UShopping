@@ -128,7 +128,7 @@ public class GoodsEvaluateActivity extends Activity {
 
         @Override
         protected SaveAppEvaluate doInBackground(SaveAppEvaluate... saveAppEvaluates) {
-            return new GoodsAction().saveAppEvaluateAction(saveAppEvaluates[0]);
+            return new GoodsAction(GoodsEvaluateActivity.this).saveAppEvaluateAction(saveAppEvaluates[0]);
         }
 
         @Override

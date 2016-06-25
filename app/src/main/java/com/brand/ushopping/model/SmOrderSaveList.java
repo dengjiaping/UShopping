@@ -1,12 +1,11 @@
 package com.brand.ushopping.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Administrator on 2015/12/30.
  */
-public class SmOrderSaveList
+public class SmOrderSaveList extends BaseModel
 {
     private ArrayList<SmOrderSave> smorder;
     private long userId;

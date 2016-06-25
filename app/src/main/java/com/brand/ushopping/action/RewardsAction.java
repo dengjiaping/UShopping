@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -18,11 +19,16 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/12/22.
  */
-public class RewardsAction
+public class RewardsAction extends BaseAction
 {
+    public RewardsAction(Context context) {
+        super(context);
+    }
+
     //查询用户U币余额
     public UserReward getAppUserRewards(UserReward userReward)
     {
+        userReward.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(userReward);
         List params = new ArrayList();
@@ -61,6 +67,7 @@ public class RewardsAction
     //查询U购积分商城
     public UserReward getAppUshopAll(UserReward userReward)
     {
+        userReward.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(userReward);
         List params = new ArrayList();
@@ -94,6 +101,7 @@ public class RewardsAction
     //兑换商品
     public UserReward appUshopBuy(UserReward userReward)
     {
+        userReward.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(userReward);
         List params = new ArrayList();

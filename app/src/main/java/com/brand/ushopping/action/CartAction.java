@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -23,9 +24,14 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/12/5.
  */
-public class CartAction {
+public class CartAction extends BaseAction{
+    public CartAction(Context context) {
+        super(context);
+    }
+
     public AddAppShopcart addAppShopcartAction(AddAppShopcart addAppShopcart)
     {
+        addAppShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(addAppShopcart);
         List params = new ArrayList();
@@ -60,6 +66,7 @@ public class CartAction {
     //查看购物车内容..
     public AppShopcartIdList getAppShopcartIdListAction(AppShopcartIdList appShopcartIdList)
     {
+        appShopcartIdList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
         List params = new ArrayList();
@@ -138,6 +145,7 @@ public class CartAction {
     //删除购物车商品
     public AppShopcartIdList deleteShopcartId(AppShopcartIdList appShopcartIdList)
     {
+        appShopcartIdList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
         Log.v("DeleteShopcartIdAction", jsonParam);
@@ -173,6 +181,7 @@ public class CartAction {
     //加入预定购物车
     public AddAppShopcart saveInsertAppyyShopcart(AddAppShopcart addAppShopcart)
     {
+        addAppShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(addAppShopcart);
         List params = new ArrayList();
@@ -213,6 +222,7 @@ public class CartAction {
     //删除预约购物车
     public AppyyShopcart updateAppyyShopcart(AppyyShopcart appyyShopcart)
     {
+        appyyShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appyyShopcart);
         List params = new ArrayList();
@@ -247,6 +257,7 @@ public class CartAction {
     //删除上门购物车
     public AppsmShopcart updateAppsmShopcart(AppsmShopcart appsmShopcart)
     {
+        appsmShopcart.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(appsmShopcart);
         List params = new ArrayList();
@@ -281,6 +292,7 @@ public class CartAction {
     // --  根据用户ID查询预约购物车  --
     public AppShopcartIdList getAppyyShopcartIdList(AppShopcartIdList appShopcartIdList)
     {
+        appShopcartIdList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
         List params = new ArrayList();
@@ -356,6 +368,7 @@ public class CartAction {
     // 加入上门购物车
     public AddAppShopcart SaveInsertAppsmShopcart(AddAppShopcart addAppShopcart)
     {
+        addAppShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(addAppShopcart);
         List params = new ArrayList();
@@ -390,6 +403,7 @@ public class CartAction {
     // --  根据用户ID查询上门购物车  --
     public AppShopcartIdList getAppsmShopcartIdList(AppShopcartIdList appShopcartIdList)
     {
+        appShopcartIdList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
         List params = new ArrayList();

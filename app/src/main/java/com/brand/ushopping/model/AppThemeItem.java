@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/20.
  */
-public class AppThemeItem
+public class AppThemeItem extends BaseModel
 {
     private long id;
     private String img;

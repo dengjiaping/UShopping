@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2015/12/14.
  */
-public class Upacp
+public class Upacp extends BaseModel
 {
     private String mode;
     private String tn;

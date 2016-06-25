@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2015/11/16.
  * 主页 品牌推荐
  */
-public class BrandRecommend
+public class BrandRecommend extends BaseModel
 {
     private long userId;
     private String sessionid;

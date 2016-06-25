@@ -5,7 +5,7 @@ import com.brand.ushopping.utils.StaticValues;
 /**
  * Created by Administrator on 2015/12/16.
  */
-public class OrderSave
+public class OrderSave extends BaseModel
 {
     private String orderNo;
     private double money;

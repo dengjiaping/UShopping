@@ -1,5 +1,6 @@
 package com.brand.ushopping.action;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -16,11 +17,16 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/12/21.
  */
-public class SignAction
+public class SignAction extends BaseAction
 {
+    public SignAction(Context context) {
+        super(context);
+    }
+
     // --  查询签到天数 --
     public Sign getSignAction(Sign sign)
     {
+        sign.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(sign);
         List params = new ArrayList();
@@ -59,6 +65,7 @@ public class SignAction
     //--  签到接口 --
     public Sign signAction(Sign sign)
     {
+        sign.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(sign);
         List params = new ArrayList();

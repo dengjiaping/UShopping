@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/29.
  */
-public class SaveAppEvaluate
+public class SaveAppEvaluate extends BaseModel
 {
     private long userId;
     private String sessionid;

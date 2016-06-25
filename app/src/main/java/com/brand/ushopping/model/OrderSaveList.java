@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2015/12/19.
  */
-public class OrderSaveList
+public class OrderSaveList extends BaseModel
 {
     private ArrayList<OrderSave> order;
     private long userId;

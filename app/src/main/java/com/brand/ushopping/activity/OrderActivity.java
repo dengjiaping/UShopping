@@ -194,7 +194,7 @@ public class OrderActivity extends Activity {
 
         @Override
         protected OrderAll doInBackground(OrderAll... orderAlls) {
-            return new OrderAction().getOrderAction(orderAlls[0]);
+            return new OrderAction(OrderActivity.this).getOrderAction(orderAlls[0]);
         }
 
         @Override

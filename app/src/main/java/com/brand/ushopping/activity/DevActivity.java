@@ -1,16 +1,22 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.utils.CommonUtils;
 import com.umeng.socialize.ShareAction;
@@ -30,17 +36,20 @@ public class DevActivity extends Activity {
     private EditText kuaidiPostidEditText;
     private Button animationBtn;
     private Button themeActivityBtn;
-
+    private TextView imieTextView;
+    private AppContext appContext;
 //    private RecyclerView recyclerViewTest;
 //    private LinearLayoutManager linearLayoutManager;
 //    private RecyclerViewAdapter recyclerViewAdapter;
     private String kuaidiType = null;
     private String kuaidiPostid = null;
+    private TextView handleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dev);
+        appContext = (AppContext) getApplicationContext();
 
         weiboShare = (Button) findViewById(R.id.weibo_share);
         weiboShare.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +184,14 @@ public class DevActivity extends Activity {
 //        linearLayoutManager = new LinearLayoutManager(this);
 //        recyclerViewTest.setLayoutManager();
 
+        imieTextView = (TextView) findViewById(R.id.imie);
+        imieTextView.setText(appContext.getImie());
+
+//        TelephonyManager tm = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+
+        handleTextView = (TextView) findViewById(R.id.handle_info);
+        handleTextView.setText(getHandSetInfo());
+
 
     }
 
@@ -200,6 +217,38 @@ public class DevActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         /** attention to this below ,must add this**/
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    private String getHandSetInfo(){
+        try{
+            String handSetInfo=
+                    "手机型号:" + android.os.Build.MODEL +
+                            ",SDK版本:" + android.os.Build.VERSION.SDK +
+                            ",系统版本:" + android.os.Build.VERSION.RELEASE+
+                            ",软件版本:"+getAppVersionName(DevActivity.this);
+            return handSetInfo;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    //获取当前版本号
+    private  String getAppVersionName(Context context) {
+        String versionName = "";
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo("cn.testgethandsetinfo", 0);
+            versionName = packageInfo.versionName;
+            if (TextUtils.isEmpty(versionName)) {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return versionName;
     }
 
 //    public class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>

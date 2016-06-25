@@ -3,7 +3,7 @@ package com.brand.ushopping.model;
 /**
  * Created by Administrator on 2016/1/17.
  */
-public class AppBrandCollectItem
+public class AppBrandCollectItem extends BaseModel
 {
     private Brand appbrandId;
     private long reTime;

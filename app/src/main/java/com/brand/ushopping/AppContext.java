@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.AppBrandCollectItem;
@@ -55,6 +54,7 @@ public class AppContext  extends Application
     private UDBHelper udbHelper;
     private double longitude;
     private double latitude;
+    private String imie = "";
 
     @Override
     public void onCreate() {
@@ -103,7 +103,7 @@ public class AppContext  extends Application
 
         //分享
         PlatformConfig.setWeixin("wx632d6c8a00776b9d", "0e141405d57f49123643fd771dacc039");
-        PlatformConfig.setSinaWeibo("866304116", "f233c114205bd034797fd4904553d71e");
+        PlatformConfig.setSinaWeibo("866304116", "cc642572970f33f26b656f7d59912208");
         PlatformConfig.setQQZone("1105140517", "xTKlL6zUVLeXgUgN");
 
         //bugly崩溃统计
@@ -116,7 +116,13 @@ public class AppContext  extends Application
         @Override
         public void onReceive(Context context, Intent intent) {
             try{
-                ParcelFileDescriptor pfd = dMgr.openDownloadedFile(downloadId);
+//                ParcelFileDescriptor pfd = dMgr.openDownloadedFile(downloadId);
+                Intent install = new Intent(Intent.ACTION_VIEW);
+                Uri downloadFileUri = dMgr.getUriForDownloadedFile(downloadId);
+                install.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
+                install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(install);
+
 
 
             }catch (Exception e)
@@ -132,14 +138,20 @@ public class AppContext  extends Application
         DownloadManager.Request request = new DownloadManager.Request(
                 Uri.parse(url)
         );
-        request.setTitle("升级包下载中...");
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
 
+        // 设置下载路径和文件名
+        request.setTitle("升级包下载中...");
+        // request.setDescription(“MeiLiShuo desc”); //设置下载中通知栏提示的介绍
+        request.setDestinationInExternalPublicDir("download", "UShopping.apk");
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setMimeType("application/vnd.android.package-archive");
+        request.allowScanningByMediaScanner();    // 设置为可被媒体扫描器找到
+        request.setVisibleInDownloadsUi(true);  // 设置为可见和可管理
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         registerReceiver(receiver, filter);
 
         downloadId = dMgr.enqueue(request);
-
     }
 
     //收藏
@@ -294,5 +306,13 @@ public class AppContext  extends Application
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getImie() {
+        return imie;
+    }
+
+    public void setImie(String imie) {
+        this.imie = imie;
     }
 }

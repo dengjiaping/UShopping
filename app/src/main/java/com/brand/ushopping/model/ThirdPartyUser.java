@@ -4,7 +4,7 @@ package com.brand.ushopping.model;
  * Created by Administrator on 2016/6/3.
  * 第三方登录
  */
-public class ThirdPartyUser {
+public class ThirdPartyUser extends BaseModel{
     private String sinaId;
     private String userName;
     private String gender;

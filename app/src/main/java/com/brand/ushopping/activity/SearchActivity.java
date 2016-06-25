@@ -131,7 +131,7 @@ public class SearchActivity extends Activity {
         cleatHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new RefAction().clearRecentSearch(SearchActivity.this);
+                new RefAction(SearchActivity.this).clearRecentSearch(SearchActivity.this);
                 loadRecent();
 
             }
@@ -180,7 +180,7 @@ public class SearchActivity extends Activity {
     private void loadRecent() {
         recentSearchLayout.removeAllViewsInLayout();
 
-        recent = new RefAction().getRecentSearch(SearchActivity.this);
+        recent = new RefAction(SearchActivity.this).getRecentSearch(SearchActivity.this);
         if(recent != null)
         {
             Log.v("recent search", recent.toString());
@@ -261,7 +261,7 @@ public class SearchActivity extends Activity {
 
         @Override
         protected SearchAppGoods doInBackground(SearchAppGoods... searchAppGoodses) {
-            return new GoodsAction().searchAppGoodsAction(searchAppGoodses[0]);
+            return new GoodsAction(SearchActivity.this).searchAppGoodsAction(searchAppGoodses[0]);
         }
 
         @Override
@@ -332,7 +332,7 @@ public class SearchActivity extends Activity {
 
                 }
 
-                new RefAction().setRecentSearch(SearchActivity.this, keyword);
+                new RefAction(SearchActivity.this).setRecentSearch(SearchActivity.this, keyword);
                 loadRecent();
 
             }

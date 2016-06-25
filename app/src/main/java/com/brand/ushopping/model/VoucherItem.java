@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Administrator on 2016/3/1.
  */
-public class VoucherItem implements Parcelable
+public class VoucherItem extends BaseModel implements Parcelable
 {
     private long id;
     private String name;

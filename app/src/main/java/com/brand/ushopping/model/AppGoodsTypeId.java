@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/1/12.
  */
-public class AppGoodsTypeId
+public class AppGoodsTypeId extends BaseModel
 {
     private long userId;
     private String sessionid;
@@ -15,6 +15,7 @@ public class AppGoodsTypeId
     private boolean success;
     private String msg;
     private ArrayList<Goods> goods;
+    private Boolean useCache = true;
 
     public long getUserId() {
         return userId;
@@ -78,5 +79,13 @@ public class AppGoodsTypeId
 
     public void setGoods(ArrayList<Goods> goods) {
         this.goods = goods;
+    }
+
+    public Boolean getUseCache() {
+        return useCache;
+    }
+
+    public void setUseCache(Boolean useCache) {
+        this.useCache = useCache;
     }
 }

@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Administrator on 2015/11/20.
  */
-public class AppbrandId implements Parcelable
+public class AppbrandId extends BaseModel implements Parcelable
 {
     private long id;
     private String logopic;
