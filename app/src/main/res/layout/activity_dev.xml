@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
@@ -31,17 +31,6 @@
         android:layout_alignBottom="@+id/wx_share"
         android:layout_toRightOf="@+id/wx_share"
         android:layout_toEndOf="@+id/wx_share" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_test"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#bbccaa"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="gone" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -97,7 +86,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/theme_activity">
 
         <LinearLayout
@@ -143,4 +132,10 @@
         </LinearLayout>
     </TableLayout>
 
-</RelativeLayout>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="微博API"
+        android:id="@+id/weibo_api" />
+
+</TableLayout>

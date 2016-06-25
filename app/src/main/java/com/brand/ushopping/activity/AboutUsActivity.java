@@ -15,6 +15,7 @@ public class AboutUsActivity extends Activity {
     private ImageView backBtn;
     private TextView titleTextView;
     private Button devBtn;
+    private int timesToEnterDev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +39,24 @@ public class AboutUsActivity extends Activity {
         devBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(AboutUsActivity.this, SelectDateActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelableArrayList("goods", null);
-//                bundle.putInt("boughtType", 1);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-
-                Intent intent = new Intent(AboutUsActivity.this, DevActivity.class);
-                startActivity(intent);
-
+                if(timesToEnterDev > 0)
+                {
+                    timesToEnterDev -= 1;
+                }
+                else
+                {
+                    Intent intent = new Intent(AboutUsActivity.this, DevActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        timesToEnterDev = 3;
 
-
+    }
 }
