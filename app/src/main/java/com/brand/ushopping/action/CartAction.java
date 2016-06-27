@@ -34,8 +34,6 @@ public class CartAction extends BaseAction{
         addAppShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(addAppShopcart);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -69,8 +67,6 @@ public class CartAction extends BaseAction{
         appShopcartIdList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -148,9 +144,7 @@ public class CartAction extends BaseAction{
         appShopcartIdList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
-        Log.v("DeleteShopcartIdAction", jsonParam);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
+        Log.v("delete_cart", jsonParam);
 
         try
         {
@@ -184,8 +178,6 @@ public class CartAction extends BaseAction{
         addAppShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(addAppShopcart);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -225,8 +217,7 @@ public class CartAction extends BaseAction{
         appyyShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appyyShopcart);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
+        Log.v("delete_yy_cart", jsonParam);
 
         try
         {
@@ -243,7 +234,16 @@ public class CartAction extends BaseAction{
                     appyyShopcart = JSON.parseObject(data, AppyyShopcart.class);
                     appyyShopcart.setSuccess(true);
                 }
-
+                else
+                {
+                    appyyShopcart.setSuccess(false);
+                    appyyShopcart.setMsg(jsonObject.getString("msg"));
+                }
+            }
+            else
+            {
+                appyyShopcart.setSuccess(false);
+                appyyShopcart.setMsg("预约购物车删除失败");
             }
 
         } catch (Exception e) {
@@ -260,8 +260,7 @@ public class CartAction extends BaseAction{
         appsmShopcart.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(appsmShopcart);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
+        Log.v("delete_sm_cart", jsonParam);
 
         try
         {
@@ -278,7 +277,18 @@ public class CartAction extends BaseAction{
                     appsmShopcart = JSON.parseObject(data, AppsmShopcart.class);
                     appsmShopcart.setSuccess(true);
                 }
+                else
+                {
+                    appsmShopcart.setSuccess(false);
+                    appsmShopcart.setMsg(jsonObject.getString("msg"));
 
+                }
+
+            }
+            else
+            {
+                appsmShopcart.setSuccess(false);
+                appsmShopcart.setMsg("上门购物车删除失败");
             }
 
         } catch (Exception e) {
@@ -295,8 +305,6 @@ public class CartAction extends BaseAction{
         appShopcartIdList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -305,6 +313,7 @@ public class CartAction extends BaseAction{
 
             if(resultString != null)
             {
+                Log.v("yy_cart", resultString);
                 JSONObject jsonObject = new JSONObject(resultString);
                 if(jsonObject.getBoolean("success"))
                 {
@@ -371,8 +380,6 @@ public class CartAction extends BaseAction{
         addAppShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(addAppShopcart);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -381,6 +388,7 @@ public class CartAction extends BaseAction{
 
             if(resultString != null)
             {
+                Log.v("sm_cart", resultString);
                 JSONObject jsonObject = new JSONObject(resultString);
                 if(jsonObject.getBoolean("success"))
                 {
