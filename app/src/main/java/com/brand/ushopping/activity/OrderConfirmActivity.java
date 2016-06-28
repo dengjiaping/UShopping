@@ -344,6 +344,10 @@ public class OrderConfirmActivity extends Activity {
                                     //商品信息
                                     AppgoodsId appgoodsId = new AppgoodsId();
                                     appgoodsId.setId(goods.getId());
+
+                                    //品牌信息
+                                    appgoodsId.setAppbrandId(goods.getAppbrandId());
+
                                     smOrderSave.setAppgoodsId(appgoodsId);
 
                                     smOrderSave.setAttribute(goods.getAttribute());

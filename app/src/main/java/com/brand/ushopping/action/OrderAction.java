@@ -366,6 +366,7 @@ public class OrderAction extends BaseAction
 
             if(resultString != null)
             {
+                Log.v("SmOrderSaveAction", resultString);
                 JSONObject jsonObject = new JSONObject(resultString);
                 if(jsonObject.getBoolean("success"))
                 {
