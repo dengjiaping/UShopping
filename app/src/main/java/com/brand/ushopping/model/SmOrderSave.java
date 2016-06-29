@@ -11,7 +11,7 @@ public class SmOrderSave extends BaseModel
 {
     private double money;
     private int paymentMode;
-    private int flag;
+    private Integer flag;
     private AppuserId appuserId;
     private AppaddressId appaddressId;
     private String remark;

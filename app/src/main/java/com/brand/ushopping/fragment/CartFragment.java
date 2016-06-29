@@ -25,6 +25,7 @@ import com.brand.ushopping.R;
 import com.brand.ushopping.action.CartAction;
 import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.OrderConfirmActivity;
+import com.brand.ushopping.activity.SelectDateActivity;
 import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
 import com.brand.ushopping.model.AppShopcartIdList;
@@ -174,13 +175,25 @@ public class CartFragment extends Fragment {
                 //结算
                 if(!cartItemSelected.isEmpty())
                 {
-                    Intent intent = new Intent(getActivity(), OrderConfirmActivity.class);
+                    Intent intent = new Intent();
 
                     ArrayList<Goods> goodsList = new ArrayList<Goods>();
                     Iterator i = cartItemSelected.keySet().iterator();
                     while(i.hasNext())
                     {
                         goodsList.add(cartItemSelected.get(i.next()));
+                    }
+
+                    switch (boughtType)
+                    {
+                        case StaticValues.BOUTHT_TYPE_NORMAL:
+                            intent.setClass(getActivity(), OrderConfirmActivity.class);
+                            break;
+
+                        case StaticValues.BOUTHT_TYPE_RESERVATION:
+                        case StaticValues.BOUTHT_TYPE_TRYIT:
+                            intent.setClass(getActivity(), SelectDateActivity.class);
+                            break;
                     }
 
                     Bundle bundle = new Bundle();

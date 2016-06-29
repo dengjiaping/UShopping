@@ -426,8 +426,6 @@ public class GoodsActivity extends UActivity {
 
     }
 
-
-
     //立即购买
     public void buyit()
     {

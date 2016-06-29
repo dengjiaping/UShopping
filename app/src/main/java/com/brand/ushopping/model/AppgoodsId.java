@@ -11,7 +11,7 @@ public class AppgoodsId extends BaseModel
     private String logopicUrl;
     private double promotionPrice;
     private AppbrandId appbrandId;
-    private long reTime;
+    private Long reTime;
     private AppexpressId appexpressId;
     private int saleCount;
 
