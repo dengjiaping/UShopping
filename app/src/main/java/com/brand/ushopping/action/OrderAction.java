@@ -5,10 +5,12 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.ConfirmOrder;
+import com.brand.ushopping.model.GetSmorderStatusList;
 import com.brand.ushopping.model.OrderAll;
 import com.brand.ushopping.model.OrderGoodsItem;
 import com.brand.ushopping.model.OrderItem;
 import com.brand.ushopping.model.OrderSaveList;
+import com.brand.ushopping.model.OrderStatusListItem;
 import com.brand.ushopping.model.OrderSuccess;
 import com.brand.ushopping.model.OrderUpdate;
 import com.brand.ushopping.model.SmOrderSaveList;
@@ -608,5 +610,59 @@ public class OrderAction extends BaseAction
 
         return confirmOrder;
     }
+
+    // 查询上门订单状态
+    public GetSmorderStatusList getSmorderStatusListAction(GetSmorderStatusList getSmorderStatusList)
+    {
+        getSmorderStatusList.addVersion(context);   //添加App版本信息
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(getSmorderStatusList);
+
+        try
+        {
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetSmorderStatusListAction.action"), CommonUtils.generateParams(jsonParam));
+            if(resultString != null)
+            {
+                Log.v("SmorderStatus", resultString);
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    //赋值
+                    JSONArray orderStatusJSONArray = jsonObject.getJSONArray("data");
+
+                    if(orderStatusJSONArray.length() > 0)
+                    {
+                        ArrayList<OrderStatusListItem> orderStatusListItems = new ArrayList<OrderStatusListItem>();
+                        for(int a=0; a<orderStatusJSONArray.length();a++)
+                        {
+                            JSONObject orderStatusJSONObject = orderStatusJSONArray.getJSONObject(a);
+                            String data = orderStatusJSONObject.toString();
+                            OrderStatusListItem orderStatusListItem = JSON.parseObject(data, OrderStatusListItem.class);
+
+                            orderStatusListItems.add(orderStatusListItem);
+                        }
+
+                        getSmorderStatusList.setOrderStatusListItems(orderStatusListItems);
+                    }
+
+                    getSmorderStatusList.setSuccess(true);
+
+                }
+                else
+                {
+                    getSmorderStatusList.setSuccess(false);
+                    getSmorderStatusList.setMsg(jsonObject.getString("msg"));
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return getSmorderStatusList;
+    }
+
 
 }

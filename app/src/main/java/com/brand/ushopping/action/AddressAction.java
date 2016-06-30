@@ -31,8 +31,6 @@ public class AddressAction extends BaseAction
         ArrayList<Address> result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-//        List params = new ArrayList();
-//        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {

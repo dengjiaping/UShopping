@@ -210,6 +210,9 @@ public class ReservationOrderItemView extends LinearLayout {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, OrderStatusActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("orderNo", orderItem.getOrderNo());
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });

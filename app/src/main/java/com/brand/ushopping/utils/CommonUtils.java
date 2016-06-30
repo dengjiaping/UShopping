@@ -108,14 +108,14 @@ public class CommonUtils {
     // 时间戳转换为日期字符串
     public static String timestampToDate(long timestamp)
     {
-        return new SimpleDateFormat("yyyy-MM-dd").format(timestamp * 1000L);
+        return new SimpleDateFormat("yyyy-MM-dd").format(timestamp);
 
     }
 
     // 时间戳转换为日期+时间字符串
     public static String timestampToDatetime(long timestamp)
     {
-        return new SimpleDateFormat("yyyy-MM-dd \n HH:mm").format(timestamp * 1000L);
+        return new SimpleDateFormat("yyyy-MM-dd \n HH:mm").format(timestamp);
 
     }
 

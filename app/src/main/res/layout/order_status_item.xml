@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="160dp">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/comment"
-            android:layout_margin="4dp" />
+            android:id="@+id/body"
+            android:layout_margin="8dp" />
     </LinearLayout>
 </LinearLayout>
