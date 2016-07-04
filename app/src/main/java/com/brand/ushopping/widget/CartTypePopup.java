@@ -40,7 +40,7 @@ public class CartTypePopup extends PopupWindow {
             @Override
             public void onClick(View v) {
                 fragment.setCartType(StaticValues.CART_TYPE_NORMAL);
-                fragment.setCartTypeText("购物车");
+                fragment.setCartTypeText("▼ 购物车");
 
                 CartTypePopup.this.dismiss();
             }
@@ -51,7 +51,7 @@ public class CartTypePopup extends PopupWindow {
             @Override
             public void onClick(View v) {
                 fragment.setCartType(StaticValues.CART_TYPE_TRYIT);
-                fragment.setCartTypeText("上门购物车");
+                fragment.setCartTypeText("▼ 上门购物车");
 
                 CartTypePopup.this.dismiss();
             }
@@ -62,7 +62,7 @@ public class CartTypePopup extends PopupWindow {
             @Override
             public void onClick(View v) {
                 fragment.setCartType(StaticValues.CART_TYPE_RESERVATION);
-                fragment.setCartTypeText("预订购物车");
+                fragment.setCartTypeText("▼ 预订购物车");
 
                 CartTypePopup.this.dismiss();
             }

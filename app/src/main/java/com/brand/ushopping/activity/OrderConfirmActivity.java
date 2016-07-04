@@ -88,7 +88,8 @@ public class OrderConfirmActivity extends Activity {
     private TextView addressSelectBtn;
     private ViewGroup manjianFirstViewGroup;
     private TextView manjianFirstMoneyTextView;
-    private double manjianFirstMoney = 0;
+    private ManJianAll manJianAll;
+//    private double manjianFirstMoney = 0;
 
     private OrderSubmitPopup orderSubmitPopup;
 
@@ -359,6 +360,7 @@ public class OrderConfirmActivity extends Activity {
         ManJainVoucher manJainVoucher = new ManJainVoucher();
         manJainVoucher.setUserId(user.getUserId());
         manJainVoucher.setSessionid(user.getSessionid());
+        manJainVoucher.setAppOrderType(this.boughtType);
 
         new ManJainAllActionTask().execute(manJainVoucher);
 
@@ -402,8 +404,7 @@ public class OrderConfirmActivity extends Activity {
                 }
                 Log.v("charge", this.charge);
                 callClientCharge();
-//                generateYyOrder();
-//                yyOrderSuccess();
+
                 break;
             case StaticValues.BOUTHT_TYPE_TRYIT:
                 if(operation == StaticValues.ORDER_COMFIRM_PAY)
@@ -413,8 +414,7 @@ public class OrderConfirmActivity extends Activity {
                 }
                 Log.v("charge", this.charge);
                 callClientCharge();
-//                generateSmOrder();
-//                smOrderSuccess();
+
                 break;
         }
 
@@ -1046,7 +1046,10 @@ public class OrderConfirmActivity extends Activity {
         }
 
         //首单满减
-        summary -= manjianFirstMoney;
+        if(manJianAll != null)
+        {
+            summary -= manJianAll.getMoney();
+        }
 
         summary = Double.valueOf(CommonUtils.df.format(summary));
 
@@ -1234,9 +1237,13 @@ public class OrderConfirmActivity extends Activity {
 
         //添加优惠券
         orderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
-
         //添加满减券
 //        orderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+        //添加首单优惠
+        if(manJianAll != null)
+        {
+            orderSaveArrayList.get(0).setFirstAppsmorderId(manJianAll.getId());
+        }
 
         OrderSaveList orderSaveList = new OrderSaveList();
         orderSaveList.setUserId(user.getUserId());
@@ -1303,9 +1310,13 @@ public class OrderConfirmActivity extends Activity {
 
         //添加优惠券
         smOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
-
         //添加满减券
 //                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+        //添加首单优惠
+        if(manJianAll != null)
+        {
+            smOrderSaveArrayList.get(0).setFirstAppsmorderId(manJianAll.getId());
+        }
 
         smOrderSaveList.setSmorder(smOrderSaveArrayList);
 
@@ -1368,6 +1379,11 @@ public class OrderConfirmActivity extends Activity {
 
         //添加满减券
 //                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+        //添加首单优惠
+        if(manJianAll != null)
+        {
+            yyOrderSaveArrayList.get(0).setFirstAppsmorderId(manJianAll.getId());
+        }
 
         yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
 
@@ -1446,8 +1462,8 @@ public class OrderConfirmActivity extends Activity {
                 if(result.isSuccess())
                 {
                     manjianFirstViewGroup.setVisibility(View.VISIBLE);
-                    manjianFirstMoney = result.getMoney();
-                    manjianFirstMoneyTextView.setText(Double.toString(manjianFirstMoney));
+                    manJianAll = result;
+                    manjianFirstMoneyTextView.setText(Double.toString(result.getMoney()));
                     calculateSummary();
                 }
 

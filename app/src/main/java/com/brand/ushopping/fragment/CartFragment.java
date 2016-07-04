@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.CartAction;
+import com.brand.ushopping.activity.LoginActivity;
 import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.OrderConfirmActivity;
 import com.brand.ushopping.activity.SelectDateActivity;
@@ -232,6 +233,12 @@ public class CartFragment extends Fragment {
         appContext = (AppContext) getActivity().getApplicationContext();
         user = appContext.getUser();
 
+        if(user == null)
+        {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+
         reload();
 
         mainActivity.setButtomBarEnable(true);
@@ -242,11 +249,7 @@ public class CartFragment extends Fragment {
         //没有数据时的提示
         warningLayout.setVisibility(View.GONE);
 
-        if(user == null)
-        {
-            Toast.makeText(getActivity(), "请登录或注册", Toast.LENGTH_SHORT).show();
-        }
-        else
+        if(user != null)
         {
             appShopcartIdList = new AppShopcartIdList();
             appShopcartIdList.setUserId(user.getUserId());

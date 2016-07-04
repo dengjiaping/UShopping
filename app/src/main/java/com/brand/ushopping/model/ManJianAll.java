@@ -11,6 +11,9 @@ public class ManJianAll extends BaseModel
     private boolean success;
     private String msg;
     private double money;
+    private int flag;
+    private long id;
+    private long reTime;
 
     public long getUserId() {
         return userId;
@@ -59,4 +62,29 @@ public class ManJianAll extends BaseModel
     public void setMoney(double money) {
         this.money = money;
     }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getReTime() {
+        return reTime;
+    }
+
+    public void setReTime(long reTime) {
+        this.reTime = reTime;
+    }
+
 }

@@ -12,6 +12,7 @@ public class ManJainVoucher extends BaseModel
     private boolean success;
     private String msg;
     private ArrayList<ManJianVoucherItem> manJianVoucherItems;
+    private int appOrderType;
 
     public long getUserId() {
         return userId;
@@ -51,5 +52,13 @@ public class ManJainVoucher extends BaseModel
 
     public void setManJianVoucherItems(ArrayList<ManJianVoucherItem> manJianVoucherItems) {
         this.manJianVoucherItems = manJianVoucherItems;
+    }
+
+    public int getAppOrderType() {
+        return appOrderType;
+    }
+
+    public void setAppOrderType(int appOrderType) {
+        this.appOrderType = appOrderType;
     }
 }
