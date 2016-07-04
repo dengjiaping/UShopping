@@ -1,5 +1,7 @@
 package com.brand.ushopping.utils;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -17,6 +19,7 @@ public class URLConnectionUtil
 {
     public static String post(String path, Map<String, Object> params) throws Exception
     {
+        Log.v("params", path + " ---- " + params.toString());
         URL url = new URL(path);
 
         PrintWriter printWriter = null;
@@ -78,6 +81,7 @@ public class URLConnectionUtil
 
         if(responseResult != null)
         {
+            Log.v("resultString", responseResult.toString());
             return responseResult.toString();
         }
         else

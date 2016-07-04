@@ -6,7 +6,11 @@ package com.brand.ushopping.activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brand.ushopping.AppContext;
@@ -27,14 +31,27 @@ public class OrderStatusActivity extends AppCompatActivity {
     private ListView orderStatusListView;
     private String orderNo;
     private User user;
+    private ImageView backBtn;
+    private TextView titleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_order_status);
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
         orderStatusListView = (ListView) findViewById(R.id.status_list);
+
+        backBtn = (ImageView) findViewById(R.id.back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        titleTextView = (TextView) findViewById(R.id.title);
+        titleTextView.setText(this.getTitle().toString());
 
         Bundle bundle = getIntent().getExtras();
         orderNo = bundle.getString("orderNo");

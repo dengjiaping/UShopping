@@ -138,4 +138,10 @@
         android:text="微博API"
         android:id="@+id/weibo_api" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONTENT_RESOLVER"
+        android:id="@+id/resolver" />
+
 </TableLayout>

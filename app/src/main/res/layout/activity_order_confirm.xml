@@ -240,6 +240,35 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:background="@color/tablerow_background"
+                android:layout_marginTop="4dp"
+                android:id="@+id/manjian_first">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="28dp"
+                    android:text="首单满减"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_grey"
+                    style="@style/TextViewStyle"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/manjian_first_money"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp" />
+
+            </LinearLayout>
+
             <com.brand.ushopping.widget.MyListView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

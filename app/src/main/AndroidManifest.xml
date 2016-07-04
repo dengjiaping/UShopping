@@ -155,12 +155,12 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
 
         <!-- 银联支付 sdk -->
         <activity
@@ -510,8 +510,13 @@
             android:name=".activity.OrderStatusActivity"
             android:label="订单状态"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name=".provider.UShoppingProvider"
+            android:authorities="com.ushopping.provider"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,7 @@ import com.brand.ushopping.model.Charge;
 import com.brand.ushopping.model.ClientCharge;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.ManJainVoucher;
+import com.brand.ushopping.model.ManJianAll;
 import com.brand.ushopping.model.ManJianVoucherItem;
 import com.brand.ushopping.model.OrderSave;
 import com.brand.ushopping.model.OrderSaveList;
@@ -59,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.brand.ushopping.R.id.manjian_first_money;
 import static com.brand.ushopping.R.id.root_view;
 
 public class OrderConfirmActivity extends Activity {
@@ -83,6 +86,9 @@ public class OrderConfirmActivity extends Activity {
     private TextView titleTextView;
     private Button orderSubmitBtn;
     private TextView addressSelectBtn;
+    private ViewGroup manjianFirstViewGroup;
+    private TextView manjianFirstMoneyTextView;
+    private double manjianFirstMoney = 0;
 
     private OrderSubmitPopup orderSubmitPopup;
 
@@ -140,10 +146,11 @@ public class OrderConfirmActivity extends Activity {
         deaddressTextView = (TextView) findViewById(R.id.deaddress);
         goodsListView = (ListView) findViewById(R.id.goods_list);
         storeNameTextView = (TextView) findViewById(R.id.store_name);
-
         totalCountTextView = (TextView) findViewById(R.id.total_count);
         summaryTextView = (TextView) findViewById(R.id.summary);
         addressSelectBtn = (TextView) findViewById(R.id.address_select);
+        manjianFirstViewGroup = (ViewGroup) findViewById(R.id.manjian_first);
+        manjianFirstMoneyTextView = (TextView) findViewById(manjian_first_money);
 
         Bundle bundle = getIntent().getExtras();
         goodsList = bundle.getParcelableArrayList("goods");
@@ -152,6 +159,8 @@ public class OrderConfirmActivity extends Activity {
         operation = bundle.getInt("operation", StaticValues.ORDER_COMFIRM_GEN_ORDER);
         orderNo = bundle.getString("orderNo", null);
         appbrandId = goodsList.get(0).getAppbrandId();
+
+        Log.v("operation", String.valueOf(operation));
 
         if(!CommonUtils.isValueEmpty(user.getUserName()))
         {
@@ -258,129 +267,11 @@ public class OrderConfirmActivity extends Activity {
                                 break;
 
                             case StaticValues.BOUTHT_TYPE_RESERVATION:
-                                //生成预约订单
-                                YyOrderSaveList yyOrderSaveList = new YyOrderSaveList();
-
-                                yyOrderSaveList.setUserId(user.getUserId());
-                                yyOrderSaveList.setSessionid(user.getSessionid());
-
-                                ArrayList<YyOrderSave> yyOrderSaveArrayList = new ArrayList<YyOrderSave>();
-                                for(int a=0; a<goodsList.size(); a++)
-                                {
-                                    Goods goods = goodsList.get(a);
-                                    YyOrderSave yyOrderSave = new YyOrderSave();
-
-                                    yyOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
-
-                                    AppuserId appuserId = new AppuserId();
-                                    appuserId.setUserId(user.getUserId());
-                                    yyOrderSave.setAppuserId(appuserId);
-
-                                    AppaddressId appaddressId = new AppaddressId();
-                                    appaddressId.setId(addressId);
-                                    yyOrderSave.setAppaddressId(appaddressId);
-
-                                    //商品信息
-                                    AppgoodsId appgoodsId = new AppgoodsId();
-                                    appgoodsId.setId(goods.getId());
-                                    yyOrderSave.setAppgoodsId(appgoodsId);
-
-                                    yyOrderSave.setAttribute(goods.getAttribute());
-                                    yyOrderSave.setQuantity(goods.getCount());
-
-                                    yyOrderSave.setMoney(goods.getPromotionPrice());
-                                    //优惠券扣除到第一个商品中
-                                    if(a == 0)
-                                    {
-                                        double money = yyOrderSave.getMoney();
-                                        for(UserVoucherItem userVoucherItem: userVoucherItems)
-                                        {
-                                            money -= userVoucherItem.getAppvoucherId().getMoney01();
-
-                                        }
-                                        yyOrderSave.setMoney(money);
-
-                                    }
-
-                                    yyOrderSave.setTimeShop(new Date(reservationDate));
-
-                                    yyOrderSaveArrayList.add(yyOrderSave);
-                                }
-
-                                //添加优惠券
-                                yyOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
-
-                                //添加满减券
-//                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
-
-                                yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
-
-                                new YyOrderSaveTask().execute(yyOrderSaveList);
+                                generateYyOrder();
                                 break;
 
                             case StaticValues.BOUTHT_TYPE_TRYIT:
-                                //生成上门订单
-                                SmOrderSaveList smOrderSaveList = new SmOrderSaveList();
-
-                                smOrderSaveList.setUserId(user.getUserId());
-                                smOrderSaveList.setSessionid(user.getSessionid());
-
-                                ArrayList<SmOrderSave> smOrderSaveArrayList = new ArrayList<SmOrderSave>();
-                                for(int a=0; a<goodsList.size(); a++)
-                                {
-                                    Goods goods = goodsList.get(a);
-                                    SmOrderSave smOrderSave = new SmOrderSave();
-
-                                    smOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
-
-                                    AppuserId appuserId = new AppuserId();
-                                    appuserId.setUserId(user.getUserId());
-                                    smOrderSave.setAppuserId(appuserId);
-
-                                    AppaddressId appaddressId = new AppaddressId();
-                                    appaddressId.setId(addressId);
-                                    smOrderSave.setAppaddressId(appaddressId);
-
-                                    //商品信息
-                                    AppgoodsId appgoodsId = new AppgoodsId();
-                                    appgoodsId.setId(goods.getId());
-
-                                    //品牌信息
-                                    appgoodsId.setAppbrandId(goods.getAppbrandId());
-
-                                    smOrderSave.setAppgoodsId(appgoodsId);
-
-                                    smOrderSave.setAttribute(goods.getAttribute());
-                                    smOrderSave.setQuantity(goods.getCount());
-
-                                    smOrderSave.setMoney(goods.getPromotionPrice());
-                                    //优惠券扣除到第一个商品中
-                                    if(a == 0)
-                                    {
-                                        double money = smOrderSave.getMoney();
-                                        for(UserVoucherItem userVoucherItem: userVoucherItems)
-                                        {
-                                            money -= userVoucherItem.getAppvoucherId().getMoney01();
-
-                                        }
-                                        smOrderSave.setMoney(money);
-
-                                    }
-
-                                    smOrderSave.setTimeShop(new Date(reservationDate));
-
-                                    smOrderSaveArrayList.add(smOrderSave);
-                                }
-
-                                //添加优惠券
-                                smOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
-
-                                //添加满减券
-//                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
-
-                                smOrderSaveList.setSmorder(smOrderSaveArrayList);
-
-                                new SmOrderSaveTask().execute(smOrderSaveList);
+                                generateSmOrder();
                                 break;
                         }
                         break;
@@ -399,6 +290,8 @@ public class OrderConfirmActivity extends Activity {
                             case StaticValues.BOUTHT_TYPE_RESERVATION:
                                 //预约 //上门
                                 ClientCharge clientCharge = new ClientCharge();
+                                clientCharge.addVersion(OrderConfirmActivity.this);
+
                                 clientCharge.setUserId(user.getUserId());
                                 clientCharge.setSessionid(user.getSessionid());
                                 clientCharge.setSummary(summary);
@@ -416,7 +309,7 @@ public class OrderConfirmActivity extends Activity {
                                     clientCharge.setSubjectVal("暂无备注");
                                     clientCharge.setBodyVal("暂无备注");
                                 }
-
+                                clientCharge.setAppOrderType(boughtType);
                                 orderSubmitPopup = new OrderSubmitPopup(OrderConfirmActivity.this, clientCharge);
                                 orderSubmitPopup.showAtLocation(rootView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 
@@ -469,6 +362,13 @@ public class OrderConfirmActivity extends Activity {
 
         new ManJainAllActionTask().execute(manJainVoucher);
 
+        //首单满减
+        ManJianAll manJianAll = new ManJianAll();
+        manJianAll.setUserId(user.getUserId());
+        manJianAll.setSessionid(user.getSessionid());
+        manJianAll.setAppOrderType(this.boughtType);
+        new ManJainAllFirstActionTask().execute(manJianAll);
+
     }
 
     @Override
@@ -488,7 +388,35 @@ public class OrderConfirmActivity extends Activity {
     {
         this.charge = charge;
         this.chargeObj = JSON.parseObject(charge, Charge.class);
-        generateOrder();
+
+        switch (this.boughtType)
+        {
+            case StaticValues.BOUTHT_TYPE_NORMAL:
+                generateOrder();
+                break;
+            case StaticValues.BOUTHT_TYPE_RESERVATION:
+                if(operation == StaticValues.ORDER_COMFIRM_PAY)
+                {
+                    this.chargeObj.setOrderNo(this.chargeObj.getOrderNo() + "yy");
+                    this.charge = JSON.toJSONString(this.chargeObj);
+                }
+                Log.v("charge", this.charge);
+                callClientCharge();
+//                generateYyOrder();
+//                yyOrderSuccess();
+                break;
+            case StaticValues.BOUTHT_TYPE_TRYIT:
+                if(operation == StaticValues.ORDER_COMFIRM_PAY)
+                {
+                    this.chargeObj.setOrderNo(this.chargeObj.getOrderNo() + "yy");
+                    this.charge = JSON.toJSONString(this.chargeObj);
+                }
+                Log.v("charge", this.charge);
+                callClientCharge();
+//                generateSmOrder();
+//                smOrderSuccess();
+                break;
+        }
 
     }
 
@@ -1117,6 +1045,9 @@ public class OrderConfirmActivity extends Activity {
 
         }
 
+        //首单满减
+        summary -= manjianFirstMoney;
+
         summary = Double.valueOf(CommonUtils.df.format(summary));
 
         totalCountTextView.setText(Integer.toString(totalCount));
@@ -1235,29 +1166,11 @@ public class OrderConfirmActivity extends Activity {
 
             case StaticValues.BOUTHT_TYPE_RESERVATION:
                 // 到店预订订单
-                orderSuccess = new OrderSuccess();
-                orderSuccess.setUserId(user.getUserId());
-                orderSuccess.setSessionid(user.getSessionid());
-                orderSuccess.setOrderNo(orderNo);
-                orderSuccess.setFlag(1);
-
-                String channel = chargeObj.getChannel();
-                orderSuccess.setPaymentMode(putPaymentMode(channel));
-
-                new YyOrderSuccessActionTask().execute(orderSuccess);
+                yyOrderSuccess();
                 break;
             case StaticValues.BOUTHT_TYPE_TRYIT:
                 // 上门试衣订单
-                orderSuccess = new OrderSuccess();
-                orderSuccess.setUserId(user.getUserId());
-                orderSuccess.setSessionid(user.getSessionid());
-                orderSuccess.setOrderNo(orderNo);
-                orderSuccess.setFlag(1);
-
-                String channel1 = chargeObj.getChannel();
-                orderSuccess.setPaymentMode(putPaymentMode(channel1));
-
-                new SmOrderSuccessActionTask().execute(orderSuccess);
+                smOrderSuccess();
 
                 break;
 
@@ -1333,6 +1246,164 @@ public class OrderConfirmActivity extends Activity {
         new OrderSaveTask().execute(orderSaveList);
     }
 
+    public void generateSmOrder()
+    {
+        //生成上门订单
+        SmOrderSaveList smOrderSaveList = new SmOrderSaveList();
+
+        smOrderSaveList.setUserId(user.getUserId());
+        smOrderSaveList.setSessionid(user.getSessionid());
+
+        ArrayList<SmOrderSave> smOrderSaveArrayList = new ArrayList<SmOrderSave>();
+        for(int a=0; a<goodsList.size(); a++)
+        {
+            Goods goods = goodsList.get(a);
+            SmOrderSave smOrderSave = new SmOrderSave();
+
+            smOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
+
+            AppuserId appuserId = new AppuserId();
+            appuserId.setUserId(user.getUserId());
+            smOrderSave.setAppuserId(appuserId);
+
+            AppaddressId appaddressId = new AppaddressId();
+            appaddressId.setId(addressId);
+            smOrderSave.setAppaddressId(appaddressId);
+
+            //商品信息
+            AppgoodsId appgoodsId = new AppgoodsId();
+            appgoodsId.setId(goods.getId());
+
+            //品牌信息
+            appgoodsId.setAppbrandId(goods.getAppbrandId());
+
+            smOrderSave.setAppgoodsId(appgoodsId);
+
+            smOrderSave.setAttribute(goods.getAttribute());
+            smOrderSave.setQuantity(goods.getCount());
+
+            smOrderSave.setMoney(goods.getPromotionPrice());
+            //优惠券扣除到第一个商品中
+            if(a == 0)
+            {
+                double money = smOrderSave.getMoney();
+                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                {
+                    money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                }
+                smOrderSave.setMoney(money);
+
+            }
+
+            smOrderSave.setTimeShop(new Date(reservationDate));
+
+            smOrderSaveArrayList.add(smOrderSave);
+        }
+
+        //添加优惠券
+        smOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
+
+        //添加满减券
+//                                smOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+
+        smOrderSaveList.setSmorder(smOrderSaveArrayList);
+
+        new SmOrderSaveTask().execute(smOrderSaveList);
+    }
+
+    //生成预约订单
+    public void generateYyOrder()
+    {
+        YyOrderSaveList yyOrderSaveList = new YyOrderSaveList();
+
+        yyOrderSaveList.setUserId(user.getUserId());
+        yyOrderSaveList.setSessionid(user.getSessionid());
+
+        ArrayList<YyOrderSave> yyOrderSaveArrayList = new ArrayList<YyOrderSave>();
+        for(int a=0; a<goodsList.size(); a++)
+        {
+            Goods goods = goodsList.get(a);
+            YyOrderSave yyOrderSave = new YyOrderSave();
+
+            yyOrderSave.setFlag(StaticValues.ORDER_FLAG_UNPAY);
+
+            AppuserId appuserId = new AppuserId();
+            appuserId.setUserId(user.getUserId());
+            yyOrderSave.setAppuserId(appuserId);
+
+            AppaddressId appaddressId = new AppaddressId();
+            appaddressId.setId(addressId);
+            yyOrderSave.setAppaddressId(appaddressId);
+
+            //商品信息
+            AppgoodsId appgoodsId = new AppgoodsId();
+            appgoodsId.setId(goods.getId());
+            yyOrderSave.setAppgoodsId(appgoodsId);
+
+            yyOrderSave.setAttribute(goods.getAttribute());
+            yyOrderSave.setQuantity(goods.getCount());
+
+            yyOrderSave.setMoney(goods.getPromotionPrice());
+            //优惠券扣除到第一个商品中
+            if(a == 0)
+            {
+                double money = yyOrderSave.getMoney();
+                for(UserVoucherItem userVoucherItem: userVoucherItems)
+                {
+                    money -= userVoucherItem.getAppvoucherId().getMoney01();
+
+                }
+                yyOrderSave.setMoney(money);
+
+            }
+
+            yyOrderSave.setTimeShop(new Date(reservationDate));
+
+            yyOrderSaveArrayList.add(yyOrderSave);
+        }
+
+        //添加优惠券
+        yyOrderSaveArrayList.get(0).setUserVoucherId(addVouchers(userVoucherItems));
+
+        //添加满减券
+//                                yyOrderSaveArrayList.get(0).setAppVoucherId(manJianVoucherItems.get(0).getId());
+
+        yyOrderSaveList.setYyorder(yyOrderSaveArrayList);
+
+        new YyOrderSaveTask().execute(yyOrderSaveList);
+    }
+
+
+    public void yyOrderSuccess()
+    {
+        OrderSuccess orderSuccess = new OrderSuccess();
+        orderSuccess.setUserId(user.getUserId());
+        orderSuccess.setSessionid(user.getSessionid());
+        orderSuccess.setOrderNo(orderNo);
+        orderSuccess.setFlag(1);
+
+        String channel = chargeObj.getChannel();
+        orderSuccess.setPaymentMode(putPaymentMode(channel));
+
+        new YyOrderSuccessActionTask().execute(orderSuccess);
+    }
+
+    public void smOrderSuccess()
+    {
+        OrderSuccess orderSuccess = new OrderSuccess();
+        orderSuccess.setUserId(user.getUserId());
+        orderSuccess.setSessionid(user.getSessionid());
+        orderSuccess.setOrderNo(orderNo);
+        orderSuccess.setFlag(1);
+
+        String channel1 = chargeObj.getChannel();
+        orderSuccess.setPaymentMode(putPaymentMode(channel1));
+
+        new SmOrderSuccessActionTask().execute(orderSuccess);
+    }
+
+
     //添加优惠券
     private String addVouchers(ArrayList<UserVoucherItem> userVoucherItems)
     {
@@ -1351,6 +1422,37 @@ public class OrderConfirmActivity extends Activity {
         else
         {
             return null;
+        }
+    }
+
+    //首单满减
+    public class ManJainAllFirstActionTask extends AsyncTask<ManJianAll, Void, ManJianAll>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected ManJianAll doInBackground(ManJianAll... manJianAlls) {
+            return new OrderAction(OrderConfirmActivity.this).manJainAllAction(manJianAlls[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(ManJianAll result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    manjianFirstViewGroup.setVisibility(View.VISIBLE);
+                    manjianFirstMoney = result.getMoney();
+                    manjianFirstMoneyTextView.setText(Double.toString(manjianFirstMoney));
+                    calculateSummary();
+                }
+
+            }
+
         }
     }
 

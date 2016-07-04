@@ -44,6 +44,7 @@ public class DevActivity extends Activity {
     private String kuaidiType = null;
     private String kuaidiPostid = null;
     private TextView handleTextView;
+    private Button resolverBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +193,14 @@ public class DevActivity extends Activity {
         handleTextView = (TextView) findViewById(R.id.handle_info);
         handleTextView.setText(getHandSetInfo());
 
+        resolverBtn = (Button) findViewById(R.id.resolver);
+        resolverBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                getContentResolver().query()
+
+            }
+        });
 
     }
 

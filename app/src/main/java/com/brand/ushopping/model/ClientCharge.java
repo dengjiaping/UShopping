@@ -14,6 +14,7 @@ public class ClientCharge extends BaseModel
     private String bodyVal;
     private boolean success;
     private String msg;
+    private int appOrderType;
 
     public long getUserId() {
         return userId;
@@ -85,5 +86,13 @@ public class ClientCharge extends BaseModel
 
     public void setSummary(double summary) {
         this.summary = summary;
+    }
+
+    public int getAppOrderType() {
+        return appOrderType;
+    }
+
+    public void setAppOrderType(int appOrderType) {
+        this.appOrderType = appOrderType;
     }
 }

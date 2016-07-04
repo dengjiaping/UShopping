@@ -219,6 +219,7 @@ public class ReservationOrderItemView extends LinearLayout {
 
             orderStatusBtn.setVisibility(View.VISIBLE);
         }
+        orderStatusBtn.setVisibility(View.GONE);
 
     }
 

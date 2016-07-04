@@ -6,6 +6,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.ConfirmOrder;
 import com.brand.ushopping.model.GetSmorderStatusList;
+import com.brand.ushopping.model.ManJianAll;
 import com.brand.ushopping.model.OrderAll;
 import com.brand.ushopping.model.OrderGoodsItem;
 import com.brand.ushopping.model.OrderItem;
@@ -358,8 +359,6 @@ public class OrderAction extends BaseAction
         smOrderSaveList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(smOrderSaveList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -489,8 +488,6 @@ public class OrderAction extends BaseAction
         orderSuccess.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderSuccess);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -644,6 +641,10 @@ public class OrderAction extends BaseAction
 
                         getSmorderStatusList.setOrderStatusListItems(orderStatusListItems);
                     }
+                    else
+                    {
+                        getSmorderStatusList.setMsg("尚未有订单信息");
+                    }
 
                     getSmorderStatusList.setSuccess(true);
 
@@ -655,6 +656,10 @@ public class OrderAction extends BaseAction
                 }
 
             }
+            else
+            {
+                getSmorderStatusList.setMsg("获取订单信息失败");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -662,6 +667,46 @@ public class OrderAction extends BaseAction
         }
 
         return getSmorderStatusList;
+    }
+
+    //首单满减
+    public ManJianAll manJainAllAction(ManJianAll manJianAll)
+    {
+        manJianAll.addVersion(context);   //添加App版本信息
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(manJianAll);
+
+        try
+        {
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("ManJainAllAction.action"), CommonUtils.generateParams(jsonParam));
+
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    //赋值
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                    String data = dataObject.toString();
+                    manJianAll = JSON.parseObject(data, ManJianAll.class);
+                    manJianAll.setSuccess(true);
+
+                }
+                else
+                {
+                    manJianAll.setSuccess(false);
+                    manJianAll.setMsg(jsonObject.getString("msg"));
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return manJianAll;
+
     }
 
 
