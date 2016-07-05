@@ -186,7 +186,7 @@ public class BrandMoreGoodsActivity extends Activity {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_FILTER;
                 selectTab();
 
-//                callGoodsFilterPopup();
+                callGoodsFilterPopup();
 
             }
         });

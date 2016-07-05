@@ -42,7 +42,8 @@
             android:layout_alignParentBottom="true"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:gravity="center" />
+            android:gravity="center"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

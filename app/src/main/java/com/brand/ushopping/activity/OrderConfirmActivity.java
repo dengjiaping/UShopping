@@ -873,10 +873,10 @@ public class OrderConfirmActivity extends Activity {
                 }
 
             }
-            else
-            {
-                Toast.makeText(OrderConfirmActivity.this, "满减券列表获取失败", Toast.LENGTH_SHORT).show();
-            }
+//            else
+//            {
+//                Toast.makeText(OrderConfirmActivity.this, "满减券列表获取失败", Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 
@@ -1193,15 +1193,22 @@ public class OrderConfirmActivity extends Activity {
 
             orderSave.setOrderNo(this.chargeObj.getOrderNo());
             orderSave.setMoney(goods.getPromotionPrice());
-            //优惠券扣除到第一个商品中
+
             if(a == 0)
             {
+                //优惠券扣除到第一个商品中
                 double money = orderSave.getMoney();
                 for(UserVoucherItem userVoucherItem: userVoucherItems)
                 {
                     money -= userVoucherItem.getAppvoucherId().getMoney01();
 
                 }
+                //首单满减
+                if(manJianAll != null)
+                {
+                    money -= manJianAll.getMoney();
+                }
+
                 orderSave.setMoney(money);
 
             }
@@ -1297,8 +1304,13 @@ public class OrderConfirmActivity extends Activity {
                 for(UserVoucherItem userVoucherItem: userVoucherItems)
                 {
                     money -= userVoucherItem.getAppvoucherId().getMoney01();
-
                 }
+                //首单满减
+                if(manJianAll != null)
+                {
+                    money -= manJianAll.getMoney();
+                }
+
                 smOrderSave.setMoney(money);
 
             }
@@ -1363,8 +1375,13 @@ public class OrderConfirmActivity extends Activity {
                 for(UserVoucherItem userVoucherItem: userVoucherItems)
                 {
                     money -= userVoucherItem.getAppvoucherId().getMoney01();
-
                 }
+                //首单满减
+                if(manJianAll != null)
+                {
+                    money -= manJianAll.getMoney();
+                }
+
                 yyOrderSave.setMoney(money);
 
             }
