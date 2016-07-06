@@ -49,6 +49,7 @@ public class DevActivity extends Activity {
     private TextView handleTextView;
     private Button weiboApiBtn;
     private UMShareAPI mShareAPI;
+    private Button resolverBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,6 +229,14 @@ public class DevActivity extends Activity {
             }
         });
         mShareAPI = UMShareAPI.get(this);
+        resolverBtn = (Button) findViewById(R.id.resolver);
+        resolverBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                getContentResolver().query()
+
+            }
+        });
 
     }
 

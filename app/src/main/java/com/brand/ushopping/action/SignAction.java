@@ -8,11 +8,7 @@ import com.brand.ushopping.model.Sign;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/21.
@@ -29,12 +25,9 @@ public class SignAction extends BaseAction
         sign.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(sign);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetSignAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetSignAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("last sign", resultString);
 
@@ -68,12 +61,9 @@ public class SignAction extends BaseAction
         sign.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(sign);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SignAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SignAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

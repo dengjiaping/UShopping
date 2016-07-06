@@ -155,9 +155,14 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
                 appContext.setDefaultAddress(address.getDeaddress());
                 appContext.setDefaultAddressId(address.getAddressId());
 
-                new RefAction(AddAddressActivity.this).setDefaultAddress(AddAddressActivity.this, address);
-
-                Toast.makeText(AddAddressActivity.this, "默认地址已设置", Toast.LENGTH_SHORT).show();
+                if(new RefAction(AddAddressActivity.this).setDefaultAddress(AddAddressActivity.this, address))
+                {
+                    Toast.makeText(AddAddressActivity.this, "默认地址已设置", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(AddAddressActivity.this, "默认地址设置失败", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

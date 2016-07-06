@@ -178,24 +178,34 @@ public class RefAction extends BaseAction
         if(ref != null)
         {
             address = new Address();
-            address.setAddressId(ref.getLong("defaultAddressId", 0));
-            address.setDeaddress(ref.getString("defaultDeaddress", null));
+            address.setAddressId(ref.getLong("uDefaultAddressId", 0));
+            address.setDeaddress(ref.getString("uDefaultDeaddress", null));
         }
 
         return address;
     }
 
     //保存默认地址
-    public void setDefaultAddress(Context context, Address address)
+    public boolean setDefaultAddress(Context context, Address address)
     {
-        //信息写入ref
-        SharedPreferences ref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = ref.edit();
+        try
+        {
+            //信息写入ref
+            SharedPreferences ref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = ref.edit();
 
-        editor.putLong("defaultAddressId", address.getAddressId());
-        editor.putString("defaultDeaddress", address.getDeaddress());
+            editor.putLong("uDefaultAddressId", address.getAddressId());
+            editor.putString("uDefaultDeaddress", address.getDeaddress());
 
-        editor.commit();
+            editor.commit();
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
 
     }
 

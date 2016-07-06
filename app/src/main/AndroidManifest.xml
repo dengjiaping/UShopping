@@ -155,12 +155,12 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
 
         <!-- 银联支付 sdk -->
         <activity
@@ -515,8 +515,20 @@
         <activity
             android:name=".activity.WeiboActivity"
             android:label="@string/title_activity_weibo"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> ff3e4fecbd27b90e9c621cc23b35ab121043acb7
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name=".provider.UShoppingProvider"
+            android:authorities="com.ushopping.provider"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.GoodsFilterActivity"
+            android:label="商品筛选"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
     </application>
 
 </manifest>

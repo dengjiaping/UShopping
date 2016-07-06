@@ -3,22 +3,22 @@ package com.brand.ushopping.model;
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2016/4/19.
+ * Created by Administrator on 2016/6/30.
  */
-public class ManJainVoucher extends BaseModel
+public class GetSmorderStatusList extends BaseModel
 {
-    private long userId;
+    private Long userId;
     private String sessionid;
     private boolean success;
     private String msg;
-    private ArrayList<ManJianVoucherItem> manJianVoucherItems;
-    private int appOrderType;
+    private String order_no;
+    private ArrayList<OrderStatusListItem> orderStatusListItems;
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -46,19 +46,19 @@ public class ManJainVoucher extends BaseModel
         this.msg = msg;
     }
 
-    public ArrayList<ManJianVoucherItem> getManJianVoucherItems() {
-        return manJianVoucherItems;
+    public String getOrder_no() {
+        return order_no;
     }
 
-    public void setManJianVoucherItems(ArrayList<ManJianVoucherItem> manJianVoucherItems) {
-        this.manJianVoucherItems = manJianVoucherItems;
+    public void setOrder_no(String order_no) {
+        this.order_no = order_no;
     }
 
-    public int getAppOrderType() {
-        return appOrderType;
+    public ArrayList<OrderStatusListItem> getOrderStatusListItems() {
+        return orderStatusListItems;
     }
 
-    public void setAppOrderType(int appOrderType) {
-        this.appOrderType = appOrderType;
+    public void setOrderStatusListItems(ArrayList<OrderStatusListItem> orderStatusListItems) {
+        this.orderStatusListItems = orderStatusListItems;
     }
 }

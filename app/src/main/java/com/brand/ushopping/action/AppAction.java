@@ -19,13 +19,11 @@ import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/30.
@@ -40,13 +38,10 @@ public class AppAction extends BaseAction{
     {
         String resultString = null;
         String jsonParam = JSON.toJSONString(version);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
+
         Log.v("version jsonParam", jsonParam);
         try
         {
-//            resultString = HttpClientUtil.post("GetMaxVersionAction.action", params);
-//            resultString = OkHttpUtil.post("GetMaxVersionAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetMaxVersionAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("version", resultString);
@@ -148,13 +143,9 @@ public class AppAction extends BaseAction{
         feedback.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(feedback);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("FeedbackSaveAction.action", params);
-//            resultString = OkHttpUtil.post("FeedbackSaveAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("FeedbackSaveAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

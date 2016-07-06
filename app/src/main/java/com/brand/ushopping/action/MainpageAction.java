@@ -13,12 +13,10 @@ import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/9.
@@ -45,9 +43,6 @@ public class MainpageAction extends BaseAction
 
             if(resultString == null)
             {
-//                resultString = URLConnectionUtil.post("HomeAction.action", jsonParam);
-//                resultString = HttpClientUtil.post("HomeAction.action", params);
-//                resultString = OkHttpUtil.post("HomeAction.action", jsonParam);
                 resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("HomeAction.action"), CommonUtils.generateParams(jsonParam));
 
                 Log.v("home", resultString);
@@ -103,8 +98,6 @@ public class MainpageAction extends BaseAction
 
             if(CommonUtils.isValueEmpty(resultString))
             {
-//                resultString = HttpClientUtil.post("HomeReAction.action", params);
-//                resultString = OkHttpUtil.post("HomeReAction.action", jsonParam);
                 resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("HomeReAction.action"), CommonUtils.generateParams(jsonParam));
             }
 
@@ -157,8 +150,6 @@ public class MainpageAction extends BaseAction
         onlineshoppingGoods.addVersion(context);  //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(onlineshoppingGoods);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
@@ -167,7 +158,6 @@ public class MainpageAction extends BaseAction
 
             if(resultString == null)
             {
-//                resultString = HttpClientUtil.post("OnlineshoppingGoodsAction.action", params);
                 resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("OnlineshoppingGoodsAction.action"), CommonUtils.generateParams(jsonParam));
 
             }

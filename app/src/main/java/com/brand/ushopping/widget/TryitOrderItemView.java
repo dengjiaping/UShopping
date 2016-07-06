@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.activity.OrderConfirmActivity;
+import com.brand.ushopping.activity.OrderStatusActivity;
 import com.brand.ushopping.activity.SnsShareActivity;
 import com.brand.ushopping.activity.TryoutActivity;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
@@ -53,7 +54,7 @@ public class TryitOrderItemView extends LinearLayout
     private TextView moneyTextView;
     private TextView quantityTextView;
     private TryoutActivity activity;
-
+    private Button orderStatusBtn;
 
     public TryitOrderItemView(final Context context, AttributeSet attrs, final OrderItem orderItem, final User user) {
         super(context, attrs);
@@ -73,7 +74,7 @@ public class TryitOrderItemView extends LinearLayout
         orderListView = (ListView) view.findViewById(R.id.goods_list);
         moneyTextView = (TextView) view.findViewById(R.id.money);
         quantityTextView = (TextView) view.findViewById(R.id.quantity);
-
+        orderStatusBtn = (Button) findViewById(R.id.order_status);
         orderNoTextView.setText(orderItem.getOrderNo());
 
         int quantity = 0;
@@ -121,6 +122,7 @@ public class TryitOrderItemView extends LinearLayout
 
         payOnlineBtn.setVisibility(View.GONE);
         payOfflineBtn.setVisibility(View.GONE);
+        orderStatusBtn.setVisibility(View.GONE);
 
         if(orderItem.getFlag() == StaticValues.TRYOUT_ORDER_FLAG_UNPAID)
         {
@@ -191,7 +193,22 @@ public class TryitOrderItemView extends LinearLayout
             payOnlineBtn.setVisibility(View.VISIBLE);
             payOfflineBtn.setVisibility(View.VISIBLE);
         }
+        else
+        {
+            //已支付显示订单状态
+            orderStatusBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, OrderStatusActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("orderNo", orderItem.getOrderNo());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
 
+            orderStatusBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     //上门订单线下支付

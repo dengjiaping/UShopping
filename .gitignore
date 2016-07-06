@@ -44,3 +44,6 @@ app/app.iml
 lib/bdwallet_pay_sdk/
 lib/pingpp/
 lib/pingpp_one/
+
+lib/bdwallet_pay_sdk/bdwallet_pay_sdk.iml
+lib/pingpp/pingpp.iml

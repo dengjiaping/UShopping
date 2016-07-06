@@ -6,15 +6,12 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.utils.CommonUtils;
-import com.brand.ushopping.utils.OkHttpUtil;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/11.
@@ -31,13 +28,9 @@ public class AddressAction extends BaseAction
         ArrayList<Address> result = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-//        List params = new ArrayList();
-//        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppAddressAllAction.action", params);
-//            resultString = OkHttpUtil.post("GetAppAddressAllAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppAddressAllAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -66,13 +59,9 @@ public class AddressAction extends BaseAction
         address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveAppAddressAction.action", params);
-            resultString = OkHttpUtil.post("SaveAppAddressAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -106,13 +95,9 @@ public class AddressAction extends BaseAction
         address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("UpdateAddressAction.action", params);
-//            resultString = OkHttpUtil.post("UpdateAddressAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("UpdateAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -147,13 +132,9 @@ public class AddressAction extends BaseAction
         address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("DeleteAddressAction.action", params);
-//            resultString = OkHttpUtil.post("DeleteAddressAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("DeleteAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             Log.v("delete address", resultString);
@@ -186,13 +167,9 @@ public class AddressAction extends BaseAction
         address.addVersion(context); //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(address);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("DefaultAddressAction.action", params);
-//            resultString = OkHttpUtil.post("DefaultAddressAction.action", jsonParam);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("DefaultAddressAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

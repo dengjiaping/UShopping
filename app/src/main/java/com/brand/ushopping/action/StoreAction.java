@@ -11,12 +11,10 @@ import com.brand.ushopping.model.BrandGoodsList;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/23.
@@ -33,12 +31,9 @@ public class StoreAction extends BaseAction
         appStoresList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appStoresList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GettAppStoresList.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GettAppStoresList.action"), CommonUtils.generateParams(jsonParam));
             Log.v("ushopping around", resultString);
             if(resultString != null)
@@ -76,7 +71,6 @@ public class StoreAction extends BaseAction
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppStoresIdAll.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppStoresIdAll.action"), CommonUtils.generateParams(jsonParam));
             Log.v("brand goods", resultString);
 

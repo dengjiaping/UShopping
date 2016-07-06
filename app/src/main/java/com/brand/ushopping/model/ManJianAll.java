@@ -1,18 +1,19 @@
 package com.brand.ushopping.model;
 
-import java.util.ArrayList;
-
 /**
- * Created by Administrator on 2016/4/19.
+ * Created by Administrator on 2016/7/1.
  */
-public class ManJainVoucher extends BaseModel
+public class ManJianAll extends BaseModel
 {
     private long userId;
     private String sessionid;
+    private int appOrderType;
     private boolean success;
     private String msg;
-    private ArrayList<ManJianVoucherItem> manJianVoucherItems;
-    private int appOrderType;
+    private double money;
+    private int flag;
+    private long id;
+    private long reTime;
 
     public long getUserId() {
         return userId;
@@ -46,14 +47,6 @@ public class ManJainVoucher extends BaseModel
         this.msg = msg;
     }
 
-    public ArrayList<ManJianVoucherItem> getManJianVoucherItems() {
-        return manJianVoucherItems;
-    }
-
-    public void setManJianVoucherItems(ArrayList<ManJianVoucherItem> manJianVoucherItems) {
-        this.manJianVoucherItems = manJianVoucherItems;
-    }
-
     public int getAppOrderType() {
         return appOrderType;
     }
@@ -61,4 +54,37 @@ public class ManJainVoucher extends BaseModel
     public void setAppOrderType(int appOrderType) {
         this.appOrderType = appOrderType;
     }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getReTime() {
+        return reTime;
+    }
+
+    public void setReTime(long reTime) {
+        this.reTime = reTime;
+    }
+
 }

@@ -193,6 +193,7 @@ public class MainActivity extends UActivity
             public void onClick(View v) {
                 if(buttomBarEnable)
                 {
+                    iconUnselect();
                     if(cartFragment == null)
                     {
                         cartFragment = new CartFragment();

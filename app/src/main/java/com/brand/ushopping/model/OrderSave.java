@@ -15,7 +15,8 @@ public class OrderSave extends BaseModel
     private AppaddressId appaddressId;
     private String remark;
     private String userVoucherId;
-    private long appVoucherId;
+    private Long appVoucherId;
+    private Long firstAppsmorderId;
     private AppgoodsId appgoodsId;
     private String attribute;
     private int quantity;
@@ -109,11 +110,11 @@ public class OrderSave extends BaseModel
         this.userVoucherId = userVoucherId;
     }
 
-    public long getAppVoucherId() {
+    public Long getAppVoucherId() {
         return appVoucherId;
     }
 
-    public void setAppVoucherId(long appVoucherId) {
+    public void setAppVoucherId(Long appVoucherId) {
         this.appVoucherId = appVoucherId;
     }
 
@@ -123,5 +124,13 @@ public class OrderSave extends BaseModel
 
     public void setClient(int client) {
         this.client = client;
+    }
+
+    public Long getFirstAppsmorderId() {
+        return firstAppsmorderId;
+    }
+
+    public void setFirstAppsmorderId(Long firstAppsmorderId) {
+        this.firstAppsmorderId = firstAppsmorderId;
     }
 }

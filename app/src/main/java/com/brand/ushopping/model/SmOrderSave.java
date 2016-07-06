@@ -11,7 +11,7 @@ public class SmOrderSave extends BaseModel
 {
     private double money;
     private int paymentMode;
-    private int flag;
+    private Integer flag;
     private AppuserId appuserId;
     private AppaddressId appaddressId;
     private String remark;
@@ -20,8 +20,9 @@ public class SmOrderSave extends BaseModel
     private String attribute;
     private int quantity;
     private String userVoucherId;
-    private long appVoucherId;
+    private Long appVoucherId;
     private Integer client = StaticValues.ORDER_SAVE_PLATFORM;
+    private Long firstAppsmorderId;
 
     public double getMoney() {
         return money;
@@ -111,19 +112,27 @@ public class SmOrderSave extends BaseModel
         this.userVoucherId = userVoucherId;
     }
 
-    public long getAppVoucherId() {
-        return appVoucherId;
-    }
-
-    public void setAppVoucherId(long appVoucherId) {
-        this.appVoucherId = appVoucherId;
-    }
-
     public Integer getClient() {
         return client;
     }
 
     public void setClient(Integer client) {
         this.client = client;
+    }
+
+    public Long getAppVoucherId() {
+        return appVoucherId;
+    }
+
+    public void setAppVoucherId(Long appVoucherId) {
+        this.appVoucherId = appVoucherId;
+    }
+
+    public Long getFirstAppsmorderId() {
+        return firstAppsmorderId;
+    }
+
+    public void setFirstAppsmorderId(Long firstAppsmorderId) {
+        this.firstAppsmorderId = firstAppsmorderId;
     }
 }
