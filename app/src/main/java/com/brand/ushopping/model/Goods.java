@@ -28,6 +28,7 @@ public class Goods extends BaseModel implements Parcelable
     private String barCode;
     private int flag;
     private int saleCount;
+    private AppaddressId appaddressId;
 
     public AppexpressId getAppexpressId() {
         return appexpressId;
@@ -157,6 +158,14 @@ public class Goods extends BaseModel implements Parcelable
         this.saleCount = saleCount;
     }
 
+    public AppaddressId getAppaddressId() {
+        return appaddressId;
+    }
+
+    public void setAppaddressId(AppaddressId appaddressId) {
+        this.appaddressId = appaddressId;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Goods createFromParcel(Parcel in) {
             return new Goods(in);
@@ -198,7 +207,7 @@ public class Goods extends BaseModel implements Parcelable
         dest.writeString(barCode);
         dest.writeInt(flag);
         dest.writeInt(saleCount);
-
+        dest.writeParcelable(appaddressId, flags);
     }
 
     public void readFromParcel(Parcel in)
@@ -219,6 +228,6 @@ public class Goods extends BaseModel implements Parcelable
         barCode = in.readString();
         flag = in.readInt();
         saleCount = in.readInt();
-
+        appaddressId = in.readParcelable(AppaddressId.class.getClassLoader());
     }
 }

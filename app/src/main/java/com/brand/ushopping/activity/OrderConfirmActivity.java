@@ -28,6 +28,7 @@ import com.brand.ushopping.action.VoucherAction;
 import com.brand.ushopping.adapter.GoodsVoucherAdapter;
 import com.brand.ushopping.adapter.ManjianVoucherAdapter;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
+import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.AppaddressId;
 import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.AppgoodsId;
@@ -61,6 +62,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.brand.ushopping.R.id.brand;
 import static com.brand.ushopping.R.id.manjian_first_money;
 import static com.brand.ushopping.R.id.root_view;
 
@@ -372,9 +374,24 @@ public class OrderConfirmActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        addressId = appContext.getDefaultAddressId();
-        deaddress = appContext.getDefaultAddress();
-        deaddressTextView.setText(deaddress);
+        switch (operation)
+        {
+            case StaticValues.ORDER_COMFIRM_GEN_ORDER:
+                //订单提交选择默认地址
+                addressId = appContext.getDefaultAddressId();
+                deaddress = appContext.getDefaultAddress();
+                deaddressTextView.setText(deaddress);
+
+                break;
+            case StaticValues.ORDER_COMFIRM_PAY:
+                //订单付款只显示地址
+                AppaddressId address = goodsList.get(0).getAppaddressId();
+                addressId = address.getId();
+                deaddress = appContext.getDeaddressFromId(address.getId());
+                addressSelectBtn.setVisibility(View.GONE);
+
+                break;
+        }
 
     }
 

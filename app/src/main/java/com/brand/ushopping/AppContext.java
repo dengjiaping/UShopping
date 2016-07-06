@@ -173,6 +173,20 @@ public class AppContext  extends Application
         goodsViewHistory.add(appgoodsId);
     }
 
+    public String getDeaddressFromId(long id)
+    {
+        String result  = null;
+
+        for(Address address: addressList)
+        {
+            if(id == address.getAddressId())
+            {
+                result = address.getDeaddress();
+            }
+        }
+
+        return result;
+    }
 
     public User getUser() {
         return user;
