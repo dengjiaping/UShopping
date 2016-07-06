@@ -201,7 +201,6 @@ public class DevActivity extends Activity {
         weiboApiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //微博登录
                 SHARE_MEDIA platform = SHARE_MEDIA.SINA;
                 mShareAPI.doOauthVerify(DevActivity.this, platform, new UMAuthListener() {
