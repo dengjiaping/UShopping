@@ -15,12 +15,10 @@ import com.brand.ushopping.model.VoucherItem;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/1.
@@ -37,12 +35,9 @@ public class VoucherAction extends BaseAction
         appVoucherSelect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appVoucherSelect);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("AppVoucherSelectGeneralAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("AppVoucherSelectGeneralAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("voucher", resultString);
             if(resultString != null)
@@ -85,12 +80,9 @@ public class VoucherAction extends BaseAction
         saveUserVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveUserVoucher);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveUserVoucherAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveUserVoucherAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -126,12 +118,9 @@ public class VoucherAction extends BaseAction
         getUserVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(getUserVoucher);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetUserVoucherIdAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetUserVoucherIdAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("user voucher", resultString);
             if(resultString != null)
@@ -176,12 +165,9 @@ public class VoucherAction extends BaseAction
         manJainVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(manJainVoucher);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("ManJainAllAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("ManJainAllAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("manjian", resultString);
             if(resultString != null)
@@ -226,12 +212,9 @@ public class VoucherAction extends BaseAction
         batchSaveUserVoucher.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(batchSaveUserVoucher);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("BatchSaveUserVoucherAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("BatchSaveUserVoucherAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

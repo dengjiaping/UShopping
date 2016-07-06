@@ -12,12 +12,10 @@ import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/16.
@@ -72,14 +70,11 @@ public class BrandAction extends BaseAction
         saveAppBrandCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppBrandCollect);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
             if(CommonUtils.isValueEmpty(resultString))
             {
-//                resultString = HttpClientUtil.post("SaveAppBrandCollectAction.action", params);
                 resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppBrandCollectAction.action"), CommonUtils.generateParams(jsonParam));
 
                 Log.v("brand favourite", resultString);
@@ -118,7 +113,6 @@ public class BrandAction extends BaseAction
         {
             if(CommonUtils.isValueEmpty(resultString))
             {
-//                resultString = HttpClientUtil.post("GetListAppBrandCollectUserIdAction.action", params);
                 resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetListAppBrandCollectUserIdAction.action"), CommonUtils.generateParams(jsonParam));
 
             }

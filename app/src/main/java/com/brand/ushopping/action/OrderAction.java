@@ -19,12 +19,10 @@ import com.brand.ushopping.model.YyOrderSaveList;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/27.
@@ -41,12 +39,9 @@ public class OrderAction extends BaseAction
         orderSaveList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderSaveList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("OrderSaveAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("OrderSaveAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("OrderSaveAction", resultString);
             if(resultString != null)
@@ -83,13 +78,10 @@ public class OrderAction extends BaseAction
         orderAll.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderAll);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         String result = null;
         try
         {
-//            resultString = HttpClientUtil.post("GetOrderAllAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetOrderAllAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("order", resultString);
             if(resultString != null)
@@ -161,12 +153,9 @@ public class OrderAction extends BaseAction
         yyOrderSaveList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(yyOrderSaveList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("YyOrderSaveAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("YyOrderSaveAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -204,12 +193,9 @@ public class OrderAction extends BaseAction
         orderAll.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderAll);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetYyOrderAllAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetYyOrderAllAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("GetYyOrderAllAction", resultString);
             if(resultString != null)
@@ -282,12 +268,9 @@ public class OrderAction extends BaseAction
         orderAll.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderAll);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetSmOrderAllAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetSmOrderAllAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -362,7 +345,6 @@ public class OrderAction extends BaseAction
 
         try
         {
-//            resultString = HttpClientUtil.post("SmOrderSaveAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SmOrderSaveAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -402,12 +384,9 @@ public class OrderAction extends BaseAction
         orderUpdate.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderUpdate);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("YyOrderUpdateAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("YyOrderUpdateAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -445,12 +424,9 @@ public class OrderAction extends BaseAction
         orderUpdate.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderUpdate);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SmOrderUpdateAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SmOrderUpdateAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -491,7 +467,6 @@ public class OrderAction extends BaseAction
 
         try
         {
-//            resultString = HttpClientUtil.post("SmOrderSuccessAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SmOrderSuccessAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -529,12 +504,9 @@ public class OrderAction extends BaseAction
         orderSuccess.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(orderSuccess);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("YyOrderSuccessAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("YyOrderSuccessAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -572,12 +544,9 @@ public class OrderAction extends BaseAction
         confirmOrder.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(confirmOrder);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
-        Log.v("ConfirmOrderAction", jsonParam);
+
         try
         {
-//            resultString = HttpClientUtil.post("ConfirmOrderAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("ConfirmOrderAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

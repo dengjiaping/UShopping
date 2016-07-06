@@ -516,7 +516,14 @@
             android:name=".provider.UShoppingProvider"
             android:authorities="com.ushopping.provider"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.GoodsFilterActivity"
+            android:label="商品筛选"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
     </application>
 
 </manifest>

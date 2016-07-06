@@ -9,12 +9,10 @@ import com.brand.ushopping.model.UserReward;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/22.
@@ -31,12 +29,9 @@ public class RewardsAction extends BaseAction
         userReward.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(userReward);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppUserRewards.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppUserRewards.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -70,12 +65,9 @@ public class RewardsAction extends BaseAction
         userReward.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(userReward);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppUshopAll.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppUshopAll.action"), CommonUtils.generateParams(jsonParam));
             Log.v("reward", resultString);
 
@@ -104,12 +96,9 @@ public class RewardsAction extends BaseAction
         userReward.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(userReward);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("AppUshopBuy.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("AppUshopBuy.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

@@ -14,12 +14,10 @@ import com.brand.ushopping.model.AppyyShopcart;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/5.
@@ -37,7 +35,6 @@ public class CartAction extends BaseAction{
 
         try
         {
-//            resultString = HttpClientUtil.post("AddAppShopcartAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("AddAppShopcartAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -70,7 +67,6 @@ public class CartAction extends BaseAction{
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppShopcartIdListAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppShopcartIdListAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -144,11 +140,9 @@ public class CartAction extends BaseAction{
         appShopcartIdList.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
-        Log.v("delete_cart", jsonParam);
 
         try
         {
-//            resultString = HttpClientUtil.post("DeleteShopcartIdAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("DeleteShopcartIdAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -181,7 +175,6 @@ public class CartAction extends BaseAction{
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveInsertAppyyShopcart.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveInsertAppyyShopcart.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -217,11 +210,9 @@ public class CartAction extends BaseAction{
         appyyShopcart.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appyyShopcart);
-        Log.v("delete_yy_cart", jsonParam);
 
         try
         {
-//            resultString = HttpClientUtil.post("UpdateAppyyShopcart.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("UpdateAppyyShopcart.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -260,11 +251,9 @@ public class CartAction extends BaseAction{
         appsmShopcart.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(appsmShopcart);
-        Log.v("delete_sm_cart", jsonParam);
 
         try
         {
-//            resultString = HttpClientUtil.post("UpdateAppsmShopcartAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("UpdateAppsmShopcartAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -308,7 +297,6 @@ public class CartAction extends BaseAction{
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppyyShopcartIdList.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppyyShopcartIdList.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -383,7 +371,6 @@ public class CartAction extends BaseAction{
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveInsertAppsmShopcart.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveInsertAppsmShopcart.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -414,12 +401,9 @@ public class CartAction extends BaseAction{
         appShopcartIdList.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appShopcartIdList);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppsmShopcartIdList.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppsmShopcartIdList.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

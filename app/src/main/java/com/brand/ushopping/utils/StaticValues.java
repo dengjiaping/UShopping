@@ -209,4 +209,5 @@ public class StaticValues
     //客户端类型 0: ios    1: android
     public static final int ORDER_SAVE_PLATFORM = 1;
 
+    public static final int REQUEST_CODE_GOODS_FILTER = 1004;
 }

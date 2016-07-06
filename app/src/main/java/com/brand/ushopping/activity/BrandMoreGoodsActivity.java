@@ -1,6 +1,7 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,6 +23,7 @@ import com.brand.ushopping.action.StoreAction;
 import com.brand.ushopping.adapter.MoreGoodsAdapter;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.BrandGoodsList;
+import com.brand.ushopping.model.FilterParams;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.EndlessGridRecyclerOnScrollListener;
 import com.brand.ushopping.utils.StaticValues;
@@ -65,7 +67,7 @@ public class BrandMoreGoodsActivity extends Activity {
 //    private int brandGoodsTypePrev;
     private int currentArrenge = StaticValues.ARRENGE_TIME_DESC;
     private int boughtType;
-
+    private FilterParams filterParams = null;
     private GoodsFilterPopup goodsFilterPopup;
 
     @Override
@@ -186,7 +188,9 @@ public class BrandMoreGoodsActivity extends Activity {
                 brandGoodsType = StaticValues.BRAND_GOODS_TYPE_FILTER;
                 selectTab();
 
-                callGoodsFilterPopup();
+                Intent intent = new Intent(BrandMoreGoodsActivity.this, GoodsFilterActivity.class);
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_GOODS_FILTER);
+//                callGoodsFilterPopup();
 
             }
         });
@@ -254,6 +258,16 @@ public class BrandMoreGoodsActivity extends Activity {
         brandGoodsList.setAppbrandId(Long.toString(brandId) + ",");
         brandGoodsList.setMin(currentGoodsCount);
         brandGoodsList.setMax(StaticValues.GOODS_PAGE_COUNT);
+
+        //筛选参数
+        if(filterParams != null)
+        {
+            brandGoodsList.setYear(filterParams.getYear());
+            brandGoodsList.setQuarter(filterParams.getSeason());
+            brandGoodsList.setMinMoney(filterParams.getPriceMin());
+            brandGoodsList.setMaxMoney(filterParams.getPriceMax());
+            brandGoodsList.setAppCategoryId(filterParams.getAppCategoryId());
+        }
 
         new GetAppStoresIdAllTask().execute(brandGoodsList);
 
@@ -558,6 +572,16 @@ public class BrandMoreGoodsActivity extends Activity {
         }
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //筛选界面返回处理
+        if (requestCode == StaticValues.REQUEST_CODE_GOODS_FILTER) {
+            if(resultCode == Activity.RESULT_OK)
+            {
+                filterParams = data.getExtras().getParcelable("filterParams");
+                reload();
+            }
+        }
+    }
     //去重操作
 //    private void distinctList()
 //    {

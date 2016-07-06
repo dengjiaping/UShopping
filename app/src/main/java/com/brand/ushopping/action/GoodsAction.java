@@ -95,16 +95,11 @@ public class GoodsAction extends BaseAction
         clientCharge.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(clientCharge);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
-//        Charge charge = new Charge();
         String result = null;
         try
         {
-//            resultString = HttpClientUtil.post("ReturnClientChargeAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("ReturnClientChargeAction.action"), CommonUtils.generateParams(jsonParam));
 
-//            Log.v("charge", resultString);
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -141,7 +136,6 @@ public class GoodsAction extends BaseAction
             }
             if(resultString == null)
             {
-                //            resultString = HttpClientUtil.post("GetAppGoodsTypeId.action", params);
                 resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
             }
 
@@ -191,15 +185,10 @@ public class GoodsAction extends BaseAction
         searchAppGoods.addVersion(context);
         String resultString = null;
         String jsonParam = JSON.toJSONString(searchAppGoods);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SearchAppGoodsAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SearchAppGoodsAction.action"), CommonUtils.generateParams(jsonParam));
-
-            Log.v("search result", resultString);
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -242,12 +231,9 @@ public class GoodsAction extends BaseAction
         saveAppGoodsCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppGoodsCollect);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveAppGoodsCollectAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppGoodsCollectAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -275,12 +261,9 @@ public class GoodsAction extends BaseAction
         appGoodsCollect.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appGoodsCollect);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetListAppGoodsCollectUserIdAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetListAppGoodsCollectUserIdAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -323,14 +306,10 @@ public class GoodsAction extends BaseAction
         appEvaluate.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appEvaluate);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetAppEvaluateAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppEvaluateAction.action"), CommonUtils.generateParams(jsonParam));
-            Log.v("ushopping evaluate", resultString);
 
             if(resultString != null)
             {
@@ -374,12 +353,9 @@ public class GoodsAction extends BaseAction
         appCustomer.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(appCustomer);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveAppCustomerAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppCustomerAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -399,7 +375,6 @@ public class GoodsAction extends BaseAction
         }
 
         return appCustomer;
-
     }
 
     //发布商品评价
@@ -408,12 +383,9 @@ public class GoodsAction extends BaseAction
         saveAppEvaluate.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(saveAppEvaluate);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SaveAppEvaluateAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SaveAppEvaluateAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -442,7 +414,6 @@ public class GoodsAction extends BaseAction
         }
 
         return saveAppEvaluate;
-
     }
 
     //添加到浏览历史

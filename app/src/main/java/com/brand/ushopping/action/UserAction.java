@@ -9,11 +9,7 @@ import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/3.
@@ -30,12 +26,9 @@ public class UserAction extends BaseAction
         user.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(user);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("GetLoginAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetLoginAction.action"), CommonUtils.generateParams(jsonParam));
             Log.v("ushopping login", resultString);
             if(resultString != null)
@@ -72,12 +65,9 @@ public class UserAction extends BaseAction
         user.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(user);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("RegisteredAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("RegisteredAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
@@ -116,12 +106,9 @@ public class UserAction extends BaseAction
         User user = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(thirdPartyUser);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SinaRegistered.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SinaRegistered.action"), CommonUtils.generateParams(jsonParam));
             if(resultString != null)
             {
@@ -157,12 +144,9 @@ public class UserAction extends BaseAction
         user.addVersion(context);   //添加App版本信息
         String resultString = null;
         String jsonParam = JSON.toJSONString(user);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("UpdateAppUser.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("UpdateAppUser.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

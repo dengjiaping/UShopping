@@ -169,11 +169,6 @@ public class OrderConfirmActivity extends Activity {
         }
         mobileTextView.setText(user.getMobile());
 
-        addressId = appContext.getDefaultAddressId();
-        deaddress = appContext.getDefaultAddress();
-
-        deaddressTextView.setText(deaddress);
-
         commentEditText = (EditText) findViewById(R.id.comment);
 
         List listData = new ArrayList<Map<String,Object>>();
@@ -370,6 +365,16 @@ public class OrderConfirmActivity extends Activity {
         manJianAll.setSessionid(user.getSessionid());
         manJianAll.setAppOrderType(this.boughtType);
         new ManJainAllFirstActionTask().execute(manJianAll);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        addressId = appContext.getDefaultAddressId();
+        deaddress = appContext.getDefaultAddress();
+        deaddressTextView.setText(deaddress);
 
     }
 
