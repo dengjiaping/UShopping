@@ -155,6 +155,7 @@ public class OrderSubmitPopup extends PopupWindow
         line.put("value", StaticValues.PAY_METHOD_WX);
         listData.add(line);
 
+        /*
         if(activity.getBoughtType() != StaticValues.BOUTHT_TYPE_NORMAL)
         {
             line = new HashMap();
@@ -163,6 +164,7 @@ public class OrderSubmitPopup extends PopupWindow
             listData.add(line);
 
         }
+        */
 
         adapter = new TextValueAdapter(listData, activity);
         payMethodListView.setAdapter(adapter);

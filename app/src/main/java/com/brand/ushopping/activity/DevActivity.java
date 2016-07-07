@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,12 +21,14 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.utils.CommonUtils;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DevActivity extends Activity {
     private Button weiboShare;
@@ -44,6 +47,8 @@ public class DevActivity extends Activity {
     private String kuaidiType = null;
     private String kuaidiPostid = null;
     private TextView handleTextView;
+    private Button weiboApiBtn;
+    private UMShareAPI mShareAPI;
     private Button resolverBtn;
 
     @Override
@@ -193,6 +198,37 @@ public class DevActivity extends Activity {
         handleTextView = (TextView) findViewById(R.id.handle_info);
         handleTextView.setText(getHandSetInfo());
 
+        weiboApiBtn = (Button) findViewById(R.id.weibo_api);
+        weiboApiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //微博登录
+                SHARE_MEDIA platform = SHARE_MEDIA.SINA;
+                mShareAPI.doOauthVerify(DevActivity.this, platform, new UMAuthListener() {
+                    @Override
+                    public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                        Log.v("weibo login", map.toString());
+
+                        Intent intent = new Intent();
+                        intent.setClass(DevActivity.this, WeiboActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+                        Toast.makeText( getApplicationContext(), "微博登录失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media, int i) {
+                        Toast.makeText( getApplicationContext(), "微博登录取消", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+        mShareAPI = UMShareAPI.get(this);
         resolverBtn = (Button) findViewById(R.id.resolver);
         resolverBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,6 +295,7 @@ public class DevActivity extends Activity {
         }
         return versionName;
     }
+
 
 //    public class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 //    {

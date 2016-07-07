@@ -90,4 +90,9 @@ public class URLConnectionUtil
         }
     }
 
+    public static String get(String path, Map<String, Object> params) throws Exception
+    {
+        return null;
+    }
+
 }

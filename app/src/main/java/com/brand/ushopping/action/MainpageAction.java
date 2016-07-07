@@ -153,6 +153,7 @@ public class MainpageAction extends BaseAction
 
         try
         {
+            //读取缓存
             resultString = DataCache.getData(context, "OnlineshoppingGoodsAction.action");
 
             if(resultString == null)
@@ -190,6 +191,7 @@ public class MainpageAction extends BaseAction
 
                     //存入缓存
                     DataCache.putData(context, "OnlineshoppingGoodsAction.action", resultString);
+
                 }
                 else
                 {

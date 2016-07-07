@@ -130,7 +130,7 @@
             android:layout_height="160dp"
             android:layout_margin="8dp"
             android:id="@+id/category_grid"
-            android:columnCount="5"></GridLayout>
+            android:columnCount="4"></GridLayout>
     </TableLayout>
 
     <LinearLayout

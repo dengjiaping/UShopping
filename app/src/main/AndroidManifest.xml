@@ -510,6 +510,11 @@
             android:name=".activity.OrderStatusActivity"
             android:label="订单状态"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.WeiboActivity"
+            android:label="@string/title_activity_weibo"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
