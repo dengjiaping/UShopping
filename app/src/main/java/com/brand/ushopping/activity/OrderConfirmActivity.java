@@ -62,7 +62,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.brand.ushopping.R.id.brand;
 import static com.brand.ushopping.R.id.manjian_first_money;
 import static com.brand.ushopping.R.id.root_view;
 
@@ -314,7 +313,6 @@ public class OrderConfirmActivity extends Activity {
                                 break;
 
                         }
-
                         break;
                 }
 
@@ -368,12 +366,6 @@ public class OrderConfirmActivity extends Activity {
         manJianAll.setAppOrderType(this.boughtType);
         new ManJainAllFirstActionTask().execute(manJianAll);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         switch (operation)
         {
             case StaticValues.ORDER_COMFIRM_GEN_ORDER:
@@ -386,12 +378,32 @@ public class OrderConfirmActivity extends Activity {
             case StaticValues.ORDER_COMFIRM_PAY:
                 //订单付款只显示地址
                 AppaddressId address = goodsList.get(0).getAppaddressId();
-                addressId = address.getId();
-                deaddress = appContext.getDeaddressFromId(address.getId());
-                addressSelectBtn.setVisibility(View.GONE);
+                if(address != null)
+                {
+                    addressId = address.getId();
+                    deaddress = appContext.getDeaddressFromId(address.getId());
+                    if(!CommonUtils.isValueEmpty(deaddress))
+                    {
+                        deaddressTextView.setText(deaddress);
+                        addressSelectBtn.setVisibility(View.GONE);
+                    }
+
+                }
+                else
+                {
+                    addressId = appContext.getDefaultAddressId();
+                    deaddress = appContext.getDefaultAddress();
+                    deaddressTextView.setText(deaddress);
+                }
 
                 break;
         }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
     }
 
@@ -526,8 +538,9 @@ public class OrderConfirmActivity extends Activity {
         {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                addressId = bundle.getLong("addressId");
-                deaddress = bundle.getString("deaddress");
+                Address address = bundle.getParcelable("obj");
+                addressId = address.getAddressId();
+                deaddress = address.getDeaddress();
 
                 deaddressTextView.setText(deaddress);
 

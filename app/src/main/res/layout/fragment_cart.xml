@@ -36,7 +36,8 @@
                 android:textColor="@color/text_white"
                 android:layout_alignBottom="@+id/title"
                 android:layout_alignParentEnd="true"
-                style="@style/TextViewStyle" />
+                style="@style/TextViewStyle"
+                android:visibility="invisible" />
 
         </RelativeLayout>
 
