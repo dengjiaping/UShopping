@@ -124,8 +124,7 @@ public class AddressesActivity extends Activity {
                                 Intent intent = new Intent(AddressesActivity.this, OrderConfirmActivity.class);
 
                                 Bundle bundle = new Bundle();
-                                bundle.putLong("addressId", address.getAddressId());
-                                bundle.putString("deaddress", address.getDeaddress());
+                                bundle.putParcelable("obj", address);
                                 intent.putExtras(bundle);
 
                                 setResult(Activity.RESULT_OK, intent);

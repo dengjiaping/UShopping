@@ -103,6 +103,7 @@ public class UserAction extends BaseAction
     //第三方登录 //2 weibo 3 qq 4 weixin
     public User thirdPartyLogin(ThirdPartyUser thirdPartyUser)
     {
+        thirdPartyUser.addVersion(context);
         User user = null;
         String resultString = null;
         String jsonParam = JSON.toJSONString(thirdPartyUser);

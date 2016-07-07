@@ -1,16 +1,19 @@
 package com.brand.ushopping.activity;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,12 +21,19 @@ import android.widget.Toast;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.GoodsAction;
+import com.brand.ushopping.adapter.GoodsAdapter;
 import com.brand.ushopping.model.Category;
 import com.brand.ushopping.model.FilterParams;
+import com.brand.ushopping.model.Goods;
+import com.brand.ushopping.model.SearchAppGoods;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.FilterCategoryItemView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GoodsFilterActivity extends AppCompatActivity {
     private AppContext appContext;
@@ -49,6 +59,13 @@ public class GoodsFilterActivity extends AppCompatActivity {
     private String yearSelected = null;
     private String seasonSelected = null;
     private Long appCategoryIdSelected = null;//类型ID
+    private ViewGroup filterParamViewGroup;
+    private GridView filterResultGridView;
+    private ArrayList<Goods> goodses;
+    private GoodsAdapter goodsAdapter = null;
+    private ArrayList<Map<String,Object>> listData;
+    private int goodsCount = 0;
+    private long brandId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +74,10 @@ public class GoodsFilterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_goods_filter);
 
         appContext = (AppContext) getApplicationContext();
+        user = appContext.getUser();
+
+        Bundle bundle = getIntent().getExtras();
+        brandId = bundle.getLong("brandId");
 
         backBtn = (ImageView) findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +140,9 @@ public class GoodsFilterActivity extends AppCompatActivity {
                     return;
                 }
 
+                search();
+
+                /*
                 filterParams = new FilterParams();
                 filterParams.setYear(yearSelected);
                 filterParams.setSeason(seasonSelected);
@@ -132,6 +156,7 @@ public class GoodsFilterActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
+                */
             }
         });
 
@@ -139,12 +164,67 @@ public class GoodsFilterActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
         categoryGridView = (GridLayout) findViewById(R.id.category_grid);
+        filterParamViewGroup = (ViewGroup) findViewById(R.id.filter_param);
+        filterResultGridView = (GridView) findViewById(R.id.filter_grid);
 
+        filterParamViewGroup.setVisibility(View.VISIBLE);
+        filterResultGridView.setVisibility(View.GONE);
+        filterResultGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(GoodsFilterActivity.this, GoodsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("goodsId", id);
+                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        filterResultGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                switch (scrollState) {
+                    // 当不滚动时
+                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+                        // 判断滚动到底部
+                        if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                            search();
+
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            }
+        });
+
+    }
+
+    //搜索
+    private void search()
+    {
+        SearchAppGoods searchAppGoods = new SearchAppGoods();
+        searchAppGoods.setYear(yearSelected);
+        searchAppGoods.setQuarter(seasonSelected);
+        searchAppGoods.setMinMoney(priceMinEditText.getText().toString());
+        searchAppGoods.setMaxMoney(priceMaxEditText.getText().toString());
+        searchAppGoods.setAppCategoryId(appCategoryIdSelected);
+        if(user != null)
+        {
+            searchAppGoods.setUserId(user.getUserId());
+            searchAppGoods.setSessionid(user.getSessionid());
+        }
+        searchAppGoods.setMin(goodsCount);
+        searchAppGoods.setMax(StaticValues.GOODS_PAGE_COUNT);
+        searchAppGoods.setAppBranId(brandId);
+
+        new SearchAppGoodsActionTask().execute(searchAppGoods);
     }
 
     @Override
@@ -176,6 +256,98 @@ public class GoodsFilterActivity extends AppCompatActivity {
         for(FilterCategoryItemView filterCategoryItemView : categoryItemList)
         {
             filterCategoryItemView.unselect();
+        }
+    }
+
+    //搜索任务
+    public class SearchAppGoodsActionTask extends AsyncTask<SearchAppGoods, Void, SearchAppGoods>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected SearchAppGoods doInBackground(SearchAppGoods... searchAppGoodses) {
+            return new GoodsAction(GoodsFilterActivity.this).searchAppGoodsAction(searchAppGoodses[0]);
+        }
+
+        @Override
+        protected void onPostExecute(SearchAppGoods result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    goodses = result.getGoodses();
+                    filterParamViewGroup.setVisibility(View.GONE);
+                    filterResultGridView.setVisibility(View.VISIBLE);
+                    setValues();
+
+                }
+                else
+                {
+                    Toast.makeText(GoodsFilterActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(GoodsFilterActivity.this, "未搜索到商品", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+    public void setValues() {
+        if (goodses != null)
+        {
+            if(!goodses.isEmpty())
+            {
+                //UI更新
+                if(listData == null)
+                {
+                    listData = new ArrayList<Map<String,Object>>();
+                }
+
+                for(Goods goods: goodses)
+                {
+                    Map line = new HashMap();
+
+                    line.put("id", goods.getId());
+                    line.put("name", goods.getGoodsName());
+                    if(goods.getLogopicUrl() != null)
+                    {
+                        line.put("img", goods.getLogopicUrl());
+                    }
+                    else
+                    {
+                        line.put("img", "");
+                    }
+                    line.put("price", goods.getPromotionPrice());
+                    line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+
+                    listData.add(line);
+                }
+                goodsCount += goodses.size();
+
+                if(goodsAdapter == null)
+                {
+                    goodsAdapter = new GoodsAdapter(listData, GoodsFilterActivity.this);
+                    filterResultGridView.setAdapter(goodsAdapter);
+
+                }
+                else
+                {
+                    goodsAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+            else
+            {
+                Toast.makeText(GoodsFilterActivity.this, "没有更多", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

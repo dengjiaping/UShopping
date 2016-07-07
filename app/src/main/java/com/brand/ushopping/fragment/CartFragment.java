@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.CartAction;
-import com.brand.ushopping.activity.LoginActivity;
 import com.brand.ushopping.activity.MainActivity;
 import com.brand.ushopping.activity.OrderConfirmActivity;
 import com.brand.ushopping.activity.SelectDateActivity;
@@ -235,8 +234,10 @@ public class CartFragment extends Fragment {
 
         if(user == null)
         {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            Toast.makeText(getActivity(), "请先登录或注册", Toast.LENGTH_SHORT).show();
+
+//            Intent intent = new Intent(getActivity(), LoginActivity.class);
+//            startActivity(intent);
         }
 
         reload();

@@ -87,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/tablerow_background"
                 android:layout_marginTop="1dp"
-                android:id="@+id/clean_cache">
+                android:id="@+id/clean_cache"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -207,14 +208,17 @@ public class LoginActivity extends Activity {
         wxLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText( getApplicationContext(), "暂不支持微信登录", Toast.LENGTH_SHORT).show();
+
                 //微信登录
                 SHARE_MEDIA platform = SHARE_MEDIA.WEIXIN;
                 mShareAPI.doOauthVerify(LoginActivity.this, platform, new UMAuthListener() {
                     @Override
                     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                        Log.v("weixin_login", map.toString());
                         ThirdPartyUser thirdPartyUser = new ThirdPartyUser();
                         thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_WEIXIN);
-                        thirdPartyUser.setSinaId(map.get("uid"));
+                        thirdPartyUser.setSinaId(map.get("openid"));
                         thirdPartyUser.setUserName("userName");
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
@@ -230,27 +234,6 @@ public class LoginActivity extends Activity {
                         Toast.makeText( getApplicationContext(), "登录取消", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-//                if(iwxapi == null)
-//                {
-//                    iwxapi = WXAPIFactory.createWXAPI(LoginActivity.this, StaticValues.WX_APP_ID, true);
-//                    iwxapi.registerApp(StaticValues.WX_APP_ID);
-//
-//                }
-//                if (!iwxapi.isWXAppInstalled()) {
-//                    //提醒用户没有按照微信
-//                    Toast.makeText(LoginActivity.this, "没有安装微信", Toast.LENGTH_SHORT).show();
-//                    return;
-//
-//                }
-//
-//                iwxapi.registerApp(StaticValues.WX_APP_ID);
-//
-//                SendAuth.Req req = new SendAuth.Req();
-//                req.scope = "snsapi_userinfo";
-//                req.state = "wechat_sdk_demo_test";
-//                iwxapi.sendReq(req);
-
 
             }
         });
