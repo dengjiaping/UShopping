@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -214,9 +215,10 @@ public class LoginActivity extends Activity {
                 mShareAPI.doOauthVerify(LoginActivity.this, platform, new UMAuthListener() {
                     @Override
                     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                        Log.v("weixin_login", map.toString());
                         ThirdPartyUser thirdPartyUser = new ThirdPartyUser();
                         thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_WEIXIN);
-                        thirdPartyUser.setSinaId(map.get("uid"));
+                        thirdPartyUser.setSinaId(map.get("openid"));
                         thirdPartyUser.setUserName("userName");
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
