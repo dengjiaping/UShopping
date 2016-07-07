@@ -183,6 +183,10 @@ public class Address extends BaseModel implements Parcelable
         this.addressId = id;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Address createFromParcel(Parcel in) {
             return new Address(in);
