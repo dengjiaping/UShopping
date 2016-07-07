@@ -24,7 +24,6 @@ import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.AppUser_id;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
-import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 
 public class AddAddressActivity extends Activity implements AMapLocationListener {
     private ImageView backBtn;
@@ -49,8 +48,6 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
 
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
-
-    private TimeoutbleProgressDialog addAddressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -170,14 +167,6 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
             }
         });
 
-        addAddressDialog = TimeoutbleProgressDialog.createProgressDialog(AddAddressActivity.this, StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
-            @Override
-            public void onTimeOut(TimeoutbleProgressDialog dialog) {
-                addAddressDialog.dismiss();
-                Toast.makeText(AddAddressActivity.this, "地址添加失败", Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
     @Override
@@ -242,7 +231,6 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            addAddressDialog.show();
             saveBtn.setEnabled(false);
         }
 
@@ -283,7 +271,6 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
 
         @Override
         protected void onPostExecute(Address result) {
-            addAddressDialog.dismiss();
             saveBtn.setEnabled(true);
             if(result != null)
             {

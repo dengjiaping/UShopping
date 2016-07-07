@@ -32,7 +32,7 @@ public class FilterCategoryItemView extends LinearLayout {
             public void onClick(View v) {
                 goodsFilterActivity.categoryClearSelected();
                 goodsFilterActivity.setAppCategoryIdSelected(category.getId());
-                nameTextView.setBackgroundColor(goodsFilterActivity.getResources().getColor(R.color.attribute_btn_selected));
+                nameTextView.setBackgroundColor(goodsFilterActivity.getResources().getColor(R.color.buttonl_bg_green));
             }
         });
 

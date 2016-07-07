@@ -27,12 +27,10 @@ import com.brand.ushopping.utils.DataCache;
 import com.brand.ushopping.utils.UDBHelper;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/19.
@@ -532,12 +530,9 @@ public class GoodsAction extends BaseAction
     {
         String resultString = null;
         String jsonParam = JSON.toJSONString(selectChargeId);
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("param", jsonParam));
 
         try
         {
-//            resultString = HttpClientUtil.post("SelectChargeIdPingAction.action", params);
             resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("SelectChargeIdPingAction.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)

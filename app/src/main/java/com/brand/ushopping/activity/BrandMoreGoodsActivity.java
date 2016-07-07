@@ -189,8 +189,12 @@ public class BrandMoreGoodsActivity extends Activity {
                 selectTab();
 
                 Intent intent = new Intent(BrandMoreGoodsActivity.this, GoodsFilterActivity.class);
-                startActivityForResult(intent, StaticValues.REQUEST_CODE_GOODS_FILTER);
+//                startActivityForResult(intent, StaticValues.REQUEST_CODE_GOODS_FILTER);
 //                callGoodsFilterPopup();
+                Bundle bundle1 = new Bundle();
+                bundle1.putLong("brandId", brandId);
+                intent.putExtras(bundle1);
+                startActivity(intent);
 
             }
         });
@@ -572,6 +576,7 @@ public class BrandMoreGoodsActivity extends Activity {
         }
     }
 
+    /*
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //筛选界面返回处理
         if (requestCode == StaticValues.REQUEST_CODE_GOODS_FILTER) {
@@ -582,6 +587,8 @@ public class BrandMoreGoodsActivity extends Activity {
             }
         }
     }
+    */
+
     //去重操作
 //    private void distinctList()
 //    {

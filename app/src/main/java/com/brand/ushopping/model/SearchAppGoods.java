@@ -16,6 +16,12 @@ public class SearchAppGoods extends BaseModel
     private boolean success;
     private String msg;
     private ArrayList<Goods> goodses;
+    private String year;
+    private String quarter;
+    private String minMoney;
+    private String maxMoney;
+    private Long appCategoryId;
+    private Long appBranId;
 
     public long getUserId() {
         return userId;
@@ -87,5 +93,53 @@ public class SearchAppGoods extends BaseModel
 
     public void setBarCode(String barCode) {
         this.barCode = barCode;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(String quarter) {
+        this.quarter = quarter;
+    }
+
+    public String getMinMoney() {
+        return minMoney;
+    }
+
+    public void setMinMoney(String minMoney) {
+        this.minMoney = minMoney;
+    }
+
+    public String getMaxMoney() {
+        return maxMoney;
+    }
+
+    public void setMaxMoney(String maxMoney) {
+        this.maxMoney = maxMoney;
+    }
+
+    public Long getAppCategoryId() {
+        return appCategoryId;
+    }
+
+    public void setAppCategoryId(Long appCategoryId) {
+        this.appCategoryId = appCategoryId;
+    }
+
+    public Long getAppBranId() {
+        return appBranId;
+    }
+
+    public void setAppBranId(Long appBranId) {
+        this.appBranId = appBranId;
     }
 }

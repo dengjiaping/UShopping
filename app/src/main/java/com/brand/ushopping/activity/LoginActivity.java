@@ -207,6 +207,8 @@ public class LoginActivity extends Activity {
         wxLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText( getApplicationContext(), "暂不支持微信登录", Toast.LENGTH_SHORT).show();
+
                 //微信登录
                 SHARE_MEDIA platform = SHARE_MEDIA.WEIXIN;
                 mShareAPI.doOauthVerify(LoginActivity.this, platform, new UMAuthListener() {
@@ -230,27 +232,6 @@ public class LoginActivity extends Activity {
                         Toast.makeText( getApplicationContext(), "登录取消", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-//                if(iwxapi == null)
-//                {
-//                    iwxapi = WXAPIFactory.createWXAPI(LoginActivity.this, StaticValues.WX_APP_ID, true);
-//                    iwxapi.registerApp(StaticValues.WX_APP_ID);
-//
-//                }
-//                if (!iwxapi.isWXAppInstalled()) {
-//                    //提醒用户没有按照微信
-//                    Toast.makeText(LoginActivity.this, "没有安装微信", Toast.LENGTH_SHORT).show();
-//                    return;
-//
-//                }
-//
-//                iwxapi.registerApp(StaticValues.WX_APP_ID);
-//
-//                SendAuth.Req req = new SendAuth.Req();
-//                req.scope = "snsapi_userinfo";
-//                req.state = "wechat_sdk_demo_test";
-//                iwxapi.sendReq(req);
-
 
             }
         });
