@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class SignActivity extends Activity {
     private TextView warningTextView;
     private Button signBtn;
     private Button shareBtn;
-
+    private ImageView closeBtn;
     private Sign sign;
 
     @Override
@@ -66,6 +67,14 @@ public class SignActivity extends Activity {
                 Intent intent = new Intent(SignActivity.this, SnsShareActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        closeBtn = (ImageView) findViewById(R.id.close);
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignActivity.this.finish();
             }
         });
 

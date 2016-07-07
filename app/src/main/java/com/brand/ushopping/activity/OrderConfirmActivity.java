@@ -433,8 +433,8 @@ public class OrderConfirmActivity extends Activity {
             case StaticValues.BOUTHT_TYPE_RESERVATION:
                 if(operation == StaticValues.ORDER_COMFIRM_PAY)
                 {
-                    this.chargeObj.setOrderNo(this.chargeObj.getOrderNo() + "yy");
-                    this.charge = JSON.toJSONString(this.chargeObj);
+//                    this.chargeObj.setOrderNo(this.chargeObj.getOrderNo() + "yy");
+//                    this.charge = JSON.toJSONString(this.chargeObj);
                 }
                 Log.v("charge", this.charge);
                 callClientCharge();
@@ -443,8 +443,8 @@ public class OrderConfirmActivity extends Activity {
             case StaticValues.BOUTHT_TYPE_TRYIT:
                 if(operation == StaticValues.ORDER_COMFIRM_PAY)
                 {
-                    this.chargeObj.setOrderNo(this.chargeObj.getOrderNo() + "yy");
-                    this.charge = JSON.toJSONString(this.chargeObj);
+//                    this.chargeObj.setOrderNo(this.chargeObj.getOrderNo() + "yy");
+//                    this.charge = JSON.toJSONString(this.chargeObj);
                 }
                 Log.v("charge", this.charge);
                 callClientCharge();
@@ -502,7 +502,7 @@ public class OrderConfirmActivity extends Activity {
                         String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
-                        builder.setMessage("支付失败 " + errorMsg + " " + extraMsg);
+                        builder.setMessage("支付失败 error_msg: " + errorMsg + " extra_msg:" + extraMsg);
                         builder.setTitle("提示");
                         builder.setPositiveButton("OK", null);
                         builder.setCancelable(false);
