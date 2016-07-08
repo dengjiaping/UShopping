@@ -387,6 +387,10 @@ public class OrderConfirmActivity extends Activity {
                         deaddressTextView.setText(deaddress);
                         addressSelectBtn.setVisibility(View.GONE);
                     }
+                    else
+                    {
+                        deaddressTextView.setText(deaddress);
+                    }
 
                 }
                 else

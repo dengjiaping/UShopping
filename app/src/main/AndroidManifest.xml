@@ -370,7 +370,7 @@
         <activity
             android:name=".activity.BrandActivity"
             android:label="@string/title_activity_brand"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SelectDateActivity"
@@ -485,7 +485,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.BrandMoreGoodsActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

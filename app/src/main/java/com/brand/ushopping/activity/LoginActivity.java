@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.action.UserAction;
 import com.brand.ushopping.model.ThirdPartyUser;
@@ -332,6 +333,9 @@ public class LoginActivity extends Activity {
                     appContext.setUser(user);
                     appContext.setSessionid(user.getSessionid());
 
+                    //加载地址列表
+                    new LoadTask(user).start();
+
                     LoginActivity.this.finish();
                 }
                 else
@@ -376,6 +380,9 @@ public class LoginActivity extends Activity {
                     appContext.setUser(user);
                     appContext.setSessionid(user.getSessionid());
 
+                    //加载地址列表
+                    new LoadTask(user).start();
+
                     LoginActivity.this.finish();
                 }
                 else
@@ -387,6 +394,21 @@ public class LoginActivity extends Activity {
             {
                 Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public class LoadTask extends Thread
+    {
+        private User user;
+
+        public LoadTask(User user) {
+            this.user = user;
+        }
+
+        @Override
+        public void run() {
+            new AppAction(LoginActivity.this).appDataInit(user);
+
         }
     }
 

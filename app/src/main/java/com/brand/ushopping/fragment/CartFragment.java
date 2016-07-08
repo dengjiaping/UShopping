@@ -175,6 +175,7 @@ public class CartFragment extends Fragment {
                 //结算
                 if(!cartItemSelected.isEmpty())
                 {
+                    checkoutBtn.setEnabled(false);
                     Intent intent = new Intent();
 
                     ArrayList<Goods> goodsList = new ArrayList<Goods>();
@@ -203,6 +204,7 @@ public class CartFragment extends Fragment {
                     intent.putExtras(bundle);
 
                     startActivity(intent);
+                    checkoutBtn.setEnabled(true);
                 }
                 else
                 {

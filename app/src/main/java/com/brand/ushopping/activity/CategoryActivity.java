@@ -166,16 +166,6 @@ public class CategoryActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                Log.v("recycler test", "load more");
-                load();
-
-            }
-        });
-
         reload();
 
     }
@@ -186,6 +176,13 @@ public class CategoryActivity extends Activity {
         goodsAdapter = null;
         goodsListData = null;
         goodsGridView.removeAllViewsInLayout();
+        goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                load();
+
+            }
+        });
 
         load();
     }

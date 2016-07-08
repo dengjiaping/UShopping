@@ -81,7 +81,7 @@ public class URLConnectionUtil
 
         if(responseResult != null)
         {
-            Log.v("resultString", responseResult.toString());
+            Log.v("resultString", path + " ---- " + responseResult.toString());
             return responseResult.toString();
         }
         else
