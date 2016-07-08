@@ -146,6 +146,7 @@ public class TryitOrderItemView extends LinearLayout
                         goods.setAttribute(orderGoodsItem.getAttribute());
                         goods.setPromotionPrice(orderGoodsItem.getMoney());
                         goods.setCount(orderGoodsItem.getQuantity());
+                        goods.setAppaddressId(orderGoodsItem.getAppaddressId());
 
                         goodsList.add(goods);
                     }

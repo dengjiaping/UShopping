@@ -179,7 +179,7 @@ public class AppContext  extends Application
 
         for(Address address: addressList)
         {
-            if(id == address.getAddressId())
+            if(id == address.getId())
             {
                 result = address.getDeaddress();
             }
