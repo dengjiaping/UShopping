@@ -205,7 +205,16 @@ public class RefAction extends BaseAction
             e.printStackTrace();
             return false;
         }
+    }
 
+    //位置信息
+    public void setLocation(Context context, Address address)
+    {
+
+    }
+
+    public void getLocation(Context context, Address address)
+    {
 
     }
 

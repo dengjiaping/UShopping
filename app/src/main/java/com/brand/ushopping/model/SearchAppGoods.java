@@ -18,8 +18,8 @@ public class SearchAppGoods extends BaseModel
     private ArrayList<Goods> goodses;
     private String year;
     private String quarter;
-    private String minMoney;
-    private String maxMoney;
+    private Double minMoney;
+    private Double maxMoney;
     private Long appCategoryId;
     private Long appBranId;
 
@@ -111,19 +111,19 @@ public class SearchAppGoods extends BaseModel
         this.quarter = quarter;
     }
 
-    public String getMinMoney() {
+    public Double getMinMoney() {
         return minMoney;
     }
 
-    public void setMinMoney(String minMoney) {
+    public void setMinMoney(Double minMoney) {
         this.minMoney = minMoney;
     }
 
-    public String getMaxMoney() {
+    public Double getMaxMoney() {
         return maxMoney;
     }
 
-    public void setMaxMoney(String maxMoney) {
+    public void setMaxMoney(Double maxMoney) {
         this.maxMoney = maxMoney;
     }
 

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,20 +206,32 @@ public class SettingsActivity extends Activity {
             {
                 if(result.isSuccess())
                 {
-                    //退出确认
                     AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                     builder.setMessage(result.getExplains());
                     builder.setTitle("检测到新版本,是否升级");
-                    builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("直接升级", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            String url = EnvValues.serverPath + result.getDownloadUrl() + result.getAppName();
-                            Log.v("ushopping", url);
-                            appContext.downloadApp(url);
-                            Toast.makeText(SettingsActivity.this, "下载开始", Toast.LENGTH_SHORT).show();
+                            try
+                            {
+                                appContext.downloadApp(EnvValues.serverPath + result.getDownloadUrl() + result.getAppName());
+                                Toast.makeText(SettingsActivity.this, "下载开始", Toast.LENGTH_SHORT).show();
+                            }catch (Exception e)
+                            {
+                                //自动下载出错,使用浏览器下载
+                                appContext.openUrlinBrowser(SettingsActivity.this, StaticValues.WEBSITE);
+                            }
+
                         }
                     });
-                    builder.setNegativeButton("取消", null);
+                    builder.setNegativeButton("官网下载", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //使用浏览器下载
+                            appContext.openUrlinBrowser(SettingsActivity.this, StaticValues.WEBSITE);
+                        }
+                    });
+                    builder.setNeutralButton("取消", null);
                     builder.create().show();
 
                 }

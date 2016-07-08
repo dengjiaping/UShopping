@@ -6,6 +6,8 @@ package com.brand.ushopping.utils;
  */
 public class StaticValues
 {
+    public final static String WEBSITE = "http://ugouchina.com/";
+
     public final static int ICON_WIDTH = 255;
     public final static int ICON_HEIGHT = 255;
 
@@ -82,7 +84,7 @@ public class StaticValues
     public static final int RESERVATION_ORDER_FLAG_PAID = 1;
     public static final int RESERVATION_ORDER_FLAG_DELIVERED = 2;
 
-    // 上门试衣订单分类flag flag: -1 删减, 0 未付款, 1 已付款
+    // 上门试衣订单分类flag flag: -1 删减, 0 未付款, 1 已付款, 2 商家已接单, 3 配送中, 4 订单完成
     public static final int TRYOUT_ORDER_FLAG_ALL = 9;
     public static final int TRYOUT_ORDER_FLAG_UNPAID = 0;
     public static final int TRYOUT_ORDER_FLAG_PAID = 1;

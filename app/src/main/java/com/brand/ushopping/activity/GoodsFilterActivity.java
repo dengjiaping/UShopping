@@ -28,6 +28,7 @@ import com.brand.ushopping.model.FilterParams;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.SearchAppGoods;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.FilterCategoryItemView;
 
@@ -51,10 +52,10 @@ public class GoodsFilterActivity extends AppCompatActivity {
     private ArrayList<Category> categoryList;   //商品类别列表
     private ArrayList<FilterCategoryItemView> categoryItemList;   //商品类别列表
     private static final String [] yearData = {
-        "2016", "2015", "2014", "2013", "2012"
+        "", "2016", "2015", "2014", "2013", "2012"
     };
     private static final String [] seasonData = {
-        "春", "夏", "秋", "冬"
+        "", "春", "夏", "秋", "冬"
     };
     private String yearSelected = null;
     private String seasonSelected = null;
@@ -119,26 +120,26 @@ public class GoodsFilterActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(yearSelected == null)
-                {
-                    Toast.makeText(GoodsFilterActivity.this, "请选择年份", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(seasonSelected == null)
-                {
-                    Toast.makeText(GoodsFilterActivity.this, "请选择季节", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(priceMinEditText.getText() == null || priceMaxEditText.getText() == null)
-                {
-                    Toast.makeText(GoodsFilterActivity.this, "请选择价格区间", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(appCategoryIdSelected == null)
-                {
-                    Toast.makeText(GoodsFilterActivity.this, "请选择类别", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if(yearSelected == null)
+//                {
+//                    Toast.makeText(GoodsFilterActivity.this, "请选择年份", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if(seasonSelected == null)
+//                {
+//                    Toast.makeText(GoodsFilterActivity.this, "请选择季节", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if(priceMinEditText.getText() == null || priceMaxEditText.getText() == null)
+//                {
+//                    Toast.makeText(GoodsFilterActivity.this, "请选择价格区间", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if(appCategoryIdSelected == null)
+//                {
+//                    Toast.makeText(GoodsFilterActivity.this, "请选择类别", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
 
                 search();
 
@@ -210,10 +211,22 @@ public class GoodsFilterActivity extends AppCompatActivity {
     private void search()
     {
         SearchAppGoods searchAppGoods = new SearchAppGoods();
-        searchAppGoods.setYear(yearSelected);
-        searchAppGoods.setQuarter(seasonSelected);
-        searchAppGoods.setMinMoney(priceMinEditText.getText().toString());
-        searchAppGoods.setMaxMoney(priceMaxEditText.getText().toString());
+        if(!CommonUtils.isValueEmpty(yearSelected))
+        {
+            searchAppGoods.setYear(yearSelected);
+        }
+        if(!CommonUtils.isValueEmpty(seasonSelected))
+        {
+            searchAppGoods.setQuarter(seasonSelected);
+        }
+        if(!CommonUtils.isValueEmpty(priceMinEditText.getText().toString()))
+        {
+            searchAppGoods.setMinMoney(Double.valueOf(priceMinEditText.getText().toString()));
+        }
+        if(!CommonUtils.isValueEmpty(priceMaxEditText.getText().toString()))
+        {
+            searchAppGoods.setMaxMoney(Double.valueOf(priceMaxEditText.getText().toString()));
+        }
         searchAppGoods.setAppCategoryId(appCategoryIdSelected);
         if(user != null)
         {

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.AppBrandCollectItem;
@@ -137,6 +138,7 @@ public class AppContext  extends Application
 
     public void downloadApp(String url)
     {
+        Log.v("ushopping", "download from: " + url);
         DownloadManager.Request request = new DownloadManager.Request(
                 Uri.parse(url)
         );
@@ -154,6 +156,16 @@ public class AppContext  extends Application
         registerReceiver(receiver, filter);
 
         downloadId = dMgr.enqueue(request);
+    }
+
+    //浏览器打开特定url
+    public void openUrlinBrowser(Context context, String url)
+    {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(url);
+        intent.setData(content_url);
+        context.startActivity(intent);
     }
 
     //收藏
