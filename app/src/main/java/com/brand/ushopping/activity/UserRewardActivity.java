@@ -255,7 +255,7 @@ public class UserRewardActivity extends Activity {
         Bundle bundle1 = new Bundle();
         bundle1.putInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_PICK);
         intent.putExtras(bundle1);
-
+        appContext.setBundleObj(bundle1);
         startActivityForResult(intent, StaticValues.CODE_ADDRESSES_PICK);
     }
 

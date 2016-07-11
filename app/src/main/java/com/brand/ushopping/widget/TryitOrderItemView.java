@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.activity.OrderConfirmActivity;
@@ -43,7 +44,7 @@ import java.util.Map;
 public class TryitOrderItemView extends LinearLayout
 {
     private Context context;
-
+    private AppContext appContext;
     private TextView orderNoTextView;
     private TextView statusTextView;
     private ListView orderGoodsListView;
@@ -60,6 +61,7 @@ public class TryitOrderItemView extends LinearLayout
         super(context, attrs);
 
         this.context = context;
+        this.appContext = (AppContext) context.getApplicationContext();
         this.orderItem = orderItem;
         this.activity = (TryoutActivity) context;
 
@@ -158,6 +160,7 @@ public class TryitOrderItemView extends LinearLayout
                     bundle.putString("orderNo", orderItem.getOrderNo());
 
                     intent.putExtras(bundle);
+                    appContext.setBundleObj(bundle);
                     context.startActivity(intent);
                 }
             });
@@ -204,6 +207,7 @@ public class TryitOrderItemView extends LinearLayout
                     Bundle bundle = new Bundle();
                     bundle.putString("orderNo", orderItem.getOrderNo());
                     intent.putExtras(bundle);
+                    appContext.setBundleObj(bundle);
                     context.startActivity(intent);
                 }
             });

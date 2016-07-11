@@ -53,6 +53,7 @@ public class AfterSaleServiceActivity extends Activity {
     private int count;
     private double money;
     private String reContent;
+    private int customerFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,21 +94,36 @@ public class AfterSaleServiceActivity extends Activity {
         orderNoTextView = (TextView) findViewById(R.id.order_no);
         reContentTextView = (TextView) findViewById(R.id.re_content);
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
 
-        ImageLoader.getInstance().displayImage(bundle.getString("img", ""), goodsImgView);
-        goodsNameTextView.setText(bundle.getString("goodsName", ""));
-        attributeTextView.setText(bundle.getString("attribute", ""));
-        priceTextView.setText(Double.toString(bundle.getDouble("price", 0)));
+        if(bundle != null)
+        {
+            ImageLoader.getInstance().displayImage(bundle.getString("img", ""), goodsImgView);
+            goodsNameTextView.setText(bundle.getString("goodsName", ""));
+            attributeTextView.setText(bundle.getString("attribute", ""));
+            priceTextView.setText(Double.toString(bundle.getDouble("price", 0)));
 
-        orderId = bundle.getLong("orderId");
-        orderNo = bundle.getString("orderNo");
-        startTime =bundle.getLong("startTime");
-        endTime = bundle.getLong("endTime");
-        reContent = bundle.getString("customerContent");
-        money = bundle.getDouble("money");
+            orderId = bundle.getLong("orderId");
+            orderNo = bundle.getString("orderNo");
+            startTime =bundle.getLong("startTime");
+            endTime = bundle.getLong("endTime");
+            reContent = bundle.getString("customerContent");
+            money = bundle.getDouble("money");
+            customerFlag = bundle.getInt("customerFlag", 0);
 
-        int customerFlag = bundle.getInt("customerFlag", 0);
+        }
+        else
+        {
+            finish();
+        }
 
         if(customerFlag == 0)
         {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.CategoryActivity;
 import com.brand.ushopping.model.Category;
@@ -18,10 +19,11 @@ import com.brand.ushopping.model.Category;
  */
 public class CategoryItemView extends LinearLayout {
     private TextView nameTextView;
+    private AppContext appContext;
 
     public CategoryItemView(final Context context, AttributeSet attrs, final Category category) {
         super(context, attrs);
-
+        appContext = (AppContext) context.getApplicationContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.category_item, this, true);
 
@@ -36,6 +38,7 @@ public class CategoryItemView extends LinearLayout {
                             bundle.putLong("categoryId", category.getId());
                             bundle.putString("categoryName", category.getName());
                             intent.putExtras(bundle);
+                            appContext.setBundleObj(bundle);
                             context.startActivity(intent);
             }
         });

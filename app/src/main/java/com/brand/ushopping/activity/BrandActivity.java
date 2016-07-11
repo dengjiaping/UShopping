@@ -117,12 +117,29 @@ public class BrandActivity extends Activity {
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
 
-        final Bundle bundle = getIntent().getExtras();
-        brand = bundle.getParcelable("brand");
-        if(brand == null)
+        Bundle bundle = null;
+        try
         {
-            BrandActivity.this.finish();
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
         }
+        if(bundle != null)
+        {
+            brand = bundle.getParcelable("brand");
+            boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+            if(brand == null)
+            {
+                finish();
+            }
+        }
+        else
+        {
+            finish();
+        }
+
         boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
         enterType = bundle.getInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
 
@@ -221,6 +238,7 @@ public class BrandActivity extends Activity {
                 bundle.putLong("goodsId", id);
                 bundle.putInt("boughtType", boughtType);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
 
             }
@@ -299,9 +317,8 @@ public class BrandActivity extends Activity {
                 bundle1.putLong("brandId", brand.getId());
                 bundle1.putString("brandName", brand.getBrandName());
                 bundle1.putInt("boughtType", boughtType);
-                boughtType = bundle.getInt("", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle1);
-
+                appContext.setBundleObj(bundle1);
                 startActivity(intent);
 
             }

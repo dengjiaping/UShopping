@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.AfterSaleServiceActivity;
 import com.brand.ushopping.activity.GoodsActivity;
@@ -32,11 +33,13 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
     //用来导入布局
     private LayoutInflater inflater =null;
     private Context context;
+    private AppContext appContext;
 
     //构造器
     public OrderGoodsItemAdapter(List<Map<String,Object>> list, Context context){
         this.list=list;
         this.context = context;
+        this.appContext = (AppContext) context.getApplicationContext();
         inflater=LayoutInflater.from(context);
     }
 
@@ -91,7 +94,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                 bundle.putLong("goodsId", (Long) list.get(position).get("goodsId"));
                 bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 context.startActivity(intent);
 
             }
@@ -151,6 +154,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                             bundle.putDouble("money", (Double) list.get(position).get("money"));
 
                             intent.putExtras(bundle);
+                            appContext.setBundleObj(bundle);
                             context.startActivity(intent);
                         }
                     });
@@ -174,6 +178,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                             bundle.putLong("goodsId", (Long) list.get(position).get("goodsId"));
 
                             intent.putExtras(bundle);
+                            appContext.setBundleObj(bundle);
                             context.startActivity(intent);
                         }
                     });

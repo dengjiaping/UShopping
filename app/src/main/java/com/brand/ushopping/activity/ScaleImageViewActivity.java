@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.widget.ScaleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -21,12 +22,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class ScaleImageViewActivity extends Activity  implements android.view.GestureDetector.OnGestureListener{
     private ScaleImageView imageview;
     private ImageView closeBtn;
-
+    private AppContext appContext;
     private ViewFlipper flipper;
     private GestureDetector gestureDetector;
     private int currentPage = 0;
     private int totalPage;
-
+    private String[] imgList;
     private Button prevBtn;
     private Button nextBtn;
 
@@ -37,12 +38,27 @@ public class ScaleImageViewActivity extends Activity  implements android.view.Ge
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_scale_image_view);
-
+        appContext = (AppContext) getApplicationContext();
         flipper = (ViewFlipper) findViewById(R.id.flipper);
         gestureDetector = new GestureDetector(this);    // 声明检测手势事件
 
-        Bundle bundle = getIntent().getExtras();
-        String[] imgList = bundle.getStringArray("imgList");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            imgList = bundle.getStringArray("imgList");
+        }
+        else
+        {
+            finish();
+        }
 
         totalPage = imgList.length;
 

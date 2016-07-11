@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.fragment.CartFragment;
@@ -33,6 +34,7 @@ public class CartGoodsAdapter extends BaseAdapter {
 
     //上下文
     private Activity context;
+    private AppContext appContext;
     private CartFragment cartFragment;
 
     //用来导入布局
@@ -41,6 +43,7 @@ public class CartGoodsAdapter extends BaseAdapter {
     //构造器
     public CartGoodsAdapter(List<Map<String,Object>> list,Activity context, CartFragment cartFragment){
         this.context=context;
+        this.appContext = (AppContext) context.getApplicationContext();
         this.cartFragment = cartFragment;
         this.list=list;
         inflater=LayoutInflater.from(context);
@@ -97,7 +100,7 @@ public class CartGoodsAdapter extends BaseAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", (Long) list.get(position).get("goodsId"));
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 context.startActivity(intent);
             }
         });

@@ -154,15 +154,29 @@ public class OrderConfirmActivity extends Activity {
         manjianFirstViewGroup = (ViewGroup) findViewById(R.id.manjian_first);
         manjianFirstMoneyTextView = (TextView) findViewById(manjian_first_money);
 
-        Bundle bundle = getIntent().getExtras();
-        goodsList = bundle.getParcelableArrayList("goods");
-        reservationDate = bundle.getLong("reservationDate");
-        boughtType = bundle.getInt("boughtType");
-        operation = bundle.getInt("operation", StaticValues.ORDER_COMFIRM_GEN_ORDER);
-        orderNo = bundle.getString("orderNo", null);
-        appbrandId = goodsList.get(0).getAppbrandId();
+        Bundle bundle = null;
+        try {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
 
-        Log.v("operation", String.valueOf(operation));
+        if(bundle != null)
+        {
+            goodsList = bundle.getParcelableArrayList("goods");
+            reservationDate = bundle.getLong("reservationDate");
+            boughtType = bundle.getInt("boughtType");
+            operation = bundle.getInt("operation", StaticValues.ORDER_COMFIRM_GEN_ORDER);
+            orderNo = bundle.getString("orderNo", null);
+        }
+        else
+        {
+            finish();
+        }
+
+        appbrandId = goodsList.get(0).getAppbrandId();
 
         if(!CommonUtils.isValueEmpty(user.getUserName()))
         {
@@ -326,7 +340,7 @@ public class OrderConfirmActivity extends Activity {
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_PICK);
                 intent.putExtras(bundle1);
-
+                appContext.setBundleObj(bundle1);
                 startActivityForResult(intent, StaticValues.CODE_ADDRESSES_PICK);
 
             }
@@ -340,7 +354,7 @@ public class OrderConfirmActivity extends Activity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_PICK);
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 startActivityForResult(intent, StaticValues.CODE_VOUCHER_PICK);
 
             }
@@ -1195,7 +1209,7 @@ public class OrderConfirmActivity extends Activity {
                             bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
                             intent.putExtras(bundle);
                             startActivity(intent);
-
+                            appContext.setBundleObj(bundle);
                             OrderConfirmActivity.this.finish();
 
                         }

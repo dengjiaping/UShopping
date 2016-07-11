@@ -68,6 +68,7 @@ public class GoodsFavouriteActivity extends Activity {
                 bundle.putLong("goodsId", id);
                 bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
             }
         });

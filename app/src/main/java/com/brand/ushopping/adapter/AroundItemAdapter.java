@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.BrandActivity;
 import com.brand.ushopping.model.Brand;
@@ -31,6 +32,7 @@ public class AroundItemAdapter extends BaseAdapter {
 
     //上下文
     private Activity context;
+    private AppContext appContext;
 
     //用来导入布局
     private LayoutInflater inflater =null;
@@ -38,6 +40,7 @@ public class AroundItemAdapter extends BaseAdapter {
     //构造器
     public AroundItemAdapter(List<Map<String,Object>> list,Activity context){
         this.context=context;
+        this.appContext = (AppContext) context.getApplicationContext();
         this.list=list;
         inflater=LayoutInflater.from(context);
     }
@@ -141,6 +144,7 @@ public class AroundItemAdapter extends BaseAdapter {
                 bundle.putInt("boughtType", (Integer) list.get(position).get("boughtType"));
                 bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_AROUND);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 context.startActivity(intent);
             }
         });

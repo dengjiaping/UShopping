@@ -202,7 +202,7 @@ public class CartFragment extends Fragment {
                     bundle.putInt("boughtType", boughtType);
                     bundle.putParcelableArrayList("goods", goodsList);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                     checkoutBtn.setEnabled(true);
                 }

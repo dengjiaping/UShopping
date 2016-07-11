@@ -77,8 +77,23 @@ public class GoodsFilterActivity extends AppCompatActivity {
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
 
-        Bundle bundle = getIntent().getExtras();
-        brandId = bundle.getLong("brandId");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            brandId = bundle.getLong("brandId");
+        }
+        else
+        {
+            finish();
+        }
 
         backBtn = (ImageView) findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +198,7 @@ public class GoodsFilterActivity extends AppCompatActivity {
                 bundle.putLong("goodsId", id);
                 bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
             }
         });

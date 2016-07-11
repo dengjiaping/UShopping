@@ -120,6 +120,7 @@ public class BrandFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("brand", brand);
                         intent.putExtras(bundle);
+                        appContext.setBundleObj(bundle);
                         startActivity(intent);
 
                     }
@@ -142,6 +143,7 @@ public class BrandFragment extends Fragment {
                         bundle.putParcelable("brand", brand);
                         bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
                         intent.putExtras(bundle);
+                        appContext.setBundleObj(bundle);
                         startActivity(intent);
 
                     }

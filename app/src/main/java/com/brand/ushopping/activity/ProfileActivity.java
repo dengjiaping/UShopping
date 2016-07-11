@@ -139,6 +139,7 @@ public class ProfileActivity extends Activity {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", user.getHeadImg());
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
 
             }

@@ -56,9 +56,24 @@ public class AroundActivity extends Activity {
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
 
-        Bundle bundle = getIntent().getExtras();
-
-        currentBoughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            currentBoughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+        }
+        else
+        {
+            finish();
+        }
 
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
@@ -83,6 +98,7 @@ public class AroundActivity extends Activity {
                 Bundle bundle1 = new Bundle();
                 bundle1.putParcelableArrayList("appStoresListItems", appStoresListItems);
                 intent.putExtras(bundle1);
+                appContext.setBundleObj(bundle1);
 
                 startActivity(intent);
 

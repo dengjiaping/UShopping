@@ -193,7 +193,7 @@ public class MineFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putInt("enterType", StaticValues.ORDER_FLAG_UNPAY);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                 }
 
@@ -312,7 +312,7 @@ public class MineFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_MINE);
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
 
 //                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -345,7 +345,7 @@ public class MineFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putInt("enterType", StaticValues.ORDER_FLAG_UNPAY);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                 }
             }
@@ -365,7 +365,7 @@ public class MineFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putInt("enterType", StaticValues.ORDER_FLAG_DELIVERED);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                 }
 
@@ -386,7 +386,7 @@ public class MineFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putInt("enterType", StaticValues.ORDER_FLAG_CONFIRMED);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                 }
 

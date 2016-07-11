@@ -171,7 +171,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", id);
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
             }
         });
@@ -258,6 +258,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_RESERVATION);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
 
             }
@@ -271,6 +272,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_TRYIT);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
 
             }
@@ -353,7 +355,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         Bundle bundle = new Bundle();
         bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
         intent.putExtras(bundle);
-
+        appContext.setBundleObj(bundle);
         startActivity(intent);
 
     }
@@ -570,7 +572,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                             Bundle bundle = new Bundle();
                             bundle.putString("url", banner.getImgUrl());
                             intent.putExtras(bundle);
-
+                            appContext.setBundleObj(bundle);
                             startActivity(intent);
                         }
                     });

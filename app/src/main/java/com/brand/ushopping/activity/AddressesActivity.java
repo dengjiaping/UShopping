@@ -67,6 +67,7 @@ public class AddressesActivity extends Activity {
                 bundle.putParcelable("obj", null);
                 bundle.putInt("action", StaticValues.ADDRESS_ACTION_NEW);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
 
                 startActivity(intent);
             }
@@ -86,7 +87,23 @@ public class AddressesActivity extends Activity {
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
 
-        enterMode = getIntent().getExtras().getInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_EDIT);
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            bundle.getInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_EDIT);
+        }
+        else
+        {
+            finish();
+        }
 
         switch (enterMode)
         {
@@ -105,7 +122,7 @@ public class AddressesActivity extends Activity {
                                 bundle.putInt("enterMode", enterMode);
                                 bundle.putInt("action", StaticValues.ADDRESS_ACTION_UPDATE);
                                 intent.putExtras(bundle);
-
+                                appContext.setBundleObj(bundle);
                                 startActivity(intent);
                             }
                         }
@@ -126,6 +143,7 @@ public class AddressesActivity extends Activity {
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelable("obj", address);
                                 intent.putExtras(bundle);
+                                appContext.setBundleObj(bundle);
 
                                 setResult(Activity.RESULT_OK, intent);
                                 finish();

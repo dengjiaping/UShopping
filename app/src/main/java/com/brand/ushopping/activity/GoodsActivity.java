@@ -278,7 +278,7 @@ public class GoodsActivity extends UActivity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_MINE);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
 
                 }
@@ -294,7 +294,7 @@ public class GoodsActivity extends UActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_CART);
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
             }
         });
@@ -303,16 +303,23 @@ public class GoodsActivity extends UActivity {
         params.height = appContext.getScreenWidth();
         slider.setLayoutParams(params);
 
-        Bundle bundle = getIntent().getExtras();
-        goodsId = bundle.getLong("goodsId", 0);
-        if(goodsId == 0)
+        Bundle bundle = null;
+        try
         {
-            GoodsActivity.this.finish();
+            bundle = getIntent().getExtras();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
         }
-
-        if(bundle.getInt("boughtType") != 0)
+        if(bundle != null)
         {
+            goodsId = bundle.getLong("goodsId");
             boughtType = bundle.getInt("boughtType");
+        }
+        else
+        {
+            finish();
         }
 
         addFavouriteBtn = (ViewGroup) findViewById(R.id.add_favourite);
@@ -472,6 +479,7 @@ public class GoodsActivity extends UActivity {
         }
 
         intent.putExtras(bundle);
+        appContext.setBundleObj(bundle);
         startActivity(intent);
     }
 
@@ -625,7 +633,7 @@ public class GoodsActivity extends UActivity {
                                     Bundle bundle = new Bundle();
                                     bundle.putStringArray("imgList", imgList);
                                     intent.putExtras(bundle);
-
+                                    appContext.setBundleObj(bundle);
                                     startActivity(intent);
                                 }
                             });
@@ -828,6 +836,7 @@ public class GoodsActivity extends UActivity {
             bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
             bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
             intent.putExtras(bundle);
+            appContext.setBundleObj(bundle);
             startActivity(intent);
         }
         else

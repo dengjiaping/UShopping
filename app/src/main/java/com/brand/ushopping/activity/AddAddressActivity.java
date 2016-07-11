@@ -115,9 +115,25 @@ public class AddAddressActivity extends Activity implements AMapLocationListener
             }
         });
 
-        Bundle bundle = this.getIntent().getExtras();
-        address = bundle.getParcelable("obj");
-        action = bundle.getInt("action");
+        Bundle bundle = null;
+        try
+        {
+            bundle = this.getIntent().getExtras();
+        }
+        catch (Exception e)
+        {
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            address = bundle.getParcelable("obj");
+            action = bundle.getInt("action");
+        }
+        else
+        {
+            finish();
+        }
+
         if(address != null)
         {
             //修改

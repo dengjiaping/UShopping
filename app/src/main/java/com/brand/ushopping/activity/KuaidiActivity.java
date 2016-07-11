@@ -9,12 +9,16 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 
 public class KuaidiActivity extends AppCompatActivity {
     private WebView webView;
     private ImageView backBtn;
     private TextView titleTextView;
+    private AppContext appContext;
+    private String type;
+    private String postid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +27,27 @@ public class KuaidiActivity extends AppCompatActivity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_kuaidi);
+        appContext = (AppContext) getApplicationContext();
 
-        Bundle bundle = getIntent().getExtras();
-        String type = bundle.getString("type");
-        String postid = bundle.getString("postid");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            type = bundle.getString("type");
+            postid = bundle.getString("postid");
+
+        }
+        else
+        {
+            finish();
+        }
 
         webView = (WebView) findViewById(R.id.web_view);
 

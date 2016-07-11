@@ -115,6 +115,7 @@ public class SplashActivity extends Activity {
             Bundle bundle = new Bundle();
             bundle.putInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE);
             intent.putExtras(bundle);
+            appContext.setBundleObj(bundle);
             startActivity(intent);
 
             finish();

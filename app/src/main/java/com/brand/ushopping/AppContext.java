@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.brand.ushopping.model.Address;
@@ -58,6 +59,9 @@ public class AppContext  extends Application
     private double latitude;
     private String imie = "";
     private WeiboUser weiboUser = null;
+
+    //----Bundle参数,用于activity传值----
+    private Bundle bundleObj = null;
 
     @Override
     public void onCreate() {
@@ -353,5 +357,13 @@ public class AppContext  extends Application
 
     public void setWeiboUser(WeiboUser weiboUser) {
         this.weiboUser = weiboUser;
+    }
+
+    public Bundle getBundleObj() {
+        return bundleObj;
+    }
+
+    public void setBundleObj(Bundle bundleObj) {
+        this.bundleObj = bundleObj;
     }
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -27,11 +28,13 @@ import java.util.Map;
 public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.ViewHolder>  {
     private List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
     private Context context;
+    private AppContext appContext;
 
     public MoreGoodsAdapter(Context context, List<Map<String,Object>> list)
     {
         this.list = list;
         this.context = context;
+        this.appContext = (AppContext) context.getApplicationContext();
     }
 
     @Override
@@ -81,6 +84,7 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
                 bundle.putLong("goodsId", (Long) list.get(position).get("id"));
                 bundle.putInt("boughtType", (int) list.get(position).get("boughtType"));
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 context.startActivity(intent);
             }
         });

@@ -105,10 +105,25 @@ public class BrandMoreGoodsActivity extends Activity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
-        brandId = bundle.getLong("brandId");
-        brandName = bundle.getString("brandName");
-        boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            brandId = bundle.getLong("brandId");
+            brandName = bundle.getString("brandName");
+            boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+        }
+        else
+        {
+            finish();
+        }
 
         titleTextView.setText(brandName);
 
@@ -194,6 +209,7 @@ public class BrandMoreGoodsActivity extends Activity {
                 Bundle bundle1 = new Bundle();
                 bundle1.putLong("brandId", brandId);
                 intent.putExtras(bundle1);
+                appContext.setBundleObj(bundle1);
                 startActivity(intent);
 
             }

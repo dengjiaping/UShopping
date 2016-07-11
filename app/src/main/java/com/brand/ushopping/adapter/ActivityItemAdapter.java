@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.ThemeActivity;
 import com.brand.ushopping.activity.VoucherActivity;
@@ -26,6 +27,7 @@ public class ActivityItemAdapter extends BaseAdapter {
 
     //上下文
     private Activity context;
+    private AppContext appContext;
 
     //用来导入布局
     private LayoutInflater inflater =null;
@@ -33,6 +35,7 @@ public class ActivityItemAdapter extends BaseAdapter {
     //构造器
     public ActivityItemAdapter(List<Map<String,Object>> list,Activity context){
         this.context=context;
+        this.appContext = (AppContext) context.getApplicationContext();
         this.list=list;
         inflater=LayoutInflater.from(context);
     }
@@ -99,7 +102,7 @@ public class ActivityItemAdapter extends BaseAdapter {
                         intent.setClass(context, WebViewActivity.class);
                         bundle.putString("url", list.get(position).get("url").toString());
                         intent.putExtras(bundle);
-
+                        appContext.setBundleObj(bundle);
                         context.startActivity(intent);
 
                         break;
@@ -107,7 +110,7 @@ public class ActivityItemAdapter extends BaseAdapter {
                         intent.setClass(context, VoucherActivity.class);
                         bundle.putInt("enterType", StaticValues.VOUCHER_ENTER_LIST);
                         intent.putExtras(bundle);
-
+                        appContext.setBundleObj(bundle);
                         context.startActivity(intent);
 
                         break;

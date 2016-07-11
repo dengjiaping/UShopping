@@ -139,8 +139,24 @@ public class VoucherActivity extends Activity {
                 "3.\t使用优惠券发生退货关系，优惠券将不再返还。\n" +
                 "4.\t活动最终解释权归U购所有。\n");
 
-        Bundle bundle = getIntent().getExtras();
-        enterType = bundle.getInt("enterType");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            enterType = bundle.getInt("enterType");
+        }
+        else
+        {
+            finish();
+        }
 
         switch (enterType)
         {
@@ -246,7 +262,7 @@ public class VoucherActivity extends Activity {
                                 bundle.putParcelable("voucher", userVoucherItem);
 
                                 intent.putExtras(bundle);
-
+                                appContext.setBundleObj(bundle);
                                 setResult(Activity.RESULT_OK, intent);
                                 finish();
 

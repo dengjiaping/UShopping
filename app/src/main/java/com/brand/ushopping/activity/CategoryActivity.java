@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -74,11 +73,24 @@ public class CategoryActivity extends Activity {
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
 
-        Bundle bundle = getIntent().getExtras();
-        categoryId = bundle.getLong("categoryId");
-        Log.v("categoryId", Long.toString(categoryId));
-
-        categoryName = bundle.getString("categoryName");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            categoryId = bundle.getLong("categoryId");
+            categoryName = bundle.getString("categoryName");
+        }
+        else
+        {
+            finish();
+        }
 
         backBtn = (ImageView) findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {

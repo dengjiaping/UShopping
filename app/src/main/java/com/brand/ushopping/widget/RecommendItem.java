@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.model.AppgoodsId;
@@ -24,10 +25,11 @@ public class RecommendItem extends RelativeLayout {
     private Recommend recommend;
     private ImageView imgView;
     private TextView introTextView;
+    private AppContext appContext;
 
     public RecommendItem(final Context context, AttributeSet attrs, final Recommend recommend) {
         super(context, attrs);
-
+        appContext = (AppContext) context.getApplicationContext();
         this.recommend = recommend;
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -50,7 +52,7 @@ public class RecommendItem extends RelativeLayout {
                     bundle.putLong("goodsId", appgoodsId.getId());
                     bundle.putLong("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     context.startActivity(intent);
 
                 }

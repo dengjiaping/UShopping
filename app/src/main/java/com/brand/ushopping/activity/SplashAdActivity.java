@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.utils.StaticValues;
@@ -14,12 +15,13 @@ public class SplashAdActivity extends AppCompatActivity {
     private ImageView splashAdImageView;
     private long SplashTime = 3000;
     private long currentTimeMil;
+    private AppContext appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_ad);
-
+        appContext = (AppContext) getApplicationContext();
         splashAdImageView = (ImageView) findViewById(R.id.splash_ad);
 
         Bitmap bitmap = new AppAction(SplashAdActivity.this).loadSplash(SplashAdActivity.this);
@@ -57,6 +59,7 @@ public class SplashAdActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE);
             intent.putExtras(bundle);
+            appContext.setBundleObj(bundle);
             startActivity(intent);
 
             finish();

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.WebViewActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -26,13 +27,14 @@ public class ThemeItemAdapter extends BaseAdapter {
 
     //上下文
     private Activity context;
-
+    private AppContext appContext;
     //用来导入布局
     private LayoutInflater inflater =null;
 
     //构造器
     public ThemeItemAdapter(List<Map<String,Object>> list,Activity context){
         this.context=context;
+        this.appContext = (AppContext) context.getApplicationContext();
         this.list=list;
         inflater=LayoutInflater.from(context);
     }
@@ -80,7 +82,7 @@ public class ThemeItemAdapter extends BaseAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", list.get(position).get("url").toString());
                 intent.putExtras(bundle);
-
+                appContext.setBundleObj(bundle);
                 context.startActivity(intent);
             }
         });

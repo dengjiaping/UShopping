@@ -53,8 +53,23 @@ public class OrderStatusActivity extends AppCompatActivity {
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
 
-        Bundle bundle = getIntent().getExtras();
-        orderNo = bundle.getString("orderNo");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            orderNo = bundle.getString("orderNo");
+        }
+        else
+        {
+            finish();
+        }
 
     }
 

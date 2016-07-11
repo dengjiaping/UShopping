@@ -81,7 +81,7 @@ public class SettingsActivity extends Activity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_EDIT);
                     intent.putExtras(bundle);
-
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                 }
 

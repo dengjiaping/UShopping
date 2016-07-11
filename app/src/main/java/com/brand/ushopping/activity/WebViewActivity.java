@@ -9,12 +9,15 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 
 public class WebViewActivity extends Activity {
     private WebView webView;
     private ImageView backBtn;
     private TextView titleTextView;
+    private AppContext appContext;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,6 @@ public class WebViewActivity extends Activity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_web_view);
-
-        Bundle bundle = getIntent().getExtras();
 
         webView = (WebView) findViewById(R.id.web_view);
 
@@ -38,7 +39,23 @@ public class WebViewActivity extends Activity {
         titleTextView = (TextView) findViewById(R.id.title);
 //        titleTextView.setText(this.getTitle().toString());
 
-        String url = bundle.getString("url");
+        Bundle bundle = null;
+        try{
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            url = bundle.getString("url");
+        }
+        else
+        {
+            finish();
+        }
+
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

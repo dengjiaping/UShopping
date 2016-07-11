@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.activity.KuaidiActivity;
@@ -40,6 +41,7 @@ import java.util.Map;
  */
 public class OrderItemView extends LinearLayout {
     private Context context;
+    private AppContext appContext;
     private OrderActivity activity;
     private User user;
     private TextView orderNoTextView;
@@ -57,7 +59,7 @@ public class OrderItemView extends LinearLayout {
 
     public OrderItemView(final Context context, final OrderActivity activity, AttributeSet attrs, final OrderItem orderItem, final User user) {
         super(context, attrs);
-
+        appContext = (AppContext) context.getApplicationContext();
         this.context = context;
         this.activity = activity;
         this.orderItem = orderItem;
@@ -143,6 +145,7 @@ public class OrderItemView extends LinearLayout {
                         bundle.putString("type", expressCompany);
                         bundle.putString("postid", expressNo);
                         intent.putExtras(bundle);
+                        appContext.setBundleObj(bundle);
                         context.startActivity(intent);
                     }
                 });

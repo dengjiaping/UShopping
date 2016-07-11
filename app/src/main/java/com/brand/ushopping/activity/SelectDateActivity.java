@@ -72,10 +72,25 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
         timePickLayout = (GridLayout) findViewById(R.id.time_pick);
         selectedDate = (TextView) findViewById(R.id.selected_date);
 
-        Bundle bundle = getIntent().getExtras();
-        goodsList = bundle.getParcelableArrayList("goods");
-        boughtType = bundle.getInt("boughtType");
-
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            goodsList = bundle.getParcelableArrayList("goods");
+            boughtType = bundle.getInt("boughtType");
+        }
+        else
+        {
+            finish();
+        }
+        
         reservationCalendar = Calendar.getInstance();
         todayCalendar = Calendar.getInstance();
         updateDate();
@@ -113,8 +128,8 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
                     bundle.putInt("boughtType", boughtType);
                     bundle.putLong("reservationDate", reservationDate);
                     bundle.putParcelableArrayList("goods", goodsList);
-
                     intent.putExtras(bundle);
+                    appContext.setBundleObj(bundle);
                     startActivity(intent);
                     SelectDateActivity.this.finish();
                 }

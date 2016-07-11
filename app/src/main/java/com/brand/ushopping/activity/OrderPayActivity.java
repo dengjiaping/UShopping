@@ -103,10 +103,24 @@ public class OrderPayActivity extends Activity {
         totalCountTextView = (TextView) findViewById(R.id.total_count);
         summaryTextView = (TextView) findViewById(R.id.summary);
 
-        Bundle bundle = getIntent().getExtras();
-        goodsList = bundle.getParcelableArrayList("goods");
-        reservationDate = bundle.getLong("reservationDate");
-        boughtType = bundle.getInt("boughtType");
+        Bundle bundle = null;
+        try {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            goodsList = bundle.getParcelableArrayList("goods");
+            reservationDate = bundle.getLong("reservationDate");
+            boughtType = bundle.getInt("boughtType");
+        }
+        else
+        {
+            finish();
+        }
 
         appbrandId = goodsList.get(0).getAppbrandId();
 

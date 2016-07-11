@@ -159,8 +159,8 @@ public class DevActivity extends Activity {
                 Bundle bundle = new Bundle();
                 bundle.putString("type", kuaidiType);
                 bundle.putString("postid", kuaidiPostid);
-
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 startActivity(intent);
 
             }

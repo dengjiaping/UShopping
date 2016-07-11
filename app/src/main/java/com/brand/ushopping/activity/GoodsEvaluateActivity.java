@@ -106,16 +106,30 @@ public class GoodsEvaluateActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            ImageLoader.getInstance().displayImage(bundle.getString("img", ""), goodsImgView);
 
-        ImageLoader.getInstance().displayImage(bundle.getString("img", ""), goodsImgView);
+            goodsId = bundle.getLong("goodsId", 0);
+            attribute = bundle.getString("attribute", "");
 
-        goodsId = bundle.getLong("goodsId", 0);
-        attribute = bundle.getString("attribute", "");
-
-        goodsNameTextView.setText(bundle.getString("goodsName", ""));
-        attributeTextView.setText(attribute);
-        priceTextView.setText(Double.toString(bundle.getDouble("price", 0)));
+            goodsNameTextView.setText(bundle.getString("goodsName", ""));
+            attributeTextView.setText(attribute);
+            priceTextView.setText(Double.toString(bundle.getDouble("price", 0)));
+        }
+        else
+        {
+            finish();
+        }
 
     }
 

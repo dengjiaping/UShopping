@@ -22,6 +22,7 @@ import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.LatLngBounds;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.model.AppStoresListItem;
 
@@ -38,6 +39,7 @@ public class MapLocateActivity extends Activity
     private OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
+    private AppContext appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +48,25 @@ public class MapLocateActivity extends Activity
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_map_locate);
+        appContext = (AppContext) getApplicationContext();
 
-        Bundle bundle = getIntent().getExtras();
-        appStoresListItems = bundle.getParcelableArrayList("appStoresListItems");
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }
+        catch (Exception e)
+        {
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            appStoresListItems = bundle.getParcelableArrayList("appStoresListItems");
+        }
+        else
+        {
+            finish();
+        }
 
         backBtn = (ImageView) findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {

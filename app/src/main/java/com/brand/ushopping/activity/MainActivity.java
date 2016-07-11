@@ -210,8 +210,22 @@ public class MainActivity extends UActivity
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
-        initTab = bundle.getInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE);
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }catch (Exception e)
+        {
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            initTab = bundle.getInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE);
+        }
+        else
+        {
+            finish();
+        }
 
         iconUnselect();
         mainpageFragment = new MainpageFragment();

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.utils.StaticValues;
@@ -26,11 +27,13 @@ public class CategoryGoodsAdapter extends RecyclerView.Adapter<CategoryGoodsAdap
 {
     private List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
     private Context context;
+    private AppContext appContext;
 
     public CategoryGoodsAdapter(Context context, List<Map<String,Object>> list)
     {
         this.list = list;
         this.context = context;
+        this.appContext = (AppContext) context.getApplicationContext();
     }
 
     @Override
@@ -58,6 +61,7 @@ public class CategoryGoodsAdapter extends RecyclerView.Adapter<CategoryGoodsAdap
                 bundle.putLong("goodsId", (Long) list.get(position).get("id"));
                 bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                 intent.putExtras(bundle);
+                appContext.setBundleObj(bundle);
                 context.startActivity(intent);
             }
         });
