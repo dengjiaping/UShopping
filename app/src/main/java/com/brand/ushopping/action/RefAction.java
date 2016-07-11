@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.brand.ushopping.model.Address;
+import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.Sign;
 import com.brand.ushopping.model.User;
 
@@ -208,14 +209,52 @@ public class RefAction extends BaseAction
     }
 
     //位置信息
-    public void setLocation(Context context, Address address)
+    public boolean setLocation(Context context, Location location)
     {
+        try
+        {
+            //信息写入ref
+            SharedPreferences ref = context.getSharedPreferences("location", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = ref.edit();
 
+            editor.putString("city", location.getCity());
+            editor.putString("longitude", location.getLongitude());
+            editor.putString("latitude", location.getLatitude());
+            editor.putLong("time", System.currentTimeMillis());
+
+            editor.commit();
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public void getLocation(Context context, Address address)
+    public Location getLocation(Context context)
     {
+        Location location = null;
+        try
+        {
+            SharedPreferences ref = context.getSharedPreferences("location", Context.MODE_PRIVATE);
 
+            if(ref != null)
+            {
+                location = new Location();
+                location.setCity(ref.getString("city", null));
+                location.setLongitude(ref.getString("longitude", null));
+                location.setLatitude(ref.getString("latitude", null));
+                location.setTime(ref.getLong("time", 0));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+
+        return location;
     }
 
 }

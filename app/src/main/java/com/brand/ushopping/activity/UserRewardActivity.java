@@ -112,11 +112,19 @@ public class UserRewardActivity extends Activity {
 
     private void reload()
     {
-        UserReward userReward = new UserReward();
-        userReward.setUserId(user.getUserId());
-        userReward.setSessionid(user.getSessionid());
-        new GetAppUserRewardsTask().execute(userReward);
-        new GetAppUshopAll().execute(userReward);
+        try
+        {
+            UserReward userReward = new UserReward();
+            userReward.setUserId(user.getUserId());
+            userReward.setSessionid(user.getSessionid());
+            new GetAppUserRewardsTask().execute(userReward);
+            new GetAppUshopAll().execute(userReward);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            finish();
+        }
+
     }
 
     public class GetAppUserRewardsTask extends AsyncTask<UserReward, Void, UserReward>

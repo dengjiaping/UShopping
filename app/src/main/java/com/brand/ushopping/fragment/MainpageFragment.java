@@ -27,6 +27,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.MainpageAction;
+import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.activity.AroundActivity;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.activity.MainActivity;
@@ -41,9 +42,11 @@ import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.Banner;
 import com.brand.ushopping.model.Category;
 import com.brand.ushopping.model.HomeRe;
+import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.Recommend;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.CategoryItemView;
 import com.brand.ushopping.widget.MyGridView;
@@ -360,6 +363,45 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         super.onStart();
         user = appContext.getUser();
 
+        //先从缓存获取位置
+        Location location = new RefAction(getActivity()).getLocation(getActivity());
+        if(location != null)
+        {
+            if(!CommonUtils.isValueEmpty(location.getCity()) && !CommonUtils.isValueEmpty(location.getLongitude()) && !CommonUtils.isValueEmpty(location.getLatitude()))
+            {
+                String city = location.getCity();
+                Long currentTime = System.currentTimeMillis();
+                Long interval = currentTime - location.getTime();
+                if(interval < StaticValues.LOCATION_EXPIRE_TIME)
+                {
+                    cityTextView.setText(city);
+                    appContext.setCity(city);
+                    appContext.setLongitude(Double.valueOf(location.getLongitude()));
+                    appContext.setLatitude(Double.valueOf(location.getLatitude()));
+
+                    Log.v("ushopping", "get location from ref");
+                }
+                else
+                {
+                    getAALocation();
+                }
+
+            }
+            else
+            {
+                getAALocation();
+            }
+        }
+        else
+        {
+            getAALocation();
+        }
+
+        mainActivity.setButtomBarEnable(true);
+    }
+
+    private void getAALocation()
+    {
         //新建
         locationClient = new AMapLocationClient(appContext);
         locationOption = new AMapLocationClientOption();
@@ -368,17 +410,14 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         locationOption.setOnceLocation(true);
         locationOption.setInterval(10000);
         locationOption.setNeedAddress(true);
-
         //给定位客户端对象设置定位参数
         locationClient.setLocationOption(locationOption);
-
         // 设置定位监听
         locationClient.setLocationListener(this);
-
         // 启动定位
         locationClient.startLocation();
 
-        mainActivity.setButtomBarEnable(true);
+        Log.v("ushopping", "location from AA");
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -434,6 +473,14 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 appContext.setCity(city);
                 appContext.setLongitude(aMapLocation.getLongitude());
                 appContext.setLatitude(aMapLocation.getLatitude());
+
+                //存入缓存
+                Location location = new Location();
+                location.setCity(city);
+                location.setLongitude(Double.toString(aMapLocation.getLongitude()));
+                location.setLatitude(Double.toString(aMapLocation.getLatitude()));
+
+                new RefAction(getActivity()).setLocation(getActivity(), location);
 
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。

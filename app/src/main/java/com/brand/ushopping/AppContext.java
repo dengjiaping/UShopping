@@ -189,11 +189,14 @@ public class AppContext  extends Application
     {
         String result  = null;
 
-        for(Address address: addressList)
+        if(addressList != null)
         {
-            if(id == address.getId())
+            for(Address address: addressList)
             {
-                result = address.getDeaddress();
+                if(id == address.getId())
+                {
+                    result = address.getDeaddress();
+                }
             }
         }
 
