@@ -46,6 +46,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
 
     private ArrayList<Goods> goodsList = new ArrayList<Goods>();
     private TextView selectedDate;
+    private long currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_select_date);
-
+        currentTime = System.currentTimeMillis();
         appContext = (AppContext) getApplicationContext();
         user = appContext.getUser();
 
@@ -96,7 +97,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
         updateDate();
 
         dateSelectItemViews = new ArrayList<DateSelectItemView>();
-        for(int day=1; day<=5; day++)
+        for(int day=0; day<=4; day++)
         {
             DateSelectItemView dateSelectItemView = new DateSelectItemView(SelectDateActivity.this, null, day);
             dateSelectItemViews.add(dateSelectItemView);
@@ -107,7 +108,20 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
 
         for(int minuteCount=0; minuteCount<20; minuteCount++)
         {
-            TimeSelectItemView timeSelectItemView = new TimeSelectItemView(SelectDateActivity.this, null, StaticValues.SELECT_DATE_TIME_INTERVAL * minuteCount);
+            boolean avaliable = false;
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 8);
+            calendar.set(Calendar.MINUTE, 0);
+
+            int minuteAfter = StaticValues.SELECT_DATE_TIME_INTERVAL * minuteCount;
+            calendar.add(Calendar.MINUTE, minuteAfter);
+
+            if((calendar.getTimeInMillis() - currentTime) > StaticValues.DELIVER_AFTER)
+            {
+                avaliable = true;
+            }
+
+            TimeSelectItemView timeSelectItemView = new TimeSelectItemView(SelectDateActivity.this, null, calendar, avaliable);
             timeSelectItemViews.add(timeSelectItemView);
             timePickLayout.addView(timeSelectItemView);
 

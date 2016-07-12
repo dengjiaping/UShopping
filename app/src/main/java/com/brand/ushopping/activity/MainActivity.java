@@ -277,6 +277,8 @@ public class MainActivity extends UActivity
         version.setVersionNumber(CommonUtils.getVersionCode(MainActivity.this));
         new GetMaxVersionTask().execute(version);
 
+//        new DownloadSplashTask("http://pic2.ooopic.com/11/07/15/30bOOOPICd7.jpg").start();
+
     }
 
     @Override
@@ -441,6 +443,22 @@ public class MainActivity extends UActivity
 
                 }
             }
+        }
+    }
+
+    private class DownloadSplashTask extends Thread
+    {
+        private String url;
+        public DownloadSplashTask(String url)
+        {
+            this.url = url;
+        }
+        @Override
+        public void run() {
+            super.run();
+
+//            new ImageAction(MainActivity.this).downloadImg(url);
+
         }
     }
 

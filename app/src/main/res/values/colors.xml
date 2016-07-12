@@ -6,6 +6,7 @@
 
     <color name="text_white">#ffffffff</color>
     <color name="text_grey">#ff808080</color>
+    <color name="text_disable">#dbdbdb</color>
     <color name="text_light_grey">#dbdbdb</color>
     <color name="text_green">#b4d465</color>
     <color name="text_orange">#fe5407</color>

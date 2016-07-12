@@ -12,8 +12,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by Administrator on 2016/5/10.
@@ -85,26 +83,19 @@ public class BitmapTools {
         return inSimpleSize;
     }
 
-    //根据url获取图片
-    public static Bitmap getImage(String Url) throws Exception {
-
-        try {
-
-            URL url = new URL(Url);
-            String responseCode = url.openConnection().getHeaderField(0);
-            if (responseCode.indexOf("200") < 0)
-                throw new Exception("图片文件不存在或路径错误，错误代码：" + responseCode);
-            return BitmapFactory.decodeStream(url.openStream());
-
-        } catch (IOException e) {
-
-            // TODO Auto-generated catch block
-
-            throw new Exception(e.getMessage());
-
-        }
-
-    }
+//    public static Bitmap getImage(String Url) throws Exception {
+//        try {
+//            URL url = new URL(Url);
+//            String responseCode = url.openConnection().getHeaderField(0);
+//            if (responseCode.indexOf("200") < 0)
+//                throw new Exception("图片文件不存在或路径错误，错误代码：" + responseCode);
+//            return BitmapFactory.decodeStream(url.openStream());
+//
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            throw new Exception(e.getMessage());
+//        }
+//    }
 
     //图片圆角化 第一个参数是Bitmap,第二个参数是圆角角度
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap,int roundPixels) {
