@@ -1,7 +1,10 @@
 package com.brand.ushopping.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +13,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.OrderAction;
 import com.brand.ushopping.activity.AfterSaleServiceActivity;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.activity.GoodsEvaluateActivity;
+import com.brand.ushopping.activity.TryoutActivity;
+import com.brand.ushopping.model.DeleteAppSmOder;
+import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -34,6 +42,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
     private LayoutInflater inflater =null;
     private Context context;
     private AppContext appContext;
+    private User user;
 
     //构造器
     public OrderGoodsItemAdapter(List<Map<String,Object>> list, Context context){
@@ -78,13 +87,14 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
             holder.increase = (ImageView) convertView.findViewById(R.id.increase);
             holder.afterSaleService = (Button) convertView.findViewById(R.id.after_sale_service);
             holder.evaluate = (Button) convertView.findViewById(R.id.evaluate);
+            holder.deleteItemBtn = (TextView) convertView.findViewById(R.id.delete_item);
 
             //为view设置标签
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
-
+        user = (User) list.get(position).get("user");
         ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +198,46 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
 
         }
 
+        holder.deleteItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("确认移除订单商品?");
+                builder.setTitle("提示");
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+
+                        DeleteAppSmOder deleteAppSmOder = new DeleteAppSmOder();
+                        if(user != null)
+                        {
+                            deleteAppSmOder.setUserId(user.getUserId());
+                            deleteAppSmOder.setSessionid(user.getSessionid());
+                        }
+                        deleteAppSmOder.setId((Long) list.get(position).get("id"));
+
+                        new DeleteAppSmOderActionTask().execute(deleteAppSmOder);
+                    }
+                });
+                builder.setNegativeButton("取消", null);
+                builder.create().show();
+            }
+        });
+        holder.deleteItemBtn.setVisibility(View.INVISIBLE);
+
+        switch ((int) list.get(position).get("boughtType"))
+        {
+            case StaticValues.BOUTHT_TYPE_NORMAL:
+                break;
+            case StaticValues.BOUTHT_TYPE_TRYIT:
+                holder.deleteItemBtn.setVisibility(View.VISIBLE);
+                break;
+            case StaticValues.BOUTHT_TYPE_RESERVATION:
+                break;
+
+        }
+
         width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
         height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
 
@@ -208,6 +258,43 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
         ImageView increase;
         Button afterSaleService;
         Button evaluate;
+        TextView deleteItemBtn;
     }
 
+    //上门订单商品删除
+    public class DeleteAppSmOderActionTask extends AsyncTask<DeleteAppSmOder, Void, DeleteAppSmOder>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected DeleteAppSmOder doInBackground(DeleteAppSmOder... deleteAppSmOders) {
+            return new OrderAction(context).deleteAppSmOderAction(deleteAppSmOders[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(DeleteAppSmOder result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    Toast.makeText(context, "商品已删除", Toast.LENGTH_SHORT).show();
+                    TryoutActivity activity = (TryoutActivity)context;
+                    activity.reload();
+                }
+                else
+                {
+                    Toast.makeText(context, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else
+            {
+                Toast.makeText(context, "商品删除失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

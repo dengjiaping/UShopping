@@ -110,6 +110,9 @@ public class OrderItemView extends LinearLayout {
                 line.put("orderNo", orderItem.getOrderNo());
                 line.put("money", CommonUtils.df.format(orderGoodsItem.getMoney()));
                 line.put("flag", orderItem.getFlag());
+                line.put("context", this.context);
+                line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                line.put("user", user);
 
                 listData.add(line);
 

@@ -25,6 +25,7 @@ import com.brand.ushopping.activity.SnsShareActivity;
 import com.brand.ushopping.activity.TryoutActivity;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
 import com.brand.ushopping.model.AppgoodsId;
+import com.brand.ushopping.model.DeleteAppSmOder;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.OrderGoodsItem;
 import com.brand.ushopping.model.OrderItem;
@@ -40,6 +41,7 @@ import java.util.Map;
 
 /**
  * Created by Administrator on 2015/12/31.
+ * 上门试衣订单项
  */
 public class TryitOrderItemView extends LinearLayout
 {
@@ -56,6 +58,7 @@ public class TryitOrderItemView extends LinearLayout
     private TextView quantityTextView;
     private TryoutActivity activity;
     private Button orderStatusBtn;
+    private Button deleteOrderBtn;
 
     public TryitOrderItemView(final Context context, AttributeSet attrs, final OrderItem orderItem, final User user) {
         super(context, attrs);
@@ -78,6 +81,7 @@ public class TryitOrderItemView extends LinearLayout
         quantityTextView = (TextView) view.findViewById(R.id.quantity);
         orderStatusBtn = (Button) findViewById(R.id.order_status);
         orderNoTextView.setText(orderItem.getOrderNo());
+        deleteOrderBtn = (Button) view.findViewById(R.id.delete_order);
 
         int quantity = 0;
         double money =0;
@@ -97,6 +101,9 @@ public class TryitOrderItemView extends LinearLayout
             line.put("price",  CommonUtils.df.format(orderGoodsItem.getMoney()));
             line.put("count", orderGoodsItem.getQuantity());
             line.put("customerFlag", StaticValues.CUSTOMER_FLAG_NONE);
+            line.put("context", this.context);
+            line.put("boughtType", StaticValues.BOUTHT_TYPE_TRYIT);
+            line.put("user", user);
 
             listData.add(line);
 
@@ -125,6 +132,7 @@ public class TryitOrderItemView extends LinearLayout
         payOnlineBtn.setVisibility(View.GONE);
         payOfflineBtn.setVisibility(View.GONE);
         orderStatusBtn.setVisibility(View.GONE);
+        deleteOrderBtn.setVisibility(View.GONE);
 
         if(orderItem.getFlag() == StaticValues.TRYOUT_ORDER_FLAG_UNPAID)
         {
@@ -193,9 +201,36 @@ public class TryitOrderItemView extends LinearLayout
 
                 }
             });
+            deleteOrderBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("确认删除订单?");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+
+                            DeleteAppSmOder deleteAppSmOder = new DeleteAppSmOder();
+                            if(user != null)
+                            {
+                                deleteAppSmOder.setUserId(user.getUserId());
+                                deleteAppSmOder.setSessionid(user.getSessionid());
+                            }
+                            deleteAppSmOder.setOrder_no(orderItem.getOrderNo());
+
+                            new DeleteAppSmOderActionTask().execute(deleteAppSmOder);
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                    builder.create().show();
+                }
+            });
 
             payOnlineBtn.setVisibility(View.VISIBLE);
             payOfflineBtn.setVisibility(View.VISIBLE);
+            deleteOrderBtn.setVisibility(View.VISIBLE);
         }
         else
         {
@@ -264,6 +299,42 @@ public class TryitOrderItemView extends LinearLayout
             else
             {
                 Toast.makeText(context, "上门订单支付失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //上门订单删除
+    public class DeleteAppSmOderActionTask extends AsyncTask<DeleteAppSmOder, Void, DeleteAppSmOder>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected DeleteAppSmOder doInBackground(DeleteAppSmOder... deleteAppSmOders) {
+            return new OrderAction(context).deleteAppSmOderAction(deleteAppSmOders[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(DeleteAppSmOder result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    activity.reload();
+                    Toast.makeText(context, "订单已删除", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(context, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else
+            {
+                Toast.makeText(context, "上门订单删除失败", Toast.LENGTH_SHORT).show();
             }
         }
     }

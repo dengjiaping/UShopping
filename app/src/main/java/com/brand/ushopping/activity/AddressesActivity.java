@@ -98,7 +98,7 @@ public class AddressesActivity extends Activity {
         }
         if(bundle != null)
         {
-            bundle.getInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_EDIT);
+            enterMode = bundle.getInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_EDIT);
         }
         else
         {
@@ -154,9 +154,7 @@ public class AddressesActivity extends Activity {
                 });
 
                 break;
-
         }
-
 
         reloadList();
     }

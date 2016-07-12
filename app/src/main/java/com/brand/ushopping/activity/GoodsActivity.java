@@ -315,7 +315,7 @@ public class GoodsActivity extends UActivity {
         if(bundle != null)
         {
             goodsId = bundle.getLong("goodsId");
-            boughtType = bundle.getInt("boughtType");
+            boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
         }
         else
         {

@@ -100,6 +100,9 @@ public class ReservationOrderItemView extends LinearLayout {
             line.put("price",  CommonUtils.df.format(orderGoodsItem.getMoney()));
             line.put("count", orderGoodsItem.getQuantity());
             line.put("customerFlag", StaticValues.CUSTOMER_FLAG_NONE);
+            line.put("context", this.context);
+            line.put("boughtType", StaticValues.BOUTHT_TYPE_RESERVATION);
+            line.put("user", user);
 
             listData.add(line);
 
