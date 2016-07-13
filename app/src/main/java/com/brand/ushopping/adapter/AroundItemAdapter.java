@@ -143,6 +143,7 @@ public class AroundItemAdapter extends BaseAdapter {
                 bundle.putParcelable("brand", brand);
                 bundle.putInt("boughtType", (Integer) list.get(position).get("boughtType"));
                 bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_AROUND);
+                bundle.putLong("storeId", (Long) list.get(position).get("shopId"));
                 intent.putExtras(bundle);
                 appContext.setBundleObj(bundle);
                 context.startActivity(intent);

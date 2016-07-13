@@ -113,7 +113,7 @@ public class GoodsActivity extends UActivity {
     private String[] imgList;
     private TextView saleCountTextView;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private long storeId;
     private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
     private int goodsViewPage = StaticValues.GOODS_VIEW_PAGE_INFO;
 
@@ -316,6 +316,7 @@ public class GoodsActivity extends UActivity {
         {
             goodsId = bundle.getLong("goodsId");
             boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+            storeId = bundle.getLong("storeId", 0);
         }
         else
         {
@@ -473,6 +474,7 @@ public class GoodsActivity extends UActivity {
 
             case StaticValues.BOUTHT_TYPE_RESERVATION:
             case StaticValues.BOUTHT_TYPE_TRYIT:
+                bundle.putLong("storeId", storeId);
                 intent.setClass(GoodsActivity.this, SelectDateActivity.class);
 
                 break;

@@ -2,7 +2,6 @@ package com.brand.ushopping.action;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
@@ -27,7 +26,7 @@ import java.net.URL;
 public class ImageAction extends BaseAction
 {
     private final static String ALBUM_PATH
-            = Environment.getExternalStorageDirectory() + "/download_test/";
+            = Environment.getExternalStorageDirectory() + "/com.brand.ushopping/";
 
     public ImageAction(Context context) {
         super(context);
@@ -66,35 +65,19 @@ public class ImageAction extends BaseAction
     }
 
     //下载图片到sd卡
-    public void downloadImg(String url) throws Exception
-    {
-
-        String filePath = "http://img.my.csdn.net/uploads/201402/24/1393242467_3999.jpg";
-        String mFileName = "test.jpg";
-
-        byte[] data = getImage(filePath);
-        if(data!=null){
-            Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);// bitmap
-        }else{
-
-        }
-
-
-//        try {
-//            Bitmap bitmap = BitmapTools.getImage(url);
-//            if(bitmap != null)
-//            {
-//                Log.v("ushopping", "splash downloaded");
-//            }
-//            else
-//            {
-//                Log.v("ushopping", "splash download failed");
-//            }
+//    public Bitmap downloadImg(String url) throws Exception
+//    {
+//        String filePath = "http://img.my.csdn.net/uploads/201402/24/1393242467_3999.jpg";
+//        String mFileName = "test.jpg";
 //
-//        } catch (Exception e) {
-//            e.printStackTrace();
+//        byte[] data = getImage(filePath);
+//        if(data!=null){
+//            Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);// bitmap
+//        }else{
+//
 //        }
-    }
+//
+//    }
 
     //根据url获取图片
     public byte[] getImage(String path) throws Exception{
@@ -134,6 +117,20 @@ public class ImageAction extends BaseAction
         bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
         bos.flush();
         bos.close();
+    }
+
+    /**
+     * 检查文件是否存在
+     */
+    public boolean checkFileExists(String fileName) throws IOException {
+        boolean result = false;
+
+        File dirFile = new File(ALBUM_PATH + fileName);
+        if(dirFile.exists()){
+            result = true;
+        }
+
+        return result;
     }
 
 }

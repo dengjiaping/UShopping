@@ -53,6 +53,7 @@ public class BrandMoreGoodsActivity extends Activity {
 
     private long brandId;
     private String brandName;
+    private long storeId;
 
     private TextView categoryNew;
     private TextView categoryPrice;
@@ -117,6 +118,7 @@ public class BrandMoreGoodsActivity extends Activity {
         if(bundle != null)
         {
             brandId = bundle.getLong("brandId");
+            storeId = bundle.getLong("storeId", 0);
             brandName = bundle.getString("brandName");
             boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
         }
@@ -343,6 +345,7 @@ public class BrandMoreGoodsActivity extends Activity {
                             line.put("reTime",appgoodsId.getReTime());
                             line.put("boughtType", boughtType);
                             line.put("salesCount", appgoodsId.getSaleCount());
+                            line.put("storeId", storeId);
 
                             //去重
                             boolean insertAvaliable = true;

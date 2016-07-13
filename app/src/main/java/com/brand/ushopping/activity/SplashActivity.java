@@ -17,7 +17,6 @@ import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.model.User;
-import com.brand.ushopping.utils.StaticValues;
 
 public class SplashActivity extends Activity {
     private AppContext appContext;
@@ -109,14 +108,15 @@ public class SplashActivity extends Activity {
 
             }
 
-//            intent = new Intent(SplashActivity.this, SplashAdActivity.class);
-//            startActivity(intent);
-            intent = new Intent(SplashActivity.this, MainActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE);
-            intent.putExtras(bundle);
-            appContext.setBundleObj(bundle);
+            intent = new Intent(SplashActivity.this, SplashAdActivity.class);
             startActivity(intent);
+
+//            intent = new Intent(SplashActivity.this, MainActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("initTab", StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE);
+//            intent.putExtras(bundle);
+//            appContext.setBundleObj(bundle);
+//            startActivity(intent);
 
             finish();
 

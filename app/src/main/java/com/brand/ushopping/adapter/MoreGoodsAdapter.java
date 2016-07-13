@@ -83,6 +83,7 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", (Long) list.get(position).get("id"));
                 bundle.putInt("boughtType", (int) list.get(position).get("boughtType"));
+                bundle.putLong("storeId", (Long) list.get(position).get("storeId"));
                 intent.putExtras(bundle);
                 appContext.setBundleObj(bundle);
                 context.startActivity(intent);

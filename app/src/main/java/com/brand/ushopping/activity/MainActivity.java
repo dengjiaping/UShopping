@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,11 +22,13 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
+import com.brand.ushopping.action.ImageAction;
 import com.brand.ushopping.fragment.BrandFragment;
 import com.brand.ushopping.fragment.CartFragment;
 import com.brand.ushopping.fragment.MainpageFragment;
 import com.brand.ushopping.fragment.MineFragment;
 import com.brand.ushopping.fragment.ThemeFragment;
+import com.brand.ushopping.model.GetSelectAppStartpicture;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.CommonUtils;
@@ -277,7 +281,13 @@ public class MainActivity extends UActivity
         version.setVersionNumber(CommonUtils.getVersionCode(MainActivity.this));
         new GetMaxVersionTask().execute(version);
 
-//        new DownloadSplashTask("http://pic2.ooopic.com/11/07/15/30bOOOPICd7.jpg").start();
+        GetSelectAppStartpicture getSelectAppStartpicture = new GetSelectAppStartpicture();
+        if(user != null)
+        {
+            getSelectAppStartpicture.setUserId(user.getUserId());
+            getSelectAppStartpicture.setSessionid(user.getSessionid());
+        }
+        new GetSelectAppStartpictureTask().execute(getSelectAppStartpicture);
 
     }
 
@@ -437,9 +447,41 @@ public class MainActivity extends UActivity
                     builder.create().show();
 
                 }
-                else
+
+            }
+        }
+    }
+
+    //获取splash url
+    public class GetSelectAppStartpictureTask extends AsyncTask<GetSelectAppStartpicture, Void, GetSelectAppStartpicture>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected GetSelectAppStartpicture doInBackground(GetSelectAppStartpicture... getSelectAppStartpictures) {
+            return new AppAction(MainActivity.this).getSelectAppStartpictureAction(getSelectAppStartpictures[0]);
+        }
+
+        @Override
+        protected void onPostExecute(final GetSelectAppStartpicture result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
                 {
-                    Toast.makeText(MainActivity.this, "当前已是最新版,无需升级", Toast.LENGTH_SHORT).show();
+                    try
+                    {
+                        if(!new ImageAction(MainActivity.this).checkFileExists("splash.png"))
+                        {
+                            new DownloadSplashTask(result.getImages()).start();
+                        }
+
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
 
                 }
             }
@@ -456,6 +498,17 @@ public class MainActivity extends UActivity
         @Override
         public void run() {
             super.run();
+            try {
+                byte[] data = new ImageAction(MainActivity.this).getImage(url);
+                if(data != null)
+                {
+                    Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    new ImageAction(MainActivity.this).saveFile(mBitmap, "splash.png");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 //            new ImageAction(MainActivity.this).downloadImg(url);
 

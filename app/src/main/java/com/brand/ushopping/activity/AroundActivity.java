@@ -208,6 +208,7 @@ public class AroundActivity extends Activity {
                         line.put("shopName", appStoresListItem.getShopName());
                         line.put("logopicUrl", appStoresListItem.getLogopicUrl());
                         line.put("showpic", appbrandId.getShowpic());
+                        line.put("shopId", appStoresListItem.getId());
                         line.put("shopAddr", appStoresListItem.getShopAddr());
                         line.put("latitude", appStoresListItem.getLatitude());
                         line.put("longitude", appStoresListItem.getLongitude());

@@ -23,6 +23,7 @@ public class YyOrderSave extends BaseModel
     private Long appVoucherId;
     private Integer client = StaticValues.ORDER_SAVE_PLATFORM;
     private Long firstAppsmorderId;
+    private AppStoresId appStoresId;
 
     public double getMoney() {
         return money;
@@ -134,5 +135,13 @@ public class YyOrderSave extends BaseModel
 
     public void setFirstAppsmorderId(Long firstAppsmorderId) {
         this.firstAppsmorderId = firstAppsmorderId;
+    }
+
+    public AppStoresId getAppStoresId() {
+        return appStoresId;
+    }
+
+    public void setAppStoresId(AppStoresId appStoresId) {
+        this.appStoresId = appStoresId;
     }
 }

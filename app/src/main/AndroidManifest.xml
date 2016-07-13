@@ -512,7 +512,10 @@
             android:label="动画效果"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.SplashAdActivity" />
+        <activity android:name=".activity.SplashAdActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.OrderStatusActivity"
             android:label="订单状态"

@@ -54,6 +54,7 @@ public class BrandActivity extends Activity {
     private ImageView categoryPriceIdc;
     private ImageView categorySaleIdc;
     private ImageView categoryUndefIdc;
+    private Long storeId;
 
     private ArrayList<AppgoodsId> appgoodsIds;
     private ArrayList<Map<String,Object>> listData = null;
@@ -130,6 +131,8 @@ public class BrandActivity extends Activity {
         {
             brand = bundle.getParcelable("brand");
             boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+            enterType = bundle.getInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
+            storeId = bundle.getLong("storeId", 0);
             if(brand == null)
             {
                 finish();
@@ -139,9 +142,6 @@ public class BrandActivity extends Activity {
         {
             finish();
         }
-
-        boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
-        enterType = bundle.getInt("enterType", StaticValues.BRAND_ENTER_TYPE_NORMAL);
 
         logoImageView = (ImageView) findViewById(R.id.logo);
         nameTextView = (TextView) findViewById(R.id.name);
@@ -237,6 +237,7 @@ public class BrandActivity extends Activity {
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", id);
                 bundle.putInt("boughtType", boughtType);
+                bundle.putLong("storeId", storeId);
                 intent.putExtras(bundle);
                 appContext.setBundleObj(bundle);
                 startActivity(intent);
@@ -317,6 +318,7 @@ public class BrandActivity extends Activity {
                 bundle1.putLong("brandId", brand.getId());
                 bundle1.putString("brandName", brand.getBrandName());
                 bundle1.putInt("boughtType", boughtType);
+                bundle1.putLong("storeId", storeId);
                 intent.putExtras(bundle1);
                 appContext.setBundleObj(bundle1);
                 startActivity(intent);
@@ -420,6 +422,7 @@ public class BrandActivity extends Activity {
                             line.put("reTime",appgoodsId.getReTime());
                             line.put("boughtType", boughtType);
                             line.put("salesCount", appgoodsId.getSaleCount());
+                            line.put("storeId", storeId);
 
                             listData.add(line);
                         }

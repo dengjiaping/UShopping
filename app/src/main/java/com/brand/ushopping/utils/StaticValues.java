@@ -217,6 +217,6 @@ public class StaticValues
     public static final int LOCATION_EXPIRE_TIME = 7200000;
 
     //下单后多长时间可送达
-    public static final int DELIVER_AFTER = 3600000;
+    public static final int DELIVER_AFTER = 1800000;
 
 }

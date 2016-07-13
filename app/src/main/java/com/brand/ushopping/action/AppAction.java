@@ -10,19 +10,18 @@ import com.alibaba.fastjson.JSON;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.Feedback;
+import com.brand.ushopping.model.GetSelectAppStartpicture;
 import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.CommonUtils;
-import com.brand.ushopping.utils.HttpClientUtil;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -134,6 +133,7 @@ public class AppAction extends BaseAction{
         homeRe.setUseCache(true);
         appContext.setHomeRe(new MainpageAction(context).homeRe(homeRe));
 
+
 //        new AppAction().downloadSplash(context, "http://static.oschina.net/uploads/img/201208/13122559_L8G0.png");
     }
 
@@ -177,27 +177,27 @@ public class AppAction extends BaseAction{
         return feedback;
     }
 
-    public void downloadSplash(Context context, String url)
-    {
-        try
-        {
-            FileOutputStream fileOutputStream = context.openFileOutput("splash.png", Context.MODE_PRIVATE);
-
-            byte[] byteArray = HttpClientUtil.getImageFromWeb(url);
-            fileOutputStream.write(byteArray);
-
-            fileOutputStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-    }
+//    public void downloadSplash(Context context, String url)
+//    {
+//        try
+//        {
+//            FileOutputStream fileOutputStream = context.openFileOutput("splash.png", Context.MODE_PRIVATE);
+//
+//            byte[] byteArray = HttpClientUtil.getImageFromWeb(url);
+//            fileOutputStream.write(byteArray);
+//
+//            fileOutputStream.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//        }
+//
+//    }
 
     public Bitmap loadSplash(Context context)
     {
-        String url = Environment.getExternalStorageDirectory() + "/splash.png";
+        String url = Environment.getExternalStorageDirectory() + "/com.brand.ushopping/splash.png";
         try
         {
             File file = new File(url);
@@ -213,6 +213,46 @@ public class AppAction extends BaseAction{
 
         return null;
 
+    }
+
+    //-- 启动页
+    public GetSelectAppStartpicture getSelectAppStartpictureAction(GetSelectAppStartpicture getSelectAppStartpicture)
+    {
+        getSelectAppStartpicture.addVersion(context);   //添加App版本信息
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(getSelectAppStartpicture);
+
+        try
+        {
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetSelectAppStartpicture.action"), CommonUtils.generateParams(jsonParam));
+
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+
+                getSelectAppStartpicture.setSuccess(jsonObject.getBoolean("success"));
+                if(getSelectAppStartpicture.isSuccess())
+                {
+                    //赋值
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                    String data = dataObject.toString();
+                    getSelectAppStartpicture = JSON.parseObject(data, GetSelectAppStartpicture.class);
+                    getSelectAppStartpicture.setSuccess(true);
+                }
+                else
+                {
+                    getSelectAppStartpicture.setMsg(jsonObject.getString("msg"));
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return getSelectAppStartpicture;
     }
 
 }
