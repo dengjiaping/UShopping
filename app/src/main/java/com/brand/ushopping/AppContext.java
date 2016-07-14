@@ -59,7 +59,7 @@ public class AppContext  extends Application
     private double latitude;
     private String imie = "";
     private WeiboUser weiboUser = null;
-
+    private String xgPushToken;
     //----Bundle参数,用于activity传值----
     private Bundle bundleObj = null;
 
@@ -365,5 +365,13 @@ public class AppContext  extends Application
 
     public void setBundleObj(Bundle bundleObj) {
         this.bundleObj = bundleObj;
+    }
+
+    public String getXgPushToken() {
+        return xgPushToken;
+    }
+
+    public void setXgPushToken(String xgPushToken) {
+        this.xgPushToken = xgPushToken;
     }
 }

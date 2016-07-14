@@ -120,6 +120,7 @@ public class LoginActivity extends Activity {
 
                 }
                 user.setPass(pass);
+                user.setToken(appContext.getXgPushToken());
 
                 new LoginTask().execute(user);
             }
@@ -145,6 +146,7 @@ public class LoginActivity extends Activity {
                         thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_WEIBO);
                         thirdPartyUser.setSinaId(map.get("uid"));
                         thirdPartyUser.setUserName("userName");
+                        thirdPartyUser.setToken(appContext.getXgPushToken());
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
 
@@ -178,6 +180,7 @@ public class LoginActivity extends Activity {
                         thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_QQ);
                         thirdPartyUser.setSinaId(map.get("uid"));
                         thirdPartyUser.setUserName("userName");
+                        thirdPartyUser.setToken(appContext.getXgPushToken());
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
                     }
@@ -221,6 +224,7 @@ public class LoginActivity extends Activity {
                         thirdPartyUser.setFlag(StaticValues.THIRD_PARTY_LOGIN_WEIXIN);
                         thirdPartyUser.setSinaId(map.get("openid"));
                         thirdPartyUser.setUserName("userName");
+                        thirdPartyUser.setToken(appContext.getXgPushToken());
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
                     }

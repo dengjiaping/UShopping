@@ -17,6 +17,8 @@ import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.model.User;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
 
 public class SplashActivity extends Activity {
     private AppContext appContext;
@@ -74,6 +76,15 @@ public class SplashActivity extends Activity {
             new LoadTask(user).start();
 
         }
+
+        // 开启logcat输出，方便debug，发布时请关闭
+//         XGPushConfig.enableDebug(this, true);
+        // 如果需要知道注册是否成功，请使用registerPush(getApplicationContext(), XGIOperateCallback)带callback版本
+        // 如果需要绑定账号，请使用registerPush(getApplicationContext(),account)版本
+        // 具体可参考详细的开发指南
+        // 传递的参数为ApplicationContext
+        XGPushManager.registerPush(getApplicationContext());
+        appContext.setXgPushToken(XGPushConfig.getToken(getApplicationContext()));
 
     }
 

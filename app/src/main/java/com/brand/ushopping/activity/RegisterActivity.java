@@ -213,6 +213,7 @@ public class RegisterActivity extends Activity {
 
         user.setMobile(mobile);
         user.setPass(pass);
+        user.setToken(appContext.getXgPushToken());
 
         new RegisterTask().execute(user);
     }
