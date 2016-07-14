@@ -29,6 +29,7 @@ public class Goods extends BaseModel implements Parcelable
     private int flag;
     private int saleCount;
     private AppaddressId appaddressId;
+    private AppStoresId appStoresId;
 
     public AppexpressId getAppexpressId() {
         return appexpressId;
@@ -164,6 +165,14 @@ public class Goods extends BaseModel implements Parcelable
 
     public void setAppaddressId(AppaddressId appaddressId) {
         this.appaddressId = appaddressId;
+    }
+
+    public AppStoresId getAppStoresId() {
+        return appStoresId;
+    }
+
+    public void setAppStoresId(AppStoresId appStoresId) {
+        this.appStoresId = appStoresId;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

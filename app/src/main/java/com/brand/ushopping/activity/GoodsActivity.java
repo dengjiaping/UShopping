@@ -31,6 +31,7 @@ import com.brand.ushopping.adapter.GoodsDetailAdapter;
 import com.brand.ushopping.model.AddAppShopcart;
 import com.brand.ushopping.model.AppEvaluate;
 import com.brand.ushopping.model.AppEvaluateItem;
+import com.brand.ushopping.model.AppStoresId;
 import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.AppexpressId;
 import com.brand.ushopping.model.AppgoodsId;
@@ -516,6 +517,14 @@ public class GoodsActivity extends UActivity {
         String attributes = "颜色分类:"+colorSelected+";尺码:"+sizeSelected;
         addAppShopcart.setAttribute(attributes);
         addAppShopcart.setAppgoodsId(appgoodsId);
+
+        if(storeId != 0)
+        {
+            AppStoresId appStoresId = new AppStoresId();
+            appStoresId.setId(storeId);
+            addAppShopcart.setAppStoresId(appStoresId);
+        }
+
         new AddAppShopcartActionTask().execute(addAppShopcart);
 
     }

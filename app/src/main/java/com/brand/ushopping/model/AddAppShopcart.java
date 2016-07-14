@@ -14,6 +14,7 @@ public class AddAppShopcart extends BaseModel
     private boolean success;
     private int quantity;
     private double price;
+    private AppStoresId appStoresId;
 
     public AppgoodsId getAppgoodsId() {
         return appgoodsId;
@@ -85,5 +86,13 @@ public class AddAppShopcart extends BaseModel
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public AppStoresId getAppStoresId() {
+        return appStoresId;
+    }
+
+    public void setAppStoresId(AppStoresId appStoresId) {
+        this.appStoresId = appStoresId;
     }
 }

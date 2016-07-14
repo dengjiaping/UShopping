@@ -5,6 +5,7 @@ package com.brand.ushopping.model;
  */
 public class AppShopcart extends BaseModel
 {
+    private AppStoresId appStoresId;
     private AppgoodsId appgoodsId;
     private String attribute;
     private long id;
@@ -40,5 +41,13 @@ public class AppShopcart extends BaseModel
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public AppStoresId getAppStoresId() {
+        return appStoresId;
+    }
+
+    public void setAppStoresId(AppStoresId appStoresId) {
+        this.appStoresId = appStoresId;
     }
 }
