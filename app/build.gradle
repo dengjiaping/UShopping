@@ -80,7 +80,8 @@ dependencies {
     //    compile files('libs/fastjson-1.2.7.jar')
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile files('libs/fastjson-1.1.43.android.jar')
-    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
+    //    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
+
     //    compile files('libs/nineoldroid.jar')
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/MobCommons-2016.0223.1655.jar')
@@ -109,6 +110,8 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.squareup.okio:okio:1.8.0'
     compile files('libs/wup-1.0.0.E-SNAPSHOT.jar')
+    compile files('libs/AMap_3DMap_V3.3.2_20160525.jar')
+    compile files('libs/AMap_Navi_v1.8.0_20160421.jar')
 }
 
 

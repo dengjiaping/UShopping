@@ -5,143 +5,177 @@
     android:layout_height="fill_parent"
     tools:context="com.brand.ushopping.activity.DevActivity">
 
-    <Button
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="微博分享"
-        android:id="@+id/weibo_share"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/scrollView" >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="微信分享"
-        android:id="@+id/wx_share"
-        android:layout_alignBottom="@+id/weibo_share"
-        android:layout_toRightOf="@+id/weibo_share"
-        android:layout_toEndOf="@+id/weibo_share" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="QQ分享"
-        android:id="@+id/qq_share"
-        android:layout_alignBottom="@+id/wx_share"
-        android:layout_toRightOf="@+id/wx_share"
-        android:layout_toEndOf="@+id/wx_share" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/weibo_share"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout8">
-
-        <Spinner
-            android:layout_width="100dp"
-            android:layout_height="48dp"
-            android:id="@+id/kuaidi_type"
-            android:layout_below="@+id/kuaidi"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/kuaidi_postid"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="快递查询"
-            android:id="@+id/kuaidi"
-            android:layout_below="@+id/weibo_share"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="动画效果"
-        android:id="@+id/animation"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/qq_share"
-        android:layout_toEndOf="@+id/qq_share" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="主题活动"
-        android:id="@+id/theme_activity"
-        android:layout_below="@+id/linearLayout8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/theme_activity">
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/theme_activity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="match_parent">
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IMIE"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp" />
+                android:text="微博分享"
+                android:id="@+id/weibo_share"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imie"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp" />
-        </LinearLayout>
+                android:text="微信分享"
+                android:id="@+id/wx_share"
+                android:layout_alignBottom="@+id/weibo_share"
+                android:layout_toRightOf="@+id/weibo_share"
+                android:layout_toEndOf="@+id/weibo_share" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/recycler_view_test"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="机型信息:" />
+                android:text="QQ分享"
+                android:id="@+id/qq_share"
+                android:layout_alignBottom="@+id/wx_share"
+                android:layout_toRightOf="@+id/wx_share"
+                android:layout_toEndOf="@+id/wx_share" />
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/weibo_share"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/linearLayout8">
+
+                <Spinner
+                    android:layout_width="100dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/kuaidi_type"
+                    android:layout_below="@+id/kuaidi"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/kuaidi_postid"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="快递查询"
+                    android:id="@+id/kuaidi"
+                    android:layout_below="@+id/weibo_share"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+            </LinearLayout>
+
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/handle_info" />
-        </LinearLayout>
-    </TableLayout>
+                android:text="动画效果"
+                android:id="@+id/animation"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/qq_share"
+                android:layout_toEndOf="@+id/qq_share" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="微博API"
-        android:id="@+id/weibo_api" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主题活动"
+                android:id="@+id/theme_activity"
+                android:layout_below="@+id/linearLayout8"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CONTENT_RESOLVER"
-        android:id="@+id/resolver" />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/theme_activity">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/theme_activity"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IMIE"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imie"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/recycler_view_test"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="机型信息:" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/handle_info" />
+                </LinearLayout>
+            </TableLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="微博API"
+                android:id="@+id/weibo_api" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONTENT_RESOLVER"
+                android:id="@+id/resolver" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="choose_image"
+                    android:id="@+id/choose_image" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CAMERA"
+                    android:id="@+id/camera" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/img" />
+        </TableLayout>
+    </ScrollView>
 
 </TableLayout>

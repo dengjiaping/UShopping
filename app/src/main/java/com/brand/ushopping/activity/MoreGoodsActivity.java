@@ -84,7 +84,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
         goodsGridView.addOnScrollListener(new EndlessGridRecyclerOnScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                Log.v("recycler test", "load more");
+                Log.v("recycler test", String.valueOf(currentGoodsCount));
                 load();
 
             }
@@ -171,6 +171,7 @@ public class MoreGoodsActivity extends AppCompatActivity {
                                 line.put("price", appgoodsId.getPromotionPrice());
                                 line.put("boughtType", boughtType);
                                 line.put("salesCount", appgoodsId.getSaleCount());
+                                line.put("storeId", new Long(0));
 
                                 goodsListData.add(line);
                             }
@@ -186,8 +187,6 @@ public class MoreGoodsActivity extends AppCompatActivity {
                                 moreGoodsAdapter.notifyDataSetChanged();
 
                             }
-
-                            currentGoodsCount += appgoodsIds.size();
 
 //                            warningLayout.setVisibility(View.GONE);
 

@@ -54,6 +54,11 @@ public class DataCache {
         return doGetData(context, key, 0, 0);
     }
 
+    public static String getData(Context context, String key, long page)
+    {
+        return doGetData(context, key, 0, page);
+    }
+
     public static String getData(Context context, String key, long id, long page)
     {
         return doGetData(context, key, id, page);

@@ -212,7 +212,8 @@ public class StaticValues
     public static final int ORDER_SAVE_PLATFORM = 1;
 
     public static final int REQUEST_CODE_GOODS_FILTER = 1004;
-
+    public static final int REQUEST_CODE_IMAGE_UPLOAD = 1005;
+    public static final int REQUEST_CODE_IMAGE_CAMERA = 1006;
     //获取位置的有效时间
     public static final int LOCATION_EXPIRE_TIME = 7200000;
 

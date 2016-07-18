@@ -13,15 +13,15 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.CameraUpdateFactory;
-import com.amap.api.maps2d.LocationSource;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.LatLng;
-import com.amap.api.maps2d.model.LatLngBounds;
-import com.amap.api.maps2d.model.MarkerOptions;
-import com.amap.api.maps2d.model.MyLocationStyle;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.model.AppStoresListItem;
@@ -29,7 +29,7 @@ import com.brand.ushopping.model.AppStoresListItem;
 import java.util.ArrayList;
 
 public class MapLocateActivity extends Activity
-        implements AMap.OnMapLoadedListener, LocationSource, AMapLocationListener {
+        implements LocationSource, AMapLocationListener, AMap.OnMapLoadedListener, AMap.OnMarkerClickListener {
     private MapView mapView;
     private AMap aMap;
     private ArrayList<AppStoresListItem> appStoresListItems;
@@ -113,6 +113,7 @@ public class MapLocateActivity extends Activity
         aMap.setLocationSource(this);// 设置定位监听
         aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        aMap.setOnMarkerClickListener(this);
         // aMap.setMyLocationType()
 
 
@@ -136,7 +137,12 @@ public class MapLocateActivity extends Activity
         mapView.onPause();
     }
 
-    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，实现地图生命周期管理
+        mapView.onSaveInstanceState(outState);
+    }
+
     public void onMapLoaded() {
         if(appStoresListItems != null && !appStoresListItems.isEmpty())
         {
@@ -144,7 +150,7 @@ public class MapLocateActivity extends Activity
 
             LatLngBounds bounds = new LatLngBounds.Builder()
                     .include(new LatLng(appStoresListItem.getLatitude(), appStoresListItem.getLongitude())).build();
-            aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 1));
+//            aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 1));
 
         }
 
@@ -158,8 +164,8 @@ public class MapLocateActivity extends Activity
         for(AppStoresListItem appStoresListItem: appStoresListItems)
         {
             aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f)
-                    .position(new LatLng(appStoresListItem.getLatitude(), appStoresListItem.getLongitude())).title(appStoresListItem.getShopName())
-                    .draggable(false));
+                    .position(new LatLng(appStoresListItem.getLatitude(), appStoresListItem.getLongitude())).title(appStoresListItem.getShopName()).snippet("    ")
+                    .draggable(false).visible(true));
 
         }
 
@@ -206,5 +212,11 @@ public class MapLocateActivity extends Activity
                 Log.e("AmapErr",errText);
             }
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        marker.setToTop();
+        return false;
     }
 }

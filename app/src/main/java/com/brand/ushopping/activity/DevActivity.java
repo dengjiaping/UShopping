@@ -1,11 +1,15 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +17,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.utils.BitmapTools;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.StaticValues;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -27,6 +34,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -50,6 +58,10 @@ public class DevActivity extends Activity {
     private Button weiboApiBtn;
     private UMShareAPI mShareAPI;
     private Button resolverBtn;
+    private Button chooseImageBtn;
+    private Button cameraBtn;
+    private Bitmap img = null;
+    private ImageView imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,6 +250,31 @@ public class DevActivity extends Activity {
             }
         });
 
+        chooseImageBtn = (Button) findViewById(R.id.choose_image);
+        chooseImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开相册
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                intent.putExtra("return-data", true);
+
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_IMAGE_UPLOAD);
+
+            }
+        });
+        cameraBtn = (Button) findViewById(R.id.camera);
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //拍照
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_IMAGE_CAMERA);
+
+            }
+        });
+        imgView = (ImageView) findViewById(R.id.img);
+
     }
 
     private UMShareListener testmulListener = new UMShareListener() {
@@ -261,7 +298,48 @@ public class DevActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         /** attention to this below ,must add this**/
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+//        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        if (requestCode == StaticValues.REQUEST_CODE_IMAGE_UPLOAD && resultCode == RESULT_OK) {
+            if(data != null)
+            {
+                ContentResolver resolver = getContentResolver();
+                Uri originalUri = data.getData();
+                try {
+                    img = BitmapTools.zoomImg(MediaStore.Images.Media.getBitmap(resolver, originalUri));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (img != null)
+                {
+                    //获取Bitmap
+                    imgView.setImageBitmap(img);
+
+                }
+
+            }
+            else
+            {
+                Toast.makeText(DevActivity.this, "图片读取失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (requestCode == StaticValues.REQUEST_CODE_IMAGE_CAMERA && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            img = (Bitmap)bundle.get("data");
+            if (img != null)
+            {
+                //获取Bitmap
+                imgView.setImageBitmap(img);
+
+            }
+            else
+            {
+                Toast.makeText(DevActivity.this, "图片读取失败", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
     }
 
     private String getHandSetInfo(){

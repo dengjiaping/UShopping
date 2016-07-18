@@ -93,7 +93,7 @@ public class MainpageAction extends BaseAction
         {
             if(homeRe.getUseCache())
             {
-                resultString = DataCache.getData(context, "HomeReAction.action");
+                resultString = DataCache.getData(context, "HomeReAction.action", homeRe.getMin());
             }
 
             if(CommonUtils.isValueEmpty(resultString))
@@ -124,7 +124,7 @@ public class MainpageAction extends BaseAction
                     homeRe.setSuccess(true);
 
                     //存入缓存
-                    DataCache.putData(context, "HomeReAction.action", resultString);
+                    DataCache.putData(context, "HomeReAction.action", resultString, homeRe.getMin());
                 }
                 else
                 {

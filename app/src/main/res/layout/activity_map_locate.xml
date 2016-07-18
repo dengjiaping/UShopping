@@ -32,11 +32,11 @@
             style="@style/TitleTextViewStyle" />
     </RelativeLayout>
 
-    <com.amap.api.maps2d.MapView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.amap.api.maps.MapView
         android:id="@+id/map"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/action_bar" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar">
+    </com.amap.api.maps.MapView>
 
 </RelativeLayout>
