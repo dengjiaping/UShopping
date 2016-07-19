@@ -1,6 +1,9 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +43,8 @@ public class MapLocateActivity extends Activity
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
     private AppContext appContext;
+    private Double currentLng;
+    private Double currentLat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +104,35 @@ public class MapLocateActivity extends Activity
         if(appStoresListItems != null && !appStoresListItems.isEmpty())
         {
             addMarkersToMap();// 往地图上添加marker
+            aMap.setOnMapLongClickListener(new AMap.OnMapLongClickListener() {
+                @Override
+                public void onMapLongClick(final LatLng latLng) {
+                    //地图长按事件
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MapLocateActivity.this);
+                    builder.setMessage("是否要导航到此位置");
+                    builder.setTitle("登录");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(MapLocateActivity.this, NavActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putDouble("startLng", currentLng);
+                            bundle.putDouble("startLat", currentLat);
+                            bundle.putDouble("destLng", latLng.longitude);
+                            bundle.putDouble("destLat", latLng.latitude);
+
+                            intent.putExtras(bundle);
+                            appContext.setBundleObj(bundle);
+                            startActivity(intent);
+
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                    builder.create().show();
+
+                }
+            });
+
         }
 
         // 自定义系统定位小蓝点
@@ -207,6 +241,9 @@ public class MapLocateActivity extends Activity
             if (amapLocation != null
                     && amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+                currentLng = amapLocation.getLongitude();
+                currentLat = amapLocation.getLatitude();
+
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
                 Log.e("AmapErr",errText);

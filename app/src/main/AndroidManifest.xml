@@ -18,7 +18,9 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.NFC" />
+
     <uses-feature android:name="android.hardware.nfc.hce" />
+
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
@@ -311,8 +313,9 @@
         <!-- 【必须】 信鸽receiver广播接收 -->
         <receiver
             android:name="com.tencent.android.tpush.XGPushReceiver"
-            android:process=":xg_service_v2" >
-            <intent-filter android:priority="0x7fffffff" >
+            android:process=":xg_service_v2">
+            <intent-filter android:priority="0x7fffffff">
+
                 <!-- 【必须】 信鸽SDK的内部广播 -->
                 <action android:name="com.tencent.android.tpush.action.SDK" />
                 <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
@@ -328,12 +331,13 @@
         </receiver>
 
         <!-- 【必须】 (2.30及以上版新增)展示通知的activity -->
-        <!-- 【注意】 如果被打开的activity是启动模式为SingleTop，SingleTask或SingleInstance，请根据通知的异常自查列表第8点处理-->
+        <!-- 【注意】 如果被打开的activity是启动模式为SingleTop，SingleTask或SingleInstance，请根据通知的异常自查列表第8点处理 -->
         <activity
             android:name="com.tencent.android.tpush.XGPushActivity"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <!-- 若使用AndroidStudio，请设置android:name="android.intent.action"-->
+
+                <!-- 若使用AndroidStudio，请设置android:name="android.intent.action" -->
                 <action android:name="android.intent.action" />
             </intent-filter>
         </activity>
@@ -348,7 +352,7 @@
         <!-- 【必须】 通知service，此选项有助于提高抵达率 -->
         <service
             android:name="com.tencent.android.tpush.rpc.XGRemoteService"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.brand.ushopping.PUSH_ACTION" />
             </intent-filter>
@@ -466,11 +470,10 @@
 
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/title_activity_splash">
@@ -567,16 +570,16 @@
             android:label="动画效果"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.SplashAdActivity"
+        <activity
+            android:name=".activity.SplashAdActivity"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.OrderStatusActivity"
             android:label="订单状态"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.WeiboActivity"
             android:label="@string/title_activity_weibo"
@@ -592,8 +595,12 @@
             android:name=".activity.GoodsFilterActivity"
             android:label="商品筛选"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.NavActivity"
+            android:label="导航"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
