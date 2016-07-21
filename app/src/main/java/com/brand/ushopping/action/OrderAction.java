@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.brand.ushopping.model.AppReturngoodsSave;
 import com.brand.ushopping.model.ConfirmOrder;
 import com.brand.ushopping.model.DeleteAppSmOder;
 import com.brand.ushopping.model.GetSmorderStatusList;
@@ -713,4 +714,40 @@ public class OrderAction extends BaseAction
         }
         return deleteAppSmOder;
     }
+
+    //订单提交退货
+    public AppReturngoodsSave appReturngoodsSaveAction(AppReturngoodsSave appReturngoodsSave)
+    {
+        deleteAppSmOder.addVersion(context);   //添加App版本信息
+        String resultString = null;
+        String jsonParam = JSON.toJSONString(deleteAppSmOder);
+
+        try
+        {
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("Delete_AppSmOder.action"), CommonUtils.generateParams(jsonParam));
+            if(resultString != null)
+            {
+                JSONObject jsonObject = new JSONObject(resultString);
+                if(jsonObject.getBoolean("success"))
+                {
+                    //赋值
+                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                    String data = dataObject.toString();
+                    deleteAppSmOder = JSON.parseObject(data, DeleteAppSmOder.class);
+                    deleteAppSmOder.setSuccess(true);
+                }
+                else
+                {
+                    deleteAppSmOder.setSuccess(false);
+                    deleteAppSmOder.setMsg(jsonObject.getString("msg"));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return deleteAppSmOder;
+    }
+
 }

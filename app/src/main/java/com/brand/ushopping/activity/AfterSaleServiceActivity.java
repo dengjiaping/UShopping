@@ -2,13 +2,19 @@ package com.brand.ushopping.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,16 +26,19 @@ import com.brand.ushopping.model.AppCustomer;
 import com.brand.ushopping.model.ApporderId;
 import com.brand.ushopping.model.AppuserId;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.BitmapTools;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class AfterSaleServiceActivity extends Activity {
     private User user;
     private AppContext appContext;
     private ImageView backBtn;
     private TextView titleTextView;
-
     private ImageView goodsImgView;
     private TextView goodsNameTextView;
     private TextView attributeTextView;
@@ -39,11 +48,13 @@ public class AfterSaleServiceActivity extends Activity {
     private ViewGroup submitLayout;
     private ViewGroup applyLayout;
     private TextView statusTextView;
-
     private TextView reSummaryTextView;
     private TextView reTimeTextView;
     private TextView orderNoTextView;
     private TextView reContentTextView;
+    private Button fromAlbumBtn;
+    private Button fromCameraBtn;
+    private GridLayout imgsContainer;
 
     private long orderId;
     private String orderNo;
@@ -54,6 +65,8 @@ public class AfterSaleServiceActivity extends Activity {
     private double money;
     private String reContent;
     private int customerFlag;
+    private ArrayList<Bitmap> imgList = new ArrayList<Bitmap>();
+    private ArrayList<ImageView> imgViewList = new ArrayList<ImageView>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +87,24 @@ public class AfterSaleServiceActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
-
         goodsImgView = (ImageView) findViewById(R.id.img);
         goodsNameTextView = (TextView) findViewById(R.id.goods_name);
         attributeTextView = (TextView) findViewById(R.id.attribute);
         priceTextView = (TextView) findViewById(R.id.price);
         contentTextView = (TextView) findViewById(R.id.content);
         sumbitBtn = (Button) findViewById(R.id.submit);
-
         statusTextView = (TextView) findViewById(R.id.status);
-
         submitLayout = (ViewGroup) findViewById(R.id.submit_layout);
         submitLayout.setVisibility(View.GONE);
         applyLayout = (ViewGroup) findViewById(R.id.apply_layout);
         applyLayout.setVisibility(View.GONE);
-
         reSummaryTextView = (TextView) findViewById(R.id.re_summary);
         reTimeTextView = (TextView) findViewById(R.id.re_time);
         orderNoTextView = (TextView) findViewById(R.id.order_no);
         reContentTextView = (TextView) findViewById(R.id.re_content);
+        fromAlbumBtn = (Button) findViewById(R.id.from_album);
+        fromCameraBtn = (Button) findViewById(R.id.from_camera);
+        imgsContainer = (GridLayout) findViewById(R.id.imgs_container);
 
         Bundle bundle = null;
         try
@@ -168,8 +180,6 @@ public class AfterSaleServiceActivity extends Activity {
 
         }
 
-
-
         customerContent = bundle.getString("customerContent", "");
 
         startTime = bundle.getLong("startTime", 0);
@@ -205,6 +215,27 @@ public class AfterSaleServiceActivity extends Activity {
                     Toast.makeText(AfterSaleServiceActivity.this, "请填写备注", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        fromAlbumBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开相册
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                intent.putExtra("return-data", true);
+
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_IMAGE_UPLOAD);
+            }
+        });
+
+        fromCameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //拍照
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_IMAGE_CAMERA);
             }
         });
 
@@ -246,6 +277,60 @@ public class AfterSaleServiceActivity extends Activity {
             {
 
             }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+//        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        if (requestCode == StaticValues.REQUEST_CODE_IMAGE_UPLOAD && resultCode == RESULT_OK) {
+            if(data != null)
+            {
+                Bitmap img = null;
+                ContentResolver resolver = getContentResolver();
+                Uri originalUri = data.getData();
+                try {
+                    img = BitmapTools.zoomImg(MediaStore.Images.Media.getBitmap(resolver, originalUri));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (img != null)
+                {
+                    //获取Bitmap
+                    imgList.add(img);
+                    ImageView imgView = new ImageView(AfterSaleServiceActivity.this);
+                    imgView.setImageBitmap(img);
+
+                    imgsContainer.addView(imgView);
+
+                }
+            }
+            else
+            {
+                Toast.makeText(AfterSaleServiceActivity.this, "图片读取失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (requestCode == StaticValues.REQUEST_CODE_IMAGE_CAMERA && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            Bitmap img = (Bitmap)bundle.get("data");
+            if (img != null)
+            {
+                //获取Bitmap
+                imgList.add(img);
+                ImageView imgView = new ImageView(AfterSaleServiceActivity.this);
+                imgView.setImageBitmap(img);
+
+                imgsContainer.addView(imgView);
+            }
+            else
+            {
+                Toast.makeText(AfterSaleServiceActivity.this, "图片读取失败", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

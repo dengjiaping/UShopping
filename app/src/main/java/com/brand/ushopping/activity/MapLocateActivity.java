@@ -84,8 +84,16 @@ public class MapLocateActivity extends Activity
         titleTextView.setText(this.getTitle().toString());
 
         mapView = (MapView) findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);// 必须要写
-        init();
+        try{
+            mapView.onCreate(savedInstanceState);// 必须要写
+            init();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            finish();
+        }
+
 
     }
 

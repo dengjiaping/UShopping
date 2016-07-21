@@ -220,4 +220,9 @@ public class StaticValues
     //下单后多长时间可送达
     public static final int DELIVER_AFTER = 1800000;
 
+    // 退款原因 1:质量问题, 2:尺码不合适, 3:不喜欢
+    public static final int RETURN_GOODS_REASON_QUALITY = 1;
+    public static final int RETURN_GOODS_REASON_SIZE = 2;
+    public static final int RETURN_GOODS_REASON_DISLIKE = 3;
+
 }

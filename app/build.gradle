@@ -13,7 +13,7 @@ android {
 
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi'//, 'arm64-v8a', 'armeabi-v7a'//, "mips", "mips64", 'x86' , 'x86_64'
         }
         // Enabling multidex support.
         multiDexEnabled true
@@ -81,7 +81,6 @@ dependencies {
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile files('libs/fastjson-1.1.43.android.jar')
     //    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
-
     //    compile files('libs/nineoldroid.jar')
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/MobCommons-2016.0223.1655.jar')
