@@ -718,13 +718,13 @@ public class OrderAction extends BaseAction
     //订单提交退货
     public AppReturngoodsSave appReturngoodsSaveAction(AppReturngoodsSave appReturngoodsSave)
     {
-        deleteAppSmOder.addVersion(context);   //添加App版本信息
+        appReturngoodsSave.addVersion(context);   //添加App版本信息
         String resultString = null;
-        String jsonParam = JSON.toJSONString(deleteAppSmOder);
+        String jsonParam = JSON.toJSONString(appReturngoodsSave);
 
         try
         {
-            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("Delete_AppSmOder.action"), CommonUtils.generateParams(jsonParam));
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("AppReturngoodsSaveAction.action"), CommonUtils.generateParams(jsonParam));
             if(resultString != null)
             {
                 JSONObject jsonObject = new JSONObject(resultString);
@@ -733,13 +733,13 @@ public class OrderAction extends BaseAction
                     //赋值
                     JSONObject dataObject = jsonObject.getJSONObject("data");
                     String data = dataObject.toString();
-                    deleteAppSmOder = JSON.parseObject(data, DeleteAppSmOder.class);
-                    deleteAppSmOder.setSuccess(true);
+                    appReturngoodsSave = JSON.parseObject(data, AppReturngoodsSave.class);
+                    appReturngoodsSave.setSuccess(true);
                 }
                 else
                 {
-                    deleteAppSmOder.setSuccess(false);
-                    deleteAppSmOder.setMsg(jsonObject.getString("msg"));
+                    appReturngoodsSave.setSuccess(false);
+                    appReturngoodsSave.setMsg(jsonObject.getString("msg"));
                 }
             }
 
@@ -747,7 +747,7 @@ public class OrderAction extends BaseAction
             e.printStackTrace();
             return null;
         }
-        return deleteAppSmOder;
+        return appReturngoodsSave;
     }
 
 }

@@ -225,4 +225,10 @@ public class StaticValues
     public static final int RETURN_GOODS_REASON_SIZE = 2;
     public static final int RETURN_GOODS_REASON_DISLIKE = 3;
 
+    public static final String LAST_FILE_NAME_JPG = ".jpg";
+    public static final String LAST_FILE_NAME_PNG = ".png";
+
+    //退货图片数量限制
+    public static final int RETURN_GOODS_IMAGE_COUNT = 5;
+
 }

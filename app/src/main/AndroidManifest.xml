@@ -579,7 +579,7 @@
             android:name=".activity.OrderStatusActivity"
             android:label="订单状态"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.WeiboActivity"
             android:label="@string/title_activity_weibo"
@@ -596,9 +596,14 @@
             android:label="商品筛选"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".activity.NavActivity"
+        <activity
+            android:name=".activity.NavActivity"
             android:label="导航"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AppReturnGoodsActivity"
+            android:label="退货"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

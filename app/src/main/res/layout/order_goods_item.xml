@@ -151,7 +151,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="申请售后"
+            android:text="退货"
             android:id="@+id/after_sale_service"
             android:layout_marginRight="8dp"
             android:layout_marginTop="4dp"

@@ -15,6 +15,7 @@ public class AppReturngoodsSave extends BaseModel {
     private AppyyorderId appyyorderId;
     private Integer problem;
     private ArrayList<String> images;
+    private ArrayList<String> lastFileName;
     private String explain;
 
     public long getUserId() {
@@ -95,5 +96,13 @@ public class AppReturngoodsSave extends BaseModel {
 
     public void setExplain(String explain) {
         this.explain = explain;
+    }
+
+    public ArrayList<String> getLastFileName() {
+        return lastFileName;
+    }
+
+    public void setLastFileName(ArrayList<String> lastFileName) {
+        this.lastFileName = lastFileName;
     }
 }

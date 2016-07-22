@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.OrderAction;
-import com.brand.ushopping.activity.AfterSaleServiceActivity;
+import com.brand.ushopping.activity.AppReturnGoodsActivity;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.activity.GoodsEvaluateActivity;
 import com.brand.ushopping.activity.TryoutActivity;
@@ -124,9 +124,11 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
             switch ((Integer) list.get(position).get("flag"))
             {
                 case StaticValues.ORDER_FLAG_DELIVERED:
-                    //已发货
-                    holder.afterSaleService.setVisibility(View.VISIBLE);
+                    break;
 
+                case StaticValues.ORDER_FLAG_CONFIRMED:
+                    //退货
+                    holder.afterSaleService.setVisibility(View.VISIBLE);
                     switch (customerFlag)
                     {
                         case StaticValues.CUSTOMER_FLAG_APPLY:
@@ -143,25 +145,24 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                             break;
 
                     }
-
                     holder.afterSaleService.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(context, AfterSaleServiceActivity.class);
+                            Intent intent = new Intent(context, AppReturnGoodsActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("img", list.get(position).get("img").toString());
                             bundle.putString("goodsName", list.get(position).get("goodsName").toString());
                             bundle.putString("attribute", list.get(position).get("attribute").toString());
                             bundle.putDouble("price", (Double) list.get(position).get("price"));
                             bundle.putInt("count", (Integer) list.get(position).get("count"));
-
+                            bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
                             bundle.putInt("customerFlag", customerFlag);
                             bundle.putString("customerContent", list.get(position).get("customerContent").toString());
                             bundle.putLong("startTime", (Long) list.get(position).get("startTime"));
                             bundle.putLong("endTime", (Long) list.get(position).get("endTime"));
                             bundle.putLong("orderId", (Long) list.get(position).get("orderId"));
                             bundle.putString("orderNo", (String) list.get(position).get("orderNo"));
-                            bundle.putDouble("money", (Double) list.get(position).get("money"));
+                            bundle.putDouble("money", Double.valueOf((String) list.get(position).get("money")));
 
                             intent.putExtras(bundle);
                             appContext.setBundleObj(bundle);
@@ -169,10 +170,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                         }
                     });
 
-                    break;
-
-                case StaticValues.ORDER_FLAG_CONFIRMED:
-                    //已发货
+                    //评价
                     holder.evaluate.setVisibility(View.VISIBLE);
                     holder.evaluate.setOnClickListener(new View.OnClickListener() {
                         @Override
