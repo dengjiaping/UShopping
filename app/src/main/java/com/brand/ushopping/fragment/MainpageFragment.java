@@ -322,6 +322,16 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 main.setUseCache(false);
                 new MainpageLoadTask().execute(main);
 
+                HomeRe homeRe = new HomeRe();
+                if (user != null) {
+                    homeRe.setUserId(user.getUserId());
+                    homeRe.setSessionid(user.getSessionid());
+                }
+                homeRe.setMin(homeReCount);
+                homeRe.setMax(StaticValues.RECOMMEND_PAGE_COUNT);
+                Log.v("ushopping", "home re min " + homeRe.getMin() + " max " + homeRe.getMax());
+                new MainReLoadTask().execute(homeRe);
+
                 swipeRefreshLayout.setRefreshing(false);
 
             }

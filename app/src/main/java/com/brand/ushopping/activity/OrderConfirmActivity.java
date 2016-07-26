@@ -207,6 +207,7 @@ public class OrderConfirmActivity extends Activity {
             line.put("context", OrderConfirmActivity.this);
             line.put("boughtType", boughtType);
             line.put("user", user);
+            line.put("orderFlag", StaticValues.ORDER_FLAG_ALL);
 
             listData.add(line);
 

@@ -228,7 +228,15 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
         });
         holder.deleteItemBtn.setVisibility(View.INVISIBLE);
 
-        int orderFlag = (int) list.get(position).get("orderFlag");
+        int orderFlag = StaticValues.ORDER_FLAG_ALL;
+        try
+        {
+            orderFlag = (int) list.get(position).get("orderFlag");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         switch ((int) list.get(position).get("boughtType"))
         {
