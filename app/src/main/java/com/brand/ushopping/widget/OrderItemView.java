@@ -116,6 +116,7 @@ public class OrderItemView extends LinearLayout {
                 line.put("reTime", orderGoodsItem.getReTime());
                 line.put("problem", orderGoodsItem.getCustomerProblem());
                 line.put("explain", orderGoodsItem.getCustomerExplain());
+                line.put("orderFlag", orderItem.getFlag());
 
                 line.put("user", user);
 

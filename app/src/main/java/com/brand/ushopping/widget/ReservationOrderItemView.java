@@ -103,6 +103,7 @@ public class ReservationOrderItemView extends LinearLayout {
             line.put("context", this.context);
             line.put("boughtType", StaticValues.BOUTHT_TYPE_RESERVATION);
             line.put("user", user);
+            line.put("orderFlag", orderItem.getFlag());
 
             listData.add(line);
 

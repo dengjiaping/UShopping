@@ -103,6 +103,8 @@ public class TryitOrderItemView extends LinearLayout
             line.put("customerFlag", StaticValues.CUSTOMER_FLAG_NONE);
             line.put("context", this.context);
             line.put("boughtType", StaticValues.BOUTHT_TYPE_TRYIT);
+            line.put("orderFlag", orderItem.getFlag());
+
             line.put("user", user);
 
             listData.add(line);

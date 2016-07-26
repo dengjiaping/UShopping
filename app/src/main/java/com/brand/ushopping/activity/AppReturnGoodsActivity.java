@@ -33,6 +33,7 @@ import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.BitmapTools;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.IOException;
@@ -62,6 +63,7 @@ public class AppReturnGoodsActivity extends Activity {
     private RadioButton returnGoodsReasonSize;
     private RadioButton returnGoodsReasonDislike;
     private EditText explainEditText;
+    private TimeoutbleProgressDialog submitDialog;
 
     private long orderId;
     private String orderNo;
@@ -257,6 +259,8 @@ public class AppReturnGoodsActivity extends Activity {
                     Toast.makeText(AppReturnGoodsActivity.this, "请填写退货原因", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                sumbitBtn.setEnabled(false);
+                submitDialog.show();
 
                 AppReturngoodsSave appReturngoodsSave = new AppReturngoodsSave();
                 appReturngoodsSave.setUserId(user.getUserId());
@@ -315,6 +319,25 @@ public class AppReturnGoodsActivity extends Activity {
             }
         });
 
+        submitDialog = TimeoutbleProgressDialog.createProgressDialog(AppReturnGoodsActivity.this, StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
+            @Override
+            public void onTimeOut(TimeoutbleProgressDialog dialog) {
+                submitDialog.dismiss();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AppReturnGoodsActivity.this);
+                builder.setMessage("登录失败");
+                builder.setTitle("提示");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sumbitBtn.setEnabled(true);
+                    }
+                });
+
+                builder.create().show();
+            }
+        });
+
     }
 
 
@@ -332,9 +355,12 @@ public class AppReturnGoodsActivity extends Activity {
 
         @Override
         protected void onPostExecute(AppReturngoodsSave result) {
+            sumbitBtn.setEnabled(true);
+            submitDialog.dismiss();
             if(result != null)
             {
                 if(result.isSuccess()) {
+                    imgList = null;
                     AlertDialog.Builder builder = new AlertDialog.Builder(AppReturnGoodsActivity.this);
                     builder.setMessage("退货申请提交成功,我们会在3到5个工作日退款至您的银行账户.");
                     builder.setCancelable(false);

@@ -228,12 +228,17 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
         });
         holder.deleteItemBtn.setVisibility(View.INVISIBLE);
 
+        int orderFlag = (int) list.get(position).get("orderFlag");
+
         switch ((int) list.get(position).get("boughtType"))
         {
             case StaticValues.BOUTHT_TYPE_NORMAL:
                 break;
             case StaticValues.BOUTHT_TYPE_TRYIT:
-                holder.deleteItemBtn.setVisibility(View.VISIBLE);
+                if(orderFlag == StaticValues.ORDER_FLAG_UNPAY)
+                {
+                    holder.deleteItemBtn.setVisibility(View.VISIBLE);
+                }
                 break;
             case StaticValues.BOUTHT_TYPE_RESERVATION:
                 break;
