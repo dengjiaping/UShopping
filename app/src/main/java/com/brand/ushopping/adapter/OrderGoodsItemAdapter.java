@@ -163,6 +163,10 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                             bundle.putLong("orderId", (Long) list.get(position).get("orderId"));
                             bundle.putString("orderNo", (String) list.get(position).get("orderNo"));
                             bundle.putDouble("money", Double.valueOf((String) list.get(position).get("money")));
+                            bundle.putLong("centerTime", (Long) list.get(position).get("centerTime"));
+                            bundle.putLong("reTime", (Long) list.get(position).get("reTime"));
+                            bundle.putString("problem", list.get(position).get("problem").toString());
+                            bundle.putString("explain", list.get(position).get("explain").toString());
 
                             intent.putExtras(bundle);
                             appContext.setBundleObj(bundle);

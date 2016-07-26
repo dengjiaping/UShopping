@@ -19,7 +19,11 @@ public class OrderGoodsItem extends BaseModel
     private int customerFlag = 0;
     private String customerContent = "";
     private long customerStartTime = 0;
+    private long customerCenterTime = 0;
     private long customerEndTime = 0;
+    private long reTime = 0;
+    private String customerProblem = "";
+    private String customerExplain = "";
 
     public AppaddressId getAppaddressId() {
         return appaddressId;
@@ -131,5 +135,37 @@ public class OrderGoodsItem extends BaseModel
 
     public void setCustomerEndTime(long customerEndTime) {
         this.customerEndTime = customerEndTime;
+    }
+
+    public long getCustomerCenterTime() {
+        return customerCenterTime;
+    }
+
+    public void setCustomerCenterTime(long customerCenterTime) {
+        this.customerCenterTime = customerCenterTime;
+    }
+
+    public long getReTime() {
+        return reTime;
+    }
+
+    public void setReTime(long reTime) {
+        this.reTime = reTime;
+    }
+
+    public String getCustomerProblem() {
+        return customerProblem;
+    }
+
+    public void setCustomerProblem(String customerProblem) {
+        this.customerProblem = customerProblem;
+    }
+
+    public String getCustomerExplain() {
+        return customerExplain;
+    }
+
+    public void setCustomerExplain(String customerExplain) {
+        this.customerExplain = customerExplain;
     }
 }

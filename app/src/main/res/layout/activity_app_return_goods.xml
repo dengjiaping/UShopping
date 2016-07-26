@@ -65,7 +65,7 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -96,14 +96,20 @@
                 </LinearLayout>
 
                 <TableLayout
-                    android:layout_width="48dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="20px"
+                            android:layout_weight="1" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -111,7 +117,8 @@
                             android:text="¥"
                             android:layout_marginTop="8dp"
                             android:layout_gravity="center_vertical"
-                            style="@style/TextViewStyle" />
+                            style="@style/TextViewStyle"
+                            android:layout_marginLeft="8dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -263,7 +270,7 @@
                 android:id="@+id/apply_layout"
                 android:background="@color/tablerow_background"
                 android:layout_marginTop="8dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -309,7 +316,8 @@
                         android:text="退款时间"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        style="@style/TextViewStyle" />
+                        style="@style/TextViewStyle"
+                        android:id="@+id/re_time_title" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -376,7 +384,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="退款原因"
-                        android:id="@+id/textView23"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -385,7 +392,32 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/re_content"
+                        android:id="@+id/re_problem"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:layout_marginBottom="8dp"
+                        style="@style/TextViewStyle" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="备注"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        style="@style/TextViewStyle" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/re_explain"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_weight="1"

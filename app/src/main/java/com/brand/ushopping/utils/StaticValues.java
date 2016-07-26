@@ -124,6 +124,7 @@ public class StaticValues
     public static final int CUSTOMER_FLAG_APPLY = 1;
     public static final int CUSTOMER_FLAG_SUBMITED = 2;
     public static final int CUSTOMER_FLAG_DONE = 3;
+    public static final int CUSTOMER_FLAG_RETURNED = 4;
 
     //
     public static final int GOODS_COMPARE_TYPE_TIME = 1;

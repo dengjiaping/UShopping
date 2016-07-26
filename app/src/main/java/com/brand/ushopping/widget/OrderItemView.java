@@ -112,6 +112,11 @@ public class OrderItemView extends LinearLayout {
                 line.put("flag", orderItem.getFlag());
                 line.put("context", this.context);
                 line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                line.put("centerTime", orderGoodsItem.getCustomerCenterTime());
+                line.put("reTime", orderGoodsItem.getReTime());
+                line.put("problem", orderGoodsItem.getCustomerProblem());
+                line.put("explain", orderGoodsItem.getCustomerExplain());
+
                 line.put("user", user);
 
                 listData.add(line);

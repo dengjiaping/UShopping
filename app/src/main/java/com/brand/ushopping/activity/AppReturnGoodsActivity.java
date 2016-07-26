@@ -52,9 +52,9 @@ public class AppReturnGoodsActivity extends Activity {
     private ViewGroup applyLayout;
     private TextView statusTextView;
     private TextView reSummaryTextView;
+    private TextView reTimeTitleTextView;
     private TextView reTimeTextView;
     private TextView orderNoTextView;
-    private TextView reContentTextView;
     private Button fromAlbumBtn;
     private Button fromCameraBtn;
     private LinearLayout imgsContainer;
@@ -70,13 +70,18 @@ public class AppReturnGoodsActivity extends Activity {
     private long endTime;
     private int count;
     private double money;
-    private String reContent;
     private int customerFlag;
     private ArrayList<Bitmap> imgList = new ArrayList<Bitmap>();
     private ArrayList<ImageView> imgViewList = new ArrayList<ImageView>();
     private int problem = 0;
     private int boughtType;
-    private String explain = null;
+    private long reCenterTime;
+    private long reTime;
+    private String reProblem;
+    private String reExplain = "暂无备注";
+    private String explain;
+    private TextView reExplainTextView;
+    private TextView reProblemTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +112,14 @@ public class AppReturnGoodsActivity extends Activity {
 //        applyLayout.setVisibility(View.GONE);
         reSummaryTextView = (TextView) findViewById(R.id.re_summary);
         reTimeTextView = (TextView) findViewById(R.id.re_time);
+        reTimeTitleTextView = (TextView) findViewById(R.id.re_time_title);
         orderNoTextView = (TextView) findViewById(R.id.order_no);
-        reContentTextView = (TextView) findViewById(R.id.re_content);
         fromAlbumBtn = (Button) findViewById(R.id.from_album);
         fromCameraBtn = (Button) findViewById(R.id.from_camera);
         imgsContainer = (LinearLayout) findViewById(R.id.imgs_container);
         explainEditText = (EditText) findViewById(R.id.explain);
+        reExplainTextView = (TextView) findViewById(R.id.re_explain);
+        reProblemTextView = (TextView) findViewById(R.id.re_problem);
 
         returnGoodsReasonQuality = (RadioButton) findViewById(R.id.return_goods_reason_quality);
         returnGoodsReasonQuality.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -166,65 +173,69 @@ public class AppReturnGoodsActivity extends Activity {
             orderNo = bundle.getString("orderNo");
             startTime =bundle.getLong("startTime");
             endTime = bundle.getLong("endTime");
-            reContent = bundle.getString("customerContent");
             money = bundle.getDouble("money");
             customerFlag = bundle.getInt("customerFlag", 0);
             boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
-
+            reCenterTime = bundle.getLong("centerTime", 0);
+            reTime = bundle.getLong("reTime", 0);
+            reProblem = bundle.getString("problem", "");
+            reExplain = bundle.getString("explain", "");
         }
         else
         {
             finish();
         }
 
-//        if(customerFlag == 0)
-//        {
-//            //申请售后
-//            submitLayout.setVisibility(View.VISIBLE);
-//
-//        }
-//        else
-//        {
-//            applyLayout.setVisibility(View.VISIBLE);
-//            switch (customerFlag)
-//            {
-//                case StaticValues.CUSTOMER_FLAG_APPLY:
-//                    //待处理
-//                    statusTextView.setText("待处理");
-//                    reTimeTextView.setText(CommonUtils.timestampToDatetime(startTime));
-//                    contentTextView.setText(reContent);
-//                    orderNoTextView.setText(orderNo);
-//                    reSummaryTextView.setText(Double.toString(money));
-//
-//                    break;
-//                case StaticValues.CUSTOMER_FLAG_SUBMITED:
-//                    //已申请
-//                    statusTextView.setText("已申请");
-//                    reTimeTextView.setText(CommonUtils.timestampToDatetime(startTime));
-//                    contentTextView.setText(reContent);
-//                    orderNoTextView.setText(orderNo);
-//                    reSummaryTextView.setText(Double.toString(money));
-//
-//                    break;
-//                case StaticValues.CUSTOMER_FLAG_DONE:
-//                    //已完成
-//                    statusTextView.setText("已完成");
-//                    reTimeTextView.setText(CommonUtils.timestampToDatetime(endTime));
-//                    contentTextView.setText(reContent);
-//                    orderNoTextView.setText(orderNo);
-//                    reSummaryTextView.setText(Double.toString(money));
-//
-//                    break;
-//
-//            }
-//
-//        }
+        submitLayout.setVisibility(View.GONE);
+        applyLayout.setVisibility(View.GONE);
 
-//        customerContent = bundle.getString("customerContent", "");
-//
-//        startTime = bundle.getLong("startTime", 0);
-//        endTime = bundle.getLong("endTime", 0);
-//        count = bundle.getInt("count", 0);
+        if(customerFlag == 0)
+        {
+            //申请售后
+            submitLayout.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            applyLayout.setVisibility(View.VISIBLE);
+
+            reExplainTextView.setText(reExplain);
+            reProblemTextView.setText(reProblem);
+            orderNoTextView.setText(orderNo);
+            reSummaryTextView.setText(Double.toString(money));
+
+            switch (customerFlag)
+            {
+                case StaticValues.CUSTOMER_FLAG_APPLY:
+                    //待处理
+                    statusTextView.setText("申请中");
+                    reTimeTextView.setText(CommonUtils.timestampToDatetime(reTime));
+                    reTimeTitleTextView.setText("申请时间");
+                    break;
+
+                case StaticValues.CUSTOMER_FLAG_SUBMITED:
+                    //已申请
+                    statusTextView.setText("店家同意");
+                    reTimeTextView.setText(CommonUtils.timestampToDatetime(startTime));
+                    reTimeTitleTextView.setText("处理时间");
+                    break;
+
+                case StaticValues.CUSTOMER_FLAG_DONE:
+                    //已完成
+                    statusTextView.setText("确认收货");
+                    reTimeTextView.setText(CommonUtils.timestampToDatetime(reCenterTime));
+                    reTimeTitleTextView.setText("收货时间");
+                    break;
+
+                case StaticValues.CUSTOMER_FLAG_RETURNED:
+                    //已完成
+                    statusTextView.setText("已退款");
+                    reTimeTextView.setText(CommonUtils.timestampToDatetime(endTime));
+                    reTimeTitleTextView.setText("收货时间");
+                    break;
+
+            }
+        }
 
         sumbitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,7 +259,6 @@ public class AppReturnGoodsActivity extends Activity {
                 }
 
                 AppReturngoodsSave appReturngoodsSave = new AppReturngoodsSave();
-
                 appReturngoodsSave.setUserId(user.getUserId());
                 appReturngoodsSave.setSessionid(user.getSessionid());
                 switch (boughtType)
@@ -327,6 +337,7 @@ public class AppReturnGoodsActivity extends Activity {
                 if(result.isSuccess()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(AppReturnGoodsActivity.this);
                     builder.setMessage("退货申请提交成功,我们会在3到5个工作日退款至您的银行账户.");
+                    builder.setCancelable(false);
                     builder.setTitle("提示");
                     builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                         @Override
@@ -339,10 +350,14 @@ public class AppReturnGoodsActivity extends Activity {
                     builder.create().show();
 
                 }
+                else
+                {
+                    Toast.makeText(AppReturnGoodsActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
             }
             else
             {
-
+                Toast.makeText(AppReturnGoodsActivity.this, "申请退货失败,请稍后再试", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -414,6 +429,9 @@ public class AppReturnGoodsActivity extends Activity {
         {
             final ImageView imgView = new ImageView(AppReturnGoodsActivity.this);
             imgView.setImageBitmap(img);
+            ViewGroup.LayoutParams para = new ViewGroup.LayoutParams(appContext.getScreenWidth() / 4, appContext.getScreenHeight() / 8);
+            imgView.setLayoutParams(para);
+            imgView.setPadding(8, 8, 8, 8);
             imgView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
