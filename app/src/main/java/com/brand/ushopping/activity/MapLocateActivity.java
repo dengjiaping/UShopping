@@ -118,7 +118,6 @@ public class MapLocateActivity extends Activity
                     //地图长按事件
                     AlertDialog.Builder builder = new AlertDialog.Builder(MapLocateActivity.this);
                     builder.setMessage("是否要导航到此位置");
-                    builder.setTitle("登录");
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

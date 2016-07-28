@@ -30,6 +30,18 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/actionbar_text"
             style="@style/TitleTextViewStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="长按地图开始导航"
+            android:layout_alignBottom="@+id/title"
+            android:layout_toRightOf="@+id/title"
+            android:layout_toEndOf="@+id/title"
+            android:textSize="11dp"
+            android:textColor="@color/text_white"
+            android:layout_marginLeft="8dp" />
     </RelativeLayout>
 
     <com.amap.api.maps.MapView
