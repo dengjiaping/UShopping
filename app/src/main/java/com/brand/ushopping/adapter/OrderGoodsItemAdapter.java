@@ -51,7 +51,6 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
         this.appContext = (AppContext) context.getApplicationContext();
         inflater=LayoutInflater.from(context);
     }
-
     private int width;
     private int height;
 
@@ -153,9 +152,9 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                             bundle.putString("img", list.get(position).get("img").toString());
                             bundle.putString("goodsName", list.get(position).get("goodsName").toString());
                             bundle.putString("attribute", list.get(position).get("attribute").toString());
-                            bundle.putDouble("price", (Double) list.get(position).get("price"));
+                            bundle.putDouble("price", Double.valueOf((String) list.get(position).get("price")));
                             bundle.putInt("count", (Integer) list.get(position).get("count"));
-                            bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                            bundle.putInt("boughtType", (Integer) list.get(position).get("boughtType"));
                             bundle.putInt("customerFlag", customerFlag);
                             bundle.putString("customerContent", list.get(position).get("customerContent").toString());
                             bundle.putLong("startTime", (Long) list.get(position).get("startTime"));
@@ -184,7 +183,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
                             bundle.putString("img", list.get(position).get("img").toString());
                             bundle.putString("goodsName", list.get(position).get("goodsName").toString());
                             bundle.putString("attribute", list.get(position).get("attribute").toString());
-                            bundle.putDouble("price", (Double) list.get(position).get("price"));
+                            bundle.putDouble("price", Double.valueOf((String) list.get(position).get("price")));
                             bundle.putInt("count", (Integer) list.get(position).get("count"));
 
                             bundle.putLong("goodsId", (Long) list.get(position).get("goodsId"));

@@ -43,7 +43,6 @@ public class AddressAction extends BaseAction
                     result = (ArrayList<Address>) JSON.parseArray(data, Address.class);
 
                 }
-
             }
 
         } catch (Exception e) {

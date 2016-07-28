@@ -56,7 +56,6 @@ public class OrderItemView extends LinearLayout {
     private String expressCompany = "";
     private String expressNo = "";
 
-
     public OrderItemView(final Context context, final OrderActivity activity, AttributeSet attrs, final OrderItem orderItem, final User user) {
         super(context, attrs);
         appContext = (AppContext) context.getApplicationContext();

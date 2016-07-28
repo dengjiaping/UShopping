@@ -100,10 +100,22 @@ public class TryitOrderItemView extends LinearLayout
             line.put("attribute", orderGoodsItem.getAttribute());
             line.put("price",  CommonUtils.df.format(orderGoodsItem.getMoney()));
             line.put("count", orderGoodsItem.getQuantity());
-            line.put("customerFlag", StaticValues.CUSTOMER_FLAG_NONE);
+            line.put("customerFlag", orderGoodsItem.getCustomerFlag());
             line.put("context", this.context);
             line.put("boughtType", StaticValues.BOUTHT_TYPE_TRYIT);
             line.put("orderFlag", orderItem.getFlag());
+
+            line.put("customerContent", orderGoodsItem.getCustomerContent());
+            line.put("startTime", orderGoodsItem.getCustomerStartTime());
+            line.put("endTime", orderGoodsItem.getCustomerEndTime());
+            line.put("orderId", orderGoodsItem.getId());
+            line.put("orderNo", orderItem.getOrderNo());
+            line.put("money", CommonUtils.df.format(orderGoodsItem.getMoney()));
+            line.put("flag", orderItem.getFlag());
+            line.put("centerTime", orderGoodsItem.getCustomerCenterTime());
+            line.put("reTime", orderGoodsItem.getReTime());
+            line.put("problem", orderGoodsItem.getCustomerProblem());
+            line.put("explain", orderGoodsItem.getCustomerExplain());
 
             line.put("user", user);
 
@@ -174,6 +186,7 @@ public class TryitOrderItemView extends LinearLayout
                     context.startActivity(intent);
                 }
             });
+
 
 
             payOfflineBtn.setOnClickListener(new OnClickListener() {
