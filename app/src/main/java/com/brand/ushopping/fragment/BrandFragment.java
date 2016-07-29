@@ -102,6 +102,9 @@ public class BrandFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }

@@ -62,6 +62,7 @@ public class SearchActivity extends Activity {
     private String searchTypeSelected = StaticValues.SEARCH_TYPE_NAME;
     private FrameLayout warningLayout;
     private TextView warningTextView;
+    private int boughtType = StaticValues.BOUTHT_TYPE_NORMAL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,6 @@ public class SearchActivity extends Activity {
         user = appContext.getUser();
 
         searchTypeSpinner = (Spinner) findViewById(R.id.search_type);
-
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.search_type_spinner_item, searchTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchTypeSpinner.setAdapter(adapter);
@@ -90,10 +90,8 @@ public class SearchActivity extends Activity {
 
             }
         });
-
         warningLayout = (FrameLayout) findViewById(R.id.warning_layout);
         warningTextView = (TextView) findViewById(R.id.warning_text);
-
         searchEditText = (EditText) findViewById(R.id.search_text);
         searchBtn = (ImageView) findViewById(R.id.search);
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +143,7 @@ public class SearchActivity extends Activity {
                 Intent intent = new Intent(SearchActivity.this, GoodsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("goodsId", id);
-                bundle.putInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                bundle.putInt("boughtType", boughtType);
                 intent.putExtras(bundle);
                 appContext.setBundleObj(bundle);
                 startActivity(intent);
@@ -170,8 +168,26 @@ public class SearchActivity extends Activity {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
-
         recentSearchLayout = (GridLayout) findViewById(R.id.recent);
+
+        Bundle bundle = null;
+        try
+        {
+            bundle = getIntent().getExtras();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            bundle = appContext.getBundleObj();
+        }
+        if(bundle != null)
+        {
+            boughtType = bundle.getInt("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+        }
+        else
+        {
+            finish();
+        }
 
         chooseMode();
         loadRecent();
@@ -315,7 +331,7 @@ public class SearchActivity extends Activity {
                         line.put("img", "");
                     }
                     line.put("price", goods.getPromotionPrice());
-                    line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                    line.put("boughtType", boughtType);
 
                     listData.add(line);
                 }

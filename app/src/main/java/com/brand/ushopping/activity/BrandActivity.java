@@ -45,7 +45,7 @@ public class BrandActivity extends Activity {
     private ImageView showpicImageView;
     private ImageView favouriteBtn;
     private MyGridView goodsListView;
-
+    private ImageView searchBtn;
     private TextView categoryNew;
     private TextView categoryPrice;
     private TextView categorySale;
@@ -117,6 +117,17 @@ public class BrandActivity extends Activity {
         });
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(this.getTitle().toString());
+        searchBtn = (ImageView) findViewById(R.id.search);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BrandActivity.this, SearchActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("boughtType", boughtType);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         Bundle bundle = null;
         try
@@ -325,7 +336,6 @@ public class BrandActivity extends Activity {
 
             }
         });
-
 
     }
 
