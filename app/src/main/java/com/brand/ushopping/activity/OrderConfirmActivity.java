@@ -345,6 +345,7 @@ public class OrderConfirmActivity extends Activity {
                 Intent intent = new Intent(OrderConfirmActivity.this, AddressesActivity.class);
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_PICK);
+                bundle1.putSerializable("enterActivityClass", OrderConfirmActivity.class);
                 intent.putExtras(bundle1);
                 appContext.setBundleObj(bundle1);
                 startActivityForResult(intent, StaticValues.CODE_ADDRESSES_PICK);

@@ -217,7 +217,7 @@ public class SearchActivity extends Activity {
                 });
                 textView.setTextColor(getResources().getColor(R.color.text_light_grey));
 
-                ViewGroup.LayoutParams para = new ViewGroup.LayoutParams(120, 48);
+                ViewGroup.LayoutParams para = new ViewGroup.LayoutParams(240, 65);
                 textView.setLayoutParams(para);
                 textView.setTextColor(getResources().getColor(R.color.text_grey));
                 textView.setBackgroundColor(getResources().getColor(R.color.text_white));

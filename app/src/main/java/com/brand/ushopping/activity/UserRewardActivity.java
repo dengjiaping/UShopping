@@ -17,6 +17,7 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.RewardsAction;
 import com.brand.ushopping.adapter.RewardItemAdapter;
+import com.brand.ushopping.model.Address;
 import com.brand.ushopping.model.AppaddressId;
 import com.brand.ushopping.model.AppuserId;
 import com.brand.ushopping.model.AppushopId;
@@ -40,8 +41,9 @@ public class UserRewardActivity extends Activity {
     private GridView goodsListGridView;
     private UserReward userReward;
 
-    private long addressId = 0;
-    private String deaddress;
+    private Address address;
+//    private long addressId = 0;
+//    private String deaddress;
     private RewardConfirmDialog rewardConfirmDialog;
 
     private RewardGoodsItem rewardGoodsItemSelected;
@@ -102,12 +104,13 @@ public class UserRewardActivity extends Activity {
         });
 
         rewardsTextView = (TextView) findViewById(R.id.reward);
+
+        reload();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        reload();
     }
 
     private void reload()
@@ -231,8 +234,31 @@ public class UserRewardActivity extends Activity {
             {
                 if(result.isSuccess())
                 {
-                    Toast.makeText(UserRewardActivity.this, "商品已兑换", Toast.LENGTH_SHORT).show();
-                    reload();
+                    rewardConfirmDialog.dismiss();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UserRewardActivity.this);
+                    builder.setMessage("商品已兑换");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("查看订单", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //查看订单
+                            Intent intent = new Intent(UserRewardActivity.this, OrderActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("enterType", StaticValues.ORDER_FLAG_PAID);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            appContext.setBundleObj(bundle);
+                            UserRewardActivity.this.finish();
+                        }
+                    });
+                    builder.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UserRewardActivity.this.finish();
+                        }
+                    });
+                    builder.create().show();
 
                 }
                 else
@@ -254,6 +280,7 @@ public class UserRewardActivity extends Activity {
         Intent intent = new Intent(UserRewardActivity.this, AddressesActivity.class);
         Bundle bundle1 = new Bundle();
         bundle1.putInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_PICK);
+        bundle1.putSerializable("enterActivityClass", UserRewardActivity.class);
         intent.putExtras(bundle1);
         appContext.setBundleObj(bundle1);
         startActivityForResult(intent, StaticValues.CODE_ADDRESSES_PICK);
@@ -264,11 +291,11 @@ public class UserRewardActivity extends Activity {
         {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                addressId = bundle.getLong("addressId");
-                deaddress = bundle.getString("deaddress");
-
-                rewardConfirmDialog.setAddressTextView(deaddress);
-
+                address = bundle.getParcelable("obj");
+                if(address != null)
+                {
+                    rewardConfirmDialog.setAddressTextView(address.getDeaddress());
+                }
             }
         }
 
@@ -277,7 +304,7 @@ public class UserRewardActivity extends Activity {
     //完成兑换
     public void rewardAction()
     {
-        if(addressId != 0)
+        if(address != null)
         {
             UserReward userReward = new UserReward();
 
@@ -294,7 +321,7 @@ public class UserRewardActivity extends Activity {
             userReward.setAppushopId(appushopId);
 
             AppaddressId appaddressId = new AppaddressId();
-            appaddressId.setId(addressId);
+            appaddressId.setId(address.getId());
             userReward.setAppaddressId(appaddressId);
 
             userReward.setUshopId(rewardGoodsItemSelected.getId());

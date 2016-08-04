@@ -38,6 +38,7 @@ public class AddressesActivity extends Activity {
     private TextView warningTextView;
     private AddressAdapter adapter;
     private List listData;
+    private Class enterActivityClass;
 
     private int enterMode = StaticValues.ADDRESSES_ENTER_MODE_EDIT;
 
@@ -99,6 +100,10 @@ public class AddressesActivity extends Activity {
         if(bundle != null)
         {
             enterMode = bundle.getInt("enterMode", StaticValues.ADDRESSES_ENTER_MODE_EDIT);
+            if(enterMode == StaticValues.ADDRESSES_ENTER_MODE_PICK)
+            {
+                enterActivityClass = (Class) bundle.getSerializable("enterActivityClass");
+            }
         }
         else
         {
@@ -138,7 +143,7 @@ public class AddressesActivity extends Activity {
                         for (int a = 0; a < addressList.size(); a++) {
                             address = addressList.get(a);
                             if (address.getAddressId() == id) {
-                                Intent intent = new Intent(AddressesActivity.this, OrderConfirmActivity.class);
+                                Intent intent = new Intent(AddressesActivity.this, enterActivityClass);
 
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelable("obj", address);

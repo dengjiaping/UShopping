@@ -152,7 +152,12 @@ public class RegisterActivity extends Activity {
                     Toast.makeText(RegisterActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //手机号校验
+                if(mobile.length() != 11)
+                {
+                    Toast.makeText(RegisterActivity.this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(pass == null || pass.isEmpty())
                 {
                     Toast.makeText(RegisterActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();

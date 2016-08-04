@@ -306,7 +306,7 @@ public class CategoryActivity extends Activity {
             else
             {
                 warningLayout.setVisibility(View.VISIBLE);
-                warningTextView.setText("获取分类商品失败..");
+                warningTextView.setText("获取分类商品失败");
 
             }
 

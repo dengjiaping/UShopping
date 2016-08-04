@@ -237,11 +237,19 @@ public class GoodsFilterActivity extends AppCompatActivity {
         }
         if(!CommonUtils.isValueEmpty(priceMinEditText.getText().toString()))
         {
-            searchAppGoods.setMinMoney(Double.valueOf(priceMinEditText.getText().toString()));
+            double minMoney = Double.valueOf(priceMinEditText.getText().toString());
+            if(minMoney != 0)
+            {
+                searchAppGoods.setMinMoney(minMoney);
+            }
         }
         if(!CommonUtils.isValueEmpty(priceMaxEditText.getText().toString()))
         {
-            searchAppGoods.setMaxMoney(Double.valueOf(priceMaxEditText.getText().toString()));
+            double maxMoney = Double.valueOf(priceMaxEditText.getText().toString());
+            if(maxMoney != 0)
+            {
+                searchAppGoods.setMaxMoney(maxMoney);
+            }
         }
         searchAppGoods.setAppCategoryId(appCategoryIdSelected);
         if(user != null)

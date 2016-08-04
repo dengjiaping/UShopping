@@ -128,14 +128,15 @@ public class GoodsAction extends BaseAction
 
         try
         {
-            if(appGoodsTypeId.getUseCache())
-            {
-                resultString = DataCache.getData(context, "GetAppGoodsTypeId.action", appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
-            }
-            if(resultString == null)
-            {
-                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
-            }
+//            if(appGoodsTypeId.getUseCache())
+//            {
+//                resultString = DataCache.getData(context, "GetAppGoodsTypeId.action", appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
+//            }
+//            if(resultString == null)
+//            {
+//                resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
+//            }
+            resultString = URLConnectionUtil.post(CommonUtils.getAbsoluteUrl("GetAppGoodsTypeId.action"), CommonUtils.generateParams(jsonParam));
 
             if(resultString != null)
             {
@@ -159,7 +160,7 @@ public class GoodsAction extends BaseAction
                     appGoodsTypeId.setSuccess(true);
 
                     //存入缓存
-                    DataCache.putData(context, "GetAppGoodsTypeId.action", resultString, appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
+//                    DataCache.putData(context, "GetAppGoodsTypeId.action", resultString, appGoodsTypeId.getAppcategoryId(), appGoodsTypeId.getMin());
                 }
                 else
                 {

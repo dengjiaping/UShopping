@@ -105,12 +105,16 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/price_min"
-                android:hint="0" />
+                android:hint="0"
+                android:textAlignment="center"
+                style="@style/EditTextStyle"
+                android:layout_marginLeft="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="到" />
+                android:text="到"
+                android:layout_marginLeft="4dp" />
 
             <EditText
                 android:layout_width="75dp"
@@ -118,7 +122,10 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/price_max"
-                android:hint="0" />
+                android:hint="0"
+                android:textAlignment="center"
+                style="@style/EditTextStyle"
+                android:layout_marginLeft="4dp" />
         </LinearLayout>
 
         <TextView
