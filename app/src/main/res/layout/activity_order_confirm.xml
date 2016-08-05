@@ -43,7 +43,7 @@
             android:singleLine="true"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </RelativeLayout>
 
