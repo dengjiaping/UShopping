@@ -47,7 +47,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
     private ArrayList<Goods> goodsList = new ArrayList<Goods>();
     private TextView selectedDate;
     private long currentTime;
-    private long storeId;
+//    private long storeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
         {
             goodsList = bundle.getParcelableArrayList("goods");
             boughtType = bundle.getInt("boughtType");
-            storeId = bundle.getLong("storeId", 0);
+//            storeId = bundle.getLong("storeId", 0);
         }
         else
         {
@@ -144,7 +144,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
                     bundle.putInt("boughtType", boughtType);
                     bundle.putLong("reservationDate", reservationDate);
                     bundle.putParcelableArrayList("goods", goodsList);
-                    bundle.putLong("storeId", storeId);
+//                    bundle.putLong("storeId", storeId);
                     intent.putExtras(bundle);
                     appContext.setBundleObj(bundle);
                     startActivity(intent);

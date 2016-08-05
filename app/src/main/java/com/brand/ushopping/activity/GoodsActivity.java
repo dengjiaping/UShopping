@@ -456,7 +456,12 @@ public class GoodsActivity extends UActivity {
         Goods goods = goodsInfo.getGoods();
         goods.setAttribute("颜色:"+colorSelected+" 尺码:"+sizeSelected);
         goods.setCount(count);
-
+        if(storeId != 0)
+        {
+            AppStoresId appStoresId = new AppStoresId();
+            appStoresId.setId(storeId);
+            goods.setAppStoresId(appStoresId);
+        }
         ArrayList<Goods> goodsList = new ArrayList<Goods>();
         goodsList.add(goods);
 
@@ -475,7 +480,7 @@ public class GoodsActivity extends UActivity {
 
             case StaticValues.BOUTHT_TYPE_RESERVATION:
             case StaticValues.BOUTHT_TYPE_TRYIT:
-                bundle.putLong("storeId", storeId);
+//                bundle.putLong("storeId", storeId);
                 intent.setClass(GoodsActivity.this, SelectDateActivity.class);
 
                 break;
