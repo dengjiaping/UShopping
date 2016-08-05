@@ -29,7 +29,6 @@ import com.brand.ushopping.activity.SelectDateActivity;
 import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
 import com.brand.ushopping.model.AppShopcartIdList;
-import com.brand.ushopping.model.AppStoresId;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.AppsmShopcart;
 import com.brand.ushopping.model.AppyyShopcart;
@@ -202,11 +201,11 @@ public class CartFragment extends Fragment {
                     bundle.putLong("reservationDate", 0);
                     bundle.putInt("boughtType", boughtType);
                     bundle.putParcelableArrayList("goods", goodsList);
-                    AppStoresId appStoresId = goodsList.get(0).getAppStoresId();
-                    if(appStoresId != null)
-                    {
-                        bundle.putLong("storeId", appStoresId.getId());
-                    }
+//                    AppStoresId appStoresId = goodsList.get(0).getAppStoresId();
+//                    if(appStoresId != null)
+//                    {
+//                        bundle.putLong("storeId", appStoresId.getId());
+//                    }
 
                     intent.putExtras(bundle);
                     appContext.setBundleObj(bundle);

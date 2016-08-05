@@ -29,7 +29,6 @@ import com.brand.ushopping.adapter.GoodsVoucherAdapter;
 import com.brand.ushopping.adapter.ManjianVoucherAdapter;
 import com.brand.ushopping.adapter.OrderGoodsItemAdapter;
 import com.brand.ushopping.model.Address;
-import com.brand.ushopping.model.AppStoresId;
 import com.brand.ushopping.model.AppaddressId;
 import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.AppgoodsId;
@@ -112,7 +111,6 @@ public class OrderConfirmActivity extends Activity {
     private long reservationDate;
     private int boughtType;
     private String orderNo;
-    private long storeId;
     private Date timeShop;  //到店预约时间
 
     private Long addressId;
@@ -171,7 +169,6 @@ public class OrderConfirmActivity extends Activity {
             boughtType = bundle.getInt("boughtType");
             operation = bundle.getInt("operation", StaticValues.ORDER_COMFIRM_GEN_ORDER);
             orderNo = bundle.getString("orderNo", null);
-            storeId = bundle.getLong("storeId", 0);
         }
         else
         {
@@ -1378,9 +1375,7 @@ public class OrderConfirmActivity extends Activity {
             smOrderSave.setTimeShop(new Date(reservationDate));
 
             //店铺信息
-            AppStoresId appStoresId = new AppStoresId();
-            appStoresId.setId(storeId);
-            smOrderSave.setAppStoresId(appStoresId);
+            smOrderSave.setAppStoresId(goods.getAppStoresId());
 
             smOrderSaveArrayList.add(smOrderSave);
         }
@@ -1454,9 +1449,7 @@ public class OrderConfirmActivity extends Activity {
             yyOrderSave.setTimeShop(new Date(reservationDate));
 
             //店铺信息
-            AppStoresId appStoresId = new AppStoresId();
-            appStoresId.setId(storeId);
-            yyOrderSave.setAppStoresId(appStoresId);
+            yyOrderSave.setAppStoresId(goods.getAppStoresId());
 
             yyOrderSaveArrayList.add(yyOrderSave);
         }
