@@ -215,6 +215,7 @@ public class StaticValues
     public static final int REQUEST_CODE_GOODS_FILTER = 1004;
     public static final int REQUEST_CODE_IMAGE_UPLOAD = 1005;
     public static final int REQUEST_CODE_IMAGE_CAMERA = 1006;
+    public static final int REQUEST_CODE_AREA_PICK = 1007;
     //获取位置的有效时间
     public static final int LOCATION_EXPIRE_TIME = 7200000;
 
@@ -231,5 +232,10 @@ public class StaticValues
 
     //退货图片数量限制
     public static final int RETURN_GOODS_IMAGE_COUNT = 5;
+
+    public static final int AREA_TYPE_PROVINCE = 1;
+    public static final int AREA_TYPE_CITY = 2;
+    public static final int AREA_TYPE_COUNTY = 3;
+    public static final int AREA_TYPE_DISTRICT = 4;
 
 }

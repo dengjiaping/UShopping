@@ -28,6 +28,7 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.MainpageAction;
 import com.brand.ushopping.action.RefAction;
+import com.brand.ushopping.activity.AreaChooseActivity;
 import com.brand.ushopping.activity.AroundActivity;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.activity.MainActivity;
@@ -282,6 +283,13 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         });
 
         cityTextView = (TextView) view.findViewById(R.id.city);
+        cityTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AreaChooseActivity.class);
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_AREA_PICK);
+            }
+        });
 
         mainpageLoadDialog = TimeoutbleProgressDialog.createProgressDialog(getActivity(), StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
             @Override
@@ -483,7 +491,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 amapLocation.getAdCode();//地区编码
                 */
 
-                String city = aMapLocation.getCity();
+                String city = aMapLocation.getDistrict();
                 cityTextView.setText(city);
                 appContext.setCity(city);
                 appContext.setLongitude(aMapLocation.getLongitude());
@@ -848,6 +856,19 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 appContext.setMain(result);
                 setValue();
             }
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == StaticValues.REQUEST_CODE_AREA_PICK && resultCode == getActivity().RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String areaName = bundle.getString("areaName");
+            cityTextView.setText(areaName);
+            appContext.setCity(areaName);
 
         }
     }

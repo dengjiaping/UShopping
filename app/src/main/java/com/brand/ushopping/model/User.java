@@ -21,6 +21,7 @@ public class User extends BaseModel implements Parcelable
     private String birthday;
     private Boolean success;
     private String token;
+    private String place;
 
     public long getUserId() {
         return userId;
@@ -126,6 +127,14 @@ public class User extends BaseModel implements Parcelable
         this.token = token;
     }
 
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public User createFromParcel(Parcel in) {
             return new User(in);
@@ -163,6 +172,7 @@ public class User extends BaseModel implements Parcelable
         address = in.readString();
         birthday = in.readString();
         token = in.readString();
+        place = in.readString();
     }
 
     @Override
@@ -179,6 +189,7 @@ public class User extends BaseModel implements Parcelable
         dest.writeString(address);
         dest.writeString(birthday);
         dest.writeString(token);
+        dest.writeString(place);
     }
 
     public boolean updateValidation()
