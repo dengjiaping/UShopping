@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,9 +28,10 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
+import com.brand.ushopping.action.AppAction;
+import com.brand.ushopping.action.ImageAction;
 import com.brand.ushopping.action.MainpageAction;
 import com.brand.ushopping.action.RefAction;
-import com.brand.ushopping.activity.AreaChooseActivity;
 import com.brand.ushopping.activity.AroundActivity;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.activity.MainActivity;
@@ -42,6 +45,7 @@ import com.brand.ushopping.adapter.HomeReAdapter;
 import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.Banner;
 import com.brand.ushopping.model.Category;
+import com.brand.ushopping.model.GetSelectAppStartpicture;
 import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.Main;
@@ -286,8 +290,9 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         cityTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AreaChooseActivity.class);
-                startActivityForResult(intent, StaticValues.REQUEST_CODE_AREA_PICK);
+                //手动选择地区
+//                Intent intent = new Intent(getActivity(), AreaChooseActivity.class);
+//                startActivityForResult(intent, StaticValues.REQUEST_CODE_AREA_PICK);
             }
         });
 
@@ -419,6 +424,15 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         {
             getAALocation();
         }
+
+        GetSelectAppStartpicture getSelectAppStartpicture = new GetSelectAppStartpicture();
+        if(user != null)
+        {
+            getSelectAppStartpicture.setUserId(user.getUserId());
+            getSelectAppStartpicture.setSessionid(user.getSessionid());
+        }
+        getSelectAppStartpicture.setPid(appContext.getCity());
+        new GetSelectAppStartpictureTask().execute(getSelectAppStartpicture);
 
         mainActivity.setButtomBarEnable(true);
     }
@@ -869,6 +883,76 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             String areaName = bundle.getString("areaName");
             cityTextView.setText(areaName);
             appContext.setCity(areaName);
+
+            //存入缓存
+            Location location = new Location();
+            location.setCity(areaName);
+            location.setLongitude(Double.toString(0));
+            location.setLatitude(Double.toString(0));
+
+            new RefAction(getActivity()).setLocation(getActivity(), location);
+        }
+    }
+
+    //获取splash url
+    public class GetSelectAppStartpictureTask extends AsyncTask<GetSelectAppStartpicture, Void, GetSelectAppStartpicture>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected GetSelectAppStartpicture doInBackground(GetSelectAppStartpicture... getSelectAppStartpictures) {
+            return new AppAction(getActivity()).getSelectAppStartpictureAction(getSelectAppStartpictures[0]);
+        }
+
+        @Override
+        protected void onPostExecute(final GetSelectAppStartpicture result) {
+            if(result != null)
+            {
+                if(result.isSuccess())
+                {
+                    try
+                    {
+                        if(!new ImageAction(getActivity()).checkFileExists("splash.png"))
+                        {
+                            new DownloadSplashTask(result.getImages()).start();
+                        }
+
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }
+    }
+
+    private class DownloadSplashTask extends Thread
+    {
+        private String url;
+        public DownloadSplashTask(String url)
+        {
+            this.url = url;
+        }
+        @Override
+        public void run() {
+            super.run();
+            try {
+                byte[] data = new ImageAction(getActivity()).getImage(url);
+                if(data != null)
+                {
+                    Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    new ImageAction(getActivity()).saveFile(mBitmap, "splash.png");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+//            new ImageAction(MainActivity.this).downloadImg(url);
 
         }
     }

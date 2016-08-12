@@ -146,7 +146,6 @@ public class AreaChooseActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     areaName = (String) ((Map) provinceSpinner.getItemAtPosition(i)).get("name");
-                                    titleTextView.setText(areaName);
                                     confirmBtn.setEnabled(true);
                                     //加载市列表
                                     long pid = (long) ((Map) provinceSpinner.getItemAtPosition(i)).get("id");
@@ -177,7 +176,6 @@ public class AreaChooseActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     areaName = (String) ((Map) citySpinner.getItemAtPosition(i)).get("name");
-                                    titleTextView.setText(areaName);
                                     confirmBtn.setEnabled(true);
                                     //加载县列表
                                     long pid = (long) ((Map) citySpinner.getItemAtPosition(i)).get("id");
@@ -207,7 +205,6 @@ public class AreaChooseActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     areaName = (String) ((Map) countySpinner.getItemAtPosition(i)).get("name");
-                                    titleTextView.setText(areaName);
                                     confirmBtn.setEnabled(true);
                                     //加载地区列表
                                     long pid = (long) ((Map) countySpinner.getItemAtPosition(i)).get("id");
@@ -236,7 +233,6 @@ public class AreaChooseActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     areaName = (String) ((Map) districtSpinner.getItemAtPosition(i)).get("name");
-                                    titleTextView.setText(areaName);
                                     confirmBtn.setEnabled(true);
 
                                 }

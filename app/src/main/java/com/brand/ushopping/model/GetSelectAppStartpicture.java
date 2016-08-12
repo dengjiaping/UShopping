@@ -9,6 +9,7 @@ public class GetSelectAppStartpicture extends BaseModel {
     private boolean success;
     private String msg;
     private String images;
+    private String pid;
 
     public long getUserId() {
         return userId;
@@ -48,5 +49,13 @@ public class GetSelectAppStartpicture extends BaseModel {
 
     public void setImages(String images) {
         this.images = images;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }
