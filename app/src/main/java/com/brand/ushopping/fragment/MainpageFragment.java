@@ -431,7 +431,7 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             getSelectAppStartpicture.setUserId(user.getUserId());
             getSelectAppStartpicture.setSessionid(user.getSessionid());
         }
-        getSelectAppStartpicture.setPid(appContext.getCity());
+        getSelectAppStartpicture.setArea(appContext.getCity());
         new GetSelectAppStartpictureTask().execute(getSelectAppStartpicture);
 
         mainActivity.setButtomBarEnable(true);

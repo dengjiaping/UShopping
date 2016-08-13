@@ -121,7 +121,7 @@ public class LoginActivity extends Activity {
                 }
                 user.setPass(pass);
                 user.setToken(appContext.getXgPushToken());
-                user.setPid(appContext.getCity());
+                user.setArea(appContext.getCity());
                 new LoginTask().execute(user);
             }
         });
