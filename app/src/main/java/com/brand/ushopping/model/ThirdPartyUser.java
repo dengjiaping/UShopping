@@ -12,6 +12,7 @@ public class ThirdPartyUser extends BaseModel{
     private Boolean model;
     private String url;
     private String token;
+    private String area;
 
     public String getSinaId() {
         return sinaId;
@@ -67,5 +68,13 @@ public class ThirdPartyUser extends BaseModel{
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

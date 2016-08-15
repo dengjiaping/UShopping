@@ -331,6 +331,7 @@ public class SearchActivity extends Activity {
                         line.put("img", "");
                     }
                     line.put("price", goods.getPromotionPrice());
+                    line.put("salesCount", goods.getSaleCount());
                     line.put("boughtType", boughtType);
 
                     listData.add(line);

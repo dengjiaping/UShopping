@@ -147,6 +147,7 @@ public class LoginActivity extends Activity {
                         thirdPartyUser.setSinaId(map.get("uid"));
                         thirdPartyUser.setUserName("userName");
                         thirdPartyUser.setToken(appContext.getXgPushToken());
+                        thirdPartyUser.setArea(appContext.getCity());
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
 
@@ -181,6 +182,7 @@ public class LoginActivity extends Activity {
                         thirdPartyUser.setSinaId(map.get("uid"));
                         thirdPartyUser.setUserName("userName");
                         thirdPartyUser.setToken(appContext.getXgPushToken());
+                        thirdPartyUser.setArea(appContext.getCity());
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
                     }
@@ -225,6 +227,7 @@ public class LoginActivity extends Activity {
                         thirdPartyUser.setSinaId(map.get("openid"));
                         thirdPartyUser.setUserName("userName");
                         thirdPartyUser.setToken(appContext.getXgPushToken());
+                        thirdPartyUser.setArea(appContext.getCity());
 
                         new ThirdPartyLoginTask().execute(thirdPartyUser);
                     }

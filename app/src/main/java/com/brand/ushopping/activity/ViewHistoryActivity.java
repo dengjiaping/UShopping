@@ -120,6 +120,7 @@ public class ViewHistoryActivity extends Activity {
                 line.put("img", appgoodsId.getLogopicUrl());
                 line.put("name", appgoodsId.getGoodsName());
                 line.put("price", appgoodsId.getPromotionPrice());
+                line.put("salesCount", appgoodsId.getSaleCount());
 
                 goodsListData.add(line);
 

@@ -67,6 +67,7 @@ public class GoodsAdapter extends BaseAdapter {
             holder.img = (ImageView)convertView.findViewById(R.id.img);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.price = (TextView) convertView.findViewById(R.id.price);
+            holder.salesCount = (TextView) convertView.findViewById(R.id.sales_count);
 
             //为view设置标签
             convertView.setTag(holder);
@@ -109,6 +110,7 @@ public class GoodsAdapter extends BaseAdapter {
 
         holder.name.setText(list.get(position).get("name").toString());
         holder.price.setText(list.get(position).get("price").toString());
+        holder.salesCount.setText(list.get(position).get("salesCount").toString());
 
         width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
         height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
@@ -122,7 +124,7 @@ public class GoodsAdapter extends BaseAdapter {
         ImageView img;
         TextView name;
         TextView price;
-
+        TextView salesCount;
     }
 
 }

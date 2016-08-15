@@ -362,6 +362,7 @@ public class GoodsFilterActivity extends AppCompatActivity {
                     }
                     line.put("price", goods.getPromotionPrice());
                     line.put("boughtType", StaticValues.BOUTHT_TYPE_NORMAL);
+                    line.put("salesCount", goods.getSaleCount());
 
                     listData.add(line);
                 }
