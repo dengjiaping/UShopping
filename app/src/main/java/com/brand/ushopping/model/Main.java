@@ -14,6 +14,7 @@ public class Main extends BaseModel
     private ArrayList<Category> category;
     private ArrayList<Recommend> recommend;
     private Boolean useCache = true;    //是否使用缓存
+    private String area;
 
     private boolean success;
     private String msg;
@@ -88,5 +89,13 @@ public class Main extends BaseModel
 
     public void setUseCache(Boolean useCache) {
         this.useCache = useCache;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

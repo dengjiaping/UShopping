@@ -109,7 +109,8 @@ public class AppAction extends BaseAction{
             mMain.setSessionid(user.getSessionid());
 
         }
-        mMain.setUseCache(true);
+        mMain.setArea(appContext.getCity());
+        mMain.setUseCache(false);
         Main result = null;
         try
         {

@@ -16,6 +16,7 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.action.RefAction;
+import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.User;
 import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
@@ -55,6 +56,12 @@ public class SplashActivity extends Activity {
         }catch (Exception e)
         {
             e.printStackTrace();
+        }
+
+        Location location = new RefAction(SplashActivity.this).getLocation(SplashActivity.this);
+        if(location != null)
+        {
+            appContext.setCity(location.getCity());
         }
 
         //检测是否登录

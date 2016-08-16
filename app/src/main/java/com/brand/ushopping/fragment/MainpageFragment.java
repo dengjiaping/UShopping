@@ -32,6 +32,7 @@ import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.action.ImageAction;
 import com.brand.ushopping.action.MainpageAction;
 import com.brand.ushopping.action.RefAction;
+import com.brand.ushopping.activity.AreaChooseActivity;
 import com.brand.ushopping.activity.AroundActivity;
 import com.brand.ushopping.activity.GoodsActivity;
 import com.brand.ushopping.activity.MainActivity;
@@ -291,8 +292,8 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             @Override
             public void onClick(View v) {
                 //手动选择地区
-//                Intent intent = new Intent(getActivity(), AreaChooseActivity.class);
-//                startActivityForResult(intent, StaticValues.REQUEST_CODE_AREA_PICK);
+                Intent intent = new Intent(getActivity(), AreaChooseActivity.class);
+                startActivityForResult(intent, StaticValues.REQUEST_CODE_AREA_PICK);
             }
         });
 
