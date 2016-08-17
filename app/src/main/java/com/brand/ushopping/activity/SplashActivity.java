@@ -62,6 +62,7 @@ public class SplashActivity extends Activity {
         if(location != null)
         {
             appContext.setCity(location.getCity());
+            appContext.setArea(location.getArea());
         }
 
         //检测是否登录

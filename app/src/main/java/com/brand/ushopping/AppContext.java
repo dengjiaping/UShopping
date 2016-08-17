@@ -48,6 +48,7 @@ public class AppContext  extends Application
     private ArrayList<Address> addressList;
     private String defaultAddress;
     private long defaultAddressId;
+    private String area;
     private String city;
     private Main main;
     private HomeRe homeRe;
@@ -373,5 +374,13 @@ public class AppContext  extends Application
 
     public void setXgPushToken(String xgPushToken) {
         this.xgPushToken = xgPushToken;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

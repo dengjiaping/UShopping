@@ -247,10 +247,16 @@ public class AroundActivity extends Activity {
                 }
                 else
                 {
-
+                    warningLayout.setVisibility(View.VISIBLE);
+                    warningTextView.setText(result.getMsg());
 
                 }
 
+            }
+            else
+            {
+                warningLayout.setVisibility(View.VISIBLE);
+                warningTextView.setText("获取周边门店失败");
             }
         }
     }

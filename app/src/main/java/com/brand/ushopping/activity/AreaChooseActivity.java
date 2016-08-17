@@ -37,6 +37,7 @@ public class AreaChooseActivity extends AppCompatActivity {
     private ImageView backBtn;
     private TextView titleTextView;
     private String areaName;
+    private String cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,14 @@ public class AreaChooseActivity extends AppCompatActivity {
                     Intent intent = new Intent(AreaChooseActivity.this, MainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("areaName", areaName);
+                    if(!CommonUtils.isValueEmpty(cityName))
+                    {
+                        bundle.putString("cityName", cityName);
+                    }
+                    else
+                    {
+                        bundle.putString("cityName", areaName);
+                    }
                     intent.putExtras(bundle);
                     appContext.setBundleObj(bundle);
 
@@ -120,7 +129,7 @@ public class AreaChooseActivity extends AppCompatActivity {
                 if(result.isSuccess())
                 {
                     ArrayList<Map<String, Object>> listData = new ArrayList<Map<String, Object>>();
-                    ArrayList<AreaItem> areaItems = result.getAreaItems();
+                    final ArrayList<AreaItem> areaItems = result.getAreaItems();
                     for (AreaItem areaItem: areaItems)
                     {
                         if(areaItem.getId() != 0)
@@ -176,6 +185,7 @@ public class AreaChooseActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     areaName = (String) ((Map) citySpinner.getItemAtPosition(i)).get("name");
+                                    cityName = areaName;
                                     confirmBtn.setEnabled(true);
                                     //加载县列表
                                     long pid = (long) ((Map) citySpinner.getItemAtPosition(i)).get("id");

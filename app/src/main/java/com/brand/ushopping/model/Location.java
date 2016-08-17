@@ -6,10 +6,19 @@ package com.brand.ushopping.model;
  */
 public class Location
 {
+    private String area;
     private String city;
     private String longitude;
     private String latitude;
     private Long time;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public String getCity() {
         return city;

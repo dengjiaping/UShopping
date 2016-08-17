@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -77,7 +76,7 @@ public class AroundItemAdapter extends BaseAdapter {
             holder.address=(TextView)convertView.findViewById(R.id.address);
             holder.telephone=(TextView)convertView.findViewById(R.id.telephone);
             holder.openTime=(TextView)convertView.findViewById(R.id.open_time);
-            holder.reservation=(Button)convertView.findViewById(R.id.reservation);
+            holder.reservation=(TextView) convertView.findViewById(R.id.reservation);
             holder.distance = (TextView) convertView.findViewById(R.id.distance);
 
             //为view设置标签
@@ -93,7 +92,7 @@ public class AroundItemAdapter extends BaseAdapter {
         holder.telephone.setText(list.get(position).get("shopTele").toString());
         holder.openTime.setText(list.get(position).get("businessHours").toString());
 
-        holder.reservation.setEnabled(false);
+        Boolean enable = false;
         switch ((Integer) list.get(position).get("boughtType"))
         {
             case StaticValues.BOUTHT_TYPE_NORMAL:
@@ -103,12 +102,11 @@ public class AroundItemAdapter extends BaseAdapter {
                 if((Integer) list.get(position).get("flag") == 0)
                 {
                     holder.reservation.setText("我要预订");
-                    holder.reservation.setEnabled(true);
+                    enable = true;
                 }
                 else
                 {
                     holder.reservation.setText("暂不支持");
-                    holder.reservation.setEnabled(false);
                 }
 
                 break;
@@ -117,38 +115,39 @@ public class AroundItemAdapter extends BaseAdapter {
                 if((Integer) list.get(position).get("door") == 0)
                 {
                     holder.reservation.setText("上门试衣");
-                    holder.reservation.setEnabled(true);
+                    enable = true;
                 }
                 else
                 {
                     holder.reservation.setText("暂不支持");
-                    holder.reservation.setEnabled(false);
                 }
 
                 break;
-
         }
 
-        holder.reservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, BrandActivity.class);
-                Brand brand = new Brand();
-                brand.setId((Long) list.get(position).get("id"));
-                brand.setLogopic((String) list.get(position).get("logopicUrl"));
-                brand.setBrandName((String) list.get(position).get("shopName"));
-                brand.setShowpic((String) list.get(position).get("showpic"));
+        if(enable)
+        {
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, BrandActivity.class);
+                    Brand brand = new Brand();
+                    brand.setId((Long) list.get(position).get("id"));
+                    brand.setLogopic((String) list.get(position).get("logopicUrl"));
+                    brand.setBrandName((String) list.get(position).get("shopName"));
+                    brand.setShowpic((String) list.get(position).get("showpic"));
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("brand", brand);
-                bundle.putInt("boughtType", (Integer) list.get(position).get("boughtType"));
-                bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_AROUND);
-                bundle.putLong("storeId", (Long) list.get(position).get("shopId"));
-                intent.putExtras(bundle);
-                appContext.setBundleObj(bundle);
-                context.startActivity(intent);
-            }
-        });
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("brand", brand);
+                    bundle.putInt("boughtType", (Integer) list.get(position).get("boughtType"));
+                    bundle.putInt("enterType", StaticValues.BRAND_ENTER_TYPE_AROUND);
+                    bundle.putLong("storeId", (Long) list.get(position).get("shopId"));
+                    intent.putExtras(bundle);
+                    appContext.setBundleObj(bundle);
+                    context.startActivity(intent);
+                }
+            });
+        }
 
         holder.distance.setText("距离: "+CommonUtils.distanceFormat((Double) list.get(position).get("distance")));
 
@@ -161,7 +160,7 @@ public class AroundItemAdapter extends BaseAdapter {
         TextView address;
         TextView telephone;
         TextView openTime;
-        Button reservation;
+        TextView reservation;
         TextView distance;
 
     }

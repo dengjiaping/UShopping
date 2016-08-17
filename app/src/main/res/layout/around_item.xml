@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Button
+                <TextView
                     android:layout_width="60dp"
                     android:layout_height="24dp"
                     android:id="@+id/reservation"
@@ -115,7 +115,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginRight="4dp" />
+                    android:layout_marginRight="4dp"
+                    android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"

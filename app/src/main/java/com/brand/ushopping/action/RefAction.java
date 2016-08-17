@@ -217,6 +217,7 @@ public class RefAction extends BaseAction
             SharedPreferences ref = context.getSharedPreferences("location", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = ref.edit();
 
+            editor.putString("area", location.getArea());
             editor.putString("city", location.getCity());
             editor.putString("longitude", location.getLongitude());
             editor.putString("latitude", location.getLatitude());
@@ -242,6 +243,7 @@ public class RefAction extends BaseAction
             if(ref != null)
             {
                 location = new Location();
+                location.setArea(ref.getString("area", null));
                 location.setCity(ref.getString("city", null));
                 location.setLongitude(ref.getString("longitude", null));
                 location.setLatitude(ref.getString("latitude", null));

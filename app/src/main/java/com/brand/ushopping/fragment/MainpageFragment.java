@@ -399,12 +399,14 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
             if(!CommonUtils.isValueEmpty(location.getCity()) && !CommonUtils.isValueEmpty(location.getLongitude()) && !CommonUtils.isValueEmpty(location.getLatitude()))
             {
                 String city = location.getCity();
+                String area = location.getArea();
                 Long currentTime = System.currentTimeMillis();
                 Long interval = currentTime - location.getTime();
                 if(interval < StaticValues.LOCATION_EXPIRE_TIME)
                 {
                     cityTextView.setText(city);
                     appContext.setCity(city);
+                    appContext.setArea(area);
                     appContext.setLongitude(Double.valueOf(location.getLongitude()));
                     appContext.setLatitude(Double.valueOf(location.getLatitude()));
 
@@ -505,16 +507,18 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
                 amapLocation.getCityCode();//城市编码
                 amapLocation.getAdCode();//地区编码
                 */
-
-                String city = aMapLocation.getDistrict();
+                String city = aMapLocation.getCity();
+                String area = aMapLocation.getDistrict();
                 cityTextView.setText(city);
                 appContext.setCity(city);
+                appContext.setArea(area);
                 appContext.setLongitude(aMapLocation.getLongitude());
                 appContext.setLatitude(aMapLocation.getLatitude());
 
                 //存入缓存
                 Location location = new Location();
                 location.setCity(city);
+                location.setArea(area);
                 location.setLongitude(Double.toString(aMapLocation.getLongitude()));
                 location.setLatitude(Double.toString(aMapLocation.getLatitude()));
 
@@ -882,12 +886,15 @@ public class MainpageFragment extends Fragment implements AMapLocationListener {
         if (requestCode == StaticValues.REQUEST_CODE_AREA_PICK && resultCode == getActivity().RESULT_OK) {
             Bundle bundle = data.getExtras();
             String areaName = bundle.getString("areaName");
-            cityTextView.setText(areaName);
-            appContext.setCity(areaName);
+            String cityName = bundle.getString("cityName");
+            cityTextView.setText(cityName);
+            appContext.setArea(areaName);
+            appContext.setCity(cityName);
 
             //存入缓存
             Location location = new Location();
-            location.setCity(areaName);
+            location.setCity(cityName);
+            location.setArea(areaName);
             location.setLongitude(Double.toString(0));
             location.setLatitude(Double.toString(0));
 
