@@ -109,7 +109,7 @@ public class AppAction extends BaseAction{
             mMain.setSessionid(user.getSessionid());
 
         }
-        mMain.setArea(appContext.getCity());
+        mMain.setArea(appContext.getArea());
         mMain.setUseCache(false);
         Main result = null;
         try
@@ -129,6 +129,7 @@ public class AppAction extends BaseAction{
             homeRe.setUserId(user.getUserId());
             homeRe.setSessionid(user.getSessionid());
         }
+        homeRe.setArea(appContext.getArea());
         homeRe.setMin(0);
         homeRe.setMax(StaticValues.RECOMMEND_PAGE_COUNT);
         homeRe.setUseCache(true);

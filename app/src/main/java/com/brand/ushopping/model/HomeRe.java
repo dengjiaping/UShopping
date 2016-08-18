@@ -15,6 +15,7 @@ public class HomeRe extends BaseModel
     private boolean success;
     private ArrayList<AppgoodsId> appgoodsId;
     private Boolean useCache = true;    //是否使用缓存
+    private String area;
 
     public long getUserId() {
         return userId;
@@ -78,5 +79,13 @@ public class HomeRe extends BaseModel
 
     public void setUseCache(Boolean useCache) {
         this.useCache = useCache;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }
