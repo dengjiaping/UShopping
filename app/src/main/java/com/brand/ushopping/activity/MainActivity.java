@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,14 +18,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
+import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.fragment.BrandFragment;
 import com.brand.ushopping.fragment.CartFragment;
 import com.brand.ushopping.fragment.MainpageFragment;
 import com.brand.ushopping.fragment.MineFragment;
 import com.brand.ushopping.fragment.ThemeFragment;
+import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.CommonUtils;
@@ -36,7 +43,8 @@ public class MainActivity extends UActivity
         CartFragment.OnFragmentInteractionListener,
         MainpageFragment.OnFragmentInteractionListener,
         MineFragment.OnFragmentInteractionListener,
-        ThemeFragment.OnFragmentInteractionListener
+        ThemeFragment.OnFragmentInteractionListener,
+        AMapLocationListener
 
 {
     private FragmentManager manager;
@@ -61,6 +69,9 @@ public class MainActivity extends UActivity
     private ImageView brandIcon;
     private ImageView themeIcon;
     private ImageView mineIcon;
+
+    private AMapLocationClient locationClient = null;
+    private AMapLocationClientOption locationOption = null;
 
     private RelativeLayout contentLayout;
 
@@ -266,6 +277,13 @@ public class MainActivity extends UActivity
 
         transaction.commit();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = appContext.getUser();
+
         //检查更新
         Version version = new Version();
         if(user != null)
@@ -277,12 +295,40 @@ public class MainActivity extends UActivity
         version.setVersionNumber(CommonUtils.getVersionCode(MainActivity.this));
         new GetMaxVersionTask().execute(version);
 
-    }
+        //先从缓存获取位置
+        Location location = new RefAction(MainActivity.this).getLocation(MainActivity.this);
+        if(location != null)
+        {
+            if(!CommonUtils.isValueEmpty(location.getCity()) && !CommonUtils.isValueEmpty(location.getLongitude()) && !CommonUtils.isValueEmpty(location.getLatitude()))
+            {
+                String city = location.getCity();
+                String area = location.getArea();
+                Long currentTime = System.currentTimeMillis();
+                Long interval = currentTime - location.getTime();
+                if(interval < StaticValues.LOCATION_EXPIRE_TIME)
+                {
+                    appContext.setCity(city);
+                    appContext.setArea(area);
+                    appContext.setLongitude(Double.valueOf(location.getLongitude()));
+                    appContext.setLatitude(Double.valueOf(location.getLatitude()));
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        user = appContext.getUser();
+                    Log.v("ushopping", "get location from ref");
+                }
+                else
+                {
+                    getAALocation();
+                }
+
+            }
+            else
+            {
+                getAALocation();
+            }
+        }
+        else
+        {
+            getAALocation();
+        }
 
     }
 
@@ -440,4 +486,71 @@ public class MainActivity extends UActivity
         }
     }
 
+    private void getAALocation()
+    {
+        //新建
+        locationClient = new AMapLocationClient(appContext);
+        locationOption = new AMapLocationClientOption();
+        // 设置定位模式为高精度模式
+        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        locationOption.setOnceLocation(true);
+        locationOption.setInterval(10000);
+        locationOption.setNeedAddress(true);
+        //给定位客户端对象设置定位参数
+        locationClient.setLocationOption(locationOption);
+        // 设置定位监听
+        locationClient.setLocationListener(this);
+        // 启动定位
+        locationClient.startLocation();
+    }
+
+    //位置相关
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if (aMapLocation != null) {
+            if (aMapLocation.getErrorCode() == 0) {
+                //定位成功回调信息，设置相关消息
+                /*
+                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                amapLocation.getLatitude();//获取纬度
+                amapLocation.getLongitude();//获取经度
+                amapLocation.getAccuracy();//获取精度信息
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date(amapLocation.getTime());
+                df.format(date);//定位时间
+                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果
+                amapLocation.getCountry();//国家信息
+                amapLocation.getProvince();//省信息
+                amapLocation.getCity();//城市信息
+                amapLocation.getDistrict();//城区信息
+                amapLocation.getRoad();//街道信息
+                amapLocation.getCityCode();//城市编码
+                amapLocation.getAdCode();//地区编码
+                */
+                String city = aMapLocation.getCity();
+                String area = aMapLocation.getDistrict();
+                appContext.setCity(city);
+                appContext.setArea(area);
+                appContext.setLongitude(aMapLocation.getLongitude());
+                appContext.setLatitude(aMapLocation.getLatitude());
+
+                //存入缓存
+                Location location = new Location();
+                location.setCity(city);
+                location.setArea(area);
+                location.setLongitude(Double.toString(aMapLocation.getLongitude()));
+                location.setLatitude(Double.toString(aMapLocation.getLatitude()));
+
+                new RefAction(MainActivity.this).setLocation(MainActivity.this, location);
+
+            } else {
+                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                Log.e("AmapError", "location Error, ErrCode:"
+                        + aMapLocation.getErrorCode() + ", errInfo:"
+                        + aMapLocation.getErrorInfo());
+
+            }
+        }
+
+    }
 }
