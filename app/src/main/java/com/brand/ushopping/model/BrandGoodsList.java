@@ -20,6 +20,7 @@ public class BrandGoodsList extends BaseModel
     private String minMoney;
     private String maxMoney;
     private Long appCategoryId;
+    private String area;
 
     public long getUserId() {
         return userId;
@@ -123,5 +124,13 @@ public class BrandGoodsList extends BaseModel
 
     public void setAppCategoryId(Long appCategoryId) {
         this.appCategoryId = appCategoryId;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

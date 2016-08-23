@@ -376,7 +376,7 @@ public class BrandActivity extends Activity {
         brandGoodsList.setAppbrandId(Long.toString(brand.getId())+",");
         brandGoodsList.setMin(goodsCount);
         brandGoodsList.setMax(StaticValues.GOODS_PAGE_COUNT);
-
+        brandGoodsList.setArea(appContext.getArea());
         new GetAppStoresIdAllTask().execute(brandGoodsList);
 
     }

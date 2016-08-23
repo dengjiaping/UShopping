@@ -256,8 +256,7 @@ public class SearchActivity extends Activity {
             searchAppGoods.setUserId(user.getUserId());
             searchAppGoods.setSessionid(user.getSessionid());
         }
-
-        Log.v("ushopping", "search page min: " + searchAppGoods.getMin() + "max: "+searchAppGoods.getMax());
+        searchAppGoods.setArea(appContext.getArea());
 
         new SearchAppGoodsActionTask().execute(searchAppGoods);
 

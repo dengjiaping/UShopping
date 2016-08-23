@@ -22,6 +22,7 @@ public class SearchAppGoods extends BaseModel
     private Double maxMoney;
     private Long appCategoryId;
     private Long appBranId;
+    private String area;
 
     public long getUserId() {
         return userId;
@@ -141,5 +142,13 @@ public class SearchAppGoods extends BaseModel
 
     public void setAppBranId(Long appBranId) {
         this.appBranId = appBranId;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

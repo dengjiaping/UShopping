@@ -12,6 +12,7 @@ public class AppGoodsCollect extends BaseModel
     private boolean success;
     private String msg;
     private ArrayList<AppGoodsCollectItem> appGoodsCollectItems;
+    private String area;
 
     public long getUserId() {
         return userId;
@@ -51,5 +52,13 @@ public class AppGoodsCollect extends BaseModel
 
     public void setAppGoodsCollectItems(ArrayList<AppGoodsCollectItem> appGoodsCollectItems) {
         this.appGoodsCollectItems = appGoodsCollectItems;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

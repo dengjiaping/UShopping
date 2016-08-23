@@ -280,7 +280,7 @@ public class BrandMoreGoodsActivity extends Activity {
         brandGoodsList.setAppbrandId(Long.toString(brandId) + ",");
         brandGoodsList.setMin(currentGoodsCount);
         brandGoodsList.setMax(StaticValues.GOODS_PAGE_COUNT);
-
+        brandGoodsList.setArea(appContext.getArea());
         //筛选参数
         if(filterParams != null)
         {

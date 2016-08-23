@@ -359,12 +359,13 @@ public class DevActivity extends Activity {
     }
 
     //获取当前版本号
-    private  String getAppVersionName(Context context) {
+    private String getAppVersionName(Context context) {
         String versionName = "";
         try {
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo("cn.testgethandsetinfo", 0);
             versionName = packageInfo.versionName;
+//            packageInfo.versionCode;
             if (TextUtils.isEmpty(versionName)) {
                 return "";
             }

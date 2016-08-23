@@ -579,7 +579,7 @@ public class GoodsActivity extends UActivity {
     {
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setGoodsId(goodsId);
-
+        goodsInfo.setArea(appContext.getArea());
         if(user != null)
         {
             goodsInfo.setUserId(user.getUserId());

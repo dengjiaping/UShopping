@@ -14,6 +14,7 @@ public class GoodsInfo extends BaseModel
     private boolean success;
     private String msg;
     private long goodsId;
+    private String area;
 
     public HashMap<String, String[]> getAttribute() {
         return attribute;
@@ -71,4 +72,11 @@ public class GoodsInfo extends BaseModel
         this.goodsId = goodsId;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 }

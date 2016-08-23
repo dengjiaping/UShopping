@@ -16,6 +16,7 @@ public class AppGoodsTypeId extends BaseModel
     private String msg;
     private ArrayList<Goods> goods;
     private Boolean useCache = true;
+    private String area;
 
     public long getUserId() {
         return userId;
@@ -87,5 +88,13 @@ public class AppGoodsTypeId extends BaseModel
 
     public void setUseCache(Boolean useCache) {
         this.useCache = useCache;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

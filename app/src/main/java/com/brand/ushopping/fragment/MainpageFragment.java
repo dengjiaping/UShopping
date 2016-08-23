@@ -353,7 +353,7 @@ public class MainpageFragment extends Fragment {
         moreGoodsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moreGoods();
+//                moreGoods();
 
             }
         });
@@ -361,7 +361,7 @@ public class MainpageFragment extends Fragment {
         moreGoods2Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moreGoods();
+//                moreGoods();
 
             }
         });

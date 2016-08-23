@@ -260,6 +260,7 @@ public class GoodsFilterActivity extends AppCompatActivity {
         searchAppGoods.setMin(goodsCount);
         searchAppGoods.setMax(StaticValues.GOODS_PAGE_COUNT);
         searchAppGoods.setAppBranId(brandId);
+        searchAppGoods.setArea(appContext.getArea());
 
         new SearchAppGoodsActionTask().execute(searchAppGoods);
     }

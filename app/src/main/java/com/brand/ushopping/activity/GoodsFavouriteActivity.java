@@ -102,6 +102,7 @@ public class GoodsFavouriteActivity extends Activity {
             AppGoodsCollect appGoodsCollect = new AppGoodsCollect();
             appGoodsCollect.setUserId(user.getUserId());
             appGoodsCollect.setSessionid(user.getSessionid());
+            appGoodsCollect.setArea(appContext.getArea());
 
             new GetListAppGoodsCollectUserIdTask().execute(appGoodsCollect);
         }

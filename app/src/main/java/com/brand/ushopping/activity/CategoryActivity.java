@@ -218,7 +218,7 @@ public class CategoryActivity extends Activity {
 
         appGoodsTypeId.setMin(currentGoodsCount);
         appGoodsTypeId.setMax(StaticValues.GOODS_PAGE_COUNT);
-
+        appGoodsTypeId.setArea(appContext.getArea());
         new GetAppGoodsTypeIdTask().execute(appGoodsTypeId);
 
 
