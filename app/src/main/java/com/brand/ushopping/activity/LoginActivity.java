@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,28 +40,23 @@ public class LoginActivity extends Activity {
     private String pass;
     private AppContext appContext;
     private User user;
-
     private ImageView backBtn;
     private TextView titleTextView;
     private TextView registerTextView;
-
     private ImageView wxLoginBtn;
     private ImageView qqLoginBtn;
     private ImageView weiboLoginBtn;
-
 //    private AuthInfo mAuthInfo;
 //    private SsoHandler mSsoHandler;
 //    private Oauth2AccessToken mAccessToken;
 //    private UsersAPI usersAPI;
 //    private String weiboUserName;
 //    private String weiboAccessToken;
-//
 //    private Tencent mTencent = null;
 //    private IWXAPI iwxapi = null;
-
     private TimeoutbleProgressDialog loginDialog;
-
     private UMShareAPI mShareAPI;
+    private ViewGroup thirdPartyLoginCotainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +121,8 @@ public class LoginActivity extends Activity {
                 new LoginTask().execute(user);
             }
         });
+
+        thirdPartyLoginCotainer = (ViewGroup) findViewById(R.id.third_party_login_cotainer);
 
         wxLoginBtn = (ImageView) findViewById(R.id.wx_login);
         qqLoginBtn = (ImageView) findViewById(R.id.qq_login);
@@ -265,7 +263,14 @@ public class LoginActivity extends Activity {
             }
         });
 
-        mShareAPI = UMShareAPI.get(this);
+        try
+        {
+            mShareAPI = UMShareAPI.get(this);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            thirdPartyLoginCotainer.setVisibility(View.GONE);
+        }
 
     }
 

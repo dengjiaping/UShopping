@@ -17,8 +17,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2015/11/11.
  */
 public class AddressAction extends BaseAction
-{
-    public AddressAction(Context context) {
+{   public AddressAction(Context context) {
         super(context);
     }
 

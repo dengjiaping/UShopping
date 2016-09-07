@@ -3,7 +3,6 @@ package com.brand.ushopping.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -392,23 +391,38 @@ public class MainpageFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("请开启App的定位权限");
             builder.setTitle("定位失败");
+            builder.setCancelable(false);
+            builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    System.exit(0);
+                }
+            });
+            /*
             builder.setPositiveButton("打开设置", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent("/");
-                    ComponentName cm = new ComponentName("com.android.settings","com.android.settings.Settings");
-                    intent.setComponent(cm);
-                    intent.setAction("android.intent.action.VIEW");
-                    getActivity().startActivityForResult( intent , 0);
+                    try {
+                        Intent intent = new Intent("/");
+                        ComponentName cm = new ComponentName("com.android.settings","com.android.settings.Settings");
+                        intent.setComponent(cm);
+                        intent.setAction("android.intent.action.VIEW");
+                        getActivity().startActivityForResult( intent , 0);
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+
+                    }
+
                 }
             });
-            builder.setCancelable(false);
             builder.setNeutralButton("退出", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     System.exit(0);
                 }
             });
+            */
             builder.create().show();
         }
         String city = appContext.getCity();

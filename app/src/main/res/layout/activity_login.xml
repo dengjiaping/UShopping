@@ -137,7 +137,9 @@
         android:layout_column="0"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/third_party_login_cotainer"
+        android:visibility="visible">
 
         <TableRow
             android:layout_width="match_parent"
