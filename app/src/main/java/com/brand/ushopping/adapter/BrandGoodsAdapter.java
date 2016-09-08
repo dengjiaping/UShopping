@@ -1,15 +1,15 @@
 package com.brand.ushopping.adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class BrandGoodsAdapter extends BaseAdapter{
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.brand_goods_item, null);
 
-            holder.img=(ImageView)convertView.findViewById(R.id.img);
+            holder.img=(SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.name=(TextView)convertView.findViewById(R.id.name);
             holder.promotionPrice=(TextView)convertView.findViewById(R.id.promotion_price);
             holder.originalPrice=(TextView)convertView.findViewById(R.id.original_price);
@@ -73,7 +73,13 @@ public class BrandGoodsAdapter extends BaseAdapter{
             holder=(ViewHolder)convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(list.get(position).get("logopic").toString(), holder.img);
+        Object img = list.get(position).get("logopic");
+        if(img != null)
+        {
+            holder.img.setImageURI(Uri.parse(img.toString()));
+
+        }
+
         holder.name.setText(list.get(position).get("name").toString());
         holder.promotionPrice.setText(list.get(position).get("promotionPrice").toString());
         holder.originalPrice.setText(list.get(position).get("originalPrice").toString());
@@ -91,7 +97,7 @@ public class BrandGoodsAdapter extends BaseAdapter{
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
         TextView name;
         TextView promotionPrice;
         TextView originalPrice;

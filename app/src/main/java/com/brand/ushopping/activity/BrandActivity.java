@@ -2,6 +2,7 @@ package com.brand.ushopping.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -28,7 +29,7 @@ import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.MyGridView;
 import com.brand.ushopping.widget.ScrollViewX;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,10 +40,10 @@ import java.util.Map;
 public class BrandActivity extends Activity {
     private AppContext appContext;
     private User user;
-    private ImageView logoImageView;
+    private SimpleDraweeView logoImageView;
     private TextView nameTextView;
     private TextView descriptionTextView;
-    private ImageView showpicImageView;
+    private SimpleDraweeView showpicImageView;
     private ImageView favouriteBtn;
     private MyGridView goodsListView;
     private ImageView searchBtn;
@@ -154,10 +155,10 @@ public class BrandActivity extends Activity {
             finish();
         }
 
-        logoImageView = (ImageView) findViewById(R.id.logo);
+        logoImageView = (SimpleDraweeView) findViewById(R.id.logo);
         nameTextView = (TextView) findViewById(R.id.name);
         descriptionTextView = (TextView) findViewById(R.id.description);
-        showpicImageView = (ImageView) findViewById(R.id.showpic);
+        showpicImageView = (SimpleDraweeView) findViewById(R.id.showpic);
         favouriteBtn = (ImageView) findViewById(R.id.favourite);
 //        favouriteBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -348,8 +349,8 @@ public class BrandActivity extends Activity {
 
     public void reload()
     {
-        ImageLoader.getInstance().displayImage(brand.getLogopic(), logoImageView);
-        ImageLoader.getInstance().displayImage(brand.getShowpic(), showpicImageView);
+        logoImageView.setImageURI(Uri.parse(brand.getLogopic()));
+        showpicImageView.setImageURI(Uri.parse(brand.getShowpic()));
 
         nameTextView.setText(brand.getBrandName());
         descriptionTextView.setText(brand.getDetail());

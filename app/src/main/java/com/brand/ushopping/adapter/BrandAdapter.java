@@ -1,15 +1,15 @@
 package com.brand.ushopping.adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class BrandAdapter  extends BaseAdapter {
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.brand_item, null);
 
-            holder.img=(ImageView)convertView.findViewById(R.id.img);
+            holder.img=(SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.name=(TextView)convertView.findViewById(R.id.name);
             holder.intro=(TextView)convertView.findViewById(R.id.intro);
             holder.favouriteCount=(TextView)convertView.findViewById(R.id.favourite_count);
@@ -73,7 +73,7 @@ public class BrandAdapter  extends BaseAdapter {
             holder=(ViewHolder)convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(list.get(position).get("logopic").toString(), holder.img);
+        holder.img.setImageURI(Uri.parse(list.get(position).get("logopic").toString()));
 
         holder.name.setText(list.get(position).get("name").toString());
         Object intro = list.get(position).get("intro");
@@ -95,7 +95,7 @@ public class BrandAdapter  extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
         TextView name;
         TextView intro;
         TextView favouriteCount;

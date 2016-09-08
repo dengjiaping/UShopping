@@ -1,15 +1,15 @@
 package com.brand.ushopping.adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class RewardItemAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.user_reward_item, null);
 
-            holder.img=(ImageView)convertView.findViewById(R.id.img);
+            holder.img=(SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.name=(TextView)convertView.findViewById(R.id.name);
             holder.integral=(TextView)convertView.findViewById(R.id.integral);
 
@@ -72,7 +72,7 @@ public class RewardItemAdapter extends BaseAdapter {
             holder=(ViewHolder)convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(list.get(position).get("image").toString(), holder.img);
+        holder.img.setImageURI(Uri.parse(list.get(position).get("image").toString()));
 
         holder.name.setText(list.get(position).get("name").toString());
         holder.integral.setText(list.get(position).get("integral").toString());
@@ -89,7 +89,7 @@ public class RewardItemAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
         TextView name;
         TextView integral;
 

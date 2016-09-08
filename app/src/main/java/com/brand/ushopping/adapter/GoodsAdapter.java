@@ -1,18 +1,15 @@
 package com.brand.ushopping.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +61,7 @@ public class GoodsAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.goods_item, null);
 
-            holder.img = (ImageView)convertView.findViewById(R.id.img);
+            holder.img = (SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.price = (TextView) convertView.findViewById(R.id.price);
             holder.salesCount = (TextView) convertView.findViewById(R.id.sales_count);
@@ -77,34 +74,7 @@ public class GoodsAdapter extends BaseAdapter {
 
         if(list.get(position).get("img") != null)
         {
-
-            final ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.setDefaultLoadingListener(new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
-//                    Toast.makeText(context, "image loading failed", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-
-                }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-
-                }
-            });
-            imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
-            /*
-            ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.img);
-            */
+            holder.img.setImageURI(Uri.parse(list.get(position).get("img").toString()));
 
         }
 
@@ -121,7 +91,7 @@ public class GoodsAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
         TextView name;
         TextView price;
         TextView salesCount;

@@ -78,17 +78,10 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    //    compile files('libs/httpclient-android-4.3.5.1.jar')
     compile files('libs/httpmime-4.3.5.jar')
     compile files('libs/httpclient-android-4.3.3.jar')
-    //    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
-
-    //    compile files('libs/fastjson-1.2.7.jar')
-    compile files('libs/universal-image-loader-1.9.5.jar')
+//    compile files('libs/universal-image-loader-1.9.5.jar')
     compile files('libs/fastjson-1.1.43.android.jar')
-    //    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
-
-    //    compile files('libs/nineoldroid.jar')
     compile files('libs/Cashier_SDK-v4.2.0.jar')
     compile files('libs/MobCommons-2016.0223.1655.jar')
     compile files('libs/MobTools-2016.0223.1655.jar')
@@ -112,12 +105,12 @@ dependencies {
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.9
     compile project(':lib:pingpp')
     compile files('libs/SocialSDK_WeiXin_2.jar')
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    compile 'com.squareup.okio:okio:1.8.0'
     compile files('libs/wup-1.0.0.E-SNAPSHOT.jar')
     compile files('libs/AMap_3DMap_V3.3.2_20160525.jar')
     compile files('libs/AMap_Navi_v1.8.0_20160421.jar')
     compile files('libs/open_sdk_r5756.jar')
+    compile 'com.facebook.fresco:fresco:0.12.0'
+
 }
 
 

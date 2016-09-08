@@ -2,21 +2,18 @@ package com.brand.ushopping.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.GoodsActivity;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,30 +45,31 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
     public void onBindViewHolder(final MoreGoodsAdapter.ViewHolder holder, final int position) {
         if(list.get(position).get("img") != null)
         {
-            final ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.setDefaultLoadingListener(new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
-
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-
-                }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-
-                }
-            });
-            imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
+            holder.img.setImageURI(Uri.parse(list.get(position).get("img").toString()));
+//            final ImageLoader imageLoader = ImageLoader.getInstance();
+//            imageLoader.setDefaultLoadingListener(new ImageLoadingListener() {
+//                @Override
+//                public void onLoadingStarted(String s, View view) {
+//
+//                }
+//
+//                @Override
+//                public void onLoadingFailed(String s, View view, FailReason failReason) {
+//                    imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
+//
+//                }
+//
+//                @Override
+//                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+//
+//                }
+//
+//                @Override
+//                public void onLoadingCancelled(String s, View view) {
+//
+//                }
+//            });
+//            imageLoader.displayImage(list.get(position).get("img").toString(), holder.img);
         }
 
         holder.name.setText(list.get(position).get("name").toString());
@@ -101,14 +99,14 @@ public class MoreGoodsAdapter extends RecyclerView.Adapter<MoreGoodsAdapter.View
 
     //自定义的ViewHolder，持有每个Item的的所有界面元素
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView img;
+        public SimpleDraweeView img;
         public TextView name;
         public TextView price;
         public TextView salesCount;
 
         public ViewHolder(View view){
             super(view);
-            img = (ImageView) view.findViewById(R.id.img);
+            img = (SimpleDraweeView) view.findViewById(R.id.img);
             name = (TextView) view.findViewById(R.id.name);
             price = (TextView) view.findViewById(R.id.price);
             salesCount = (TextView) view.findViewById(R.id.sales_count);

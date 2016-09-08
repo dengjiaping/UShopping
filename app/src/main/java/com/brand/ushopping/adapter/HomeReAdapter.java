@@ -1,15 +1,15 @@
 package com.brand.ushopping.adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class HomeReAdapter extends BaseAdapter
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.home_re_item, null);
 
-            holder.img = (ImageView)convertView.findViewById(R.id.img);
+            holder.img = (SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.price = (TextView) convertView.findViewById(R.id.price);
             holder.favouriteCount = (TextView) convertView.findViewById(R.id.favourite_count);
@@ -77,7 +77,7 @@ public class HomeReAdapter extends BaseAdapter
         Object img = list.get(position).get("img");
         if(img != null)
         {
-            ImageLoader.getInstance().displayImage(img.toString(), holder.img);
+            holder.img.setImageURI(Uri.parse(img.toString()));
 
         }
 
@@ -94,7 +94,7 @@ public class HomeReAdapter extends BaseAdapter
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
         TextView name;
         TextView price;
         TextView favouriteCount;

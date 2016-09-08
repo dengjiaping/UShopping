@@ -21,6 +21,7 @@ import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.WeiboUser;
 import com.brand.ushopping.thread.DownloadSplashThread;
 import com.brand.ushopping.utils.UDBHelper;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.FIFOLimitedMemoryCache;
@@ -119,6 +120,8 @@ public class AppContext  extends Application
 
         //bugly崩溃统计
         CrashReport.initCrashReport(getApplicationContext(), "900028246", false);
+
+        Fresco.initialize(this);
 
     }
 
