@@ -2,17 +2,17 @@ package com.brand.ushopping.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.activity.WebViewActivity;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class ThemeItemAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.theme_item, null);
 
-            holder.img=(ImageView)convertView.findViewById(R.id.img);
+            holder.img=(SimpleDraweeView)convertView.findViewById(R.id.img);
 
             //为view设置标签
             convertView.setTag(holder);
@@ -73,7 +73,7 @@ public class ThemeItemAdapter extends BaseAdapter {
             holder=(ViewHolder)convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.img);
+        holder.img.setImageURI(Uri.parse(list.get(position).get("img").toString()));
 
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +99,7 @@ public class ThemeItemAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
 
     }
 

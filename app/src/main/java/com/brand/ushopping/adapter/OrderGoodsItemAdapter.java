@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import com.brand.ushopping.activity.TryoutActivity;
 import com.brand.ushopping.model.DeleteAppSmOder;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.StaticValues;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.order_goods_item, null);
 
-            holder.imageView = (ImageView)convertView.findViewById(R.id.img);
+            holder.imageView = (SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.goodsName = (TextView) convertView.findViewById(R.id.goods_name);
             holder.attribute = (TextView) convertView.findViewById(R.id.attribute);
             holder.price = (TextView) convertView.findViewById(R.id.price);
@@ -94,7 +95,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
             holder=(ViewHolder)convertView.getTag();
         }
         user = (User) list.get(position).get("user");
-        ImageLoader.getInstance().displayImage(list.get(position).get("img").toString(), holder.imageView);
+        holder.imageView.setImageURI(Uri.parse(list.get(position).get("img").toString()));
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +264,7 @@ public class OrderGoodsItemAdapter extends BaseAdapter{
         return convertView;
     }
     static class ViewHolder {
-        ImageView imageView;
+        SimpleDraweeView imageView;
         TextView goodsName;
         TextView attribute;
         TextView price;

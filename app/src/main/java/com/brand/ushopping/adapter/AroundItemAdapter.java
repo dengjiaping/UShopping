@@ -2,12 +2,12 @@ package com.brand.ushopping.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brand.ushopping.AppContext;
@@ -16,7 +16,7 @@ import com.brand.ushopping.activity.BrandActivity;
 import com.brand.ushopping.model.Brand;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +71,7 @@ public class AroundItemAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView =inflater.inflate(R.layout.around_item, null);
 
-            holder.img=(ImageView)convertView.findViewById(R.id.img);
+            holder.img=(SimpleDraweeView)convertView.findViewById(R.id.img);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.address=(TextView)convertView.findViewById(R.id.address);
             holder.telephone=(TextView)convertView.findViewById(R.id.telephone);
@@ -85,7 +85,7 @@ public class AroundItemAdapter extends BaseAdapter {
             holder=(ViewHolder)convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(list.get(position).get("logopicUrl").toString(), holder.img);
+        holder.img.setImageURI(Uri.parse(list.get(position).get("logopicUrl").toString()));
 
         holder.name.setText(list.get(position).get("shopName").toString());
         holder.address.setText(list.get(position).get("shopAddr").toString());
@@ -155,7 +155,7 @@ public class AroundItemAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView img;
+        SimpleDraweeView img;
         TextView name;
         TextView address;
         TextView telephone;

@@ -460,36 +460,12 @@ public class MainpageFragment extends Fragment {
                 for(int a=0; a<categories.size(); a++)
                 {
                     final Category category = categories.get(a);
-
                     CategoryItemView categoryItemView = new CategoryItemView(getActivity(), null, category);
-
-//                    TextView textView = new TextView(getActivity());
-//                    textView.setText(category.getName());
-//                    textView.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
-//                    textView.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Intent intent = new Intent(getActivity(), CategoryActivity.class);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putLong("categoryId", category.getId());
-//                            bundle.putString("categoryName", category.getName());
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//
-////                                Toast.makeText(getActivity(), Long.toString(category.getId()), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                    textView.setTextColor(getResources().getColor(R.color.text_light_grey));
-//
-//                    ViewGroup.LayoutParams para = new ViewGroup.LayoutParams(100, 38);
-//                    textView.setLayoutParams(para);
-//                    textView.setTextColor(getResources().getColor(R.color.text_grey));
-//
-//                    textView.setPadding(8,8,8,8);
-//                    textView.setTextColor(R.color.text_grey);
                     categoryLayout.addView(categoryItemView);
+
                 }
 
+                //首页滚屏
                 ArrayList<Banner> banners = main.getBanner();
                 for(int b=0; b<banners.size(); b++)
                 {
@@ -520,31 +496,6 @@ public class MainpageFragment extends Fragment {
                 for(int c=0; c<recommends.size(); c++)
                 {
                     Recommend recommend = recommends.get(c);
-
-                    /*
-                    FrameLayout frameLayout = new FrameLayout(getActivity());
-                    ViewGroup.LayoutParams para = new ViewGroup.LayoutParams(appContext.getScreenWidth() / 4, appContext.getScreenWidth() / 4);
-                    frameLayout.setLayoutParams(para);
-                    frameLayout.setPadding(8, 8, 8, 8);
-
-                    ImageView imageView = new ImageView(getActivity());
-                    ImageLoader.getInstance().displayImage(recommend.getImg(), imageView, options);
-                    frameLayout.addView(imageView);
-
-                    TextView introTextView = new TextView(getActivity());
-                    introTextView.setText(recommend.getIntro());
-                    introTextView.setTextColor(Color.WHITE);
-                    introTextView.setBackgroundColor(Color.BLACK);
-                    introTextView.setAlpha(StaticValues.ALPHA_HALF);
-                    para = new ViewGroup.LayoutParams(appContext.getScreenWidth() / 4, 45);
-                    introTextView.setLayoutParams(para);
-                    introTextView.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
-
-                    frameLayout.addView(introTextView);
-
-                    recommendLayout.addView(frameLayout);
-                    */
-
                     RecommendItem recommendItem = new RecommendItem(getActivity(), null, recommend);
                     recommendLayout.addView(recommendItem);
 
