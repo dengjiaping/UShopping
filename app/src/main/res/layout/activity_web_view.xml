@@ -30,6 +30,16 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/actionbar_text"
             style="@style/TitleTextViewStyle" />
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:id="@+id/share"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
+            android:padding="8dp" />
     </RelativeLayout>
 
     <WebView

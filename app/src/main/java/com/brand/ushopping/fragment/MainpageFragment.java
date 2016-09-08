@@ -60,6 +60,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -836,7 +837,7 @@ public class MainpageFragment extends Fragment {
         }
     }
 
-    //获取splash url
+    //下载AdSplash图片Task
     public class GetSelectAppStartpictureTask extends AsyncTask<GetSelectAppStartpicture, Void, GetSelectAppStartpicture>
     {
         @Override
@@ -882,16 +883,35 @@ public class MainpageFragment extends Fragment {
         @Override
         public void run() {
             super.run();
+
+            byte[] data = null;
             try {
-                byte[] data = new ImageAction(getActivity()).getImage(url);
-                if(data != null)
-                {
-                    Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                    new ImageAction(getActivity()).saveFile(mBitmap, "splash.png");
-                }
+                    data = new ImageAction(getActivity()).getImage(url);
 
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+            if(data != null)
+            {
+                Bitmap mBitmap = null;
+                try {
+                    mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                }catch (OutOfMemoryError e)
+                {
+                    System.gc();
+                    System.runFinalization();
+                }
+
+                if(mBitmap != null)
+                {
+                    try {
+                        new ImageAction(getActivity()).saveFile(mBitmap, "splash.png");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
 
 //            new ImageAction(MainActivity.this).downloadImg(url);

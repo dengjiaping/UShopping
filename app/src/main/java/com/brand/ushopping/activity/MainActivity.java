@@ -295,12 +295,12 @@ public class MainActivity extends UActivity
         version.setVersionNumber(CommonUtils.getVersionCode(MainActivity.this));
         new GetMaxVersionTask().execute(version);
 
-        //先从缓存获取位置
         Location location = new RefAction(MainActivity.this).getLocation(MainActivity.this);
         if(location != null)
         {
             if(!CommonUtils.isValueEmpty(location.getCity()) && !CommonUtils.isValueEmpty(location.getLongitude()) && !CommonUtils.isValueEmpty(location.getLatitude()))
             {
+                //先从缓存获取位置
                 String city = location.getCity();
                 String area = location.getArea();
                 Long currentTime = System.currentTimeMillis();
@@ -542,8 +542,46 @@ public class MainActivity extends UActivity
                 location.setLatitude(Double.toString(aMapLocation.getLatitude()));
 
                 new RefAction(MainActivity.this).setLocation(MainActivity.this, location);
+            }
+            else
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("请开启App的定位权限");
+                builder.setTitle("定位失败");
+                builder.setCancelable(false);
+                builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        System.exit(0);
+                    }
+                });
+                /*
+                builder.setPositiveButton("打开设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
+                            Intent intent = new Intent("/");
+                            ComponentName cm = new ComponentName("com.android.settings","com.android.settings.Settings");
+                            intent.setComponent(cm);
+                            intent.setAction("android.intent.action.VIEW");
+                            getActivity().startActivityForResult( intent , 0);
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
 
-            } else {
+                        }
+
+                    }
+                });
+                builder.setNeutralButton("退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.exit(0);
+                    }
+                });
+                */
+                builder.create().show();
+
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError", "location Error, ErrCode:"
                         + aMapLocation.getErrorCode() + ", errInfo:"

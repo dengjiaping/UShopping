@@ -1,6 +1,7 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +19,7 @@ public class WebViewActivity extends Activity {
     private TextView titleTextView;
     private AppContext appContext;
     private String url;
+    private ImageView shareBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,21 @@ public class WebViewActivity extends Activity {
             }
         });
         webView.loadUrl(url);
+
+        shareBtn = (ImageView) findViewById(R.id.share);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入分享页面
+                Intent intent = new Intent(WebViewActivity.this, SnsShareActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("title", "U购分享");
+                bundle1.putString("url", url);
+                intent.putExtras(bundle1);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

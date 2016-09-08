@@ -12,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brand.ushopping.R;
-import com.brand.ushopping.utils.EnvValues;
-import com.brand.ushopping.utils.StaticValues;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -27,6 +25,9 @@ public class SnsShareActivity extends Activity {
     private ViewGroup weiboBtn;
     private ImageView backBtn;
     private TextView titleTextView;
+    private String title;
+    private String text;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,11 @@ public class SnsShareActivity extends Activity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sns_share);
+
+        Bundle bundle = getIntent().getExtras();
+        title = bundle.getString("title", "");
+        text = bundle.getString("text", "");
+        url = bundle.getString("url", "");
 
         backBtn = (ImageView) findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +57,16 @@ public class SnsShareActivity extends Activity {
             @Override
             public void onClick(View v) {
 //                UMImage image = new UMImage(SnsShareActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
 
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.WEIXIN);
                 shareAction.setCallback(testmulListener);
 
                 shareAction.withMedia(image);
-                shareAction.withText("分享链接,领取优惠券");
-                shareAction.withTitle("U购优惠券");
-                shareAction.withTargetUrl(EnvValues.serverPath + StaticValues.voucherAddress);
+                shareAction.withText(text);
+                shareAction.withTitle(title);
+                shareAction.withTargetUrl(url);
                 //.withMedia(new UMEmoji(ShareActivity.this,"http://img.newyx.net/news_img/201306/20/1371714170_1812223777.gif"))
                 shareAction.share();
             }
@@ -70,16 +76,16 @@ public class SnsShareActivity extends Activity {
         wxCircleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
 
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE);
                 shareAction.setCallback(testmulListener);
 
                 shareAction.withMedia(image);
-                shareAction.withText("分享链接,领取优惠券");
-                shareAction.withTitle("U购优惠券");
-                shareAction.withTargetUrl(EnvValues.serverPath + StaticValues.voucherAddress);
+                shareAction.withText(text);
+                shareAction.withTitle(title);
+                shareAction.withTargetUrl(url);
                 shareAction.share();
             }
         });
@@ -88,16 +94,16 @@ public class SnsShareActivity extends Activity {
         qqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
 
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.QZONE);
                 shareAction.setCallback(testmulListener);
 
                 shareAction.withMedia(image);
-                shareAction.withText("分享链接,领取优惠券");
-                shareAction.withTitle("U购优惠券");
-                shareAction.withTargetUrl(EnvValues.serverPath + StaticValues.voucherAddress);
+                shareAction.withText(text);
+                shareAction.withTitle(title);
+                shareAction.withTargetUrl(url);
                 //.withMedia(new UMEmoji(ShareActivity.this,"http://img.newyx.net/news_img/201306/20/1371714170_1812223777.gif"))
                 shareAction.share();
 
@@ -108,15 +114,15 @@ public class SnsShareActivity extends Activity {
         weiboBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.sns_share));
+                UMImage image = new UMImage(SnsShareActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.logo));
                 ShareAction shareAction = new ShareAction(SnsShareActivity.this);
                 shareAction.setPlatform(SHARE_MEDIA.SINA);
                 shareAction.setCallback(testmulListener);
 
                 shareAction.withMedia(image);
-                shareAction.withText("分享链接,领取优惠券");
-                shareAction.withTitle("U购优惠券");
-                shareAction.withTargetUrl(EnvValues.serverPath + StaticValues.voucherAddress);
+                shareAction.withText(text);
+                shareAction.withTitle(title);
+                shareAction.withTargetUrl(url);
                 //.withMedia(new UMEmoji(ShareActivity.this,"http://img.newyx.net/news_img/201306/20/1371714170_1812223777.gif"))
                 shareAction.share();
             }

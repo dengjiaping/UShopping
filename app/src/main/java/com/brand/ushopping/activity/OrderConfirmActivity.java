@@ -51,6 +51,7 @@ import com.brand.ushopping.model.UserVoucherItem;
 import com.brand.ushopping.model.YyOrderSave;
 import com.brand.ushopping.model.YyOrderSaveList;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.EnvValues;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.MyListView;
 import com.brand.ushopping.widget.OrderSubmitPopup;
@@ -229,6 +230,11 @@ public class OrderConfirmActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("title", "U购优惠券");
+                bundle1.putString("text", "分享链接,领取优惠券");
+                bundle1.putString("url", EnvValues.serverPath + StaticValues.voucherAddress);
+                intent.putExtras(bundle1);
                 startActivity(intent);
                 OrderConfirmActivity.this.finish();
 
@@ -804,6 +810,11 @@ public class OrderConfirmActivity extends Activity {
 
                             //弹出分享优惠券
                             Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putString("title", "U购优惠券");
+                            bundle1.putString("text", "分享链接,领取优惠券");
+                            bundle1.putString("url", EnvValues.serverPath + StaticValues.voucherAddress);
+                            intent.putExtras(bundle1);
                             startActivity(intent);
                             OrderConfirmActivity.this.finish();
 
@@ -867,6 +878,11 @@ public class OrderConfirmActivity extends Activity {
 
                             //弹出分享优惠券
                             Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putString("title", "U购优惠券");
+                            bundle1.putString("text", "分享链接,领取优惠券");
+                            bundle1.putString("url", EnvValues.serverPath + StaticValues.voucherAddress);
+                            intent.putExtras(bundle1);
                             startActivity(intent);
                             OrderConfirmActivity.this.finish();
 
@@ -1198,6 +1214,11 @@ public class OrderConfirmActivity extends Activity {
 
                             //弹出分享优惠券
                             Intent intent = new Intent(OrderConfirmActivity.this, SnsShareActivity.class);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putString("title", "U购优惠券");
+                            bundle1.putString("text", "分享链接,领取优惠券");
+                            bundle1.putString("url", EnvValues.serverPath + StaticValues.voucherAddress);
+                            intent.putExtras(bundle1);
                             startActivity(intent);
                             OrderConfirmActivity.this.finish();
 

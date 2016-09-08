@@ -20,6 +20,7 @@ import com.brand.ushopping.action.SignAction;
 import com.brand.ushopping.model.Sign;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.EnvValues;
 import com.brand.ushopping.utils.StaticValues;
 
 public class SignActivity extends Activity {
@@ -65,6 +66,11 @@ public class SignActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignActivity.this, SnsShareActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("title", "U购优惠券");
+                bundle1.putString("text", "分享链接,领取优惠券");
+                bundle1.putString("url", EnvValues.serverPath + StaticValues.voucherAddress);
+                intent.putExtras(bundle1);
                 startActivity(intent);
 
             }

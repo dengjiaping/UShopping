@@ -32,6 +32,7 @@ import com.brand.ushopping.model.OrderItem;
 import com.brand.ushopping.model.OrderSuccess;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.EnvValues;
 import com.brand.ushopping.utils.StaticValues;
 
 import java.util.ArrayList;
@@ -298,6 +299,11 @@ public class TryitOrderItemView extends LinearLayout
 
                             //进入分享页面
                             Intent intent = new Intent(context, SnsShareActivity.class);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putString("title", "U购优惠券");
+                            bundle1.putString("text", "分享链接,领取优惠券");
+                            bundle1.putString("url", EnvValues.serverPath + StaticValues.voucherAddress);
+                            intent.putExtras(bundle1);
                             context.startActivity(intent);
 
                         }
