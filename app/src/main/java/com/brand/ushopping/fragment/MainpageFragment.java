@@ -5,8 +5,6 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,6 +45,7 @@ import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.Recommend;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.thread.DownloadSplashThread;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.CategoryItemView;
@@ -60,7 +59,6 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -387,45 +385,6 @@ public class MainpageFragment extends Fragment {
         super.onStart();
         user = appContext.getUser();
 
-        if(appContext.getLongitude() == 0 && appContext.getLongitude() == 0)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("请开启App的定位权限");
-            builder.setTitle("定位失败");
-            builder.setCancelable(false);
-            builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    System.exit(0);
-                }
-            });
-            /*
-            builder.setPositiveButton("打开设置", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    try {
-                        Intent intent = new Intent("/");
-                        ComponentName cm = new ComponentName("com.android.settings","com.android.settings.Settings");
-                        intent.setComponent(cm);
-                        intent.setAction("android.intent.action.VIEW");
-                        getActivity().startActivityForResult( intent , 0);
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-
-                    }
-
-                }
-            });
-            builder.setNeutralButton("退出", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    System.exit(0);
-                }
-            });
-            */
-            builder.create().show();
-        }
         String city = appContext.getCity();
         if(!CommonUtils.isValueEmpty(city))
         {
@@ -860,7 +819,7 @@ public class MainpageFragment extends Fragment {
                     {
                         if(!new ImageAction(getActivity()).checkFileExists("splash.png"))
                         {
-                            new DownloadSplashTask(result.getImages()).start();
+                            new DownloadSplashThread(getActivity(), result.getImages()).start();
                         }
 
                     }catch (Exception e)
@@ -870,52 +829,6 @@ public class MainpageFragment extends Fragment {
 
                 }
             }
-        }
-    }
-
-    private class DownloadSplashTask extends Thread
-    {
-        private String url;
-        public DownloadSplashTask(String url)
-        {
-            this.url = url;
-        }
-        @Override
-        public void run() {
-            super.run();
-
-            byte[] data = null;
-            try {
-                    data = new ImageAction(getActivity()).getImage(url);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if(data != null)
-            {
-                Bitmap mBitmap = null;
-                try {
-                    mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                }catch (OutOfMemoryError e)
-                {
-                    System.gc();
-                    System.runFinalization();
-                }
-
-                if(mBitmap != null)
-                {
-                    try {
-                        new ImageAction(getActivity()).saveFile(mBitmap, "splash.png");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-
-//            new ImageAction(MainActivity.this).downloadImg(url);
-
         }
     }
 

@@ -545,16 +545,18 @@ public class MainActivity extends UActivity
             }
             else
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage("请开启App的定位权限");
-                builder.setTitle("定位失败");
-                builder.setCancelable(false);
-                builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        System.exit(0);
-                    }
-                });
+                if(EnvValues.locationCheck == true)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("请开启App的定位权限");
+                    builder.setTitle("定位失败");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            System.exit(0);
+                        }
+                    });
                 /*
                 builder.setPositiveButton("打开设置", new DialogInterface.OnClickListener() {
                     @Override
@@ -580,7 +582,9 @@ public class MainActivity extends UActivity
                     }
                 });
                 */
-                builder.create().show();
+                    builder.create().show();
+                }
+
 
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError", "location Error, ErrCode:"

@@ -19,6 +19,7 @@ import com.brand.ushopping.model.HomeRe;
 import com.brand.ushopping.model.Main;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.model.WeiboUser;
+import com.brand.ushopping.thread.DownloadSplashThread;
 import com.brand.ushopping.utils.UDBHelper;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
@@ -63,6 +64,8 @@ public class AppContext  extends Application
     private String xgPushToken;
     //----Bundle参数,用于activity传值----
     private Bundle bundleObj = null;
+
+    public DownloadSplashThread downloadSplashThread = null;
 
     @Override
     public void onCreate() {
@@ -206,6 +209,17 @@ public class AppContext  extends Application
         }
 
         return result;
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+
+        if(downloadSplashThread != null)
+        {
+            downloadSplashThread.stop();
+        }
+
     }
 
     public User getUser() {
