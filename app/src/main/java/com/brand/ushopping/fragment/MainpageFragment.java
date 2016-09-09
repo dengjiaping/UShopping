@@ -390,6 +390,10 @@ public class MainpageFragment extends Fragment {
         {
             cityTextView.setText(city);
         }
+        else
+        {
+
+        }
 
         GetSelectAppStartpicture getSelectAppStartpicture = new GetSelectAppStartpicture();
         if(user != null)
@@ -397,7 +401,7 @@ public class MainpageFragment extends Fragment {
             getSelectAppStartpicture.setUserId(user.getUserId());
             getSelectAppStartpicture.setSessionid(user.getSessionid());
         }
-        getSelectAppStartpicture.setArea(appContext.getCity());
+        getSelectAppStartpicture.setArea(appContext.getArea());
         new GetSelectAppStartpictureTask().execute(getSelectAppStartpicture);
 
         mainActivity.setButtomBarEnable(true);

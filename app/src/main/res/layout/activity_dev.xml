@@ -178,4 +178,13 @@
         </TableLayout>
     </ScrollView>
 
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_column="0" />
+    </TableRow>
+
 </TableLayout>

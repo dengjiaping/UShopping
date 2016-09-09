@@ -65,7 +65,6 @@ public class AppContext  extends Application
     private String xgPushToken;
     //----Bundle参数,用于activity传值----
     private Bundle bundleObj = null;
-
     public DownloadSplashThread downloadSplashThread = null;
 
     @Override
@@ -400,4 +399,5 @@ public class AppContext  extends Application
     public void setArea(String area) {
         this.area = area;
     }
+
 }

@@ -62,6 +62,7 @@ public class DevActivity extends Activity {
     private Button cameraBtn;
     private Bitmap img = null;
     private ImageView imgView;
+    private TextView locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,6 +275,14 @@ public class DevActivity extends Activity {
             }
         });
         imgView = (ImageView) findViewById(R.id.img);
+
+
+
+        locationTextView = (TextView) findViewById(R.id.location);
+        locationTextView.setText(
+                "Longitude: " + Double.toString(appContext.getLongitude()) + " Latitude: " + Double.toString(appContext.getLatitude()) + " Area: " + appContext.getArea()
+
+        );
 
     }
 

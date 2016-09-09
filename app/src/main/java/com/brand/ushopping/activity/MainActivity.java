@@ -37,6 +37,7 @@ import com.brand.ushopping.model.Version;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.EnvValues;
 import com.brand.ushopping.utils.StaticValues;
+import com.brand.ushopping.widget.TimeoutbleProgressDialog;
 
 public class MainActivity extends UActivity
         implements BrandFragment.OnFragmentInteractionListener,
@@ -78,6 +79,8 @@ public class MainActivity extends UActivity
     private int initTab = StaticValues.MAIN_ACTIVITY_TAB_MAINPAGE;
 
     private boolean buttomBarEnable = true;
+
+    private TimeoutbleProgressDialog locationDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,6 +280,13 @@ public class MainActivity extends UActivity
 
         transaction.commit();
 
+        locationDialog = TimeoutbleProgressDialog.createProgressDialog(MainActivity.this, StaticValues.CONNECTION_TIMEOUT, new TimeoutbleProgressDialog.OnTimeOutListener() {
+            @Override
+            public void onTimeOut(TimeoutbleProgressDialog dialog) {
+                locationDialog.dismiss();
+                locationFailedAction();
+            }
+        });
     }
 
     @Override
@@ -311,8 +321,6 @@ public class MainActivity extends UActivity
                     appContext.setArea(area);
                     appContext.setLongitude(Double.valueOf(location.getLongitude()));
                     appContext.setLatitude(Double.valueOf(location.getLatitude()));
-
-                    Log.v("ushopping", "get location from ref");
                 }
                 else
                 {
@@ -488,6 +496,8 @@ public class MainActivity extends UActivity
 
     private void getAALocation()
     {
+        locationDialog.show();
+
         //新建
         locationClient = new AMapLocationClient(appContext);
         locationOption = new AMapLocationClientOption();
@@ -509,6 +519,7 @@ public class MainActivity extends UActivity
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
+                locationDialog.dismiss();
                 //定位成功回调信息，设置相关消息
                 /*
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
@@ -527,36 +538,63 @@ public class MainActivity extends UActivity
                 amapLocation.getCityCode();//城市编码
                 amapLocation.getAdCode();//地区编码
                 */
+                String adCode  = aMapLocation.getAdCode();
                 String city = aMapLocation.getCity();
-                String area = aMapLocation.getDistrict();
                 appContext.setCity(city);
-                appContext.setArea(area);
+                appContext.setArea(adCode);
                 appContext.setLongitude(aMapLocation.getLongitude());
                 appContext.setLatitude(aMapLocation.getLatitude());
 
                 //存入缓存
                 Location location = new Location();
                 location.setCity(city);
-                location.setArea(area);
+                location.setArea(adCode);
                 location.setLongitude(Double.toString(aMapLocation.getLongitude()));
                 location.setLatitude(Double.toString(aMapLocation.getLatitude()));
 
                 new RefAction(MainActivity.this).setLocation(MainActivity.this, location);
+
+                //刷新mainpage fragment
+                if(mainpageFragment == null)
+                {
+                    mainpageFragment = new MainpageFragment();
+                    Bundle bundle = new Bundle();
+                    mainpageFragment.setArguments(bundle);
+                }
+
             }
             else
             {
-                if(EnvValues.locationCheck == true)
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage("请开启App的定位权限");
-                    builder.setTitle("定位失败");
-                    builder.setCancelable(false);
-                    builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            System.exit(0);
-                        }
-                    });
+                locationDialog.dismiss();
+                locationFailedAction();
+
+                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                Log.e("AmapError", "location Error, ErrCode:"
+                        + aMapLocation.getErrorCode() + ", errInfo:"
+                        + aMapLocation.getErrorInfo());
+
+            }
+        }
+        else
+        {
+            locationDialog.dismiss();
+            locationFailedAction();
+        }
+
+    }
+
+    private void locationFailedAction()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("请开启App的定位权限");
+        builder.setTitle("定位失败");
+        builder.setCancelable(false);
+        builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                System.exit(0);
+            }
+        });
                 /*
                 builder.setPositiveButton("打开设置", new DialogInterface.OnClickListener() {
                     @Override
@@ -582,17 +620,7 @@ public class MainActivity extends UActivity
                     }
                 });
                 */
-                    builder.create().show();
-                }
-
-
-                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                Log.e("AmapError", "location Error, ErrCode:"
-                        + aMapLocation.getErrorCode() + ", errInfo:"
-                        + aMapLocation.getErrorInfo());
-
-            }
-        }
-
+        builder.create().show();
     }
+
 }
