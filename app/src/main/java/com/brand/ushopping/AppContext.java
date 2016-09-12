@@ -58,7 +58,6 @@ public class AppContext  extends Application
     private HomeRe homeRe;
     private DownloadManager dMgr;
     private long downloadId;
-    private boolean neetworkEnable;
     private UDBHelper udbHelper;
     private double longitude;
     private double latitude;
@@ -69,6 +68,8 @@ public class AppContext  extends Application
     private Bundle bundleObj = null;
     public DownloadSplashThread downloadSplashThread = null;
     private boolean thirdPartyLoginEnabled = false;
+    private boolean lowMemory = false;
+    private int networkType;
 
     @Override
     public void onCreate() {
@@ -226,14 +227,11 @@ public class AppContext  extends Application
         return result;
     }
 
+    //低内存情况下的操作
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-
-        if(downloadSplashThread != null)
-        {
-            downloadSplashThread.stop();
-        }
+        lowMemory = true;
 
     }
 
@@ -315,14 +313,6 @@ public class AppContext  extends Application
 
     public void setHomeRe(HomeRe homeRe) {
         this.homeRe = homeRe;
-    }
-
-    public boolean isNeetworkEnable() {
-        return neetworkEnable;
-    }
-
-    public void setNeetworkEnable(boolean neetworkEnable) {
-        this.neetworkEnable = neetworkEnable;
     }
 
     public ArrayList<AppGoodsCollectItem> getAppGoodsCollectItems() {
@@ -419,5 +409,21 @@ public class AppContext  extends Application
 
     public void setThirdPartyLoginEnabled(boolean thirdPartyLoginEnabled) {
         this.thirdPartyLoginEnabled = thirdPartyLoginEnabled;
+    }
+
+    public boolean isLowMemory() {
+        return lowMemory;
+    }
+
+    public void setLowMemory(boolean lowMemory) {
+        this.lowMemory = lowMemory;
+    }
+
+    public int getNetworkType() {
+        return networkType;
+    }
+
+    public void setNetworkType(int networkType) {
+        this.networkType = networkType;
     }
 }

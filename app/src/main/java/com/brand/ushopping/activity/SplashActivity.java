@@ -1,14 +1,10 @@
 package com.brand.ushopping.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -18,6 +14,8 @@ import com.brand.ushopping.action.AppAction;
 import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.model.Location;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
+import com.brand.ushopping.utils.StaticValues;
 import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
 
@@ -63,6 +61,16 @@ public class SplashActivity extends Activity {
         {
             appContext.setCity(location.getCity());
             appContext.setArea(location.getArea());
+        }
+
+        //获取网络状况
+        try
+        {
+            appContext.setNetworkType(CommonUtils.getCurrentNetType(SplashActivity.this));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            appContext.setNetworkType(StaticValues.NETWORK_TYPE_NONE);
         }
 
         //检测是否登录
@@ -119,12 +127,9 @@ public class SplashActivity extends Activity {
 
             }
 
-            boolean networkEnabled = isOpenNetwork();
-            appContext.setNeetworkEnable(networkEnabled);
-            if(networkEnabled)
+            if(appContext.getNetworkType() != StaticValues.NETWORK_TYPE_NONE)
             {
                 new AppAction(SplashActivity.this).appDataInit(user);
-
             }
 
             intent = new Intent(SplashActivity.this, SplashAdActivity.class);
@@ -140,33 +145,6 @@ public class SplashActivity extends Activity {
             finish();
 
         }
-    }
-
-    //检测网络是否可用
-    private boolean isOpenNetwork() {
-        boolean result = false;
-
-        ConnectivityManager connManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connManager.getActiveNetworkInfo() != null) {
-
-            NetworkInfo.State state = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-            if(NetworkInfo.State.CONNECTED == state)
-            {
-                Log.v("ushopping network", "WIfi");
-                connManager.setNetworkPreference(ConnectivityManager.TYPE_WIFI);
-
-            }
-            else
-            {
-                Log.v("ushopping network", "Mobile");
-                connManager.setNetworkPreference(ConnectivityManager.TYPE_MOBILE);
-
-            }
-
-            result = connManager.getActiveNetworkInfo().isAvailable();
-        }
-
-        return result;
     }
 
 }

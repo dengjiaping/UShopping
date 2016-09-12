@@ -12,6 +12,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -241,6 +243,35 @@ public class CommonUtils {
             filePath = new File(uri.getPath()).getAbsolutePath();
         }
         return filePath;
+    }
+
+    public static int getCurrentNetType(Context context){
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connManager.getActiveNetworkInfo().isAvailable())
+        {
+            NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+            if(networkInfo != null)
+            {
+                switch (networkInfo.getType())
+                {
+                    case ConnectivityManager.TYPE_WIFI:
+                        return StaticValues.NETWORK_TYPE_WIFI;
+
+                    case ConnectivityManager.TYPE_MOBILE:
+                        return StaticValues.NETWOKR_TYPE_MOBILE;
+
+                    default:
+                        return StaticValues.NETWOKR_TYPE_MOBILE;
+
+                }
+            }
+        }
+        else
+        {
+            return StaticValues.NETWORK_TYPE_NONE;
+        }
+
+        return StaticValues.NETWOKR_TYPE_MOBILE;
     }
 
     //设置优先使用的网络

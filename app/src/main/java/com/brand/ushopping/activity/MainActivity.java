@@ -294,6 +294,13 @@ public class MainActivity extends UActivity
         super.onStart();
         user = appContext.getUser();
 
+//        if(appContext.getNetworkType() == StaticValues.NETWORK_TYPE_NONE)
+//        {
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//
+//        }
+
         //检查更新
         Version version = new Version();
         if(user != null)

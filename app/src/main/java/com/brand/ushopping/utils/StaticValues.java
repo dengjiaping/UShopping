@@ -238,4 +238,7 @@ public class StaticValues
     public static final int AREA_TYPE_COUNTY = 3;
     public static final int AREA_TYPE_DISTRICT = 4;
 
+    public static final int NETWORK_TYPE_NONE = 9;  // 断网情况
+    public static final int NETWORK_TYPE_WIFI = 1;   // WiFi模式
+    public static final int NETWOKR_TYPE_MOBILE = 2; // gprs模式
 }

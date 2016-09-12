@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.action.AppAction;
-import com.brand.ushopping.action.ImageAction;
 import com.brand.ushopping.action.MainpageAction;
 import com.brand.ushopping.action.RefAction;
 import com.brand.ushopping.activity.AroundActivity;
@@ -772,10 +771,20 @@ public class MainpageFragment extends Fragment {
                 {
                     try
                     {
-                        if(!new ImageAction(getActivity()).checkFileExists("splash.png"))
+                        if(appContext.getNetworkType() == StaticValues.NETWORK_TYPE_WIFI)
                         {
-                            new DownloadSplashThread(getActivity(), result.getImages()).start();
+                            if(!appContext.isLowMemory())
+                            {
+                                new DownloadSplashThread(getActivity(), result.getImages()).start();
+                            }
                         }
+//                        if(!new ImageAction(getActivity()).checkFileExists("splash.png"))
+//                        {
+//                            if(!appContext.isLowMemory())
+//                            {
+//                                new DownloadSplashThread(getActivity(), result.getImages()).start();
+//                            }
+//                        }
 
                     }catch (Exception e)
                     {
