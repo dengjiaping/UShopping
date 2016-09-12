@@ -263,12 +263,12 @@ public class LoginActivity extends Activity {
             }
         });
 
-        try
+        if(appContext.isThirdPartyLoginEnabled())
         {
             mShareAPI = UMShareAPI.get(this);
-        }catch (Exception e)
+        }
+        else
         {
-            e.printStackTrace();
             thirdPartyLoginCotainer.setVisibility(View.GONE);
         }
 

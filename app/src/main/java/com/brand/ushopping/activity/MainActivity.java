@@ -585,16 +585,18 @@ public class MainActivity extends UActivity
 
     private void locationFailedAction()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("请开启App的定位权限");
-        builder.setTitle("定位失败");
-        builder.setCancelable(false);
-        builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                System.exit(0);
-            }
-        });
+        if(EnvValues.locationRequired)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("请开启App的定位权限");
+            builder.setTitle("定位失败");
+            builder.setCancelable(false);
+            builder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    System.exit(0);
+                }
+            });
                 /*
                 builder.setPositiveButton("打开设置", new DialogInterface.OnClickListener() {
                     @Override
@@ -620,7 +622,9 @@ public class MainActivity extends UActivity
                     }
                 });
                 */
-        builder.create().show();
+            builder.create().show();
+        }
+
     }
 
 }

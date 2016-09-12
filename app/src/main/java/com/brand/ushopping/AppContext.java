@@ -1,5 +1,6 @@
 package com.brand.ushopping;
 
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -66,6 +68,7 @@ public class AppContext  extends Application
     //----Bundle参数,用于activity传值----
     private Bundle bundleObj = null;
     public DownloadSplashThread downloadSplashThread = null;
+    private boolean thirdPartyLoginEnabled = false;
 
     @Override
     public void onCreate() {
@@ -112,17 +115,27 @@ public class AppContext  extends Application
         //数据库对象
         udbHelper = new UDBHelper(getApplicationContext(), "ushopping");
 
-        //分享
-        PlatformConfig.setWeixin("wx632d6c8a00776b9d", "0e141405d57f49123643fd771dacc039");
-        PlatformConfig.setSinaWeibo("866304116", "cc642572970f33f26b656f7d59912208");
-        PlatformConfig.setQQZone("1105140517", "xTKlL6zUVLeXgUgN");
-
-        //bugly崩溃统计
-        CrashReport.initCrashReport(getApplicationContext(), "900028246", false);
-
+        lowerSersionCompacity();
         Fresco.initialize(this);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void lowerSersionCompacity()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            //分享
+            PlatformConfig.setWeixin("wx632d6c8a00776b9d", "0e141405d57f49123643fd771dacc039");
+            PlatformConfig.setSinaWeibo("866304116", "cc642572970f33f26b656f7d59912208");
+            PlatformConfig.setQQZone("1105140517", "xTKlL6zUVLeXgUgN");
+            this.thirdPartyLoginEnabled = true;
+
+            //bugly崩溃统计
+            CrashReport.initCrashReport(getApplicationContext(), "900028246", false);
+        }
 
     }
+
 
     //------------------新版app下载------------------
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -400,4 +413,11 @@ public class AppContext  extends Application
         this.area = area;
     }
 
+    public boolean isThirdPartyLoginEnabled() {
+        return thirdPartyLoginEnabled;
+    }
+
+    public void setThirdPartyLoginEnabled(boolean thirdPartyLoginEnabled) {
+        this.thirdPartyLoginEnabled = thirdPartyLoginEnabled;
+    }
 }
