@@ -48,6 +48,8 @@ public class DateSelectItemView extends LinearLayout {
                 selectDateActivity.setDate(calendar);
                 ((SelectDateActivity) context).dateUnselAll();
                 DateSelectItemView.this.setBackgroundColor(context.getResources().getColor(R.color.text_green));
+
+                selectDateActivity.updateTimeCotainer();
             }
         });
     }

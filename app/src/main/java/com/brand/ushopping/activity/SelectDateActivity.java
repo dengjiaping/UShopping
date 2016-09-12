@@ -17,6 +17,7 @@ import com.brand.ushopping.AppContext;
 import com.brand.ushopping.R;
 import com.brand.ushopping.model.Goods;
 import com.brand.ushopping.model.User;
+import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
 import com.brand.ushopping.widget.DateSelectItemView;
 import com.brand.ushopping.widget.TimeSelectItemView;
@@ -106,28 +107,7 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
             datePickLayout.addView(dateSelectItemView);
         }
 
-        timeSelectItemViews = new ArrayList<TimeSelectItemView>();
-
-        for(int minuteCount=0; minuteCount<20; minuteCount++)
-        {
-            boolean avaliable = false;
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
-            calendar.set(Calendar.MINUTE, 0);
-
-            int minuteAfter = StaticValues.SELECT_DATE_TIME_INTERVAL * minuteCount;
-            calendar.add(Calendar.MINUTE, minuteAfter);
-
-            if((calendar.getTimeInMillis() - currentTime) > StaticValues.DELIVER_AFTER)
-            {
-                avaliable = true;
-            }
-
-            TimeSelectItemView timeSelectItemView = new TimeSelectItemView(SelectDateActivity.this, null, calendar, avaliable);
-            timeSelectItemViews.add(timeSelectItemView);
-            timePickLayout.addView(timeSelectItemView);
-
-        }
+        updateTimeCotainer();
 
         confirmBtn = (Button) findViewById(R.id.confirm);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +139,46 @@ public class SelectDateActivity extends Activity implements View.OnClickListener
         });
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
+    public void updateTimeCotainer()
+    {
+        timePickLayout.removeAllViewsInLayout();
+
+        timeSelectItemViews = new ArrayList<TimeSelectItemView>();
+
+        for(int minuteCount=0; minuteCount<20; minuteCount++)
+        {
+            boolean avaliable = true;
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 8);
+            calendar.set(Calendar.MINUTE, 0);
+
+            int minuteAfter = StaticValues.SELECT_DATE_TIME_INTERVAL * minuteCount;
+            calendar.add(Calendar.MINUTE, minuteAfter);
+
+            if(CommonUtils.isSameDay(currentTime, reservationCalendar.getTimeInMillis()))
+            {
+                if((calendar.getTimeInMillis() - currentTime) < StaticValues.DELIVER_AFTER)
+                {
+                    avaliable = false;
+                }
+            }
+
+            TimeSelectItemView timeSelectItemView = new TimeSelectItemView(SelectDateActivity.this, null, calendar, avaliable);
+            timeSelectItemViews.add(timeSelectItemView);
+            timePickLayout.addView(timeSelectItemView);
+
+        }
+
+    }
+
 
     public void updateDate()
     {
