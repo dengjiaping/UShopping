@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -124,7 +123,6 @@ public class SignActivity extends Activity {
                     fate = result.getFate();
                     fateTextView.setText(Integer.toString(fate));
                     reTime = result.getReTime();
-                    Log.v("ushopping", "last sign time " + reTime + "  " + CommonUtils.timestampToDatetime(reTime));
 
                     if(reTime == 0)
                     {
@@ -141,7 +139,6 @@ public class SignActivity extends Activity {
                         else
                         {
                             signBtn.setEnabled(true);
-
                         }
                     }
 

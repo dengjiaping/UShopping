@@ -546,7 +546,7 @@ public class MainActivity extends UActivity
                 amapLocation.getAdCode();//地区编码
                 */
                 String adCode  = aMapLocation.getAdCode();
-                String city = aMapLocation.getCity();
+                String city = aMapLocation.getDistrict();
                 appContext.setCity(city);
                 appContext.setArea(adCode);
                 appContext.setLongitude(aMapLocation.getLongitude());

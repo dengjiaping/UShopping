@@ -76,6 +76,11 @@ public class SignAction extends BaseAction
                     sign = JSON.parseObject(data, Sign.class);
                     sign.setSuccess(true);
                 }
+                else
+                {
+                    sign.setSuccess(false);
+                    sign.setMsg(jsonObject.getString("msg"));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
