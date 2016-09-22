@@ -1,6 +1,7 @@
 package com.brand.ushopping.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Administrator on 2015/12/7.
@@ -13,6 +14,8 @@ public class AppShopcartIdList extends BaseModel
     private String msg;
     private ArrayList<AppShopcartBrand> appShopcartBrands;
     private long shopcartId;
+    private String area;
+    private HashMap<String, ArrayList<ShopcartDiscountItem>> shopcartDiscountItems;
 
     public long getUserId() {
         return userId;
@@ -60,5 +63,21 @@ public class AppShopcartIdList extends BaseModel
 
     public void setShopcartId(long shopcartId) {
         this.shopcartId = shopcartId;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public HashMap<String, ArrayList<ShopcartDiscountItem>> getShopcartDiscountItems() {
+        return shopcartDiscountItems;
+    }
+
+    public void setShopcartDiscountItems(HashMap<String, ArrayList<ShopcartDiscountItem>> shopcartDiscountItems) {
+        this.shopcartDiscountItems = shopcartDiscountItems;
     }
 }

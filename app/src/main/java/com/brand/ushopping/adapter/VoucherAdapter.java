@@ -81,7 +81,7 @@ public class VoucherAdapter extends BaseAdapter {
         holder.validity.setText(list.get(position).get("validity").toString());
         holder.come.setText(list.get(position).get("come").toString());
 
-        if(list.get(position).get("flag") == StaticValues.VOUCHER_ITEM_STATUS_GOT)
+        if((int) list.get(position).get("flag") == StaticValues.VOUCHER_ITEM_STATUS_GOT)
         {
             holder.status.setText("已领取");
             context.voucherSaveDisable();

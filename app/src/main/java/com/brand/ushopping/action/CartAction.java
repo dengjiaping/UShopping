@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.brand.ushopping.model.AddAppShopcart;
 import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
@@ -11,6 +12,7 @@ import com.brand.ushopping.model.AppShopcartIdList;
 import com.brand.ushopping.model.AppbrandId;
 import com.brand.ushopping.model.AppsmShopcart;
 import com.brand.ushopping.model.AppyyShopcart;
+import com.brand.ushopping.model.ShopcartDiscountItem;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.URLConnectionUtil;
 
@@ -18,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Administrator on 2015/12/5.
@@ -114,6 +117,12 @@ public class CartAction extends BaseAction{
                     }
 
                     appShopcartIdList.setAppShopcartBrands(appShopcartBrandList);
+
+                    // 商品个数折扣
+                    JSONObject shopcartDiscountJSONObject = jsonObject.getJSONObject("shopcartDiscount");
+                    String data = shopcartDiscountJSONObject.toString();
+                    appShopcartIdList.setShopcartDiscountItems(JSON.parseObject(data, new TypeReference<HashMap<String, ArrayList<ShopcartDiscountItem>>>(){}));
+//                    appShopcartIdList.setShopcartDiscountItems((HashMap<String, ShopcartDiscountItem>) JSON.parse(data));
 
                     appShopcartIdList.setSuccess(true);
                 }

@@ -15,6 +15,7 @@ public class AddAppShopcart extends BaseModel
     private int quantity;
     private double price;
     private AppStoresId appStoresId;
+    private String area;
 
     public AppgoodsId getAppgoodsId() {
         return appgoodsId;
@@ -94,5 +95,13 @@ public class AddAppShopcart extends BaseModel
 
     public void setAppStoresId(AppStoresId appStoresId) {
         this.appStoresId = appStoresId;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

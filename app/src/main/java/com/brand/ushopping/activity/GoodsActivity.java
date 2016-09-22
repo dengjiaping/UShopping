@@ -515,7 +515,7 @@ public class GoodsActivity extends UActivity {
         appgoodsId.setId(goodsId);
         addAppShopcart.setUserId(user.getUserId());
         addAppShopcart.setSessionid(user.getSessionid());
-
+        addAppShopcart.setArea(appContext.getArea());
         addAppShopcart.setPrice(goods.getPromotionPrice());
         addAppShopcart.setQuantity(count);
 

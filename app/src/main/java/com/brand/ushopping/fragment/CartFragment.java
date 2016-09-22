@@ -33,6 +33,7 @@ import com.brand.ushopping.model.AppgoodsId;
 import com.brand.ushopping.model.AppsmShopcart;
 import com.brand.ushopping.model.AppyyShopcart;
 import com.brand.ushopping.model.Goods;
+import com.brand.ushopping.model.ShopcartDiscountItem;
 import com.brand.ushopping.model.User;
 import com.brand.ushopping.utils.CommonUtils;
 import com.brand.ushopping.utils.StaticValues;
@@ -72,8 +73,8 @@ public class CartFragment extends Fragment {
     private FrameLayout warningLayout;
     private TextView warningTextView;
     private SwipeRefreshLayout swipeRefreshLayout;
-
     private MainActivity mainActivity;
+    private ArrayList<ShopcartDiscountItem> shopcartDiscountItemsSelected;
 
     /**
      * Use this factory method to create a new instance of
@@ -263,6 +264,7 @@ public class CartFragment extends Fragment {
             appShopcartIdList = new AppShopcartIdList();
             appShopcartIdList.setUserId(user.getUserId());
             appShopcartIdList.setSessionid(user.getSessionid());
+            appShopcartIdList.setArea(appContext.getArea());
 
             new CartLoadTask().execute(appShopcartIdList);
         }
@@ -371,6 +373,7 @@ public class CartFragment extends Fragment {
                         AppShopcartBrand appShopcartBrand = appShopcartBrands.get(a);
                         if(appShopcartBrand != null)
                         {
+                            appShopcartBrand.setShopcartDiscountItems(appShopcartIdList.getShopcartDiscountItems());
                             CartItemView cartItemView = new CartItemView(getActivity(), CartFragment.this, null, appShopcartBrand);
                             contentLayout.addView(cartItemView);
 
@@ -603,4 +606,21 @@ public class CartFragment extends Fragment {
 
     }
 
+    public void ShopcartDiscountAdd()
+    {
+        if(shopcartDiscountItemsSelected == null)
+        {
+            shopcartDiscountItemsSelected = new ArrayList<ShopcartDiscountItem>();
+        }
+
+
+    }
+
+    public void ShopcartDiscountRemove()
+    {
+        if(shopcartDiscountItemsSelected != null)
+        {
+
+        }
+    }
 }

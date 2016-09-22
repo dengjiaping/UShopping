@@ -18,6 +18,7 @@ import com.brand.ushopping.fragment.CartFragment;
 import com.brand.ushopping.model.AppShopcart;
 import com.brand.ushopping.model.AppShopcartBrand;
 import com.brand.ushopping.model.AppgoodsId;
+import com.brand.ushopping.model.ShopcartDiscountItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ public class CartItemView extends LinearLayout {
     private CartGoodsAdapter adapter;
     private List listData;
     private CartFragment cartFragment;
+    private HashMap<String, ArrayList<ShopcartDiscountItem>> shopcartDiscountItems;
 
     public CartItemView(Context context, final CartFragment cartFragment, AttributeSet attrs, AppShopcartBrand appShopcartBrand) {
         super(context, attrs);
@@ -55,6 +57,7 @@ public class CartItemView extends LinearLayout {
         appShopcarts = appShopcartBrand.getAppShopcarts();
 
         listData = new ArrayList<Map<String,Object>>();
+        int goodsCount = 0;
         for(int a=0; a<appShopcarts.size(); a++)
         {
             AppShopcart appShopcart = appShopcarts.get(a);
@@ -76,7 +79,7 @@ public class CartItemView extends LinearLayout {
             listData.add(line);
 
             this.cartFragment.addCartItem(appShopcart);
-
+            goodsCount += appShopcart.getQuantity();
         }
         adapter = new CartGoodsAdapter(listData, activity, cartFragment);
         goodsListView.setAdapter(adapter);
@@ -117,6 +120,22 @@ public class CartItemView extends LinearLayout {
 
             }
         });
+
+        //折扣
+        shopcartDiscountItems = appShopcartBrand.getShopcartDiscountItems();
+
+        if(shopcartDiscountItems != null && !shopcartDiscountItems.isEmpty())
+        {
+            if(shopcartDiscountItems.containsKey(String.valueOf(appShopcartBrand.getId())))
+            {
+//                ShopcartDiscountItem shopcartDiscountItem = shopcartDiscountItems.get(String.valueOf(appShopcartBrand.getId()));
+
+
+//                shopcartDiscountItem.;
+            }
+
+        }
+
     }
 
     public void setChecked(boolean checked)
