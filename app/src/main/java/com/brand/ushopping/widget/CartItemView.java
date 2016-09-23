@@ -31,6 +31,7 @@ import java.util.Map;
 public class CartItemView extends LinearLayout {
     private CheckBox storeCheckBox;
     private TextView storeNameTextView;
+    private TextView discountTextView;
     private ListView goodsListView;
     private ArrayList<AppShopcart> appShopcarts;
     private Activity activity;
@@ -38,7 +39,8 @@ public class CartItemView extends LinearLayout {
     private List listData;
     private CartFragment cartFragment;
     private HashMap<String, ArrayList<ShopcartDiscountItem>> shopcartDiscountItems;
-
+    private ShopcartDiscountItem max = null;
+    private AppShopcart appShopcart;
     public CartItemView(Context context, final CartFragment cartFragment, AttributeSet attrs, AppShopcartBrand appShopcartBrand) {
         super(context, attrs);
         this.activity = (Activity) context;
@@ -50,17 +52,58 @@ public class CartItemView extends LinearLayout {
         storeCheckBox = (CheckBox) view.findViewById(R.id.store_check);
         storeCheckBox.setChecked(true);
         storeNameTextView = (TextView) view.findViewById(R.id.store_name);
+        discountTextView = (TextView) view.findViewById(R.id.discount);
         goodsListView = (ListView) view.findViewById(R.id.goods_list);
-
         storeNameTextView.setText(appShopcartBrand.getBrandName());
 
-        appShopcarts = appShopcartBrand.getAppShopcarts();
-
-        listData = new ArrayList<Map<String,Object>>();
         int goodsCount = 0;
+        appShopcarts = appShopcartBrand.getAppShopcarts();
         for(int a=0; a<appShopcarts.size(); a++)
         {
-            AppShopcart appShopcart = appShopcarts.get(a);
+            appShopcart = appShopcarts.get(a);
+            goodsCount += appShopcart.getQuantity();
+        }
+        //折扣
+        shopcartDiscountItems = appShopcartBrand.getShopcartDiscountItems();
+        if(shopcartDiscountItems != null && !shopcartDiscountItems.isEmpty())
+        {
+            if(shopcartDiscountItems.containsKey(String.valueOf(appShopcartBrand.getId())))
+            {
+                ArrayList<ShopcartDiscountItem> shopcartDiscountItemList = shopcartDiscountItems.get(String.valueOf(appShopcartBrand.getId()));
+                for (ShopcartDiscountItem shopcartDiscountItem: shopcartDiscountItemList)
+                {
+                    if(goodsCount >= shopcartDiscountItem.getCount())
+                    {
+                        if(max == null)
+                        {
+                            max = shopcartDiscountItem;
+                        }
+                        else
+                        {
+                            if(shopcartDiscountItem.getCount() > max.getCount())
+                            {
+                                max = shopcartDiscountItem;
+                            }
+                        }
+                    }
+                }
+
+                if(max != null)
+                {
+                    this.cartFragment.shopcartDiscountAdd(max);
+                    discountTextView.setText("满"+max.getCount()+"件减"+max.getMoney()+"元");
+                }
+            }
+        }
+
+        listData = new ArrayList<Map<String,Object>>();
+        for(int a=0; a<appShopcarts.size(); a++)
+        {
+             appShopcart = appShopcarts.get(a);
+            if(max != null)
+            {
+                appShopcart.setShopcartDiscountId(max.getId());
+            }
             AppgoodsId appgoodsId = appShopcart.getAppgoodsId();
 
             Map line = new HashMap();
@@ -106,7 +149,7 @@ public class CartItemView extends LinearLayout {
 
                     if(isChecked)
                     {
-                        cartFragment.addCartItem((AppShopcart) line.get("obj"));
+                        cartFragment.addCartItem((AppShopcart) appShopcart);
 
                     }
                     else
@@ -120,21 +163,6 @@ public class CartItemView extends LinearLayout {
 
             }
         });
-
-        //折扣
-        shopcartDiscountItems = appShopcartBrand.getShopcartDiscountItems();
-
-        if(shopcartDiscountItems != null && !shopcartDiscountItems.isEmpty())
-        {
-            if(shopcartDiscountItems.containsKey(String.valueOf(appShopcartBrand.getId())))
-            {
-//                ShopcartDiscountItem shopcartDiscountItem = shopcartDiscountItems.get(String.valueOf(appShopcartBrand.getId()));
-
-
-//                shopcartDiscountItem.;
-            }
-
-        }
 
     }
 

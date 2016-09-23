@@ -21,6 +21,7 @@ public class OrderSave extends BaseModel
     private String attribute;
     private int quantity;
     private Integer client = StaticValues.ORDER_SAVE_PLATFORM;
+    private Long shopcartDiscountId;
 
     public String getOrderNo() {
         return orderNo;
@@ -132,5 +133,13 @@ public class OrderSave extends BaseModel
 
     public void setFirstAppsmorderId(Long firstAppsmorderId) {
         this.firstAppsmorderId = firstAppsmorderId;
+    }
+
+    public Long getShopcartDiscountId() {
+        return shopcartDiscountId;
+    }
+
+    public void setShopcartDiscountId(Long shopcartDiscountId) {
+        this.shopcartDiscountId = shopcartDiscountId;
     }
 }

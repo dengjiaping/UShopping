@@ -415,6 +415,7 @@ public class CartFragment extends Fragment {
         goods.setCount(appShopcart.getQuantity());
         goods.setAppbrandId(appgoodsId.getAppbrandId());
         goods.setAppStoresId(appShopcart.getAppStoresId());
+        goods.setShopcartDiscountId(appShopcart.getShopcartDiscountId());
         cartItemSelected.put(appShopcart.getId(), goods);
 
         summaryCal();
@@ -439,6 +440,16 @@ public class CartFragment extends Fragment {
             summary += (goods.getPromotionPrice() * goods.getCount());
 
         }
+        //折扣
+        if(shopcartDiscountItemsSelected != null && !shopcartDiscountItemsSelected.isEmpty())
+        {
+            for (ShopcartDiscountItem shopcartDiscountItem: shopcartDiscountItemsSelected)
+            {
+                summary -= shopcartDiscountItem.getMoney();
+                
+            }
+        }
+
         summaryTextView.setText(CommonUtils.df.format(summary));
     }
 
@@ -606,17 +617,16 @@ public class CartFragment extends Fragment {
 
     }
 
-    public void ShopcartDiscountAdd()
+    public void shopcartDiscountAdd(ShopcartDiscountItem shopcartDiscountItem)
     {
         if(shopcartDiscountItemsSelected == null)
         {
             shopcartDiscountItemsSelected = new ArrayList<ShopcartDiscountItem>();
         }
-
-
+        shopcartDiscountItemsSelected.add(shopcartDiscountItem);
     }
 
-    public void ShopcartDiscountRemove()
+    public void shopcartDiscountRemove()
     {
         if(shopcartDiscountItemsSelected != null)
         {

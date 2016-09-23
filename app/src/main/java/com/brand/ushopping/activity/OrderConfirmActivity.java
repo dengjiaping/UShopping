@@ -1315,6 +1315,7 @@ public class OrderConfirmActivity extends Activity {
 
             orderSave.setAttribute(goods.getAttribute());
             orderSave.setQuantity(goods.getCount());
+            orderSave.setShopcartDiscountId(goods.getShopcartDiscountId());
 
             orderSaveArrayList.add(orderSave);
 

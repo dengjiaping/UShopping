@@ -9,6 +9,7 @@ public class ShopcartDiscountItem {
     private AppchinaId appchinaId;
     private int count;
     private double money;
+    private Long id;
 
     public AppbrandId getAppbrandId() {
         return appbrandId;
@@ -40,5 +41,13 @@ public class ShopcartDiscountItem {
 
     public void setMoney(double money) {
         this.money = money;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

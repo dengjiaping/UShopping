@@ -10,6 +10,7 @@ public class AppShopcart extends BaseModel
     private String attribute;
     private long id;
     private int quantity;
+    private long shopcartDiscountId;
 
     public AppgoodsId getAppgoodsId() {
         return appgoodsId;
@@ -49,5 +50,13 @@ public class AppShopcart extends BaseModel
 
     public void setAppStoresId(AppStoresId appStoresId) {
         this.appStoresId = appStoresId;
+    }
+
+    public long getShopcartDiscountId() {
+        return shopcartDiscountId;
+    }
+
+    public void setShopcartDiscountId(long shopcartDiscountId) {
+        this.shopcartDiscountId = shopcartDiscountId;
     }
 }
