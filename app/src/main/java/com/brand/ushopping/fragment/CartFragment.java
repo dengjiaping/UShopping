@@ -185,6 +185,7 @@ public class CartFragment extends Fragment {
                     {
                         goodsList.add(cartItemSelected.get(i.next()));
                     }
+                    goodsList.get(0).setDiscountMoney(summary);
 
                     switch (boughtType)
                     {
@@ -333,6 +334,11 @@ public class CartFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             getinfoDialog.show();
+
+            if(shopcartDiscountItemsSelected != null)
+            {
+                shopcartDiscountItemsSelected.clear();
+            }
 
         }
 

@@ -11,7 +11,7 @@ public class AppStoresList extends BaseModel
     private String sessionid;
     private boolean success;
     private String msg;
-    private String city;
+    private String area;
     private ArrayList<AppStoresListItem> appStoresListItems;
 
     public long getUserId() {
@@ -46,12 +46,12 @@ public class AppStoresList extends BaseModel
         this.msg = msg;
     }
 
-    public String getCity() {
-        return city;
+    public String getArea() {
+        return area;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public ArrayList<AppStoresListItem> getAppStoresListItems() {

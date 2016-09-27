@@ -1084,15 +1084,22 @@ public class OrderConfirmActivity extends Activity {
         totalCount = 0;
         summary = 0;
 
-        for(Goods goods: goodsList)
+        if(goodsList.get(0).getDiscountMoney() != 0)
         {
-            Map line = new HashMap();
+            summary = goodsList.get(0).getDiscountMoney();
+        }
+        else
+        {
+            for(Goods goods: goodsList)
+            {
+                Map line = new HashMap();
 
-            int count = goods.getCount();
-            double price = goods.getPromotionPrice();
+                int count = goods.getCount();
+                double price = goods.getPromotionPrice();
 
-            totalCount += count;
-            summary += price * count;
+                totalCount += count;
+                summary += price * count;
+            }
         }
 
         //优惠券

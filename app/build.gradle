@@ -14,8 +14,8 @@ android {
         applicationId "com.brand.ushopping"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 16
-        versionName "2.6"
+        versionCode 17
+        versionName "2.7"
 
         ndk {
             //设置支持的SO库架构

@@ -138,8 +138,8 @@ public class AroundActivity extends Activity {
         //没有数据时的提示
         warningLayout.setVisibility(View.GONE);
 
-        String city = appContext.getCity();
-        if(city != null)
+        String area = appContext.getArea();
+        if(!CommonUtils.isValueEmpty(area))
         {
             AppStoresList appStoresList = new AppStoresList();
             if(user != null)
@@ -147,7 +147,7 @@ public class AroundActivity extends Activity {
                 appStoresList.setUserId(user.getUserId());
                 appStoresList.setSessionid(user.getSessionid());
             }
-            appStoresList.setCity(city);
+            appStoresList.setArea(area);
 
             new GettAppStoresListTask().execute(appStoresList);
 

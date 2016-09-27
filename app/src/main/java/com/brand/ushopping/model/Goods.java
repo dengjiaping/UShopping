@@ -30,7 +30,8 @@ public class Goods extends BaseModel implements Parcelable
     private int saleCount;
     private AppaddressId appaddressId;
     private AppStoresId appStoresId;
-    private Long shopcartDiscountId;
+    private long shopcartDiscountId;
+    private double discountMoney;
     public AppexpressId getAppexpressId() {
         return appexpressId;
     }
@@ -175,12 +176,20 @@ public class Goods extends BaseModel implements Parcelable
         this.appStoresId = appStoresId;
     }
 
-    public Long getShopcartDiscountId() {
+    public long getShopcartDiscountId() {
         return shopcartDiscountId;
     }
 
-    public void setShopcartDiscountId(Long shopcartDiscountId) {
+    public void setShopcartDiscountId(long shopcartDiscountId) {
         this.shopcartDiscountId = shopcartDiscountId;
+    }
+
+    public double getDiscountMoney() {
+        return discountMoney;
+    }
+
+    public void setDiscountMoney(double discountMoney) {
+        this.discountMoney = discountMoney;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -226,6 +235,7 @@ public class Goods extends BaseModel implements Parcelable
         dest.writeInt(saleCount);
         dest.writeParcelable(appaddressId, flags);
         dest.writeLong(shopcartDiscountId);
+        dest.writeDouble(discountMoney);
     }
 
     public void readFromParcel(Parcel in)
@@ -248,5 +258,6 @@ public class Goods extends BaseModel implements Parcelable
         saleCount = in.readInt();
         appaddressId = in.readParcelable(AppaddressId.class.getClassLoader());
         shopcartDiscountId = in.readLong();
+        discountMoney = in.readDouble();
     }
 }
